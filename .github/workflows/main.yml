@@ -24,7 +24,6 @@ jobs:
         password: ${{ secrets.SSH_PASSWORD }}
         port: 22
         script: |
-          exec bash \-l
           cd /home/buffeti/www/buffeti
           git pull pj main
           npm install
