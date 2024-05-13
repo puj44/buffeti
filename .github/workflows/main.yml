@@ -28,7 +28,7 @@ jobs:
           cd ~/www/buffeti/
           git pull origin main
           git status
-          npm install --only=prod
+          npm install
           npm run build
           npm start
           
