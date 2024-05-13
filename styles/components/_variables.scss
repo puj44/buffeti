@@ -1,0 +1,61 @@
+// --- Bootstrap Theme Colors --- //
+//
+//Theme Colours
+//RED
+$primary: #B42318 !default;
+//ORANGE
+$secondary: #F79009 !default;
+$orange:#DC6803 !default;
+$charcoal:#564C57 !default;
+
+//GRAY
+$primaryGray:#717171 !default;
+$secondaryGray:#A8A8AD !default;
+$lightestGray:#F3F3F3 !default;
+
+//YELLOW
+$primaryYellow:#FEDF89 !default;
+$secondaryYellow:#FEF0C7 !default;
+
+//OFF WHITE
+$offWhitePrimary: #E3E5E5 !default;
+
+//Font Colors
+$primaryTextColor:#1E1E24 !default;
+//ORANGE TEXT
+$secondaryTextColor:#DC6803 !default;
+
+
+// --- Bootstrap Theme Colors --- //
+
+$success: #05a34a !default;
+$info: #66d1d1 !default;
+$logo:#BF0603 !default;
+$white:#fff !default;
+
+// Social colors
+$social-colors: (
+  //RED
+  "primary": $primary,
+  "secondary":$secondary,
+
+  //ORANGE
+  "primary-orange":$orange,
+
+  //GRAY
+  "primary-gray":$primaryGray,
+  "secondary-gray":$secondaryGray,
+  "lightest-gray":$lightestGray,
+  
+  //OFFWHITE
+  "offwhite":$offWhitePrimary,
+
+  //text colors
+  "font-primary":$primaryTextColor,
+  "font-secondary":$secondaryTextColor,
+
+
+
+
+  "white":#fff,
+);

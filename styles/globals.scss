@@ -1,0 +1,52 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import './components/variables';
+@import './common/background';
+@import './common/font';
+
+
+@layer components {
+  .page-spacing {
+    @apply px-[20px] sm:px-[128px]  flex flex-col justify-center;
+  }
+}
+
+body{
+  font-family: $primaryFont;
+  color:$primaryTextColor;
+}
+@import './components/buttons';
+
+//Navbar
+.navbar{
+  box-shadow: 0px 4px 25px 0px #00000008;
+  padding:11px 0px;
+  max-height: 72px;
+}
+
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+//Large Screen
+@media screen and (max-width:1440px){ 
+  
+}
+
+//Medium-Large Screen
+@media screen and (max-width:1280px){ 
+  
+}
+
+//Medium Screen
+@media screen and (max-width:1000px){ 
+  
+}
+//Tablet Screen
+@media screen and (max-width:786px){
+  
+}

@@ -1,6 +1,15 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: true,
+  reactStrictMode: false,
+  async redirects() {
+    return[
+      {
+        source: "/_error",
+        destination: "/",
+        permanent: true
+      }
+    ]
+  }
 };
 
 export default nextConfig;
