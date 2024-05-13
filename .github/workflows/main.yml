@@ -26,6 +26,6 @@ jobs:
           cd ~/www/buffeti/
           git pull origin main
           git status
-          pnpm install --only=prod
-          pnpm start
+          npm install --only=prod
+          npm start
           
