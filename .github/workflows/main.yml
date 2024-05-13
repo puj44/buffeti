@@ -25,9 +25,9 @@ jobs:
         port: 22
         script: |
           exec bash \-l
-          cd ~/www/buffeti/
+          cd /home/buffeti/www/buffeti
           git pull pj main
-          pnpm install
-          pnpm run build
+          npm install
+          npm run build
           pm2 restart buffeti_frontend
           
