@@ -25,6 +25,9 @@ jobs:
         port: 22
         script: |
           cd /home/buffeti/www/buffeti
+          export NVM_DIR=~/.nvm
+          source ~/.nvm/nvm.sh
+          npm --help
           git pull pj main
           npm install
           npm run build
