@@ -21,9 +21,10 @@ jobs:
         host: ${{ secrets.HOST }}
         username: ${{ secrets.USERNAME }}
         key: ${{ secrets.SSH_PRIVATE_KEY }}
+        password: ${{ secrets.SSH_PASSWORD }}
         port: 22
         script: |
-          ls --all
+          exec bash \-l
           cd ~/www/buffeti/
           git pull origin main
           git status
