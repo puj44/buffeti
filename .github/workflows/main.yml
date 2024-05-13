@@ -26,7 +26,7 @@ jobs:
         script: |
           exec bash \-l
           cd ~/www/buffeti/
-          git pull origin main
+          git pull pj main
           pnpm install
           pnpm run build
           pm2 restart buffeti_frontend
