@@ -4,18 +4,18 @@ import React from 'react'
 
 function LaunchingSoon() {
   return (
-    <div className='page-spacing justify-center items-center gap-14 align-middle py-4'>
+    <div className='page-spacing justify-center items-center gap-8 align-middle py-2'>
           <Image
                 src={"/logo/logo_primary.webp"}
                 alt="Buffeti"
                 width={2049}
                 height={1354}
                 className="cursor-pointer"
-                style={{width:"76.01px",height:"50px"}}
+                style={{width:"103.39px",height:"69px"}}
                 priority
             />
         <div className='flex flex-col gap-1  '>
-            <div className='flex flex-col gap-3 justify-center items-center'>
+            <div className='flex flex-col gap-2 justify-center items-center'>
                 <Image
                     src={"/coming_soon.webp"}
                     width={484}
@@ -39,10 +39,10 @@ function LaunchingSoon() {
                     <Image
                         src={"/logo/logo_primary.webp"}
                         alt="Buffeti"
-                        width={103.39}
-                        height={69}
+                        width={2049}
+                        height={1354}
                         className="cursor-pointer "
-                        style={{width:"76.01px",height:"50px"}}
+                        style={{width:"103.39px",height:"69px"}}
                         priority
                     />
                 </div>
