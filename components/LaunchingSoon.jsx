@@ -54,7 +54,7 @@ function LaunchingSoon() {
                 </div>
                 <div className='border-[#E4E4E7] border-[1px] '></div>
             </div>
-            <p className='text-color-light-gray items-center'>{"Copyright c 2024 Buffeti"}</p>
+            <p className='text-color-light-gray items-center'>{"Copyright © 2024 Buffeti"}</p>
         </div>
     </div>
   )
