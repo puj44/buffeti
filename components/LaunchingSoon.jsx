@@ -4,7 +4,7 @@ import React from 'react'
 
 function LaunchingSoon() {
   return (
-    <div className='page-spacing justify-center items-center gap-10 align-middle py-4'>
+    <div className='page-spacing justify-center items-center gap-14 align-middle py-4'>
           <Image
                 src={"/logo/logo_primary.webp"}
                 alt="Buffeti"
@@ -14,7 +14,7 @@ function LaunchingSoon() {
                 style={{width:"76.01px",height:"50px"}}
                 priority
             />
-        <div className='flex flex-col gap-6  '>
+        <div className='flex flex-col gap-1  '>
             <div className='flex flex-col gap-3 justify-center items-center'>
                 <Image
                     src={"/coming_soon.webp"}
