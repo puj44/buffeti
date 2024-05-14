@@ -12,7 +12,7 @@ $charcoal:#564C57 !default;
 $primaryGray:#717171 !default;
 $secondaryGray:#A8A8AD !default;
 $lightestGray:#F3F3F3 !default;
-
+$lightGray:#9F9F9F !default;
 //YELLOW
 $primaryYellow:#FEDF89 !default;
 $secondaryYellow:#FEF0C7 !default;
@@ -45,8 +45,9 @@ $social-colors: (
   //GRAY
   "primary-gray":$primaryGray,
   "secondary-gray":$secondaryGray,
+  "light-gray":$lightGray,
   "lightest-gray":$lightestGray,
-  
+  "charcoal":$charcoal,
   //OFFWHITE
   "offwhite":$offWhitePrimary,
 
