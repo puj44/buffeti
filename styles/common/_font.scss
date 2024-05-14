@@ -12,9 +12,38 @@
 
 $primaryFont: "Poppins";
 
-$decorativeFont1: "PoetsenOne";
+$decorativeFont1: "Poetsen One";
 
 $decorativeFont2: "Luckiest Guy";
 
 
+.decorative-1{
+  font-family: $decorativeFont1;
+  line-height: normal;
+}
 
+.decorative-2{
+  font-family: $decorativeFont2;
+}
+
+//Font Size
+
+.big-title{
+  font-size: 60px !important;
+}
+
+.heading{
+  font-size:40px !important;
+}
+
+.page-title{
+  font-size:28px !important;
+}
+
+.description{
+  font-size:18px !important;
+}
+
+.product-title{
+  font-size:20px !important;
+}
