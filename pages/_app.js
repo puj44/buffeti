@@ -9,13 +9,12 @@ export default function App({ Component, pageProps }) {
   return(
    <main>
     <PageHead />
-     <LaunchingSoon />
-    {/*
-    <Header />
+    
+    {/* <Header /> */}
     <div className="page-content min-h-[80vh]">
       <Component {...pageProps} />
     </div>
-    <Footer /> */}
+    {/* <Footer /> */}
    </main>
   )
 }
