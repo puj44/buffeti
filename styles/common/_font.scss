@@ -47,3 +47,36 @@ $decorativeFont2: "Luckiest Guy";
 .product-title{
   font-size:20px !important;
 }
+
+
+//Large Screen
+@media screen and (max-width:1440px){ 
+  
+}
+
+//Medium-Large Screen
+@media screen and (max-width:1280px){ 
+
+  
+}
+
+//Medium Screen
+@media screen and (max-width:1024px){ 
+  
+}
+//Tablet Screen
+@media screen and (max-width:786px){
+  .heading{
+    font-size:28px !important;
+  }
+  .page-title{
+    font-size:20px !important;
+  }
+  .product-title{
+    font-size:16px !important;
+  }
+  body{
+    font-size:14px ;
+  }
+  
+}
