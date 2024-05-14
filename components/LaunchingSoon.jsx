@@ -27,7 +27,7 @@ function LaunchingSoon() {
                         className='w-[280px] h-[174.4] lg:w-[484px] lg:h-[302px]'
                         priority
                     />
-                    <p className='decorative-2 heading text-color-primary text-center'>Launching Soon</p>
+                    <p className='open-sans font-bold heading text-color-primary text-center'>Launching Soon</p>
                 </div>
                 <p className='page-title text-center'>We are coming soon at your place</p>
             </div>
