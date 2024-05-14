@@ -39,13 +39,15 @@ function Footer() {
                     <div className='flex flex-row gap-6 items-center'>
                             {socials.map((s,idx)=>{
                                 return(
-                                    <Image
-                                        src={s.img}
-                                        width={s.width}
-                                        height={s.height}
-                                        alt={s.title}
-                                        key={"social-"+s.title}
-                                    />
+                                    <Link href={s.url} key={"social-"+s.title}>
+                                        <Image
+                                            src={s.img}
+                                            width={s.width}
+                                            height={s.height}
+                                            alt={s.title}
+                                    
+                                        />
+                                    </Link>
                                 )
                             })}
                     </div>
