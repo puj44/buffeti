@@ -10,7 +10,7 @@ function CateringServices() {
             width:378.12,
             height:240,
             description:"Advantage of food packages with multiple options available in it",
-            url:"/coming_soon"
+            url:"/coming-soon"
         },
         {
             title:"Suggestive Packages",
@@ -18,7 +18,7 @@ function CateringServices() {
             width:382,
             height:394,
             description:"Advantage of food packages with multiple options available in it",
-            url:"/coming_soon"
+            url:"/coming-soon"
         },
         {
             title:"Mini Thali",
@@ -26,7 +26,7 @@ function CateringServices() {
             width:378.12,
             height:240,
             description:"Advantage of food packages with multiple options available in it",
-            url:"/coming_soon"
+            url:"/coming-soon"
         },
     ]
   return (

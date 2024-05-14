@@ -1,20 +1,20 @@
 [
     {
-        "url":"/coming_soon",
+        "url":"/coming-soon",
         "img":"/footer/twitter.webp",
         "width":16,
         "height":12.87,
         "title":"Twitter"
     },
     {
-        "url":"/coming_soon",
+        "url":"/coming-soon",
         "img":"/footer/facebook.webp",
         "width":9.05,
         "height":17.35,
         "title":"Facebook"
     },
     {
-        "url":"/coming_soon",
+        "url":"/coming-soon",
         "img":"/footer/instagram.webp",
         "width":19.4,
         "height":19.31,

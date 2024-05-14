@@ -9,7 +9,7 @@ export default function App({ Component, pageProps }) {
    <main>
     <PageHead />
     <Header />
-    <div className="page-content min-h-[50vh]">
+    <div className="page-content min-h-[80vh]">
       <Component {...pageProps} />
     </div>
     <Footer />

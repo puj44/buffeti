@@ -11,7 +11,7 @@ function Banners() {
                     <p className='decorative-1 big-title'>{"A New way to Enjoy your catering food"}</p>
                     <div className='gap-8 flex flex-col'>
                         <p className='description max-w-[70%] md:max-w-[55%] text-color-charcoal'>{"Need some great food for a Birthday Party, House Party, Sales Call, Office Event, or Team Meeting?"}</p>
-                        <Link href="coming_soon" className='btn primary-btn  big-btn-padding gap-3'>
+                        <Link href="coming-soon" className='btn primary-btn  big-btn-padding gap-3'>
                             <p>
                                 Order Now
                             </p>

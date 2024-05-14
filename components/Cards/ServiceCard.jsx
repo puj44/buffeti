@@ -16,7 +16,7 @@ function ServiceCard({sv,idx}) {
         <div className='gap-2 flex flex-col'>
             <h5 className='product-title font-medium'>{sv.title}</h5>
             <p>{sv.description}</p>
-            <Link className='flex flex-row gap-2 items-center' href={sv.url}>
+            <Link className='flex flex-row gap-2 items-center w-fit' href={sv.url}>
                 <p className='font-medium text-color-font-secondary'>View Now</p>
                 <div>
                     <Image

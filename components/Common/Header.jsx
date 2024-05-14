@@ -47,7 +47,7 @@ function Header() {
                         )
                     })
                 }
-               <Link  href={"coming_soon"} className={` flex flex-row gap-2 xl:gap-3 align-middle my-auto`}>
+               <Link  href={"coming-soon"} className={` flex flex-row gap-2 xl:gap-3 align-middle my-auto`}>
 
                     <Image
                         src={"/icons/profile.webp"}
