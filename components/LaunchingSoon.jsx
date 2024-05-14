@@ -25,7 +25,7 @@ function LaunchingSoon() {
                 />
                 <p className='decorative-2 heading text-color-primary text-center'>Launching Soon</p>
             </div>
-            <p className='page-title text-center'>This page is under construction</p>
+            <p className='page-title text-center'>We are coming soon at your place</p>
         </div>
         <div className='flex flex-col gap-4 justify-center items-center'>
             <h1 className='page-title font-semibold'>About Buffeti</h1>
