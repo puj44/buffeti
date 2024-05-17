@@ -45,6 +45,9 @@ $openSans: "Open Sans", sans-serif;
 .page-title{
   font-size:28px !important;
 }
+.sub-title{
+  font-size:24px !important
+}
 
 .description{
   font-size:18px !important;
@@ -52,6 +55,10 @@ $openSans: "Open Sans", sans-serif;
 
 .product-title{
   font-size:20px !important;
+}
+
+.small-title{
+  font-size:14px !important
 }
 
 
@@ -68,10 +75,6 @@ $openSans: "Open Sans", sans-serif;
 
 //Medium Screen
 @media screen and (max-width:1024px){ 
-  
-}
-//Tablet Screen
-@media screen and (max-width:786px){
   .heading{
     font-size:28px !important;
   }
@@ -81,8 +84,18 @@ $openSans: "Open Sans", sans-serif;
   .product-title{
     font-size:16px !important;
   }
+  .sub-title{
+    font-size:20px !important
+  }
+  .small-title{
+    font-size:12px !important
+  }
   body{
     font-size:14px ;
   }
+}
+//Tablet Screen
+@media screen and (max-width:786px){
+ 
   
 }

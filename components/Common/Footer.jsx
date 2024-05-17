@@ -27,7 +27,7 @@ function Footer() {
                                 navbar.map((nv,idx)=>{
                                     return(
                                         idx !== (navbar.length -1) &&
-                                        <Link href={nv.url} >{nv.title}</Link>
+                                        <Link href={nv.url} key={"menu-"+idx}>{nv.title}</Link>
                                     )
                                 })
                             }

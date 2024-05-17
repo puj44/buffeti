@@ -15,13 +15,14 @@ export const authSlice = createSlice({
         },
         setMobileOtpResponse:(state,payload)=>{
             state.otp = "123456";
-            state.isLoading = true;
+            state.isLoading = false;
         },
         getTokenStatus:(state) => {
             
         },
         isAuthenticated:(state,payload) =>{
             state.isAuthenticated = payload.isAuthenticated;
+            // state.isAuthenticated = true;
         }
         
     }

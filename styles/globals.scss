@@ -4,11 +4,12 @@
 @import './components/variables';
 @import './common/background';
 @import './common/font';
+@import './common/decorations';
 
 
 @layer components {
   .page-spacing {
-    @apply px-[20px] sm:px-[128px]  flex flex-col justify-center;
+    @apply px-[20px] lg:px-[128px]  flex flex-col justify-center;
   }
 }
 
@@ -37,6 +38,31 @@ body{
   display: flex;
   border-radius: 16px;
   border:1px solid $secondaryYellow;
+}
+
+//Input Group
+.input-group{
+  border:1px solid $offWhitePrimary;
+  border-radius: 8px;
+
+  display: flex;
+  flex-direction: row;
+  gap:10px;
+  padding:14px 8px;
+
+  input{
+    border:none;
+    outline: none;
+    width: -webkit-fill-available;
+    &:focus{
+      outline: none;
+      box-shadow: none;
+      -webkit-box-shadow: none;
+    }
+  }
+}
+.input-error{
+  border-color: $primary;
 }
 
 //Footer
