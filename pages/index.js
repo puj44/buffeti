@@ -8,7 +8,7 @@ import { useDispatch } from "react-redux";
 export default function Home() {
   const dispatch = useDispatch();
   useEffect(()=>{
-    dispatch(getMobileOtp({phoneNumber:"9879651515"}));
+    // dispatch(getMobileOtp({phoneNumber:"9879651515"}));
   },[dispatch])
   return (
     <div
