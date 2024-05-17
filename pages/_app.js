@@ -1,20 +1,25 @@
-import Footer from "@/components/Common/Footer";
-import Header from "@/components/Common/Header";
-import PageHead from "@/components/Common/PageHead";
-import LaunchingSoon from "@/components/LaunchingSoon";
-import "@/styles/globals.scss";
 
+
+import LaunchingSoon from "@/components/LaunchingSoon";
+import Layout from "@/components/Layout";
+import "@/styles/globals.scss";
+import { Provider } from "react-redux";
+import {store} from "../redux/store";
 
 export default function App({ Component, pageProps }) {
   return(
-   <main>
-    <PageHead />
-    
-    {/* <Header /> */}
-    <div className="page-content min-h-[80vh]">
-      <Component {...pageProps} />
-    </div>
-    {/* <Footer /> */}
-   </main>
+    <Provider store={store}>
+    {
+        process.env.NEXT_PUBLIC_ENVIRONMENT !== "DEV" ? 
+        <LaunchingSoon />:
+        <div className="page-content min-h-[80vh]">
+          
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
+        </div>
+    }
+
+    </Provider>
   )
 }
