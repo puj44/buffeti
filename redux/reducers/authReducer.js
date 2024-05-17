@@ -6,7 +6,8 @@ export const authSlice = createSlice({
         isLoading:false,
         otp:undefined,
         resendOtpCount:0,
-        otpSecondsLeft:undefined
+        otpSecondsLeft:undefined,
+        isAuthenticated:false
     },
     reducers:{
         getMobileOtp:(state) =>{
@@ -14,11 +15,19 @@ export const authSlice = createSlice({
         },
         setMobileOtpResponse:(state,payload)=>{
             state.otp = "123456";
-            state.isLoading = true;
+            state.isLoading = false;
+        },
+        getTokenStatus:(state) => {
+            
+        },
+        isAuthenticated:(state,payload) =>{
+            state.isAuthenticated = payload.isAuthenticated;
+            // state.isAuthenticated = true;
         }
+        
     }
 });
 
-export const {getMobileOtp, setMobileOtpResponse} = authSlice.actions;
+export const {getMobileOtp, setMobileOtpResponse, getTokenStatus, isAuthenticated} = authSlice.actions;
 
 export default authSlice.reducer;

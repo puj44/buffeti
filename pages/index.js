@@ -1,14 +1,14 @@
 import Banners from "@/components/Homepage/Banners";
 import CateringServices from "@/components/Homepage/CateringServices";
 import LaunchingSoon from "@/components/LaunchingSoon";
-import { getMobileOtp } from "@/redux/reducers/authReducer";
+import { getMobileOtp, getTokenStatus } from "@/redux/reducers/authReducer";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 
 export default function Home() {
   const dispatch = useDispatch();
   useEffect(()=>{
-    // dispatch(getMobileOtp({phoneNumber:"9879651515"}));
+    dispatch(getTokenStatus());
   },[dispatch])
   return (
     <div

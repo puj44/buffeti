@@ -6,6 +6,19 @@ module.exports = {
     "./app/**/*.{js,ts,jsx,tsx,mdx,html}",
   ],
   theme: {
+    screens:{
+      'xs': '368px',
+      'sm': '640px',
+
+      'md': '768px',
+
+      'lg':'1050px',
+
+      'xl': '1280px',
+
+      '2xl': '1536px',
+    
+    }
   },
   plugins: [],
 };
