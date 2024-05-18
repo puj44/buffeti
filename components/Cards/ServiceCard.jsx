@@ -2,9 +2,9 @@ import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 
-function ServiceCard({sv,idx}) {
+function ServiceCard({sv,idx,slug}) {
   return (
-    <div  className={`max-w-[382px] grid grid-flow-row gap-3 items-baseline `}>
+    <div  className={`${slug === "suggestive-package" ?"hidden md:grid" :""} grid grid-flow-row gap-3 items-baseline `}>
         <Image
             src={sv.img}
             width={sv.width}
@@ -15,7 +15,7 @@ function ServiceCard({sv,idx}) {
         />
         <div className='gap-2 flex flex-col'>
             <h5 className='product-title font-medium'>{sv.title}</h5>
-            <p>{sv.description}</p>
+            <p className='max-w-[382px]'>{sv.description}</p>
             <Link className='flex flex-row gap-2 items-center w-fit' href={sv.url}>
                 <p className='font-medium text-color-font-secondary'>View Now</p>
                 <div>

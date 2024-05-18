@@ -35,11 +35,15 @@ $openSans: "Open Sans", sans-serif;
 //Font Size
 
 .big-title{
-  font-size: 60px !important;
+  font-size: 40px !important;
 }
 
 .heading{
   font-size:40px !important;
+}
+
+.card-heading{
+  font-size:32px !important
 }
 
 .page-title{
@@ -57,6 +61,9 @@ $openSans: "Open Sans", sans-serif;
   font-size:20px !important;
 }
 
+.package-title{
+  font-size:20px !important;
+}
 .small-title{
   font-size:14px !important
 }
@@ -67,10 +74,15 @@ $openSans: "Open Sans", sans-serif;
   
 }
 
+@media screen and (max-width:1440px){ 
+  
+}
+
 //Medium-Large Screen
 @media screen and (max-width:1280px){ 
-
-  
+  .card-heading{
+    font-size:20px !important
+  }
 }
 
 //Medium Screen
@@ -78,6 +90,7 @@ $openSans: "Open Sans", sans-serif;
   .heading{
     font-size:28px !important;
   }
+
   .page-title{
     font-size:20px !important;
   }
@@ -96,6 +109,22 @@ $openSans: "Open Sans", sans-serif;
 }
 //Tablet Screen
 @media screen and (max-width:786px){
- 
-  
+  .big-title{
+    font-size: 16px !important;
+  }
+  .card-heading{
+    font-size:20px !important
+  }
+  .product-title{
+    font-size:14px !important;
+  }
+  .package-title{
+    font-size:16px !important;
+  }
+  .convert-to-normal{
+    .big-title{
+
+      font-family: $primaryFont;
+    }
+  }
 }

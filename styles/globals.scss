@@ -13,6 +13,7 @@
   }
 }
 
+
 body{
   font-family: $primaryFont;
   color:$primaryTextColor;
@@ -95,5 +96,9 @@ body{
 }
 //Tablet Screen
 @media screen and (max-width:786px){
-  
+    //Banners
+  .order-now-banner{
+    height:130px;
+  }
+ 
 }
