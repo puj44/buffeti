@@ -6,7 +6,7 @@ import CateringPackageCard from '../Common/CateringPackageCard';
 
 function PackageSlider({packages, handleChangeCard, active}) {
   return (
-    <div className='grid grid-flow-col gap-5 lg:grid-flow-row max-w-full overflow-x-scroll lg:overflow-x-hidden'>
+    <div className='grid grid-flow-col gap-5 lg:grid-flow-row max-w-full overflow-x-scroll overflow-y-hidden lg:overflow-x-hidden'>
         <p className='hidden lg:block font-medium product-title'>Select Your Package</p>
         {
             Object.keys(packages).map((p)=>{
