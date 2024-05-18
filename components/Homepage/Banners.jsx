@@ -10,7 +10,7 @@ function Banners() {
                 <div className='flex flex-col w-full gap-4 md:gap-8 convert-to-normal'>
                     <p className='font-medium max-w-[80%] 2sm:max-w-[100%] decorative-1 md:font-normal big-title'>{"A New way to Enjoy your catering food"}</p>
                     <div className='gap-8 flex flex-col'>
-                        <p className='description hidden md:block max-w-[70%] md:max-w-[55%] text-color-charcoal'>{"Need some great food for a Birthday Party, House Party, Sales Call, Office Event, or Team Meeting?"}</p>
+                        <p className='description hidden md:block  md:max-w-[55%] xl:max-w-[70%] text-color-charcoal'>{"Need some great food for a Birthday Party, House Party, Sales Call, Office Event, or Team Meeting?"}</p>
                         <Link href="coming-soon" className='btn primary-btn  big-btn-padding gap-3'>
                             <p className='font-medium'>
                                 Order Now
