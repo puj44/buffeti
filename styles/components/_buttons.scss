@@ -19,6 +19,17 @@
     border:1px solid $primary;
     color:$white;
 }
+.secondary-btn{
+    background: $secondary;
+    border:1px solid $secondary;
+    color:$white;
+}
+.transparent-orange-btn{
+    background: $white;
+    border:1px solid $offWhitePrimary;
+    border-radius: 8px;
+    padding:8px 16px;
+}
 
 //Large Screen
 @media screen and (max-width:1440px){ 
@@ -42,5 +53,11 @@
 }
 //Tablet Screen
 @media screen and (max-width:786px){
-  
+    .big-btn-padding{
+        padding:8px 12px;
+        width:138px;
+    }
+    // .btn{
+    //     padding:16px;
+    // }
 }
