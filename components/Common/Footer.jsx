@@ -22,7 +22,7 @@ function Footer() {
                             />
                             <p className='text-color-primary page-title hidden md:block decorative-1'>Buffeti</p>
                         </Link>
-                        <p className='text-color-light-gray  block md:hidden'>{"Copyright c 2024 Buffeti"}</p>
+                        <p className='text-color-light-gray  block md:hidden'>{"Copyright © 2024 Buffeti"}</p>
                     </div>
                     <div className='flex flex-col md:flex-row gap-4 md:gap-6 md:items-center'>
                             {
@@ -37,7 +37,7 @@ function Footer() {
                 </div>
                 <div className='border-[#E4E4E7] border-[1px] hidden md:block '></div>
                 <div className='flex md:justify-between w-full'>
-                    <p className='text-color-light-gray items-center hidden md:block'>{"Copyright c 2024 Buffeti"}</p>
+                    <p className='text-color-light-gray items-center hidden md:block'>{"Copyright © 2024 Buffeti"}</p>
                     <div className='flex flex-row gap-6 items-center'>
                             {socials.map((s,idx)=>{
                                 return(
