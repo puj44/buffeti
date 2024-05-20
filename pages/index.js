@@ -1,5 +1,6 @@
 import Banners from "@/components/Homepage/Banners";
 import CateringServices from "@/components/Homepage/CateringServices";
+import MiniThali from "@/components/Homepage/MiniThali";
 import SnackBox from "@/components/Homepage/SnackBox";
 import SuggestivePackage from "@/components/Homepage/SuggestivePackage";
 import LaunchingSoon from "@/components/LaunchingSoon";
@@ -84,6 +85,7 @@ export default function Home() {
           <CateringServices services={services}/>
           {services["suggestive-package"] && <SuggestivePackage data={services["suggestive-package"]} />}
           {services["snack-box"] && <SnackBox data={services["snack-box"]} />}
+          {services["mini-thali"] && <MiniThali data={services["mini-thali"]} />}
     </div>
   );
 }

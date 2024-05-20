@@ -55,12 +55,12 @@ function SuggestivePackage({data}) {
         setActiveCard(val);
     }
   return (
-    <div className='grid grid-flow-row gap-6  '>
+    <div className='grid grid-flow-row gap-4 md:gap-6  '>
         <h3 className='page-title md:font-semibold 2xl:mx-auto'>{data.title}</h3>
         <div className='grid grid-flow-row md:flex md:flex-row gap-5 2xl:mx-auto'>
             {/* ALL PACKAGES CARD */}
             <div className='md:py-[24px] md:px-[16px]'>
-                <div className='grid grid-flow-row lg:grid-flow-col gap-3 '>
+                <div className='grid grid-flow-row lg:grid-flow-col gap-3 horizontal-scroll-div'>
                     <PackageSlider packages={packages} active={activeCard} handleChangeCard={handleChangeCard}/>
                     <div className='hidden lg:block'>
                         <PackageCard  data={packages[activeCard]} />

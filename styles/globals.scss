@@ -12,11 +12,42 @@
     @apply px-[20px] lg:px-[128px]  flex flex-col justify-center;
   }
 }
-
+  //Scrollbar
+// ::-webkit-scrollbar{
+//   width:8px;
+// }
+// ::-webkit-scrollbar-thumb {
+//   background: $lightGray;
+  
+//   border-radius: 8px;
+// }
+// ::-webkit-scrollbar{
+//   width:4px;
+// }
+// ::-webkit-scrollbar-thumb {
+//   background: $lightGray;
+//   // background-clip: padding-box;
+//   border-radius: 8px;
+// }
+// .horizontal-scroll-div{
+//   ::-webkit-scrollbar{
+//     width:1px;
+//   }
+//   ::-webkit-scrollbar-thumb {
+//     background: $lightGray;
+//     background-clip: padding-box;
+//     border-radius: 8px;
+//   }
+//   ::-webkit-scrollbar-track {
+//    background: transparent;
+//   }
+// }
 
 body{
   font-family: $primaryFont;
   color:$primaryTextColor;
+
+
 }
 
 @import './components/buttons';
@@ -96,6 +127,9 @@ body{
 }
 //Tablet Screen
 @media screen and (max-width:786px){
+  ::-webkit-scrollbar{
+    width:4px
+  }
     //Banners
   .order-now-banner{
     height:130px;
