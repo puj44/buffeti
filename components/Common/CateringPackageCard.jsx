@@ -5,11 +5,11 @@ import React from 'react'
 function CateringPackageCard({pack,key}) {
   return (
     <div 
-        className={`p-4  bg-[#F5F5F5] 
-            grid grid-flow-row md:flex xl:flex-row md:flex-col gap-2 md:gap-4
+        className={`p-4 md:p-0 lg:p-0 2xl:p-4  bg-[#F5F5F5] md:bg-transparent
+            grid grid-flow-row  gap-2 md:gap-4
             rounded-lg
             w-[280px] md:w-[349px]
-            border-[1px solid #F5F5F5] md:border-0
+            border-[1px] border-[#E3E5E5] md:border-0
         `} 
         key={"s-package-"+key}>
             <div>
