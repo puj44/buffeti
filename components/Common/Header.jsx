@@ -58,7 +58,7 @@ function Header({handleModelClick}) {
                                             sizes="100vw"
                                             loading='lazy'
                                         />
-                                    <h4 className={`${ isPathActive(n.url) ?"text-color-primary font-medium":""} my-auto`}>
+                                    <h4 className={`${ isPathActive(n.url) ?"text-color-primary font-semibold":""} my-auto`}>
                                         {n.title}
                                     </h4>
                                 </Link>
