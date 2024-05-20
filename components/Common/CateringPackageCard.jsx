@@ -25,7 +25,7 @@ function CateringPackageCard({pack,key}) {
             <p className='package-title font-medium md:font-normal'>{pack.name}</p>
             <p className='text-color-dark-gray block '>{pack.description}</p>
             <div className='flex  flex-row justify-between w-full'>
-                <p className='sub-title font-medium '>{"₹"+pack.price}</p>
+                <p className='package-title my-auto font-medium '>{"₹"+pack.price}</p>
                 <Link className=' btn transparent-orange-btn text-color-secondary w-[124px] shadow-[0px_4px_15px_0px_#00000008] ' href={pack.url ?? "/coming-soon"}>
                     Add
                 </Link>
