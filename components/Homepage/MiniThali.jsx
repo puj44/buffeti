@@ -91,7 +91,7 @@ function MiniThali({data}) {
   return (
     <div className='flex flex-col gap-2 md:gap-4 2xl:items-center'>
            <h3 className='page-title md:font-semibold 2xl:mx-auto'>{data.title}</h3>
-           <div className='overflow-x-scroll md:overflow-hidden grid grid-flow-col md:flex md:flex-row md:flex-wrap xl:justify-start 2xl:justify-center  gap-5  '> 
+           <div className='overflow-x-scroll md:overflow-hidden grid grid-flow-col md:flex md:flex-row md:flex-wrap  2xl:justify-center  gap-5  '> 
                 {
                       Object.keys(packages).map((p)=>{
                         const pack = packages[p];
