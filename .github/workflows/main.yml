@@ -27,8 +27,8 @@ jobs:
           cd /home/buffeti/www/buffeti
           export NVM_DIR=~/.nvm
           source ~/.nvm/nvm.sh
-          npm --help
-          git pull pj main
+          git fetch
+          git pull pj main --rebase
           npm install
           npm run build
           pm2 restart buffeti_frontend
