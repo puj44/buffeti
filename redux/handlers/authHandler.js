@@ -6,6 +6,7 @@ import { getOtpApi, getTokenStatusApi} from "../requests/authRequests";
 export function* handleGetMobileOtp(action){
     try{
         const response = yield call(getOtpApi,action);
+        console.log("here22",response);
         yield put(setMobileOtpResponse());
     }catch(err){
         console.log(err);
