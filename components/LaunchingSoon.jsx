@@ -40,7 +40,7 @@ function LaunchingSoon() {
                 </div>
             </div>
         </div>
-        <div className='footer flex flex-col gap-3 w-full items-center text-center lg:absolute bottom-0 left-0 right-0'>
+        <div className='footer flex flex-col gap-3 w-full items-center text-center 2xl:absolute bottom-0 left-0 right-0'>
             <div className='flex flex-col gap-2 w-full '>
                 <div className='items-center flex justify-center'>
                     <Image
