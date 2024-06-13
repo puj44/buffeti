@@ -17,6 +17,7 @@ const api = (BASE_URL) => {
   // Add a request interceptor
   service.interceptors.request.use(
     async function (config) {
+      
       return config;
     },
     function (error) {

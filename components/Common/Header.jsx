@@ -134,37 +134,34 @@ function Header({handleModelClick}) {
                             )
                         })
                     }
-                <div onClick={()=>{!(auth?.isAuthenticated) && handleModelClick(true)}} className={`${auth?.isAuthenticated ? "hidden":""} cursor-pointer flex flex-row gap-2 xl:gap-3 align-middle my-auto`}>
+                  
+                </div>
+                <div className='hidden md:block my-auto'>
+
+                    <div onClick={()=>{!(auth?.isAuthenticated) && handleModelClick(true)}} className={`${auth?.isAuthenticated ? "hidden":""} cursor-pointer flex flex-row gap-2 xl:gap-3 align-middle my-auto`}>
+
+                            <Image
+                                src={"/icons/profile.webp"}
+                                alt={"signin"}
+                                width={16}
+                                height={16}
+                                className='my-auto'
+                            />
+                            <h4 className='my-auto'>
+                                {"Sign In"}
+                            </h4>
+                        </div>
+                    
+                    <div onClick={()=>{ !(auth?.isAuthenticated) && handleModelClick(true)}} className={`flex ${auth?.isAuthenticated ? "":"md:hidden"} justify-center orange-circle w-[38px] h-[38px] items-center align-middle my-auto`}>
 
                         <Image
-                            src={"/icons/profile.webp"}
-                            alt={"signin"}
+                            src={"/icons/profile_mobile.webp"}
+                            alt={"profile"}
                             width={16}
                             height={16}
-                            // style={{
-                            //     height:"100%",
-                            //     width:"100%"
-                            // }}
                             className='my-auto'
                         />
-                        <h4 className='my-auto'>
-                            {"Sign In"}
-                        </h4>
                     </div>
-                </div>
-                <div onClick={()=>{ !(auth?.isAuthenticated) && handleModelClick(true)}} className={`flex ${auth?.isAuthenticated ? "":"md:hidden"} justify-center gray-circle w-[38px] h-[38px] items-center align-middle my-auto`}>
-
-                    <Image
-                        src={"/icons/profile_mobile.webp"}
-                        alt={"profile"}
-                        width={16}
-                        height={16}
-                        // style={{
-                        //     height:"100%",
-                        //     width:"100%"
-                        // }}
-                        className='my-auto'
-                    />
                 </div>
             </div>
         </div>

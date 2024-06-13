@@ -13,7 +13,7 @@ export const get = async (url, baseURL) => {
           return res;
         }
       } else {
-        return false;
+        return res;
       }
     } catch (err) {
       if (err?.response) {
@@ -30,13 +30,12 @@ export const post = async (url, payload,baseURL) => {
     try {
         const res = await api(baseURL ?? BASE_URL).post(url,payload);
         
-     
       if (res.status === 200) {
         if (res.data?.code === 200) {
           return res;
         }
       } else {
-        return false;
+        return res;
       }
       return res;
     } catch (err) {
@@ -47,7 +46,7 @@ export const post = async (url, payload,baseURL) => {
         //   window.location.replace("/");
         }
       }
-      return false;
+      return err;
     }
 };
 export const put = async (url, payload,baseURL) => {
@@ -59,7 +58,7 @@ export const put = async (url, payload,baseURL) => {
           return res;
         }
       } else {
-        return false;
+        return res;
       }
     } catch (err) {
       if (err?.response) {
