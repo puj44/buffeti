@@ -3,8 +3,8 @@
     "short_name": "",
     "icons": [
         {
-            "src": "/logo/logo_primary.png",
-            "sizes": "695x512",
+            "src": "/logo/primary_logo.png",
+            "sizes": "305x200",
             "type": "image/png"
         }
     ],

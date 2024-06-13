@@ -11,6 +11,9 @@
   .page-spacing {
     @apply px-[20px] lg:px-[128px]  flex flex-col justify-center;
   }
+  .active-path{
+    @apply text-color-primary font-medium border-solid border-b-[1px] border-[#B42318]
+  }
 }
   //Scrollbar
 // ::-webkit-scrollbar{
@@ -97,6 +100,22 @@ input{
   max-height: 72px;
 }
 
+//Dropdown Box
+.dropdown-box{
+  min-width: 124px;
+  height:auto;
+  // transform:translate(-5px,65px);
+  z-index:99;
+  border-radius: 8px;
+  padding:10px 14px;
+  display: flex;
+  flex-direction: column;
+  gap:10px;
+  background: $white;
+  box-shadow: 0px 4px 15px 0px #0000000D;
+  opacity:1;
+  z-index: 9999;
+}
 
 
 //Banners

@@ -13,12 +13,13 @@ function Footer() {
                     <div className=' flex flex-col gap-2'>          
                         <Link className='flex flex-row gap-2  items-center ' href="/">
                             <Image
-                                src={"/logo/logo_primary.webp"}
+                                src={`${process.env.NEXT_PUBLIC_IMAGES_URL}/logo/primary_logo.webp`}
                                 alt={"signin"}
                                 width={90}
                                 height={60}
                                 className='my-auto w-[88px] h-[58px] md:w-[90px] md:h-[60px]'
                                 loading='lazy'
+                                unoptimized
                             />
                             <p className='text-color-primary page-title hidden md:block decorative-1'>Buffeti</p>
                         </Link>
@@ -27,7 +28,9 @@ function Footer() {
                     <div className='flex flex-col md:flex-row gap-4 md:gap-6 md:items-center'>
                             {
                                 navbar.map((nv,idx)=>{
+                                    
                                     return(
+                                        !(nv.isDropdown) &&
                                         idx !== (navbar.length -1) &&
                                         <Link href={nv.url} key={"menu-"+idx}>{nv.title}</Link>
                                     )
