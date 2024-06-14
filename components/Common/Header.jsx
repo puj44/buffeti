@@ -47,6 +47,13 @@ function Header({handleModelClick}) {
         return false;
     }
 
+    useEffect(()=>{
+        if(mobileMenu){
+            document.body.style.overflow = 'hidden';
+        }else{
+            document.body.style.overflow = "scroll"
+        }
+    },[mobileMenu])
 
 
   return (
