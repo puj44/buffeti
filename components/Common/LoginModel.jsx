@@ -3,9 +3,11 @@ import React, { useEffect, useState } from 'react'
 import LoginContainer from './LoginContainer';
 import { useDispatch, useSelector } from 'react-redux';
 import { getMobileOtp, resetResponse, signup, verifyOtp } from '@/redux/reducers/authReducer';
+import { hasCookie } from 'cookies-next';
 
-function LoginModel({handleModelClick, isModalOpen}) {
-    const [step, setStep] = useState("login");
+function LoginModel({handleModelClick, isModalOpen, isFirstTime}) {
+    const {otpSecondsLeft, isLoading, otpResponse, errorMessage, isAuthenticated} = useSelector((state) => state.auth)
+    const [step, setStep] = useState(isFirstTime ?isAuthenticated ? "get_started" : "register":"login");
     const [prevStep, setPrevStep] = useState();
     const [values, setValues] = useState({});
     const [error, setError] = useState(false);
@@ -13,14 +15,10 @@ function LoginModel({handleModelClick, isModalOpen}) {
 
     const dispatch = useDispatch();
 
-    const {otpSecondsLeft, isLoading, otpResponse, errorMessage} = useSelector((state) => state.auth)
+    
 
-    useEffect(()=>{
-        dispatch(resetResponse())
-    },[])
 
     const changeStep = (val) =>{
-        dispatch(resetResponse())
         setError(false);
         if(val !== "otp_verification"){
             setValues({});
@@ -40,7 +38,7 @@ function LoginModel({handleModelClick, isModalOpen}) {
         
         ){
            
-            setValues({...values,[field]:field === 'otp' ? e :e.target.value})
+            setValues({...values,[field]:field === 'otp'  ? e :e.target.value})
         }else{
             e.preventDefault();
         }
@@ -91,6 +89,7 @@ function LoginModel({handleModelClick, isModalOpen}) {
     }
 
     useEffect(()=>{
+        
         if(otpResponse){
             if(otpSecondsLeft && Number(otpSecondsLeft) > 0){
                 setTimer(Number(otpSecondsLeft));
@@ -102,13 +101,20 @@ function LoginModel({handleModelClick, isModalOpen}) {
                 if(errorMessage && errorMessage !== ""){
                     setError(errorMessage)
                 }else{
-    
+                    
                     if(step === "register" || step === "login"){
                         setPrevStep(step);
                         changeStep("otp_verification");
                         dispatch(resetResponse())
-                    }else{
-    
+                    }else if(step === "otp_verification"){
+                        
+                        if(localStorage.getItem("visited")){
+
+                            handleModelClick(false);
+                        }else{
+                            changeStep("get_started");
+                        }
+                        dispatch(resetResponse())
                     }
                 }
             }
@@ -131,11 +137,10 @@ function LoginModel({handleModelClick, isModalOpen}) {
             return;
         }else{
             dispatch(verifyOtp({
-                otp:"123456",
+                otp:values?.otp,
                 mobile_number:values?.mobile_number
             }))
         }
-        // handleModelClick(false);
     }
 
     if(isModalOpen )

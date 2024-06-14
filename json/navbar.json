@@ -9,7 +9,7 @@
         "dropdownData":[
             {
                 "title":"Catering",
-                "slug":"catering"
+                "slug":"click2cater"
             },
             {
                 "title":"Snack Boxes",
@@ -22,13 +22,29 @@
         ]
     },
     {
+        "url":"click2cater",
+        "title":"Catering",
+        "isMobile":true
+    },
+    {
+        "title":"Snack Boxes",
+        "url":"snack-boxes",
+        "isMobile":true
+    },
+    {
+        "url":"coming-soon",
+        "title":"Mini Meals",
+        "isMobile":true
+    },
+    {
         "url":"coming-soon",
         "title":"Blogs"
     },
     {
         "url":"coming-soon",
         "title":"Cart",
-        "isCart":true
+        "isCart":true,
+        "isDesktop":true
     },
     {
         "url":"coming-soon",
@@ -40,6 +56,7 @@
         "img":"/icons/plus_white.webp",
         "width":14,
         "height":14,
+        "isDesktop":true,
         "className":"btn primary-btn gap-2"
     }
   

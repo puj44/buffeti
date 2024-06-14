@@ -73,10 +73,7 @@ export default function Home() {
         url:"/coming-soon"
     }
 }
-  const dispatch = useDispatch();
-  useEffect(()=>{
-    dispatch(getTokenStatus());
-  },[dispatch])
+ 
   return (
     <div
       className={`${ process.env.NEXT_PUBLIC_ENVIRONMENT === "DEV" ? "flex flex-col md:gap-6 gap-4 py-8  page-spacing ":""}`} style={{alignItems:"stretch"}}

@@ -1,3 +1,5 @@
+import { deleteCookie, setCookie } from "cookies-next";
+
 const { createSlice } = require("@reduxjs/toolkit");
 
 export const authSlice = createSlice({
@@ -40,17 +42,34 @@ export const authSlice = createSlice({
                 mobile_number:action?.payload?.data?.user?.mobile_number,
                 email:action?.payload?.data?.user?.email ?? null,
             }
+            if(state.isAuthenticated){
+                setCookie(`accessToken`,action?.payload?.data?.accessToken),action?.payload?.data?.accessToken
+            }
             state.otpResponse = action?.payload?.statusCode ? true :false;
             state.errorMessage = action?.payload?.statusCode !== 200 ?  (action?.payload?.message ?? "") :""
         },
+        setTokenStatus:(state,action) =>{
+            if(action?.payload?.statusCode !== 200 && (action?.payload?.statusCode === 403 || action?.payload?.statusCode === 401)){
+                state.isAuthenticated = false;
+                deleteCookie("accessToken");
+            }else if(action?.payload?.statusCode === 200){
+                state.isAuthenticated = true;
+                state.user = {
+                    name:action?.payload?.data?.user?.name,
+                    mobile_number:action?.payload?.data?.user?.mobile_number,
+                    email:action?.payload?.data?.user?.email ?? null,
+                }
+            }
+        },
         resetResponse:(state) =>{
             state.otpResponse = false
-            state.errorMessage = ""
+            state.errorMessage = "";
+            state.otpSecondsLeft = 0;
         }
         
     }
 });
 
-export const {getMobileOtp, setMobileOtpResponse, getTokenStatus, isAuthenticated, signup, resetResponse, verifyOtp} = authSlice.actions;
+export const {getMobileOtp, setMobileOtpResponse, getTokenStatus, isAuthenticated, signup, resetResponse, verifyOtp, setTokenStatus} = authSlice.actions;
 
 export default authSlice.reducer;

@@ -18,5 +18,5 @@ export const verifyOtpApi = ({payload}) =>{
 
 export const getTokenStatusApi = ({payload}) =>{
 
-    return get("/auth/check-status",payload);
+    return get("/auth/get-status",payload);
 }

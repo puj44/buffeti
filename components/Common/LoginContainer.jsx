@@ -1,8 +1,17 @@
 import Image from 'next/image'
-import React from 'react'
+import React, { useState } from 'react'
 import OTPInput from 'react-otp-input'
+import { useSelector } from 'react-redux'
+import PeopleQuantityInput from './PeopleQuantityInput';
+import { setCookie } from 'cookies-next';
 
 function LoginContainer({step,changeStep, onInputChange, values,error,changeNumber,sendOTP,handleModelClick,verifyOtp, timer,isLoading,resendOTP}) {
+    const {locations} = useSelector((state) => state.home);
+    const [qty, setQty] = useState(10);
+    const [location, setLocation] = useState();
+    const [err, setErr] = useState(false);
+    const [position,setPosition] = useState({ latitude: null, longitude: null });
+
     const convertToMinute = (duration) =>{
         // Hours, minutes and seconds
         const hrs = ~~(duration / 3600);
@@ -21,6 +30,36 @@ function LoginContainer({step,changeStep, onInputChange, values,error,changeNumb
 
         return ret;
     }
+    const handleChangeQuantity = (e, isUpdate = false, val) =>{
+        e.preventDefault();
+        e.stopPropagation();
+        if(isUpdate){
+          if(val >= 10){
+            setQty(val)
+          }
+        }else{
+          if(/^[\+\-]?\d*\.?\d+(?:[Ee][\+\-]?\d+)?$/.test(e.target.value) || e.target.value === ""){
+            if(parseInt(e.target.value) >= 1 && parseInt(e.target.value) < 10){
+            }else{
+                setQty(e.target.value)
+            }
+          }
+        }
+      }
+
+      const detectLocation = () =>{
+        if ("geolocation" in navigator) {
+            navigator.geolocation.getCurrentPosition(function (position) {
+              setPosition({
+                latitude: position.coords.latitude,
+                longitude: position.coords.longitude,
+              });
+            });
+          } else {
+            setErr("Geolocation is not available in your browser, please try different browser");
+          }
+      }
+
     const renderElement = () =>{
         switch(step){
             case "login":
@@ -165,6 +204,61 @@ function LoginContainer({step,changeStep, onInputChange, values,error,changeNumb
                      </div>
                     </>
                 )
+            case "get_started":
+                return(
+                    <>
+                        <div className='flex flex-col gap-4 '>
+                            <select className='select-box' onChange={(e)=>{
+                                setLocation(e.target.value)
+                                
+                            }}
+                                value={location ?? ""}
+                            >
+                                <option selected disabled value="" className=''>Location</option>
+                                {
+                                    locations?.map((loc)=>{
+                                        return(
+
+                                            <option key={` location-${loc}`} value={loc}>{loc?.charAt(0)?.toUpperCase() + loc.slice(1)}</option>
+                                        )
+
+                                    })
+                                }
+                            </select>
+                            <div className='flex flex-row gap-2 items-center cursor-pointer' onClick={()=>{
+                                detectLocation()
+                            }}>
+                                <Image 
+                                    src={"/icons/gps.webp"}
+                                    width={24}
+                                    height={24}
+                                    alt='gps'
+                                    priority
+                                />
+                                <p className='text-color-secondary small-title'>{"Detect current location"}</p>
+                            </div>
+                            {err && <span className={'text-color-secondary-red'} id="location-error">{err}</span>}
+                        </div>
+                        <PeopleQuantityInput quantity={qty ?? 10} handleChangeQuantity={handleChangeQuantity} />
+                        <button className={`btn primary-btn ${isLoading ? "opacity-60":""}`} onClick={()=>{
+                            if(location){
+                                setErr(false)
+                                localStorage.setItem("no_of_people",qty);
+                                localStorage.setItem("visited",true)
+                                setCookie("location",location);
+                                handleModelClick(false);
+                            }else{
+                                setErr("Please select location");
+                            }
+                        }}>
+                            {
+                                isLoading?
+                                <span className='loader'></span>
+                                :
+                                "Save"}
+                        </button>
+                    </>
+                )
             default:
                 return;
             
@@ -175,18 +269,19 @@ function LoginContainer({step,changeStep, onInputChange, values,error,changeNumb
     <div className='flex flex-row gap-0'>
         <div className='hidden md:block w-full'>
             <Image
-                src={`${process.env.NEXT_PUBLIC_IMAGES_URL}/banners/signup_banner.webp`}
+                src={step === "get_started" ? `${process.env.NEXT_PUBLIC_IMAGES_URL}/banners/start_banner.webp`:`${process.env.NEXT_PUBLIC_IMAGES_URL}/banners/signup_banner.webp`}
                 width={400}
                 height={493}
                 alt={"Signup Banner"}
                 objectFit='cover'
                 unoptimized
+                priority
             />
         </div>
         <div className='w-full flex flex-col gap-0'>
             {/* TITLE DIV */}
             <div className='hidden p-[24px] pb-0 md:flex flex-row justify-between items-center'>
-                    <p className='sub-title font-medium'>{step === "login" ? "Login" : step === "register" ? "Register" :"OTP Verification"}</p>
+                    <p className='sub-title font-medium'>{step === "login" ? "Login" : step === "register" ? "Register" : step === "get_started"?"Let's get started":"OTP Verification"}</p>
                     <div className='cursor-pointer' onClick={()=>{handleModelClick(false)}}>
                         <Image
                             src={"/icons/cross.webp"}
@@ -208,7 +303,7 @@ function LoginContainer({step,changeStep, onInputChange, values,error,changeNumb
                             />
                         </div>
                         <div className='grid grid-flow-row gap-2  self-start '>
-                            <p className='sub-title font-medium'>{step === "login" ? "Login" : step === "register" ? "Register" :"OTP Verification"}</p>
+                            <p className='sub-title font-medium'>{step === "login" ? "Login" : step === "register" ? "Register" : step === "get_started"?"Let's get started":"OTP Verification"}</p>
                             <p className='text-color-dark-gray flex small-title max-w-[50%] xs:max-w-[100%]'>{step === "login" || step === "register" ? "Enter mobile number to continue":""}</p>
                         </div>
                     </div>
