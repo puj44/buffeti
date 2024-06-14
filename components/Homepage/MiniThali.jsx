@@ -96,8 +96,9 @@ function MiniThali({data}) {
                       Object.keys(packages).map((p)=>{
                         const pack = packages[p];
                         return(
-
-                                <CateringPackageCard key={p} pack={pack} />
+                                <>
+                                    <CateringPackageCard packageName={p} pack={pack} />
+                                </>
                         )
                       })
                 }

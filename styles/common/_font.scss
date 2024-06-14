@@ -57,6 +57,10 @@ $openSans: "Open Sans", sans-serif;
   font-size:18px !important;
 }
 
+.number{
+  font-size:16px;
+}
+
 .product-title{
   font-size:20px !important;
 }
@@ -66,6 +70,10 @@ $openSans: "Open Sans", sans-serif;
 }
 .small-title{
   font-size:14px !important
+}
+
+.smallest-title{
+  font-size:12px !important
 }
 
 
@@ -130,4 +138,12 @@ $openSans: "Open Sans", sans-serif;
       font-family: $primaryFont;
     }
   }
+}
+
+//Small screen
+@media screen and (max-width:368px){
+  .page-title{
+    font-size:16px !important;
+  }
+  
 }

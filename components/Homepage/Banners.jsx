@@ -1,8 +1,12 @@
 import Image from 'next/image'
-import Link from 'next/link'
 import React from 'react'
 
 function Banners() {
+    const orderNow = () =>{
+        var packageEle = document.getElementById("suggestive-package");
+        var topPos = packageEle.offsetTop;
+        window.scrollTo({top:topPos -10, behavior:"smooth"})
+    }
   return (
 
         <div className='order-now-banner overflow-hidden'>
@@ -11,7 +15,8 @@ function Banners() {
                     <p className='font-medium max-w-[80%] 2sm:max-w-[100%] decorative-1 md:font-normal big-title'>{"A New way to Enjoy your catering food"}</p>
                     <div className='gap-8 flex flex-col'>
                         <p className='description hidden md:block  md:max-w-[55%] xl:max-w-[70%] text-color-charcoal'>{"Need some great food for a Birthday Party, House Party, Sales Call, Office Event, or Team Meeting?"}</p>
-                        <Link href="coming-soon" className='btn primary-btn  big-btn-padding gap-3'>
+                        <div  className='btn primary-btn cursor-pointer big-btn-padding gap-3' 
+                            onClick={()=>{ orderNow() }}>
                             <p className='font-medium'>
                                 Order Now
                             </p>
@@ -21,7 +26,7 @@ function Banners() {
                                 height={14}
                                 alt="arrow"
                             />
-                        </Link>
+                        </div>
                     </div>
                 </div>
             </div>
