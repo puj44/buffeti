@@ -274,6 +274,7 @@ function LoginContainer({step,changeStep, onInputChange, values,error,changeNumb
                 height={493}
                 alt={"Signup Banner"}
                 objectFit='cover'
+                className='rounded-lg'
                 unoptimized
                 priority
             />

@@ -14,8 +14,11 @@ function Layout({children}) {
   useEffect(()=>{
     const visited = localStorage?.getItem("visited");
     if(!visited){
-        setModalOpen(true);
-        setVisited(true);
+        setTimeout(()=>{
+          setModalOpen(true);
+
+          setVisited(true);
+        },4000)
     }
   },[])
   return (
