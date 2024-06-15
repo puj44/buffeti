@@ -12,7 +12,8 @@ import { getPackagesData } from '@/redux/reducers/packageReducer';
 function SuggestivePackage({data,filters}) {
     const [activeCard, setActiveCard] = useState(Object.keys(data)[0]);
     const [activeFilters, setActiveFilters] = useState({
-        category:Object.keys(filters.categories)[0]
+        category:Object.keys(filters.categories)[0],
+        no_of_people:"10_20"
     });
     const [packagesData, setPackagesData] = useState({...data ?? {}});
     const {packages} = useSelector((state) => state.packages)
@@ -38,7 +39,8 @@ function SuggestivePackage({data,filters}) {
     const handleChangeFilter = (field,val) =>{
         let filtersData = JSON.parse(JSON.stringify(activeFilters)) 
         if(val === activeFilters?.[field]){
-            delete filtersData[field];
+            if(field !== "category")
+                delete filtersData[field];
         }else{
             filtersData = {
                 ...filtersData,
