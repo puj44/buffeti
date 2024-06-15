@@ -245,7 +245,7 @@ function LoginContainer({step,changeStep, onInputChange, values,error,changeNumb
                                 setErr(false)
                                 localStorage.setItem("no_of_people",qty);
                                 localStorage.setItem("visited",true)
-                                setCookie("location",location);
+                                setCookie("location",location,{maxAge:9.461e+7});
                                 handleModelClick(false);
                             }else{
                                 setErr("Please select location");

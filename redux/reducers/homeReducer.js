@@ -4,17 +4,18 @@ export const homeSlice = createSlice({
     name:"home",
     initialState:{
         isLoading:false,
-        locations:[]
+        locations:[],
+        filters:{},
+        location:"",
     },
     reducers:{
         getData:(state) =>{
             state.isLoading = true;
         },
         setData:(state,action) =>{
+            
             state.isLoading = false;
-            if(action?.payload?.statusCode === 200){
-                state.locations = action?.payload?.data?.locations ?? [];
-            }
+            state.locations = action?.payload?.data?.locations ?? [];
         },
         getMenuOptions:(state) =>{
             state.isLoading = true;

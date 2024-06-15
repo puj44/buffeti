@@ -4,12 +4,13 @@ import LaunchingSoon from "@/components/LaunchingSoon";
 import Layout from "@/components/Layout";
 import "@/styles/globals.scss";
 import { Provider, useDispatch } from "react-redux";
-import {wrapper} from "../redux/store";
+import {store, wrapper} from "../redux/store";
 import { getData, setData } from "@/redux/reducers/homeReducer";
 import { getDataApi } from "@/redux/requests/homeRequests";
 import { hasCookie } from "cookies-next";
 import { getTokenStatus } from "@/redux/reducers/authReducer";
 import { useEffect } from "react";
+import { END } from "redux-saga";
 
 function App({ Component, pageProps, props }) {
   const {locations} = props;
@@ -32,40 +33,24 @@ function App({ Component, pageProps, props }) {
   )
 }
 
-export async function fetchData(params, store) {
-  await Promise.all([
-    store.dispatch(getData())
-  ]);
+export async function fetchData() {
+  await store.dispatch(getData())
   await store.dispatch(END);
   await store.sagaTask.toPromise();
+  return true;
 }
 
+
+
 App.getInitialProps = async(props)=>{
-    const {data} = await getDataApi({});
-    let locations = [];
-    if(data?.statusCode === 200){
-      locations = data?.data?.locations;
-    }
+    await fetchData();
+    const {locations} = await store?.getState()?.home;
       return {
       props:{
         locations
       }
     }
 }
-
-// export const getInitialProps = wrapper.getInitialProps(
-//   (store) => async (props) => {
-//     console.log("HERE");
-//     await fetchData(props.params, store);
-//     const locations = await store.getState().home.locations;
-//     console.log("ASD",locations);
-//     return {
-//       props:{
-//         locations
-//       }
-//     }
-//   }
-// );
 
 export default wrapper.withRedux(App);
 
