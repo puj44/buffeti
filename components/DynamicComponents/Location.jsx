@@ -49,7 +49,7 @@ function Location() {
                         return(
                             <>
                                 <Dropdown.Item as="p"  key={`item-`+data} onClick={()=>{
-                                    setCookie("location",data)
+                                    setCookie("location",data,{maxAge:9.461e+7})
                                 }}>  
                                     {data?.charAt(0)?.toUpperCase() + data?.slice(1)}
                                 </Dropdown.Item>

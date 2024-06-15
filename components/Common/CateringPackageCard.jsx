@@ -2,7 +2,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 
-function CateringPackageCard({pack,packageName}) {
+function CateringPackageCard({pack,packageName,numberOfPeople}) {
   return (
     <div 
         className={`p-4 md:p-0 lg:p-0 2xl:p-4  bg-[#F5F5F5] md:bg-transparent
@@ -14,20 +14,20 @@ function CateringPackageCard({pack,packageName}) {
         key={"s-package-"+packageName}>
             <div>
                 <Image
-                    src={pack.activeImage.url}
-                    width={pack.activeImage.width}
-                    height={pack.activeImage.height}
-                    alt={pack.name}
+                    src={"/catering_services/mini_thali.webp"}
+                    width={100}
+                    height={100}
+                    alt={pack.package_name}
                     className=' rounded-md '
                 />
             </div>
         <div className='flex flex-col gap-2'>
-            <p className='package-title font-medium md:font-normal'>{pack.name}</p>
-            <p className='text-color-dark-gray block '>{pack.description}</p>
+            <p className='package-title font-medium md:font-normal'>{pack.package_name}</p>
+            <p className='text-color-dark-gray block '>{pack.categories_description}</p>
             <div className='flex  flex-row justify-between w-full'>
-                <p className='package-title my-auto font-medium '>{"₹"+pack.price}</p>
+                <p className='package-title my-auto font-medium '>{"₹"+pack[`_${numberOfPeople}_pax`]}</p>
                 <Link className=' btn transparent-orange-btn text-color-secondary w-[124px] shadow-[0px_4px_15px_0px_#00000008] ' href={`/suggestive-package/${packageName}`}>
-                    Add
+                    Select
                 </Link>
             </div>
 
