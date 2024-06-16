@@ -6,7 +6,7 @@ import CateringPackageCard from '../Common/CateringPackageCard';
 
 function PackageSlider({packages, handleChangeCard, active, numberOfPeople}) {
   return (
-    <div className='grid grid-flow-col gap-5 lg:grid-flow-row max-w-full overflow-x-scroll  overflow-y-hidden lg:overflow-x-hidden'>
+    <div className='grid  gap-5 grid-flow-row max-w-full  lg:overflow-x-hidden'>
         
         {
             Object.keys(packages).map((p)=>{
@@ -44,9 +44,9 @@ function PackageSlider({packages, handleChangeCard, active, numberOfPeople}) {
                 )
             })
         }
-        <div className='block lg:hidden'>
+        {/* <div className='block lg:hidden'>
           <CustomiseOrderCard mobile={true} />
-        </div>
+        </div> */}
      
     </div>
   )

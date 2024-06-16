@@ -33,11 +33,11 @@ function Filters({
 }) {
     
   return (
-    <div className='flex flex-col gap-2'>
+    <div className='flex flex-col gap-2 2xl:justify-center'>
        
             {
                 pricing?.length > 0 ?
-                    <div className='flex flex-row gap-4 md:gap-6'>
+                    <div className='flex flex-wrap gap-4 2xl:justify-center md:gap-6'>
                         {pricing.map((p,idx) => {
                             return(
                                 <div 
@@ -56,11 +56,11 @@ function Filters({
             }
             {
                 displayNoOfPeople ?
-                <div className='flex flex-row gap-4 md:gap-6'>
+                <div className='flex flex-wrap gap-4 md:gap-6 2xl:justify-center'>
                         {noOfPeople.map((nop,idx) => {
                             return(
                                 <div 
-                                    className={`filter-box cursor-pointer ${nop.value === activeFilters?.no_of_people ? "active-filter-box":""}`} 
+                                    className={`filter-box   cursor-pointer ${nop.value === activeFilters?.no_of_people ? "active-filter-box":""}`} 
                                     key={"no-of-people-"+idx}
                                     onClick={()=>{
                                         handleChangeFilter("no_of_people",nop.value)
@@ -72,6 +72,7 @@ function Filters({
                                         height={nop.height}
                                         alt={"people"}
                                         priority
+                                        className='hidden sm:block'
                                     />
                                     <p>{nop?.label}</p>
                                 </div>

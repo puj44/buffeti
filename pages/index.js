@@ -16,6 +16,9 @@ export default function Home(props) {
     >
           <Banners />
           {packages?.length > 0 && <SuggestivePackage data={packages[0]} filters={filters} />}
+          <div className="">
+
+          </div>
     </div>
   );
 }

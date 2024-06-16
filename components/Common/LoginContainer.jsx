@@ -310,7 +310,7 @@ function LoginContainer({step,changeStep, onInputChange, values,error,changeNumb
                     </div>
                     <div className='absolute right-0 bottom-0'>
                         <Image
-                            src={"/logo/logo_primary.webp"}
+                            src={"/logo/primary_logo.webp"}
                             width={2049}
                             height={1354}
                             style={{

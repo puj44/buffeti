@@ -88,9 +88,7 @@ $openSans: "Open Sans", sans-serif;
 
 //Medium-Large Screen
 @media screen and (max-width:1280px){ 
-  .card-heading{
-    font-size:20px !important
-  }
+  
 }
 
 //Medium Screen
@@ -142,6 +140,12 @@ $openSans: "Open Sans", sans-serif;
 
 //Small screen
 @media screen and (max-width:368px){
+  .card-heading{
+    font-size:16px !important
+  }
+  .product-title{
+    font-size:12px !important;
+  }
   .page-title{
     font-size:16px !important;
   }
