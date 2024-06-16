@@ -6,16 +6,20 @@ function CateringPackageCard({pack,packageName,numberOfPeople}) {
   return (
     <div 
         className={`p-0 lg:p-0 2xl:p-4  lg:bg-[#F5F5F5] md:bg-transparent
-            flex flex-row w-auto lg:grid-flow-row  gap-2 md:gap-4
+            flex flex-row w-full lg:grid-flow-row  gap-2 md:gap-4
             rounded-md 
         `} 
         key={"s-package-"+packageName}>
-            <div className='w-[100px] h-[100px]'>
+            <div className='w-max flex  h-[100px]'>
                 <Image
                     src={"/catering_services/mini_thali.webp"}
-                    width={1513}
-                    height={960}
+                    width={100}
+                    height={100}
                     alt={pack.package_name}
+                    style={{
+                        width:"100%",
+                        height:"100%"
+                    }}
                     className=' rounded-md '
                 />
             </div>

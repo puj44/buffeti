@@ -18,6 +18,7 @@ function CustomiseOrderCard({mobile}) {
             <div 
                 className={`
                     flex flex-col gap-2 items-start 
+                    md:w-full
                     md:flex-row md:justify-between md:items-center 
                     lg:flex-col lg:items-start lg:h-full
                 `}

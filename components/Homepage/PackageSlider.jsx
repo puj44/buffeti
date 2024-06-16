@@ -12,7 +12,7 @@ function PackageSlider({packages, handleChangeCard, active, numberOfPeople}) {
             Object.keys(packages).map((p)=>{
                 const pack = packages[p];
                 return(<>
-                    <div className='block lg:hidden'>
+                    <div className='block w-full lg:hidden'>
                         <CateringPackageCard pack={pack} numberOfPeople={numberOfPeople} packageName={p}/>
                     </div>
                     <div className={`p-4 h-fit xl:pe-6 lg:p-2 ${active === p ?"bg-light-red":"bg-transparent"} 

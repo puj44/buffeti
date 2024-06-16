@@ -16,7 +16,7 @@ function PackageCard({data,slug, numberOfPeople}) {
           alt={data.package_name}
         />
       </div>
-      <div className='flex flex-col justify-between h-full gap-2'>
+      <div className='flex flex-col  h-full gap-2'>
         <div className='grid grid-flow-row gap-2'>
           <p className='product-title font-medium'>{data.package_name}</p>
           <p className='text-color-primary-gray '>{data.categories_description}</p>

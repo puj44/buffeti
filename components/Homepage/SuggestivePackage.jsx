@@ -68,8 +68,8 @@ function SuggestivePackage({data,filters}) {
         <p className='hidden lg:block font-medium product-title'>Select Your Package</p>
         <div className='grid grid-flow-row md:flex md:flex-row gap-5 '>
             {/* ALL PACKAGES CARD */}
-            <div className=''>
-                <div className='grid grid-flow-row lg:grid-flow-col gap-3 horizontal-scroll-div'>
+            <div className='flex w-full'>
+                <div className='grid grid-flow-row lg:grid-flow-col w-full gap-3 horizontal-scroll-div'>
                     <PackageSlider numberOfPeople={activeFilters?.no_of_people ?? "10_20"} packages={packagesData} active={activeCard} handleChangeCard={handleChangeCard}/>
                     <div className='hidden lg:block'>
                         <PackageCard numberOfPeople={activeFilters?.no_of_people ?? "10_20"} slug={activeCard} data={packagesData[activeCard]} />
