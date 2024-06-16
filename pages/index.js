@@ -6,6 +6,8 @@ import {  getPackagesData, setFilters } from "@/redux/reducers/packageReducer";
 import { END } from "redux-saga";
 import { getFiltersApi } from "@/redux/requests/packageRequests";
 import { getCookie } from "cookies-next";
+import SnackboxCard from "@/components/Homepage/SnackboxCard";
+import MiniThaliCard from "@/components/Homepage/MiniThaliCard";
 
 
 export default function Home(props) {
@@ -16,8 +18,12 @@ export default function Home(props) {
     >
           <Banners />
           {packages?.length > 0 && <SuggestivePackage data={packages[0]} filters={filters} />}
-          <div className="">
-
+          <h4 className="font-semibold hidden page-title 2xl:text-center open-sans sm:block">Snack box And Mini Meals</h4>
+          <div className="max-w-[1120px] w-full flex 2xl:self-center">
+            <div className="flex flex-col sm:flex-row w-full  gap-6 ">
+              <SnackboxCard />
+              <MiniThaliCard />
+            </div>
           </div>
     </div>
   );
