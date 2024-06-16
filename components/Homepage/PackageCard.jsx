@@ -4,13 +4,14 @@ import React from 'react'
 
 function PackageCard({data,slug, numberOfPeople}) {
   return (
-    <div className='p-4  lg:p-0 pt-12 h-full flex flex-col gap-4 max-w-[359px]'>
-      <div className='w-[359px] h-[166px]'>
+    <div className='p-4  lg:p-0 pt-12 h-full flex flex-col gap-4 lg:max-w-[259px] xl:max-w-[359px]'>
+      <div className='w-[259px] xl:w-[359px] h-[166px]'>
         <Image
           src={"/catering_services/mini_thali.webp"}
           width={359}
           height={166}
           style={{
+            width:"100%",
             height:"100%"
           }}
           alt={data.package_name}

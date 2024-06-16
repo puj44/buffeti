@@ -9,7 +9,7 @@
 
 @layer components {
   .page-spacing {
-    @apply px-[20px] lg:px-[128px]  flex flex-col justify-center;
+    @apply px-[20px] md:px-[40px] lg:px-[128px]  flex flex-col justify-center;
   }
   .active-path{
     @apply text-color-primary font-medium border-solid border-b-[1px] border-[#B42318]
