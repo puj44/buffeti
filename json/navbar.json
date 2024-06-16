@@ -1,38 +1,62 @@
 [
     {
-        "url":"/",
-        "title":"Home",
-        "img":"/icons/home.webp",
-        "width":16,
-        "height":18
+        "url":"",
+        "title":"Home"
     },
     {
-        "url":"/coming-soon",
-        "title":"About",
-        "img":"/icons/about.webp",
-        "width":19,
-        "height":19
+        "title":"Menu Options",
+        "isDropdown":true,
+        "dropdownData":[
+            {
+                "title":"Catering",
+                "slug":"click2cater"
+            },
+            {
+                "title":"Snack Boxes",
+                "slug":"snack-boxes"
+            },
+            {
+                "title":"Mini Meals",
+                "slug":"mini-meals"
+            }
+        ]
     },
     {
-        "url":"/coming-soon",
-        "title":"Meal Boxes",
-        "img":"/icons/meal_boxes.webp",
-        "width":18,
-        "height":18
+        "url":"click2cater",
+        "title":"Catering",
+        "isMobile":true
     },
     {
-        "url":"/coming-soon",
-        "title":"Orders",
-        "img":"/icons/orders.webp",
-        "width":15,
-        "height":19
+        "title":"Snack Boxes",
+        "url":"snack-boxes",
+        "isMobile":true
     },
     {
-        "url":"/coming-soon",
-        "title":"Custom Package",
+        "url":"coming-soon",
+        "title":"Mini Meals",
+        "isMobile":true
+    },
+    {
+        "url":"coming-soon",
+        "title":"Blogs"
+    },
+    {
+        "url":"coming-soon",
+        "title":"Cart",
+        "isCart":true,
+        "isDesktop":true
+    },
+    {
+        "url":"coming-soon",
+        "title":"Orders"
+    },
+    {
+        "url":"coming-soon",
+        "title":"Create your own",
         "img":"/icons/plus_white.webp",
         "width":14,
         "height":14,
+        "isDesktop":true,
         "className":"btn primary-btn gap-2"
     }
   

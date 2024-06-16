@@ -3,6 +3,8 @@
 //Theme Colours
 //RED
 $primary: #B42318 !default;
+$secondaryRed: #D92D20 !default;
+$lightestRed: #FEE4E2 !default;
 //ORANGE
 $secondary: #F79009 !default;
 $orange:#DC6803 !default;
@@ -40,6 +42,7 @@ $social-colors: (
   //RED
   "primary": $primary,
   "secondary":$secondary,
+  "light-red":$lightestRed,
 
   //ORANGE
   "primary-orange":$orange,
@@ -53,6 +56,7 @@ $social-colors: (
   "dark-gray":$darkGray,
   //OFFWHITE
   "offwhite":$offWhitePrimary,
+  "secondary-red":$secondaryRed,
 
   //text colors
   "font-primary":$primaryTextColor,

@@ -35,23 +35,45 @@ $openSans: "Open Sans", sans-serif;
 //Font Size
 
 .big-title{
-  font-size: 60px !important;
+  font-size: 40px !important;
 }
 
 .heading{
   font-size:40px !important;
 }
 
+.card-heading{
+  font-size:32px !important
+}
+
 .page-title{
   font-size:28px !important;
+}
+.sub-title{
+  font-size:24px !important
 }
 
 .description{
   font-size:18px !important;
 }
 
+.number{
+  font-size:16px;
+}
+
 .product-title{
   font-size:20px !important;
+}
+
+.package-title{
+  font-size:20px !important;
+}
+.small-title{
+  font-size:14px !important
+}
+
+.smallest-title{
+  font-size:12px !important
 }
 
 
@@ -60,29 +82,73 @@ $openSans: "Open Sans", sans-serif;
   
 }
 
+@media screen and (max-width:1440px){ 
+  
+}
+
 //Medium-Large Screen
 @media screen and (max-width:1280px){ 
-
   
 }
 
 //Medium Screen
 @media screen and (max-width:1024px){ 
-  
-}
-//Tablet Screen
-@media screen and (max-width:786px){
   .heading{
     font-size:28px !important;
   }
+
   .page-title{
     font-size:20px !important;
   }
   .product-title{
     font-size:16px !important;
   }
+  .sub-title{
+    font-size:20px !important
+  }
+  
   body{
     font-size:14px ;
+  }
+}
+//Tablet Screen
+@media screen and (max-width:786px){
+  .description{
+    font-size:14px !important;
+  }
+  .big-title{
+    font-size: 16px !important;
+  }
+  .card-heading{
+    font-size:20px !important
+  }
+  .product-title{
+    font-size:14px !important;
+  }
+  .package-title{
+    font-size:16px !important;
+  }
+  .convert-to-normal{
+    .big-title{
+
+      font-family: $primaryFont;
+    }
+  }
+}
+
+//Small screen
+@media screen and (max-width:368px){
+  .card-heading{
+    font-size:16px !important
+  }
+  .small-title{
+    font-size:12px !important
+  }
+  .product-title{
+    font-size:12px !important;
+  }
+  .page-title{
+    font-size:16px !important;
   }
   
 }
