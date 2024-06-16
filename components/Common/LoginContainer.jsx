@@ -310,19 +310,21 @@ function LoginContainer({step,changeStep, onInputChange, values,error,changeNumb
                     </div>
                     <div className='absolute right-0 bottom-0'>
                         <Image
-                            src={"/logo/primary_logo.webp"}
+                            loader={({ src }) => src}
+                            src={`${process.env.NEXT_PUBLIC_IMAGES_URL}/logo/primary_logo.webp`}
+                            alt="Buffeti"
                             width={2049}
                             height={1354}
+                            className='grayscale-[100%]'
                             style={{
                                 width:"152px",
                                 height:"100px",
                                 opacity:0.25,
                                 
                             }}
-                            className='grayscale-[100%]'
-                            alt={"Buffeti"}
+                            priority
+                            unoptimized
                         />
-
                     </div>
                 </div>
                 {/* CONTAINER DIV */}
