@@ -11,13 +11,13 @@ import MiniThaliCard from "@/components/Homepage/MiniThaliCard";
 
 
 export default function Home(props) {
-  const {filters,packages} = props;
+  const {filters,packages,noOfPeople} = props;
   return (
     <div
       className={`${ process.env.NEXT_PUBLIC_ENVIRONMENT === "DEV" ? "flex flex-col md:gap-6 gap-4 py-8  page-spacing ":""}`} style={{alignItems:"stretch"}}
     >
           <Banners />
-          {packages?.length > 0 && <SuggestivePackage data={packages[0]} filters={filters} />}
+          {packages?.length > 0 && <SuggestivePackage data={packages[0]} noOfPeople={noOfPeople} filters={filters} />}
           <h4 className="font-semibold hidden page-title 2xl:text-center open-sans sm:block">Snack box And Mini Meals</h4>
           <div className="max-w-[1120px] w-full flex 2xl:self-center">
             <div className="flex flex-col sm:flex-row w-full  gap-6 ">
@@ -52,8 +52,18 @@ async function fetchData(store,location) {
 export const getServerSideProps =  wrapper.getServerSideProps(
   (store) => async(props) =>{
     const location = await getCookie("location",{req:props?.req,res:props?.res});
-    const data = await fetchData(store,location);
-    
+    let noOfPeople = getCookie("no_of_people") ?? "10_20";
+    if(noOfPeople){
+        const qty = Number(noOfPeople);
+        if(qty > 20 && qty <= 30){
+            noOfPeople = "20_30";
+
+        }else if(qty  > 30){
+            noOfPeople = "30_plus"
+        }
+    }
+    let data = await fetchData(store,location);
+    data.noOfPeople = noOfPeople;
     return {
       props:{
         ...data

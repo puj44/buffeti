@@ -9,20 +9,23 @@
         "dropdownData":[
             {
                 "title":"Catering",
-                "slug":"click2cater"
+                "slug":"catering",
+                "url":"/packages/catering"
             },
             {
                 "title":"Snack Boxes",
-                "slug":"snack-boxes"
+                "slug":"snack-boxes",
+                "url":"/"
             },
             {
                 "title":"Mini Meals",
-                "slug":"mini-meals"
+                "slug":"mini-meals",
+                "url":"/packages/mini-meals"
             }
         ]
     },
     {
-        "url":"click2cater",
+        "url":"packages/catering",
         "title":"Catering",
         "isMobile":true
     },
@@ -32,7 +35,7 @@
         "isMobile":true
     },
     {
-        "url":"coming-soon",
+        "url":"packages/mini-meals",
         "title":"Mini Meals",
         "isMobile":true
     },

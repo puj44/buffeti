@@ -53,6 +53,9 @@
 }
 //Tablet Screen
 @media screen and (max-width:786px){
+    .btn{
+        padding:8px 10px !important;
+    }
     .big-btn-padding{
         padding:8px 12px;
         width:138px;

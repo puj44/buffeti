@@ -8,16 +8,18 @@ import Filters from '../Common/Packages/Filters';
 import { useDispatch, useSelector } from 'react-redux';
 import filterQuery from '@/commonjs/filterQuery';
 import { getPackagesData } from '@/redux/reducers/packageReducer';
+import { getCookie } from 'cookies-next';
 
-function SuggestivePackage({data,filters}) {
+function SuggestivePackage({data,filters,noOfPeople}) {
     const [activeCard, setActiveCard] = useState(Object.keys(data)[0]);
     const [activeFilters, setActiveFilters] = useState({
         category:Object.keys(filters.categories)[0],
-        no_of_people:"10_20"
+        no_of_people:noOfPeople ?? "10_20"
     });
     const [packagesData, setPackagesData] = useState({...data ?? {}});
     const {packages} = useSelector((state) => state.packages)
     const dispatch = useDispatch();
+
 
     useEffect(()=>{
         const filtersData = JSON.parse(JSON.stringify(activeFilters))

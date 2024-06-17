@@ -288,7 +288,8 @@ input{
 }
 
 .active-filter-box{
-  background-color:$lightestRed;
+  background-color:rgb(247, 144, 9,0.1);
+  border-color:$secondary;
 }
 
 .category-filter{
@@ -324,6 +325,8 @@ input{
     width:100%;
   }
 }
+
+
 
 
 // Quantity Update Input
