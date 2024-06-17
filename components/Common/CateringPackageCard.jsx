@@ -34,7 +34,7 @@ function CateringPackageCard(props) {
                 <p className='text-color-dark-gray block '>{miniMeal ? pack.description :pack.categories_description}</p>
             </div>
             <div className='flex  flex-row justify-between w-full'>
-                <p className='package-title my-auto font-medium '>{miniMeal ?pack.price :"₹ "+pack[`_${numberOfPeople}_pax`]}</p>
+                <p className='package-title my-auto font-medium '>{miniMeal ?"₹ "+pack.price :"₹ "+pack[`_${numberOfPeople}_pax`]}</p>
                 {
                     !miniMeal ?
                     <Link className=' btn transparent-orange-btn text-color-secondary w-[80px] sm:w-[124px] shadow-[0px_4px_15px_0px_#00000008] ' href={`/suggestive-package/${packageName}`}>

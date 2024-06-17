@@ -147,12 +147,12 @@ if(mobile)
             {
                 activeFilters?.category &&
                 <div 
-                    className={`filter-box   cursor-pointer active-filter-box`} 
+                    className={`filter-box  w-full cursor-pointer active-filter-box`} 
                     onClick={()=>{
                         handleChangeFilter("category",activeFilters?.category)
                     }}
                 >
-                    <p>{categories[activeFilters?.category]}</p>
+                    <p className='w-full'>{categories[activeFilters?.category]}</p>
                     <Image 
                         src={"/icons/xmark.webp"}
                         width={12}
@@ -166,18 +166,18 @@ if(mobile)
             {
                 (!packageCategory && categories && Object.keys(categories)?.length > 0) ?
 
-                <div className='flex flex-row gap-2 md:gap-6 2xl:justify-center'>
+                <div className='flex flex-row gap-2 md:gap-6 2xl:justify-center w-full'>
                     {Object.keys(categories).map((cat,idx) => {
                         return(
                             cat !== activeFilters?.category &&
                             <div 
-                                className={`filter-box  cursor-pointer `} 
+                                className={`filter-box  cursor-pointer w-full`} 
                                 key={"category-"+idx}
                                 onClick={()=>{
                                     handleChangeFilter("category",cat)
                                 }}
                             >
-                                <p>{categories[cat]}</p>
+                                <p className='w-full text-nowrap'>{categories[cat]}</p>
                             
                             </div>
                         )
