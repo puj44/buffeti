@@ -6,14 +6,14 @@ import CateringPackageCard from '../Common/CateringPackageCard';
 
 function PackageSlider({packages, handleChangeCard, active, numberOfPeople}) {
   return (
-    <div className='grid grid-flow-col gap-5 lg:grid-flow-row max-w-full overflow-x-scroll  overflow-y-hidden lg:overflow-x-hidden'>
+    <div className='grid  gap-5 grid-flow-row max-w-full  lg:overflow-x-hidden'>
         
         {
             Object.keys(packages).map((p)=>{
                 const pack = packages[p];
                 return(<>
-                    <div className='block lg:hidden'>
-                        <CateringPackageCard pack={pack} numberOfPeople={numberOfPeople} packageName={p}/>
+                    <div className='block w-full lg:hidden'>
+                        <CateringPackageCard mobile={true} pack={pack} numberOfPeople={numberOfPeople} packageName={p}/>
                     </div>
                     <div className={`p-4 h-fit xl:pe-6 lg:p-2 ${active === p ?"bg-light-red":"bg-transparent"} 
                              hidden lg:flex  lg:flex-col xl:flex-row gap-4
@@ -44,9 +44,9 @@ function PackageSlider({packages, handleChangeCard, active, numberOfPeople}) {
                 )
             })
         }
-        <div className='block lg:hidden'>
+        {/* <div className='block lg:hidden'>
           <CustomiseOrderCard mobile={true} />
-        </div>
+        </div> */}
      
     </div>
   )

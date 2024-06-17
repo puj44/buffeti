@@ -97,7 +97,7 @@ function Header({handleModelClick}) {
                                     <div className='hidden md:block my-auto' key={"navbar-"+idx}>
 
                                         <Flowbite theme={{ theme: customTheme }}>
-                                            <Dropdown label="" className={`hidden md:block cursor-pointer`}  dismissOnClick={false} renderTrigger={() =>  
+                                            <Dropdown label="" className={`hidden md:block cursor-pointer`}   renderTrigger={() =>  
                                                 <div className='flex flex-row my-auto gap-1 cursor-pointer'>
                                                     <h4 className='' id={`nav-dropdown-label`}>{n.title}</h4>
                                                     <div className='w-[12px] h-[7px] my-auto' id={`nav-dropdown-arrow`}>
@@ -118,7 +118,7 @@ function Header({handleModelClick}) {
                                                         return(
                                                             <>
                                                                 <Dropdown.Item as="div" className={`${isPathActive(data.slug) ? "active-path border-b-[0px] border-none":""}`} key={`item-`+data.slug} >  
-                                                                        <Link href={"/meal-boxes/"+(data.slug)}>
+                                                                        <Link href={data.url}>
                                                                             {data.title}
                                                                         </Link>
                                                                 </Dropdown.Item>
@@ -135,7 +135,7 @@ function Header({handleModelClick}) {
                                     </div>
                                     :
                                     
-                                    <Link key={"navbar-"+idx} href={"/"+(n.url)} className={`${n.isMobile ? "flex md:hidden" :""}  relative ${n.isDesktop ? "hidden md:flex":""} md:flex flex-row gap-2 xl:gap-3 align-middle my-auto ${n.className ?? ""}`}>
+                                    <Link key={"navbar-"+idx} href={"/"+(n.url)} onClick={()=>{setMobileMenu(!mobileMenu)}} className={`${n.isMobile ? "flex md:hidden" :""}  relative ${n.isDesktop ? "hidden md:flex":""} md:flex flex-row gap-2 xl:gap-3 align-middle my-auto ${n.className ?? ""}`}>
                                         {
                                         n.img && 
                                         <Image

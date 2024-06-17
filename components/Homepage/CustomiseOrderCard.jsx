@@ -4,35 +4,46 @@ import React from 'react'
 
 function CustomiseOrderCard({mobile}) {
   return (
-    <div className='relative w-[280px]  lg:w-[381px] lg:h-[482px] flex justify-end '>
-        <Image
-            src={"/banners/primary_card.webp"}
-            width={1524}
-            height={1928}
-            alt={"card"}
-        />
-        <div className='absolute left-4 top-4 grid grid-flow-rows gap-8 lg:gap-0 lg:grid-rows-[75%_25%] h-fit lg:h-full '>
-            {/* TEXT */}
-            <div className='flex flex-col gap-2 lg:gap-3'>
-                <p className='text-color-offwhite card-heading'>Or</p>
-                <div className='font-semibold hidden lg:flex flex-col '>
-                    <p className='text-color-offwhite card-heading leading-9'>Create your</p>
-                    <p className='text-color-white card-heading'>Own Package</p>
+    <div className={` h-[168px] md:h-[180px] lg:w-[381px] lg:h-[466px] flex  rounded-lg `}
+    style={{
+        backgroundImage:`url(${mobile?"/banners/primary_card_row.webp":"/banners/primary_card.webp"})`,
+        backgroundSize:`${mobile ? "1184px 180px" :"100% 466px"}`
+    }}
+    >
+        <div className=
+            {`p-4 flex 
+              md:flex-row md:justify-center   md:w-full
+            lg:items-baseline
+            `}>
+            <div 
+                className={`
+                    flex flex-col gap-2 items-start 
+                    md:w-full
+                    md:flex-row md:justify-between md:items-center 
+                    lg:flex-col lg:items-start lg:h-full
+                `}
+            >
+
+                <div className='grid grid-flow-row gap-3 w-fit'>
+                    <p className='text-color-offwhite hidden lg:block card-heading'>Or</p>
+                    <div className='md:flex w-fit flex flex-wrap gap-0.5 sm:gap-2 lg:grid-flow-row card-heading lg:gap-0 font-medium md:font-bold'>
+                        <p className='text-color-offwhite w-fit'>{"Create your"}</p>
+                        <p className='text-color-white w-fit'>{"Own Package"}</p>
+                    </div>
+                    <div className='hidden product-title text-color-white lg:flex flex-col  leading-8'>
+                        <p >{"Did not find what you were looking?"}</p>
+                        <p >{"Call us to Create your own package"}</p>
+                    </div>
+                    <div className='flex  sm:max-w-[100%] product-title lg:hidden leading-5 text-color-white w-fit'>
+                        {"Order what you like from our menu. You decide the menu we deliver it."}
+                    </div>
                 </div>
-                <div className='font-medium flex lg:hidden flex-col '>
-                    <p className='text-color-offwhite card-heading '>Create your Own</p>
-                    <p className='text-color-white card-heading'>Package</p>
+                {/* BUTTON */}
+                <div className='w-fit'>
+                    <Link className='btn secondary-btn max-w-[220px] lg:max-w-[245px] lg:mb-8  font-medium' style={{padding:"12px 14px"}}  href="/coming-soon">
+                        Create Customised Order
+                    </Link>
                 </div>
-                <div className=' flex flex-col font-light  max-w-[300px]  '>
-                    <p className='text-color-white product-title lg:leading-8'>Did not find what you were looking?</p>
-                    <p className='text-color-white product-title lg:leading-8'>Call us to Create your own package</p>
-                </div>
-            </div>
-            {/* BUTTON */}
-            <div>
-                <Link className='btn secondary-btn max-w-[220px] lg:max-w-[245px]  font-semibold lg:font-medium' style={{padding:"14px"}}  href="/coming-soon">
-                    Create Customised Order
-                </Link>
             </div>
         </div>
     </div>
