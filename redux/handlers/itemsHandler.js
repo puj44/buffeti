@@ -1,0 +1,21 @@
+import { put, call } from "redux-saga/effects";
+import { setCategories, setItemsData } from "../reducers/itemsReducer";
+import { getCategoriesApi, getItemsDataApi } from "../requests/itemsRequests";
+
+
+export function* handleGetItemsData(action){
+    try{
+        const response = yield call(getItemsDataApi,action);
+        yield put(setItemsData(response?.response?.data || response?.data));
+    }catch(err){
+        console.log(err);
+    }
+}
+export function* handleGetCategories(action){
+    try{
+        const response = yield call(getCategoriesApi,action);
+        yield put(setCategories(response?.response?.data || response?.data));
+    }catch(err){
+        console.log(err);
+    }
+}

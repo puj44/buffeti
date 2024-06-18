@@ -24,7 +24,7 @@ function PackageCard({data,slug, numberOfPeople}) {
         </div>
         <div className='flex flex-row justify-between items-center'>
           <p className='sub-title font-medium '>{"₹"+data[`_${numberOfPeople}_pax`]}</p>
-          <Link href={`/suggestive-package/${slug}`} className='btn primary-btn flex flex-row gap-3'>
+          <Link href={`/customise-package/${slug}`} className='btn primary-btn flex flex-row gap-3'>
             <p className='font-medium'>Select</p>
               <Image
                   src={"/arrows/r_arrow.webp"}
