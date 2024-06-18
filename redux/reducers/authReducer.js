@@ -43,7 +43,7 @@ export const authSlice = createSlice({
                 email:action?.payload?.data?.user?.email ?? null,
             }
             if(state.isAuthenticated){
-                // setCookie(`accessToken`,action?.payload?.data?.accessToken),action?.payload?.data?.accessToken
+                setCookie(`accessToken`,action?.payload?.data?.accessToken),action?.payload?.data?.accessToken
             }
             state.otpResponse = action?.payload?.statusCode ? true :false;
             state.errorMessage = action?.payload?.statusCode !== 200 ?  (action?.payload?.message ?? "") :""
