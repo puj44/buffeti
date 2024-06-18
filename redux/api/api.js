@@ -10,7 +10,7 @@ const api = (BASE_URL, location = null) => {
   const service = axios.create({
     baseURL: BASE_URL,
     headers: {
-      "Authorization":hasCookie("accessToken") ? ("Bearer "+getCookie("accessToken")) : null,
+      "Authorization":loc,
       "Content-Type": "application/json",
       location :loc
     },
