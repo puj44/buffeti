@@ -1,14 +1,14 @@
 import Image from 'next/image'
 import React, { useEffect } from 'react'
 
-function QuantityInput({quantity, handleChangeQuantity,handleMouseUp}) {
+function QuantityInput({label ,handleChangeQuantity,disableButtons}) {
     useEffect(()=>{
         document.getElementById("")
     },[])
   return (
     <div className='input-quantity'>
-        <div id={"decrease-quantity"} className='flex items-center justify-center w-[24px]  h-[24px] cursor-pointer' 
-            onClick={(e)=>{handleChangeQuantity(e,true,(parseInt(quantity)-1))}} 
+        <div id={"decrease-quantity"} className={`flex items-center justify-center w-[24px]  h-[24px] cursor-pointer`}
+            onClick={(e)=>{handleChangeQuantity("sub")}} 
             >
             <Image
                 src={"/icons/qty_minus.webp"}
@@ -18,11 +18,10 @@ function QuantityInput({quantity, handleChangeQuantity,handleMouseUp}) {
             />
         </div>
         <div>
-
-        <input id="quantity-update" onChange={(e)=>{handleChangeQuantity(e)}} value={quantity ?? 10}  />
+        <label>{label}</label>
         </div>
-        <div id="increase-quantity" className='cursor-pointer flex items-center justify-center w-[24px]  h-[24px]' 
-            onClick={(e)=>{handleChangeQuantity(e,true,(parseInt(quantity)+1))}}
+        <div id="increase-quantity" className={`cursor-pointer flex items-center justify-center w-[24px]  h-[24px] ${disableButtons ? "opacity-50":""}`}
+            onClick={(e)=>{handleChangeQuantity("add")}}
             >
             <Image
                 src={"/icons/qty_plus.webp"}

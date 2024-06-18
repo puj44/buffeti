@@ -22,7 +22,7 @@ function SnackboxCard() {
             </div>
             <p className='small-title text-white max-w-[60%] sm:max-w-[100%]'>{"Create a snack box of your own choice"}</p>
           </div>
-          <Link href={"/packages/snack-boxes"} className='flex text-white items-center flex-row gap-2'>
+          <Link href={"/create-snackbox"} className='flex text-white items-center flex-row gap-2'>
             <p className='flex'>View</p>
             <div className='flex'>
 

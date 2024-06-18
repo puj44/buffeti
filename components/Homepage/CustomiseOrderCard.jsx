@@ -40,7 +40,7 @@ function CustomiseOrderCard({mobile}) {
                 </div>
                 {/* BUTTON */}
                 <div className='w-fit'>
-                    <Link className='btn secondary-btn max-w-[220px] lg:max-w-[245px] lg:mb-8  font-medium' style={{padding:"12px 14px"}}  href="/coming-soon">
+                    <Link className='btn secondary-btn max-w-[220px] lg:max-w-[245px] lg:mb-8  font-medium' style={{padding:"12px 14px"}}  href="/customise-package">
                         Create Customised Order
                     </Link>
                 </div>

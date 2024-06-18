@@ -8,18 +8,14 @@ function ItemsSelection({
     handleAddItem,
     handleDeleteItem,
     category,
-    itemsSelected
+    itemsSelected,
+    handleSearchChange,
+    categories,
+    handleChangeAdditionalQty,
+    noOfPeople
 }) {
     
-    const [searchValue, setSearchValue] = useState("");
-
-    const handleSearchChange = (e) =>{
-
-    }
-
-    useEffect(()=>{
-
-    },[searchValue])
+  
 
   return (
         <div className='flex flex-col gap-6 w-full'>
@@ -27,8 +23,16 @@ function ItemsSelection({
                 handleSearchChange={handleSearchChange}
             />
             <div className=' '>
-                <ItemsSlider items={items} itemsSelected={itemsSelected} category={category} handleAddItem={handleAddItem} handleDeleteItem={handleDeleteItem}/>
-                {/* <div>asdas</div> */}
+                <ItemsSlider 
+                    items={{...items ?? {}}} 
+                    itemsSelected={itemsSelected} 
+                    category={category} 
+                    handleAddItem={handleAddItem ?? (()=>{})} 
+                    handleDeleteItem={handleDeleteItem ?? (()=>{})}
+                    categories={{...categories ?? {}}}
+                    handleChangeAdditionalQty={handleChangeAdditionalQty ?? (()=>{})}
+                    noOfPeople={noOfPeople}
+                />
             </div>
         </div>
   )

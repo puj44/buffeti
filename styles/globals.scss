@@ -221,10 +221,10 @@ input{
     content: "";
     display: inline-block;
     position: absolute;
-    top:-6px;
+    // top:0px;
     left:0;
-    height:44px;
-    width:3px;
+    height:-webkit-fill-available;
+    width:2px;
     border-radius:50px;
     background-color: $primary;
   }
@@ -264,9 +264,9 @@ input{
   padding:8px;
   align-items: center;
   justify-content: space-between;
-
-  input{
-    width: 24px;
+  background-color: #fff;
+  label{
+    min-width: 24px;
     height:16px;
     color: $secondary;
   }
@@ -367,6 +367,9 @@ input{
 }
 //Tablet Screen
 @media screen and (max-width:786px){
+  .input-quantity{
+    width:fit-content;
+  }
   //active nav mobile
 .active-nav-mobile{
   color:$primary;
@@ -394,10 +397,10 @@ input{
 }
 //Small screen
 @media screen and (max-width:368px){
-  .input-quantity{
-   padding:6px;
-   width:100px;
-  }
+  // .input-quantity{
+  //  padding:6px;
+  //  width:100px;
+  // }
   
 }
 
