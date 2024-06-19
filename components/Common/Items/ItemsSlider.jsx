@@ -38,9 +38,9 @@ function ItemsSlider({
                       itemsSelected={itemsSelected}
                       item={item}
                       noOfPeople={noOfPeople}
-                      handleChangeAdditionalQty={handleChangeAdditionalQty}
-                      handleDeleteItem={handleDeleteItem}
-                      handleAddItem={handleAddItem}
+                      handleChangeAdditionalQty={handleChangeAdditionalQty ?? (()=>{})}
+                      handleDeleteItem={handleDeleteItem ?? (()=>{})}
+                      handleAddItem={handleAddItem ?? (()=>{})}
                       category={item?.category?.slug}
                     />
                   )

@@ -63,7 +63,7 @@ function ItemCard({
                         </div>
                         {/* ITEM NAME, CHARGES AND ADD BUTTON */}
                         <div className='flex flex-col md:flex-row w-full md:justify-between gap-2'>
-                          <div className='flex flex-col gap-2'>
+                          <div className='flex flex-col gap-1 sm:gap-2'>
                             <div className='flex flex-col md:flex-row gap-1 md:gap-2'>
                               <p className={`description w-fit ${itemsSelected?.[category]?.[item?.slug] ? "" :"font-medium"}`}>
                                 {item?.item_name} 
@@ -106,7 +106,7 @@ function ItemCard({
                                     quantity={Number(itemsSelected?.[category]?.[item?.slug]?.additional_qty ?? 0) ?? 0}
                                   />
                                   :
-                                  <div className='btn transparent-orange-btn text-color-secondary cursor-pointer w-[124px] h-fit' onClick={()=>{ handleAddItem(category, item) }}>
+                                  <div className='btn transparent-orange-btn text-color-secondary cursor-pointer py-1 px-2 sm:py-2 sm:px-2.5 w-[124px] h-fit' onClick={()=>{ handleAddItem(category, item) }}>
                                     {"Add"}
                                   </div>
                               }
@@ -146,7 +146,7 @@ function ItemCard({
                                                   convertToUnitsExtraItem(item.extra_items[extra],item)
                                                 }
                                               />:
-                                              <div className='btn transparent-orange-btn text-color-secondary cursor-pointer w-[124px] h-fit' onClick={()=>{ handleAddItem(category, item,extra) }}>
+                                              <div className='btn transparent-orange-btn text-color-secondary cursor-pointer w-[110px] sm:w-[124px] h-fit' onClick={()=>{ handleAddItem(category, item,extra) }}>
                                                 {"Add"}
                                               </div>
                                             }

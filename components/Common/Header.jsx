@@ -87,17 +87,17 @@ function Header({handleModelClick}) {
                 </div>
             </div>
             <div className='flex flex-row gap-4 md:gap-5 xl:gap-7'>
-                <div className={`${mobileMenu ? "flex fixed left-0 top-[66px] w-screen h-screen z-50 px-[26px] py-5 bg-white":"hidden"} md:block`}>
+                <div className={`${mobileMenu ? "flex fixed left-0 top-[66px] w-screen h-screen z-50 px-[26px] py-5 bg-white":"hidden"} md:flex md:items-center`}>
 
                     <div className={`flex flex-col w-fit md:flex-row h-fit gap-4 md:gap-5 xl:gap-7 md:my-auto`}>
                         {
                             navbar.map((n,idx)=>{
                                 return(
                                     n.isDropdown ?
-                                    <div className='hidden md:block my-auto' key={"navbar-"+idx}>
+                                    <div className='hidden md:flex md:items-center my-auto' key={"navbar-"+idx}>
 
                                         <Flowbite theme={{ theme: customTheme }}>
-                                            <Dropdown label="" className={`hidden md:block cursor-pointer`}   renderTrigger={() =>  
+                                            <Dropdown label="" className={`hidden md:flex md:items-center cursor-pointer`}   renderTrigger={() =>  
                                                 <div className='flex flex-row my-auto gap-1 cursor-pointer'>
                                                     <h4 className='' id={`nav-dropdown-label`}>{n.title}</h4>
                                                     <div className='w-[12px] h-[7px] my-auto' id={`nav-dropdown-arrow`}>
@@ -162,7 +162,7 @@ function Header({handleModelClick}) {
                     
                     </div>
                 </div>
-                <div className='hidden md:block my-auto'>
+                <div className='hidden md:flex md:items-center my-auto'>
 
                     <div onClick={()=>{!(auth?.isAuthenticated) && handleModelClick(true)}} className={`${auth?.isAuthenticated ? "hidden":""} cursor-pointer flex flex-row gap-2 xl:gap-3 align-middle my-auto`}>
 

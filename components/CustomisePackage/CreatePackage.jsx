@@ -154,7 +154,7 @@ function CreatePackage({packageName, menuOption ,packageDetails, itemsData, cate
           <p className='small-title'>{"Package Detail"}</p>
         </div>
         {/* PACKAGE DETAILS SECTION */}
-        <div className='flex flex-col md:flex-row justify-between w-full items-center'>
+        <div className='flex flex-col md:flex-row justify-between w-full md:items-center'>
             <p className='font-medium package-title'>{menuOption === "click2cater" ?"Customise Items" :"Create your Own Snack Box"}</p>
             <PeopleQuantityInput quantity={quantity ?? 10} handleChangeQuantity={handleChangeQuantity} isPackage={true} />
         </div>
