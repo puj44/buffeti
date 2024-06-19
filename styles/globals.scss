@@ -217,6 +217,8 @@ input{
 .active-sidebar{
   color:$primary;
   padding-left:6px;
+  background: linear-gradient(90deg, rgba(180, 35, 24, 0.15) 0%, rgba(180, 35, 24, 0) 100%);
+
   &::after{
     content: "";
     display: inline-block;

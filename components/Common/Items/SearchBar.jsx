@@ -13,8 +13,8 @@ function SearchBar({
             <div className='w-[24px] h-[24px] flex align-middle items-center ' id="search-button">
                 <Image
                     src={"/icons/search.webp"}
-                    width={15.63}
-                    height={15.78}
+                    width={15}
+                    height={15}
                     alt={"Search"}
                     priority
                 />
@@ -22,7 +22,7 @@ function SearchBar({
             <input 
                 onChange={(e)=>{handleSearchChange(e)}}
                 id="search-input"
-                placeholder='Search'
+                placeholder='Search "Italian Sandwich"'
                 className='text-color-dark-gray'
             />
         </div>

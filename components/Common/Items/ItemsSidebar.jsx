@@ -7,17 +7,17 @@ function ItemsSideBar({
   itemsSelected
 }) {
   return (
-    <div className='md:flex flex-col gap-6 hidden md:w-[160px] 2xl:w-[220px] '>
+    <div className='md:flex flex-col gap-3 hidden md:w-[160px] 2xl:w-[220px] '>
         <p className='product-title'>Items</p>
         {
           (items && Object.keys(items)?.length > 0) && Object.keys(items).map((i,idx)=>{
             return(
               <h4 
-                className={`product-title flex  flex-row gap-1 w-fit relative cursor-pointer items-center ${activeItem === i ? "active-sidebar my-auto" :""}`} 
+                className={`product-title flex  flex-row gap-1 w-full relative cursor-pointer items-center ${activeItem === i ? "active-sidebar my-auto" :""}`} 
                 key={"item-"+idx} 
                 onClick={()=>{handleChangeActiveItem(i)}}
               >
-                <p className='w-fit'>{items[i]?.name}</p>
+                <p className='w-full py-1'>{items[i]?.name}</p>
                 {
                   (itemsSelected?.[i] && (Object.keys(itemsSelected?.[i]).length) > 0) &&
                   <div className=' '>
