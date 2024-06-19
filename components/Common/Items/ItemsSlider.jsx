@@ -24,7 +24,10 @@ function ItemsSlider({
         items && Object.keys(items).map((subCategory)=>{
           return(
             <div key={"item-"+subCategory} id={`body-${subCategory}`} className='flex flex-col gap-4'>
-              <h5 className='item-name small-title'>{categories[category]?.sub_categories?.[subCategory]?.toString()?.toUpperCase()}</h5>
+              {
+                categories[category]?.sub_categories?.[subCategory]?.toString()?.toUpperCase() &&
+                <h5 className='item-name small-title'>{categories[category]?.sub_categories?.[subCategory]?.toString()?.toUpperCase()}</h5>
+              }
               {
                 (items[subCategory] && Object.keys(items[subCategory])?.length > 0) &&
                 Object.keys(items[subCategory]).map((sc,index)=>{
@@ -38,7 +41,7 @@ function ItemsSlider({
                       handleChangeAdditionalQty={handleChangeAdditionalQty}
                       handleDeleteItem={handleDeleteItem}
                       handleAddItem={handleAddItem}
-                      category={category}
+                      category={item?.category?.slug}
                     />
                   )
                 })

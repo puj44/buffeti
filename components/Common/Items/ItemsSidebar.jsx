@@ -7,7 +7,7 @@ function ItemsSideBar({
   itemsSelected
 }) {
   return (
-    <div className='md:flex flex-col gap-6 hidden md:w-[160px] '>
+    <div className='md:flex flex-col gap-6 hidden md:w-[160px] 2xl:w-[220px] '>
         <p className='product-title'>Items</p>
         {
           (items && Object.keys(items)?.length > 0) && Object.keys(items).map((i,idx)=>{

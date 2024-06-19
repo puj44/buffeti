@@ -14,7 +14,7 @@ function CateringPackageCard(props) {
             rounded-md 
         `} 
         key={"s-package-"+packageName}>
-            <div className='w-max flex h-[100px] md:w-full md:h-[148.64px]'>
+            <div className='w-[100px] flex h-[100px] md:w-full md:h-[148.64px]'>
                 <Image
                     src={"/catering_services/mini_thali.webp"}
                     width={mobile ? 100 : 349}
