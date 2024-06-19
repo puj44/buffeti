@@ -146,7 +146,7 @@ function CreatePackage({packageName, menuOption ,packageDetails, itemsData, cate
           {
             (packageName && packageName !== "") ?
             <>
-              <Link href={`/packages/${menuOption}`} className=' text-color-primary-gray small-title'>Packages</Link>
+              <Link href={`/packages/${menuOption === "click2cater" ? "catering"  :menuOption}`} className=' text-color-primary-gray small-title'>Packages</Link>
               <p className='text-color-primary-gray '>{">"}</p>
             </>
             :""
@@ -154,7 +154,7 @@ function CreatePackage({packageName, menuOption ,packageDetails, itemsData, cate
           <p className='small-title'>{"Package Detail"}</p>
         </div>
         {/* PACKAGE DETAILS SECTION */}
-        <div className='flex flex-col md:flex-row justify-between w-full items-center'>
+        <div className='flex flex-col md:flex-row justify-between w-full md:items-center'>
             <p className='font-medium package-title'>{menuOption === "click2cater" ?"Customise Items" :"Create your Own Snack Box"}</p>
             <PeopleQuantityInput quantity={quantity ?? 10} handleChangeQuantity={handleChangeQuantity} isPackage={true} />
         </div>
@@ -171,6 +171,7 @@ function CreatePackage({packageName, menuOption ,packageDetails, itemsData, cate
           handleChangeActiveItem={handleChangeActiveItem}
           handleChangeAdditionalQty={handleChangeAdditionalQty}
           noOfPeople={noOfPeople}
+          menuOption={menuOption}
         />
       </div>
     

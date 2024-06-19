@@ -2,9 +2,28 @@
     display:flex;
     align-items: center;
     justify-content: center;
-    padding:10px 16px;
+    padding:8px 16px;
     border-radius: 8px;
- 
+    gap:8px
+}
+
+.weird-btn{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width:100%;
+    padding:8px 16px;
+    border:1px solid $primary;
+    flex-direction: row;
+    border-radius: 24px 24px 8px 8px;
+    transform:none;
+    transition: all 0.2 ease;
+    &:hover{
+        img{
+            transform:rotate(-45deg);
+            transition: all 0.2 ease-in;
+        }
+    }
 }
 
 //Button Paddings
@@ -53,9 +72,6 @@
 }
 //Tablet Screen
 @media screen and (max-width:786px){
-    .btn{
-        padding:8px 10px !important;
-    }
     .big-btn-padding{
         padding:8px 12px;
         width:138px;
@@ -66,9 +82,6 @@
 }
 //Mobile Screen
 @media screen and (max-width:368px){
-    .btn{
-        padding:8px 10px !important;
-    }
     // .btn{
     //     padding:16px;
     // }

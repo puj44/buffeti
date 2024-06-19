@@ -217,6 +217,8 @@ input{
 .active-sidebar{
   color:$primary;
   padding-left:6px;
+  background: linear-gradient(90deg, rgba(180, 35, 24, 0.15) 0%, rgba(180, 35, 24, 0) 100%);
+
   &::after{
     content: "";
     display: inline-block;
@@ -273,23 +275,35 @@ input{
 
 
 }
+//Package card
+.package-card{
+  padding-top:16px;
+  border-radius:8px;
+  transition: all 0.1s ease-in-out;
+  &:hover{
+    box-shadow: 0px 2px 16px 0px #00000026;
+    border:1px solid $offWhitePrimary;
+    transition: all 0.1s ease-in-out;
+  }
+}
 
 //filters
 .filter-box{
   display: flex;
   flex-direction: row;
   gap:8px;
-  padding: 10px 20px;
+  padding: 10px 16px;
   justify-content: center;
   align-items: center;
-  border:1px solid $offWhitePrimary;
+  border:1px solid #D0D5DD;
   width: fit-content;
-  border-radius: 30px;
+  border-radius: 8px;
+  box-shadow: 0px 1px 2px 0px #1018280D;
 }
 
 .active-filter-box{
-  background-color:rgb(247, 144, 9,0.1);
-  border-color:$secondary;
+  background-color:$lightestRed;
+  border-color:$primary;
 }
 
 .category-filter{
@@ -299,16 +313,9 @@ input{
   align-items: center;
   justify-content: space-between;
   box-shadow: 0px 3.87px 7.75px 0px #1018280D;
-  border:3.8px solid $offWhitePrimary;
-  border-radius: 30px;
-  p:not(:last-child){
-    border-right-width: 3.8px;
-    border-right-color: $offWhitePrimary;
-    border-right-style: solid;
-  }
-  p{
-    
-  }
+
+  border:1px solid $offWhitePrimary;
+  border-radius: 9999px;
 }
 
 //Hamburger

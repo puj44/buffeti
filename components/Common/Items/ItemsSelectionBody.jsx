@@ -13,7 +13,8 @@ function ItemsSelectionBody({
   activeItem,
   handleChangeActiveItem,
   handleChangeAdditionalQty,
-  noOfPeople
+  noOfPeople,
+  menuOption
 }) {
  
 
@@ -24,7 +25,7 @@ function ItemsSelectionBody({
     <div className='flex flex-row gap-6 w-full items-start'>
       {/* LEFT SIDE SECTION ITEMS CATEGORY SELECTION */}
       <ItemsSideBar activeItem={activeItem} itemsSelected={itemsSelected} items={categories} handleChangeActiveItem={handleChangeActiveItem} />
-      <div className='h-full w-[1.5px] border-[1.5px] border-[#E3E5E5] '></div>
+      <div className='h-full w-[1.5px] border-[1.5px] border-[#E3E5E5] hidden md:block'></div>
       {/* RIGHT SIDE SECTION ITEMS SELECTION */}
       <ItemsSelection 
         items={{...items ?? {}}} 
@@ -36,6 +37,7 @@ function ItemsSelectionBody({
         categories={{...categories ?? {}}}
         handleChangeAdditionalQty={handleChangeAdditionalQty ?? (()=>{})}
         noOfPeople={noOfPeople}
+        menuOption={menuOption}
       />
     </div>
   )

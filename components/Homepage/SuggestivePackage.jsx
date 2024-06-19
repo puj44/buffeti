@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
-import PackageSlider from './PackageSlider';
+import PackageSlider from './PackageSlider'; //DELETE
 import PackageCard from './PackageCard';
 import CustomiseOrderCard from './CustomiseOrderCard';
 import Filters from '../Common/Packages/Filters';
@@ -11,9 +11,8 @@ import { getPackagesData } from '@/redux/reducers/packageReducer';
 import { getCookie } from 'cookies-next';
 
 function SuggestivePackage({data,filters,noOfPeople}) {
-    const [activeCard, setActiveCard] = useState(Object.keys(data)[0]);
     const [activeFilters, setActiveFilters] = useState({
-        category:Object.keys(filters.categories)[0],
+        category:Object.keys(filters?.categories)[0],
         no_of_people:noOfPeople ?? "10_20"
     });
     const [packagesData, setPackagesData] = useState({...data ?? {}});
@@ -31,13 +30,9 @@ function SuggestivePackage({data,filters,noOfPeople}) {
         const data = Object.values(packages ?? {})?.[0];
         if(data && Object.keys(data).length > 0){
             setPackagesData({...data});
-            setActiveCard(Object.keys(data)[0])
         }
     },[packages])
 
-    const handleChangeCard = (val) =>{
-        setActiveCard(val);
-    }
     const handleChangeFilter = (field,val) =>{
         let filtersData = JSON.parse(JSON.stringify(activeFilters)) 
         if(val === activeFilters?.[field]){
@@ -52,12 +47,8 @@ function SuggestivePackage({data,filters,noOfPeople}) {
         setActiveFilters({...filtersData})
     }
   return (
-    <div className='flex flex-col gap-4 md:gap-6 2xl:justify-center 2xl:self-center ' id={"suggestive-package"}>
-        <h3 className='page-title font-medium md:font-semibold 2xl:text-center  open-sans'>Catering</h3>
-           {/* CREATE PACKAGE CARD */}
-           <div className='block lg:hidden'>
-                <CustomiseOrderCard mobile={true} />
-            </div>
+    <div className='flex flex-col gap-4 md:gap-6  max-w-[1182px] w-full mx-auto  ' id={"suggestive-package"}>
+        <h3 className='sub-title py-2 px-4 bg-[#FFEFEE] text-color-primary rounded-2xl w-fit font-medium md:font-semibold mx-auto  '>Click-to-cater</h3>
         <Filters 
             pricing={filters?.pricing} 
             activeFilters={activeFilters} 
@@ -66,23 +57,20 @@ function SuggestivePackage({data,filters,noOfPeople}) {
             displayNoOfPeople={true} 
             handleChangeFilter={handleChangeFilter} 
         />
-     
-        <p className='hidden lg:block font-medium product-title'>Select Your Package</p>
-        <div className='grid grid-flow-row md:flex md:flex-row gap-5 '>
-            {/* ALL PACKAGES CARD */}
-            <div className='flex w-full'>
-                <div className='grid grid-flow-row lg:grid-flow-col w-full gap-3 horizontal-scroll-div'>
-                    <PackageSlider numberOfPeople={activeFilters?.no_of_people ?? "10_20"} packages={packagesData} active={activeCard} handleChangeCard={handleChangeCard}/>
-                    <div className='hidden lg:block'>
-                        <PackageCard numberOfPeople={activeFilters?.no_of_people ?? "10_20"} slug={activeCard} data={packagesData[activeCard]} />
-                    </div>
-                </div>
-            </div>
-            {/* CREATE PACKAGE CARD */}
-            <div className='hidden lg:block'>
-                <CustomiseOrderCard />
-            </div>
+     <p className='hidden lg:block font-semibold sub-title pt-2'>Select Your Package</p>
+        {/* ALL PACKAGES CARD */}
+        <div className='grid grid-flow-col justify-between w-full gap-2 mt-[-4px]'>
+            {
+                (packagesData && Object.keys(packagesData).length > 0) &&
+                Object.keys(packagesData).map((pd,idx)=>{
+                    return(
+
+                        <PackageCard key={"package-"+pd} numberOfPeople={activeFilters?.no_of_people ?? "10_20"}  data={packagesData[pd]} />
+                    )
+                })
+            }
         </div>
+        <CustomiseOrderCard />
     </div>
   )
 }

@@ -12,7 +12,8 @@ function ItemsSelection({
     handleSearchChange,
     categories,
     handleChangeAdditionalQty,
-    noOfPeople
+    noOfPeople,
+    menuOption
 }) {
     
   
@@ -32,6 +33,7 @@ function ItemsSelection({
                     categories={{...categories ?? {}}}
                     handleChangeAdditionalQty={handleChangeAdditionalQty ?? (()=>{})}
                     noOfPeople={noOfPeople}
+                    menuOption={menuOption}
                 />
             </div>
         </div>
