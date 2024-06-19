@@ -13,7 +13,8 @@ function ItemsSlider({
   itemsSelected,
   categories,
   handleChangeAdditionalQty,
-  noOfPeople
+  noOfPeople,
+  menuOption
 }) {
 
 
@@ -22,6 +23,7 @@ function ItemsSlider({
     <div className='flex flex-col gap-6'>
       {
         items && Object.keys(items).map((subCategory)=>{
+          let item = items[subCategory];
           return(
             <div key={"item-"+subCategory} id={`body-${subCategory}`} className='flex flex-col gap-4'>
               {
@@ -29,9 +31,10 @@ function ItemsSlider({
                 <h5 className='item-name small-title'>{categories[category]?.sub_categories?.[subCategory]?.toString()?.toUpperCase()}</h5>
               }
               {
+                (menuOption !== "snack-boxes" )?
                 (items[subCategory] && Object.keys(items[subCategory])?.length > 0) &&
                 Object.keys(items[subCategory]).map((sc,index)=>{
-                  const item = items[subCategory][sc];
+                  item = items[subCategory][sc];
                   return(
                     <ItemCard 
                       key={"item-"+sc}
@@ -45,6 +48,17 @@ function ItemsSlider({
                     />
                   )
                 })
+                :
+                <ItemCard 
+                  key={"item-"+subCategory}
+                  itemsSelected={itemsSelected}
+                  item={item}
+                  noOfPeople={noOfPeople}
+                  handleChangeAdditionalQty={handleChangeAdditionalQty ?? (()=>{})}
+                  handleDeleteItem={handleDeleteItem ?? (()=>{})}
+                  handleAddItem={handleAddItem ?? (()=>{})}
+                  category={item?.category?.slug}
+                />
               }
             </div>
           )

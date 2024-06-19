@@ -171,6 +171,7 @@ function CreatePackage({packageName, menuOption ,packageDetails, itemsData, cate
           handleChangeActiveItem={handleChangeActiveItem}
           handleChangeAdditionalQty={handleChangeAdditionalQty}
           noOfPeople={noOfPeople}
+          menuOption={menuOption}
         />
       </div>
     

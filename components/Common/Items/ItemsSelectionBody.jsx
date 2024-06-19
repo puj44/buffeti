@@ -13,7 +13,8 @@ function ItemsSelectionBody({
   activeItem,
   handleChangeActiveItem,
   handleChangeAdditionalQty,
-  noOfPeople
+  noOfPeople,
+  menuOption
 }) {
  
 
@@ -36,6 +37,7 @@ function ItemsSelectionBody({
         categories={{...categories ?? {}}}
         handleChangeAdditionalQty={handleChangeAdditionalQty ?? (()=>{})}
         noOfPeople={noOfPeople}
+        menuOption={menuOption}
       />
     </div>
   )
