@@ -2,38 +2,37 @@ import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 
-function PackageCard({data,slug, numberOfPeople}) {
+function PackageCard({data,numberOfPeople}) {
   return (
-    <div className='p-4  lg:p-0 pt-12 h-full flex flex-col gap-4 lg:max-w-[259px] xl:max-w-[359px]'>
-      <div className='w-[259px] xl:w-[359px] h-[166px]'>
+    <div className='package-card relative max-w-[372px] flex flex-col gap-4 h-full'>
+       <div className='px-4'>
         <Image
           src={"/catering_services/mini_thali.webp"}
-          width={359}
+          width={340}
           height={166}
-          style={{
-            width:"100%",
-            height:"100%"
-          }}
-          alt={data.package_name}
+          alt={data?.slug}
+          priority
         />
       </div>
-      <div className='flex flex-col  h-full gap-2'>
-        <div className='grid grid-flow-row gap-2'>
-          <p className='product-title font-medium'>{data.package_name}</p>
-          <p className='text-color-primary-gray '>{data.categories_description}</p>
-        </div>
-        <div className='flex flex-row justify-between items-center'>
-          <p className='sub-title font-medium '>{"₹"+data[`_${numberOfPeople}_pax`]}</p>
-          <Link href={`/customise-package/${slug}`} className='btn primary-btn flex flex-row gap-3'>
-            <p className='font-medium'>Select</p>
+      <div className='px-4'>
+
+        <h4 className='font-medium package-title'>{data?.package_name}</h4>
+        <h5 className='text-color-primary-gray '>{data?.items_description ?? data?.categories_description}</h5>
+      </div>
+      <div className='h-full items-end flex'>
+        <Link href={`/customise-package/${data?.slug}`} className='weird-btn primary-btn items-end h-fit'>
+            <p className='font-bold md:font-extrabold sub-title'>₹ {data?.[("_"+numberOfPeople+"_pax")]}</p>
+            <span className='w-[64px] h-[48px] flex justify-center items-center bg-white py-4 px-6 rounded-[45px]'>
+
               <Image
-                  src={"/arrows/r_arrow.webp"}
-                  width={9}
-                  height={14}
-                  alt="arrow"
+                src={"/arrows/red_r_arrow.webp"}
+                width={8}
+                height={14}
+                alt={"arrow"}
+                priority
               />
-          </Link>
-        </div>
+            </span>
+        </Link>
       </div>
     </div>
   )

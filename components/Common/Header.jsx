@@ -135,7 +135,7 @@ function Header({handleModelClick}) {
                                     </div>
                                     :
                                     
-                                    <Link key={"navbar-"+idx} href={"/"+(n.url)} onClick={()=>{setMobileMenu(!mobileMenu)}} className={`${n.isMobile ? "flex md:hidden" :""}  relative ${n.isDesktop ? "hidden md:flex":""} md:flex flex-row gap-2 xl:gap-3 align-middle my-auto ${n.className ?? ""}`}>
+                                    <Link key={"navbar-"+idx} href={"/"+(n.url)} onClick={()=>{setMobileMenu(false)}} className={`${n.isMobile ? "flex md:hidden" :""}  relative ${n.isDesktop ? "hidden md:flex":""} md:flex flex-row gap-2 xl:gap-3 align-middle my-auto ${n.className ?? ""}`}>
                                         {
                                         n.img && 
                                         <Image

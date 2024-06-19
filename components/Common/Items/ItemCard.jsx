@@ -95,7 +95,7 @@ function ItemCard({
                                           handleDeleteItem(category,item)
                                         }else{
 
-                                          handleChangeAdditionalQty(category,sc, action === "sub" ? true:false)
+                                          handleChangeAdditionalQty(category,item?.slug, action === "sub" ? true:false)
                                         }
                                       }
                                     }
@@ -138,7 +138,7 @@ function ItemCard({
                                                       handleDeleteItem(category,item,extra)
                                                     }else{
 
-                                                      handleChangeAdditionalQty(category,sc, action === "sub" ? true:false,extra)
+                                                      handleChangeAdditionalQty(category,item?.slug, action === "sub" ? true:false,extra)
                                                     }
                                                   }
                                                 }

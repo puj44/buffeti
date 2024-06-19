@@ -198,116 +198,17 @@ if(mobile)
 else
   return (
 
-    <div className='flex flex-col gap-2 2xl:justify-center'>
-            {
-                (!packageCategory && categories && Object.keys(categories)?.length > 0) ?
-                <div className='flex flex-wrap gap-4 md:gap-6 2xl:justify-center'>
-                    {Object.keys(categories).map((cat,idx) => {
-                        return(
-                            <div 
-                                className={`filter-box   cursor-pointer ${cat === activeFilters?.category ? "active-filter-box":""}`} 
-                                key={"category-"+idx}
-                                onClick={()=>{
-                                    handleChangeFilter("category",cat)
-                                }}
-                            >
-                                <p>{categories[cat]}</p>
-                                {
-                                    cat === activeFilters?.category?
-                                    <Image 
-                                        src={"/icons/xmark.webp"}
-                                        width={12}
-                                        height={12}
-                                        alt={"cross"}
-                                        priority
-                                    />
-                                    :""
-                                }
-                            
-                            </div>
-                        )
-                    })}
-                </div>:""
-            }
-            {
-                pricing?.length > 0 ?
-                    <div className='flex flex-wrap gap-4 2xl:justify-center md:gap-6'>
-                        {pricing.map((p,idx) => {
-                            return(
-                                <div 
-                                    className={`filter-box cursor-pointer 2xl:min-w-[137px] ${activeFilters?.pricing === idx ? "active-filter-box":""}`} 
-                                    key={"price-"+idx}
-                                    onClick={()=>{
-                                        handleChangeFilter("pricing",idx)
-                                    }}
-                                >
-                                    <p>{!p?.max ? `₹ ${p.min} +` :`₹ ${p.min}-₹ ${p.max}`}</p>
-                                    {
-                                        activeFilters?.pricing === idx?
-                                        <Image 
-                                            src={"/icons/xmark.webp"}
-                                            width={12}
-                                            height={12}
-                                            alt={"cross"}
-                                            priority
-                                            className='ms-[2px]'
-                                        />
-                                        :""
-                                    }
-                                </div>
-                            )
-                        })}
-                    </div>
-                :""
-            }
-            {
-                displayNoOfPeople ?
-                <div className='flex flex-wrap gap-4 md:gap-6 2xl:justify-center'>
-                        {noOfPeople.map((nop,idx) => {
-                            return(
-                                <div 
-                                    className={`filter-box   cursor-pointer ${nop.value === activeFilters?.no_of_people ? "active-filter-box":""}`} 
-                                    key={"no-of-people-"+idx}
-                                    onClick={()=>{
-                                        handleChangeFilter("no_of_people",nop.value)
-                                    }}
-                                >
-                                    <Image
-                                        src={nop.img}
-                                        width={nop.width}
-                                        height={nop.height}
-                                        alt={"people"}
-                                        priority
-                                        className='hidden sm:block'
-                                    />
-                                    <p>{nop?.label}</p>
-                                    {
-                                        nop.value === activeFilters?.no_of_people?
-                                        <Image 
-                                            src={"/icons/xmark.webp"}
-                                            width={12}
-                                            height={12}
-                                            alt={"cross"}
-                                            priority
-                                            className='ms-[2px]'
-                                        />
-                                        :""
-                                    }
-                                  
-                                </div>
-                            )
-                        })}
-                    </div>
-                :""
-            }
+    <div className='grid grid-flow-row gap-4 md:gap-6 w-full  '>
             {
                 (packageCategory && categories && Object.keys(categories).length) ?
-                    <div className='category-filter overflow-hidden mt-4 max-w-[1120px]'>
+                    <div className='category-filter overflow-hidden w-full mx-auto  '>
                         {
                             Object.keys(categories).map((cat)=>{
                                 return(
                                     <p key={`category-filter-${cat}`} 
-                                        className={`flex justify-center cursor-pointer py-3 items-center w-full ${activeFilters?.category === cat ? "active-filter-box":""}`}
+                                        className={`flex justify-center cursor-pointer py-4 px-6 md:py-[22px]  items-center rounded-full w-full 
+                                             font-semibold sub-title 
+                                            ${activeFilters?.category === cat ? "active-filter-box text-color-primary border-[0px_1px_0px_0px] border-[#E3E5E5]":""}`}
                                         onClick={()=>{handleChangeFilter("category",cat)}}
                                     >
                                         {categories[cat]}
@@ -320,6 +221,111 @@ else
 
                 : ""
             }
+            <div className='flex flex-col gap-2 md:flex-row items-center w-full  md:gap-4 justify-between py-2 px-4'>
+
+                {
+                    (!packageCategory && categories && Object.keys(categories)?.length > 0) ?
+                    <div className='flex flex-wrap gap-2 md:gap-2 2xl:justify-center'>
+                        {Object.keys(categories).map((cat,idx) => {
+                            return(
+                                <div 
+                                    className={`filter-box   cursor-pointer ${cat === activeFilters?.category ? "active-filter-box":""}`} 
+                                    key={"category-"+idx}
+                                    onClick={()=>{
+                                        handleChangeFilter("category",cat)
+                                    }}
+                                >
+                                    <p>{categories[cat]}</p>
+                                    {
+                                        cat === activeFilters?.category?
+                                        <Image 
+                                            src={"/icons/xmark.webp"}
+                                            width={12}
+                                            height={12}
+                                            alt={"cross"}
+                                            priority
+                                        />
+                                        :""
+                                    }
+                                
+                                </div>
+                            )
+                        })}
+                    </div>:""
+                }
+                {
+                    pricing?.length > 0 ?
+                        <div className='flex flex-wrap gap-2 2xl:justify-center '>
+                            {pricing.map((p,idx) => {
+                                return(
+                                    <div 
+                                        className={`filter-box cursor-pointer  ${activeFilters?.pricing === idx ? "active-filter-box":""}`} 
+                                        key={"price-"+idx}
+                                        onClick={()=>{
+                                            handleChangeFilter("pricing",idx)
+                                        }}
+                                    >
+                                        <p>{!p?.max ? `₹ ${p.min} +` :`₹ ${p.min}-₹ ${p.max}`}</p>
+                                        {
+                                            activeFilters?.pricing === idx?
+                                            <Image 
+                                                src={"/icons/xmark.webp"}
+                                                width={12}
+                                                height={12}
+                                                alt={"cross"}
+                                                priority
+                                                className='ms-[2px]'
+                                            />
+                                            :""
+                                        }
+                                    </div>
+                                )
+                            })}
+                        </div>
+                    :""
+                }
+                {
+                    displayNoOfPeople ?
+                    <div className='flex flex-wrap gap-2  2xl:justify-center'>
+                            {noOfPeople.map((nop,idx) => {
+                                return(
+                                    <div 
+                                        className={`filter-box   cursor-pointer ${nop.value === activeFilters?.no_of_people ? "active-filter-box":""}`} 
+                                        key={"no-of-people-"+idx}
+                                        onClick={()=>{
+                                            handleChangeFilter("no_of_people",nop.value)
+                                        }}
+                                    >
+                                        <Image
+                                            src={nop.img}
+                                            width={nop.width}
+                                            height={nop.height}
+                                            alt={"people"}
+                                            priority
+                                            className='hidden sm:block'
+                                        />
+                                        <p>{nop?.label}</p>
+                                        {
+                                            nop.value === activeFilters?.no_of_people?
+                                            <Image 
+                                                src={"/icons/xmark.webp"}
+                                                width={12}
+                                                height={12}
+                                                alt={"cross"}
+                                                priority
+                                                className='ms-[2px]'
+                                            />
+                                            :""
+                                        }
+                                    
+                                    </div>
+                                )
+                            })}
+                        </div>
+                    :""
+                }
+            </div>
+            
         
     </div>
   )
