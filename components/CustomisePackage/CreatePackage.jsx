@@ -146,7 +146,7 @@ function CreatePackage({packageName, menuOption ,packageDetails, itemsData, cate
           {
             (packageName && packageName !== "") ?
             <>
-              <Link href={`/packages/${menuOption}`} className=' text-color-primary-gray small-title'>Packages</Link>
+              <Link href={`/packages/${menuOption === "click2cater" ? "catering"  :menuOption}`} className=' text-color-primary-gray small-title'>Packages</Link>
               <p className='text-color-primary-gray '>{">"}</p>
             </>
             :""

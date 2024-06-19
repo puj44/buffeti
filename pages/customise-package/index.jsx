@@ -8,12 +8,14 @@ import { END } from 'redux-saga';
 function CustomisePackage({
   items,
   noOfPeople,
-  packageName,
+  categories
 }) {
   return (
     <CreatePackage 
       menuOption={"click2cater"} 
       packageDetails={{...items ?? {}}}
+      noOfPeople={noOfPeople}
+      categories={{...categories ?? {}}}
     />
   )
 }
