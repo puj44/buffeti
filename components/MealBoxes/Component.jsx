@@ -1,20 +1,28 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react'
-import CateringBanner from '../Common/Packages/CateringBanner';
 import Filters from '../Common/Packages/Filters';
 import { useDispatch, useSelector } from 'react-redux';
 import filterQuery from '@/commonjs/filterQuery';
 import { getPackagesData, resetAction } from '@/redux/reducers/packageReducer';
 import CateringPackageCard from '../Common/CateringPackageCard';
+import ItemsSideBar from '../Common/Items/ItemsSidebar';
+import SearchBar from '../Common/Items/SearchBar';
+import PackageCard from '../Homepage/PackageCard';
 
 function Component({mealBox, data, filters,noOfPeople}) {
     const router = useRouter();
-    const [activeFilters, setActiveFilters] = useState({});
+    const [activeFilters, setActiveFilters] = useState({
+        category:Object.keys(filters?.categories ?? {})?.[0] ?? null,
+        noOfPeople:noOfPeople
+    });
     const [packagesData, setPackagesData] = useState({...data ?? {}});
     const {packages,response, isLoading} = useSelector((state) => state.packages);
     const dispatch = useDispatch();
 
+    const handleChangeActiveItem = (val) =>{
+        setActiveFilters({...activeFilters, category:val})
+    }
     
     useEffect(()=>{
         if(response){
@@ -49,6 +57,10 @@ function Component({mealBox, data, filters,noOfPeople}) {
         setActiveFilters({});
     }
 
+    const handleSearchChange = (e) =>{
+        
+    }
+
     const convertToName = (str) =>{
         let string = str?.toString()?.trim();
         string = string.replaceAll("-", " ");
@@ -58,13 +70,9 @@ function Component({mealBox, data, filters,noOfPeople}) {
         return string
     }
   return (
-    <div className='flex flex-col gap-6 page-spacing py-6'>
-        <h1 className="font-semibold sub-title 2xl:text-center open-sans">{mealBox === "click2cater" ? "Packages":"Mini Meals"}</h1>
-        <div className='max-w-[1180px] 2xl:mx-auto w-full'>
-            <CateringBanner />
-           
-        </div>
-        <div className='hidden md:block'>
+    <div className='flex flex-col gap-6 page-spacing h-full py-6'>
+      
+        {/* <div className='hidden md:flex mx-auto w-full'>
             <Filters 
                 pricing={filters?.pricing} 
                 activeFilters={activeFilters} 
@@ -82,44 +90,47 @@ function Component({mealBox, data, filters,noOfPeople}) {
                 mobile={true}
                 clearFilters={clearFilters}
             />
-        </div>
-        <div className='flex flex-col 2xl:items-center gap-6'>
+        </div> */}
+        <div className='grid grid-flow-row gap-6  h-full items-start'>
+        <h1 className="font-semibold sub-title  open-sans">{mealBox === "click2cater" ? "Packages":"Mini Meals"}</h1>
+            <div className='grid grid-flow-col gap-6  h-full items-start'>
 
-            {
-                (packagesData && Object.keys({...packagesData})?.length > 0) ? 
-                    Object.keys({...packagesData}).map((pd,idx) => {
-                        return(
-                            <div key={"category-"+pd} className='grid grid-flow-row gap-6'>
-                                <h3 className='font-medium product-title w-full h-fit p-2 bg-[#FAFAFA]'>{filters?.categories?.[pd] ?? convertToName(pd)}</h3>
-                                {
-                                Object.keys({...packagesData[pd]}).length > 0 ?
-                                        <div className='grid grid-flow-row md:flex md:flex-wrap lg:grid lg:grid-cols-3 justify-between gap-4 md:gap-6 w-full'>
-                                            {
-                                                Object.keys({...packagesData[pd]}).map((pack,index)=>{
-                                                    return(
-                                                        <div key={"package-"+pack}>
-                                                            <CateringPackageCard
+                <div className='hidden md:flex'>
+                    <ItemsSideBar
+                        itemsSelected={{}}
+                        isCategory={true}
+                        handleChangeActiveItem={handleChangeActiveItem}
+                        activeItem={activeFilters?.category}
+                        items={filters?.categories}
+                        show={true}
+                    />
+                </div>
+                <div className=' w-[1.5px] h-full border-[1.5px] border-[#E3E5E5] hidden md:flex'></div>
+                <div className='flex flex-col gap-6 w-full'>
+                    <SearchBar 
+                        handleSearchChange={handleSearchChange}
+                    />
+                    <div className='grid grid-flow-row sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-flow-col justify-between w-full gap-6'>
 
-                                                                pack={{...packagesData[pd][pack] ?? {}}}
-                                                                packageName={pack}
-                                                                slug={pack}
-                                                                numberOfPeople={noOfPeople}
-                                                                miniMeal={mealBox === "mini-meals" ? true :false}
-                                                            />
-                                                        </div>
-                                                    )
-                                                })
-                                            }
-                                        </div>
-                                :""
-                                }
+                        {
+                            (packagesData?.[activeFilters?.category] && Object.keys(packagesData?.[activeFilters?.category])?.length > 0) ?
+                                Object.keys(packagesData?.[activeFilters?.category]).map((pd,idx) =>{
+                                    const pack = packagesData?.[activeFilters?.category][pd];
+                                    return(
+                                        <PackageCard
+                                            numberOfPeople={noOfPeople}
+                                            menuOption={mealBox}
+                                            key={"package-"+pd}
+                                            data={{...pack ?? {}}}
+                                        />
+                                    )
+                                })
 
-                            </div>
-                        )
-                    })
-
-                :""
-            }
+                            :""
+                        }
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
   )

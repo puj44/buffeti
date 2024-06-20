@@ -1,5 +1,5 @@
 
-import CateringBanner from '@/components/Common/Packages/CateringBanner'
+
 import Component from '@/components/MealBoxes/Component'
 import React, { useEffect } from 'react'
 import {wrapper} from "../../redux/store"
