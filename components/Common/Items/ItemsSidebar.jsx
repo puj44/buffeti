@@ -4,11 +4,14 @@ function ItemsSideBar({
   activeItem,
   handleChangeActiveItem,
   items,
-  itemsSelected
+  itemsSelected,
+  isCategory,
+  show
 }) {
+  if(show)
   return (
-    <div className='md:flex flex-col gap-3 hidden md:w-[160px] 2xl:w-[220px] '>
-        <p className='product-title'>Items</p>
+    <div className='flex flex-col gap-3 md:w-[160px] 2xl:w-[220px] '>
+        <p className='product-title font-medium'>{`Select ${isCategory ? "Category":"Items"}`}</p>
         {
           (items && Object.keys(items)?.length > 0) && Object.keys(items).map((i,idx)=>{
             return(
@@ -17,7 +20,7 @@ function ItemsSideBar({
                 key={"item-"+idx} 
                 onClick={()=>{handleChangeActiveItem(i)}}
               >
-                <p className='w-full py-1'>{items[i]?.name}</p>
+                <p className='w-full py-1'>{items[i]?.name ?? items[i]}</p>
                 {
                   (itemsSelected?.[i] && (Object.keys(itemsSelected?.[i]).length) > 0) &&
                   <div className=' '>

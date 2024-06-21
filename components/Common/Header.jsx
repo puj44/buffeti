@@ -23,9 +23,9 @@ const customTheme = {
             
     
             style:{
-                dark:"dropdown-box",
-                light:"dropdown-box",
-                auto:"dropdown-box",
+                dark:"dropdown-box focus:outline-none",
+                light:"dropdown-box focus:outline-none",
+                auto:"dropdown-box focus:outline-none",
             }
         }
     }
@@ -68,7 +68,7 @@ function Header({handleModelClick}) {
             </div>
             <div className='flex flex-row gap-2'>
                 <div className='w-[66.9px] h-[44px] md:w-[76.01px] md:h-[50px]'>
-                    <Link href="/">
+                    <Link href="/" className='focus:outline-none'>
                         <Image
                             loader={({ src }) => src}
                             src={`${process.env.NEXT_PUBLIC_IMAGES_URL}/logo/primary_logo.webp`}

@@ -2,7 +2,8 @@ import Image from 'next/image'
 import React, { useState } from 'react'
 
 function SearchBar({
-    handleSearchChange
+    handleSearchChange,
+    placeholder
 }) {
 
     const [isSearched, setSearched] = useState(false);
@@ -22,7 +23,7 @@ function SearchBar({
             <input 
                 onChange={(e)=>{handleSearchChange(e)}}
                 id="search-input"
-                placeholder='Search "Italian Sandwich"'
+                placeholder={placeholder ?? 'Search "Italian Sandwich"'}
                 className='text-color-dark-gray'
             />
         </div>
