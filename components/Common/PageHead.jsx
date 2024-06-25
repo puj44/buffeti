@@ -10,11 +10,12 @@ function PageHead() {
         <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
         <meta name="language" content="English" />
         <meta name="revisit-after" content="1 days" />
-        <link rel="shortcut icon" href="/logo/primary_logo.ico" />
+        <link rel="shortcut icon" href="/logo/primary_red.ico" />
         <link rel="icon" type="image/png" sizes="128x128" href="/logo/primary_logo.png" />
-        <link rel="icon" type="image/png" sizes="32x32" href="/logo/primary_logo.png" />
+        <link rel="icon" type="image/png" sizes="64x64" href="/logo/primary_red.png" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/logo/primary_red.png" />
         {/* OG */}
-        <meta property="og:image" key="og:image" content={`/logo/primary_logo.png`} />
+        <meta property="og:image" key="og:image" content={`/logo/primary_red.png`} />
         <meta property="og:type" key="og:type" content="website" />
         <meta property="og:image:type" key="og:image:type" content="image/png" />
         <meta property="og:image:width" key="og:image:width" content="512" />

@@ -18,7 +18,7 @@ export default function Home(props) {
     >
           <Banners />
           {packages?.length > 0 && <SuggestivePackage data={packages[0]} noOfPeople={noOfPeople} filters={filters} />}
-          <h4 className="font-semibold hidden page-title 2xl:text-center open-sans sm:block">Snack box And Mini Meals</h4>
+          <h4 className="font-semibold hidden page-title 2xl:text-center sm:block">Snack box And Mini Meals</h4>
           <div className="max-w-[1120px] w-full flex 2xl:self-center">
             <div className="flex flex-col sm:flex-row w-full  gap-6 ">
               <SnackboxCard />

@@ -13,7 +13,7 @@ function Footer() {
                     <div className=' flex flex-col gap-2'>          
                         <Link className='flex flex-row gap-2  items-center ' href="/">
                             <Image
-                                src={`${process.env.NEXT_PUBLIC_IMAGES_URL}/logo/primary_logo.webp`}
+                                src={`/logo/primary_red.webp`}
                                 alt={"signin"}
                                 width={90}
                                 height={60}
@@ -21,7 +21,6 @@ function Footer() {
                                 loading='lazy'
                                 unoptimized
                             />
-                            <p className='text-color-primary page-title hidden md:block decorative-1'>Buffeti</p>
                         </Link>
                         <p className='text-color-light-gray  block md:hidden'>{"Copyright © 2024 Buffeti"}</p>
                     </div>

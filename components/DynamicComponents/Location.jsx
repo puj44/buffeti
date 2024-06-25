@@ -29,18 +29,17 @@ function Location() {
     location &&
         <Flowbite theme={{ theme: customTheme }}>
             <Dropdown label="" className='cursor-pointer' dismissOnClick={true} renderTrigger={() =>
-                <div className='flex flex-row my-auto gap-1 cursor-pointer'>
-                    <p>{location?.charAt(0)?.toUpperCase() + location?.slice(1)}</p>
-                    <div className='w-[12px] h-[7px] my-auto' id={`nav-dropdown-arrow`}>
+                <div className='flex flex-row my-auto gap-2 cursor-pointer'>
+                    <div className='w-[20px] h-[20px] my-auto'>
                         <Image
-                            src={"/arrows/dropdown.webp"}
-                            width={55}
-                            height={31}
-                            alt="arrow"
-                            style={{width:"100%",height:"100%"}}
+                            src={"/icons/location.webp"}
+                            width={20}
+                            height={20}
+                            alt="pin"
                             priority
                         />
                     </div>
+                    <p className='text-white'>{location?.charAt(0)?.toUpperCase() + location?.slice(1)}</p>
                 </div>
             }>
                 

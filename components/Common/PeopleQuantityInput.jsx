@@ -7,7 +7,7 @@ function PeopleQuantityInput({quantity, handleChangeQuantity,isPackage}) {
     },[])
   return (
     <div className={`flex flex-row justify-between items-center ${isPackage ? "gap-4 md:gap-6 lg:gap-8":""}`}>
-        <p className='package-title'>Number of people</p>
+        <p className='package-title font-semibold '>Number of people</p>
         <div className='flex flex-row gap-1 items-center'>
             <div id={"decrease-quantity"} className={`flex items-center justify-center w-[24px]  h-[24px]  ${parseInt(quantity) === 10 ?"":"cursor-pointer"}`}
                 onClick={(e)=>{handleChangeQuantity(e,true,(parseInt(quantity)-1))}} 

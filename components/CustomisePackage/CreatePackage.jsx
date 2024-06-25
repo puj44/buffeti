@@ -74,7 +74,7 @@ function CreatePackage({packageName, menuOption ,packageDetails, itemsData, cate
           ...itemsData[category]?.[item?.slug],
           added_extra_items:{
             ...itemsData[category]?.[item?.slug]?.added_extra_items,
-            [extraItem]:0
+            [extraItem]:1
           }
         }
       }
@@ -140,22 +140,9 @@ function CreatePackage({packageName, menuOption ,packageDetails, itemsData, cate
   return (
     <div className='page-spacing py-6'>
       <div className='grid grid-flow-row gap-6'>
-        <div className='md:flex flex-row gap-2 hidden '>
-          <Link href={"/"} className=' text-color-primary-gray small-title'>Home</Link>
-          <p className='text-color-primary-gray '>{">"}</p>
-          {
-            (packageName && packageName !== "") ?
-            <>
-              <Link href={`/packages/${menuOption === "click2cater" ? "catering"  :menuOption}`} className=' text-color-primary-gray small-title'>Packages</Link>
-              <p className='text-color-primary-gray '>{">"}</p>
-            </>
-            :""
-          }
-          <p className='small-title'>{"Package Detail"}</p>
-        </div>
         {/* PACKAGE DETAILS SECTION */}
         <div className='flex flex-col md:flex-row justify-between w-full md:items-center'>
-            <p className='font-medium package-title'>{menuOption === "click2cater" ?"Customise Items" :"Create your Own Snack Box"}</p>
+            <p className='font-medium package-title'>{menuOption === "click2cater" ?"Create your Own Package" :"Create your Own Snack Box"}</p>
             <PeopleQuantityInput quantity={quantity ?? 10} handleChangeQuantity={handleChangeQuantity} isPackage={true} />
         </div>
         {/* ITEMS SELECTION SECTION */}
