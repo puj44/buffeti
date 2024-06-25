@@ -12,7 +12,7 @@
     @apply px-[20px] md:px-[40px] lg:px-[128px]  flex flex-col justify-center;
   }
   .active-path{
-    @apply text-color-primary font-medium border-solid border-b-[1px] border-[#B42318]
+    @apply font-medium border-solid border-b-[1px] border-[#fff]
   }
 }
   //Scrollbar
@@ -136,7 +136,6 @@ input{
 
 //Navbar
 .navbar{
-  box-shadow: 0px 4px 25px 0px #00000008;
   padding:11px 6px;
   max-height: 72px;
 }
@@ -326,7 +325,7 @@ input{
   justify-content: space-between;
   flex-direction: column;
   span{
-    background-color: $primary;
+    background-color: #fff;
     border-radius: 5px;
     height: 2px;
     width:100%;

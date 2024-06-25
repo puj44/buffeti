@@ -4,7 +4,7 @@
         "title":"Home"
     },
     {
-        "title":"Menu Options",
+        "title":"Meals",
         "isDropdown":true,
         "dropdownData":[
             {
@@ -38,29 +38,6 @@
         "url":"packages/mini-meals",
         "title":"Mini Meals",
         "isMobile":true
-    },
-    {
-        "url":"coming-soon",
-        "title":"Blogs"
-    },
-    {
-        "url":"coming-soon",
-        "title":"Cart",
-        "isCart":true,
-        "isDesktop":true
-    },
-    {
-        "url":"coming-soon",
-        "title":"Orders"
-    },
-    {
-        "url":"coming-soon",
-        "title":"Create your own",
-        "img":"/icons/plus_white.webp",
-        "width":14,
-        "height":14,
-        "isDesktop":true,
-        "className":"btn primary-btn gap-2"
     }
   
 ]

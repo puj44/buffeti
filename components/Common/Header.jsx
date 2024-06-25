@@ -57,7 +57,7 @@ function Header({handleModelClick}) {
 
 
   return (
-    <div className='page-spacing'>
+    <div className='page-spacing bg-primary'>
         <div id="navbar" className='navbar flex justify-between '>
             <div className='block md:hidden my-auto'>
                 <div className={`hamburger cursor-pointer`} onClick={()=>{setMobileMenu(!mobileMenu)}}>
@@ -66,12 +66,12 @@ function Header({handleModelClick}) {
                     <span></span>
                 </div>
             </div>
-            <div className='flex flex-row gap-2'>
+            <div className='flex flex-row gap-[85px]'>
                 <div className='w-[66.9px] h-[44px] md:w-[76.01px] md:h-[50px]'>
                     <Link href="/" className='focus:outline-none'>
                         <Image
                             loader={({ src }) => src}
-                            src={`${process.env.NEXT_PUBLIC_IMAGES_URL}/logo/primary_logo.webp`}
+                            src={`/logo/primary_white.webp`}
                             alt="Buffeti"
                             width={2049}
                             height={1354}
@@ -82,14 +82,12 @@ function Header({handleModelClick}) {
                         />
                     </Link>
                 </div>
-                <div className='hidden md:block my-auto'>
+                {/* <div className='hidden md:block my-auto'>
                     <Location />
-                </div>
-            </div>
-            <div className='flex flex-row gap-4 md:gap-5 xl:gap-7'>
+                </div> */}
                 <div className={`${mobileMenu ? "flex fixed left-0 top-[66px] w-screen h-screen z-50 px-[26px] py-5 bg-white":"hidden"} md:flex md:items-center`}>
 
-                    <div className={`flex flex-col w-fit md:flex-row h-fit gap-4 md:gap-5 xl:gap-7 md:my-auto`}>
+                    <div className={`flex flex-col w-fit md:flex-row h-fit gap-4 md:gap-5 xl:gap-7  md:my-auto`}>
                         {
                             navbar.map((n,idx)=>{
                                 return(
@@ -98,13 +96,13 @@ function Header({handleModelClick}) {
 
                                         <Flowbite theme={{ theme: customTheme }}>
                                             <Dropdown label="" className={`hidden md:flex md:items-center cursor-pointer`}   renderTrigger={() =>  
-                                                <div className='flex flex-row my-auto gap-1 cursor-pointer'>
-                                                    <h4 className='' id={`nav-dropdown-label`}>{n.title}</h4>
-                                                    <div className='w-[12px] h-[7px] my-auto' id={`nav-dropdown-arrow`}>
+                                                <div className='flex flex-row my-auto gap-2 cursor-pointer'>
+                                                    <h4 className='font-medium text-white' id={`nav-dropdown-label `}>{n.title}</h4>
+                                                    <div className=' w-[13px] h-[8px] my-auto' id={`nav-dropdown-arrow`}>
                                                         <Image
-                                                            src={"/arrows/dropdown.webp"}
-                                                            width={55}
-                                                            height={31}
+                                                            src={"/arrows/arrow_down.webp"}
+                                                            width={41}
+                                                            height={25}
                                                             alt="arrow"
                                                             style={{width:"100%",height:"100%"}}
                                                             priority
@@ -117,7 +115,7 @@ function Header({handleModelClick}) {
                                                     n.dropdownData.map((data,index)=>{
                                                         return(
                                                             <>
-                                                                <Dropdown.Item as="div" className={`${isPathActive(data.slug) ? "active-path border-b-[0px] border-none":""}`} key={`item-`+data.slug} >  
+                                                                <Dropdown.Item as="div" className={`${isPathActive(data.slug) ? "active-path border-b-[0px] border-none":""} `} key={`item-`+data.slug} >  
                                                                         <Link href={data.url}>
                                                                             {data.title}
                                                                         </Link>
@@ -135,7 +133,7 @@ function Header({handleModelClick}) {
                                     </div>
                                     :
                                     
-                                    <Link key={"navbar-"+idx} href={"/"+(n.url)} onClick={()=>{setMobileMenu(false)}} className={`${n.isMobile ? "flex md:hidden" :""}  relative ${n.isDesktop ? "hidden md:flex":""} md:flex flex-row gap-2 xl:gap-3 align-middle my-auto ${n.className ?? ""}`}>
+                                    <Link key={"navbar-"+idx} href={"/"+(n.url)} onClick={()=>{setMobileMenu(false)}} className={`${n.isMobile ? "flex md:hidden" :""} text-white font-medium  relative  md:flex flex-row gap-2 xl:gap-3 align-middle my-auto ${n.className ?? ""}`}>
                                         {
                                         n.img && 
                                         <Image
@@ -159,31 +157,15 @@ function Header({handleModelClick}) {
                                 )
                             })
                         }
-                    
+
                     </div>
                 </div>
-                <div className='hidden md:flex md:items-center my-auto'>
-
-                    <div onClick={()=>{!(auth?.isAuthenticated) && handleModelClick(true)}} className={`${auth?.isAuthenticated ? "hidden":""} cursor-pointer flex flex-row gap-2 xl:gap-3 align-middle my-auto`}>
-
-                            <Image
-                                src={"/icons/profile.webp"}
-                                alt={"signin"}
-                                width={16}
-                                height={16}
-                                className='my-auto'
-                            />
-                            <h4 className='my-auto'>
-                                {"Sign In"}
-                            </h4>
-                        </div>
-                    
-                    <div onClick={()=>{ }} className={`flex ${auth?.isAuthenticated ? "":"md:hidden"} justify-center cursor-pointer orange-circle text-white w-[38px] h-[38px] items-center align-middle my-auto`}>
-
-                        {auth?.user?.name?.toString()?.charAt(0) ?? "N"}
-                    </div>
+            </div>
+            <div className='flex flex-row gap-6'>
+                <div className='hidden md:block my-auto'>
+                        <Location />
                 </div>
-                <Link className='block md:hidden my-auto' 
+                <Link className='block my-auto' 
                     onClick={(e)=>{ 
                         if(!(auth?.isAuthenticated)){
                             e.preventDefault();
@@ -195,11 +177,31 @@ function Header({handleModelClick}) {
                     <Image
                         src={"/icons/cart.webp"}
                         alt={"cart"}
-                        width={17}
-                        height={21}
+                        width={20}
+                        height={20}
                         className='my-auto'
+                        priority
                     />
                 </Link>
+                <div className='hidden md:flex md:items-center my-auto'>
+                   
+                    <div onClick={()=>{!(auth?.isAuthenticated) && handleModelClick(true)}} className={`${auth?.isAuthenticated ? "hidden":""} rounded-full bg-white w-[24px] h-[24px] justify-center cursor-pointer flex flex-row gap-2 xl:gap-3 align-middle my-auto`}>
+                        <Image
+                            src={"/icons/profile_mobile.webp"}
+                            alt={"profile"}
+                            width={12}
+                            height={12}
+                            className='my-auto'
+                            priority
+                        />
+                    </div>
+                    
+                    <div onClick={()=>{ }} className={`flex ${auth?.isAuthenticated ? "":"md:hidden"} justify-center cursor-pointer orange-circle text-white w-[38px] h-[38px] items-center align-middle my-auto`}>
+
+                        {auth?.user?.name?.toString()?.charAt(0) ?? "N"}
+                    </div>
+                </div>
+              
             </div>
         </div>
     </div>
