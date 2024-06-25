@@ -16,7 +16,7 @@ function ItemCard({
   return (
     <>
       <div 
-          className={`p-2 flex flex-col justify-between w-full items-start ${itemsSelected?.[category]?.[item?.slug] ? "bg-[#FFFAEB]" :""} rounded-lg `}
+          className={`p-2 flex flex-col justify-between w-full items-start ${itemsSelected?.[item.category.slug]?.[item?.slug] ? "bg-[#FFFAEB]" :""} rounded-lg `}
         >
           <div className='flex flex-row gap-4 items-start justify-start w-full'>
 
@@ -38,7 +38,7 @@ function ItemCard({
                     <span className='description text-color-dark-gray font-medium'>
                       {
                         ( 
-                          !(itemsSelected?.[category]?.[item?.slug]) &&
+                          !(itemsSelected?.[item.category.slug]?.[item?.slug]) &&
                           (
                           (item.preparations && Object.keys(item.preparations)?.length > 0) || 
                           (item.extra_items && Object.keys(item.extra_items)?.length > 0)
@@ -55,15 +55,15 @@ function ItemCard({
                 }
               </div>
               <div className=''>
-                  {itemsSelected?.[category]?.[item?.slug] ? 
+                  {itemsSelected?.[item.category.slug]?.[item?.slug] ? 
                       <QuantityInput 
                         handleChangeQuantity={
                           (action) =>{
-                            if(action === "sub" && Number(itemsSelected?.[category]?.[item?.slug]?.additional_qty ?? 0) === 0){
-                              handleDeleteItem(category,item)
+                            if(action === "sub" && Number(itemsSelected?.[item.category.slug]?.[item?.slug]?.additional_qty ?? 0) === 0){
+                              handleDeleteItem(item.category.slug,item)
                             }else{
 
-                              handleChangeAdditionalQty(category,item?.slug, action === "sub" ? true:false)
+                              handleChangeAdditionalQty(item.category.slug,item?.slug, action === "sub" ? true:false)
                             }
                           }
                         }
@@ -71,10 +71,10 @@ function ItemCard({
                           convertToUnits(item,itemsSelected, noOfPeople)
                         }
                         disableButtons={item?.extra_items && Object.keys(item?.extra_items)?.length > 0}
-                        quantity={Number(itemsSelected?.[category]?.[item?.slug]?.additional_qty ?? 0) ?? 0}
+                        quantity={Number(itemsSelected?.[item.category.slug]?.[item?.slug]?.additional_qty ?? 0) ?? 0}
                       />
                       :
-                      <div className='btn transparent-orange-btn text-color-secondary cursor-pointer py-1 px-2 sm:py-2 sm:px-2.5 w-[124px] h-fit' onClick={()=>{ handleAddItem(category, item) }}>
+                      <div className='btn transparent-orange-btn text-color-secondary cursor-pointer py-1 px-2 sm:py-2 sm:px-2.5 w-[124px] h-fit' onClick={()=>{ handleAddItem(item.category.slug, item) }}>
                         {"Add"}
                       </div>
                   }
@@ -85,12 +85,12 @@ function ItemCard({
           <div className='mt-3 w-full'>
                   {/* SELECT PREPARATION */}
                   {
-                    (itemsSelected?.[category]?.[item?.slug] && item.preparations && Object.keys(item.preparations)?.length > 0)?
+                    (itemsSelected?.[item.category.slug]?.[item?.slug] && item.preparations && Object.keys(item.preparations)?.length > 0)?
                     <div className='flex flex-col gap-2 w-full  md:ps-[116px]'>
                       <p className='description font-semibold'>Select Preparation</p>
                       {
                           Object.keys(item.preparations).map((prep,prepIdx)=>{
-                              const selected = itemsSelected?.[category]?.[item.slug]?.selected_preparation === prep ?? false;
+                              const selected = itemsSelected?.[item.category.slug]?.[item.slug]?.selected_preparation === prep ?? false;
                               return(
                                   <div key={"prep-"+prep} className='flex flex-row gap-2 w-full items-center'>
                                       <span className={`
@@ -100,7 +100,7 @@ function ItemCard({
                                               flex justify-center items-center
                                               
                                           `}
-                                          onClick={()=>{handleAddItem(category,item,false,prep)}}
+                                          onClick={()=>{handleAddItem(item.category.slug,item,false,prep)}}
                                       >
                                         {
                                           selected && 
@@ -126,7 +126,7 @@ function ItemCard({
 
       </div>
       {
-                  itemsSelected?.[category]?.[item?.slug] &&
+                  itemsSelected?.[item.category.slug]?.[item.slug] &&
                   ((item.extra_items && Object.keys(item.extra_items)?.length > 0) ?
                     <>
                       {
@@ -165,28 +165,28 @@ function ItemCard({
                                   <p className='text-color-primary-gray pb-2' style={{borderBottomColor:"#E3E5E5", borderBottomWidth:"1px"}}>₹ {extraItem.rate_per_serving}/ piece ({extraItem.serving_per_pax+" "+extraItem.unit})</p>
                                   <div className='btn primary-btn cursor-pointer' 
                                     onClick={()=>{ 
-                                      if(!itemsSelected?.[category]?.[item?.slug]?.added_extra_items?.[extra]){
+                                      if(!itemsSelected?.[item.category.slug]?.[item?.slug]?.added_extra_items?.[extra]){
 
                                         handleAddItem(category, item,extra) 
                                       }
                                     }}
                                   >
                                     {
-                                       Number(itemsSelected?.[category]?.[item?.slug]?.added_extra_items?.[extra] ?? 0) > 0 ?
+                                       Number(itemsSelected?.[item.category.slug]?.[item?.slug]?.added_extra_items?.[extra] ?? 0) > 0 ?
 
                                       <div className='flex flex-row gap-4'>
                                         <span className='rounded-[45px] h-[36px] w-[64px] bg-white flex justify-center items-center '
                                           onClick={()=>{
-                                            handleChangeAdditionalQty(category,item?.slug, true,extra)
+                                            handleChangeAdditionalQty(item.category.slug,item?.slug, true,extra)
                                           }}
                                         >
                                           <span className='w-[14px] h-[2px] rounded-full bg-primary'>
                                           </span>
                                         </span>
-                                        <p className='text-white font-bold sub-title '>{Number(itemsSelected?.[category]?.[item?.slug]?.added_extra_items?.[extra])}</p>
+                                        <p className='text-white font-bold sub-title '>{Number(itemsSelected?.[item.category.slug]?.[item?.slug]?.added_extra_items?.[extra])}</p>
                                         <span className='relative rounded-[45px] h-[36px] w-[64px] bg-white flex justify-center items-center '
                                           onClick={()=>{
-                                            handleChangeAdditionalQty(category,item?.slug, false,extra)
+                                            handleChangeAdditionalQty(item.category.slug,item?.slug, false,extra)
                                           }}
                                         >
                                           <span className='absolute-center w-[14px] h-[2px] rounded-full bg-primary'>
