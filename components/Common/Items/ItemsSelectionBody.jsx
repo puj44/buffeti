@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import ItemsSideBar from './ItemsSidebar';
 import ItemsSelection from './ItemsSelection';
+import ItemsAdded from './ItemsAdded';
 
 
 function ItemsSelectionBody({
@@ -17,12 +18,20 @@ function ItemsSelectionBody({
   menuOption
 }) {
  
+  const addedItems = useMemo(()=>{
+    let items = {};
+    itemsSelected && Object.keys(itemsSelected).map((i)=>{
+      items = {...items, ...itemsSelected[i]};
+    })
+    
+    return items ?? {}
+  },[itemsSelected])
 
 
   
 
   return (
-    <div className='flex flex-row gap-6 w-full items-start'>
+    <div className='flex flex-row gap-6 w-full items-start '>
       {/* LEFT SIDE SECTION ITEMS CATEGORY SELECTION */}
       <div className='hidden md:flex'>
         <ItemsSideBar show={true} activeItem={activeItem} itemsSelected={itemsSelected} items={categories} handleChangeActiveItem={handleChangeActiveItem} />
@@ -41,6 +50,17 @@ function ItemsSelectionBody({
         noOfPeople={noOfPeople}
         menuOption={menuOption}
       />
+      {
+        addedItems && Object.keys(addedItems).length > 0?
+        <ItemsAdded
+          items={{...addedItems}}
+          handleChangeAdditionalQty={handleChangeAdditionalQty ?? (()=>{})}
+          handleDeleteItem={handleDeleteItem ?? (()=>{})} 
+          menuOption={menuOption}
+          noOfPeople={noOfPeople}
+          itemsSelected={itemsSelected} 
+        />:""
+      }
     </div>
   )
 }
