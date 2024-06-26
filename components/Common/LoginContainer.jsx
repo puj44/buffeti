@@ -1,9 +1,11 @@
 import Image from 'next/image'
 import React, { useState } from 'react'
 import OTPInput from 'react-otp-input'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import PeopleQuantityInput from './PeopleQuantityInput';
 import { setCookie } from 'cookies-next';
+import { setCurrentLocation } from '@/redux/reducers/homeReducer';
+import { useRouter } from 'next/router';
 
 function LoginContainer({step,changeStep, onInputChange, values,error,changeNumber,sendOTP,handleModelClick,verifyOtp, timer,isLoading,resendOTP}) {
     const {locations} = useSelector((state) => state.home);
@@ -11,7 +13,8 @@ function LoginContainer({step,changeStep, onInputChange, values,error,changeNumb
     const [location, setLocation] = useState();
     const [err, setErr] = useState(false);
     const [position,setPosition] = useState({ latitude: null, longitude: null });
-
+    const router = useRouter();
+    const dispatch = useDispatch();
     const convertToMinute = (duration) =>{
         // Hours, minutes and seconds
         const hrs = ~~(duration / 3600);
@@ -247,6 +250,8 @@ function LoginContainer({step,changeStep, onInputChange, values,error,changeNumb
                                 localStorage.setItem("visited",true)
                                 setCookie("location",location,{maxAge:9.461e+7});
                                 handleModelClick(false);
+                                dispatch(setCurrentLocation({location:location}));
+                                router.replace(router.asPath);
                             }else{
                                 setErr("Please select location");
                             }
@@ -283,7 +288,7 @@ function LoginContainer({step,changeStep, onInputChange, values,error,changeNumb
             {/* TITLE DIV */}
             <div className='hidden p-[24px] pb-0 md:flex flex-row justify-between items-center'>
                     <p className='sub-title font-medium'>{step === "login" ? "Login" : step === "register" ? "Register" : step === "get_started"?"Let's get started":"OTP Verification"}</p>
-                    <div className='cursor-pointer' onClick={()=>{handleModelClick(false)}}>
+                    <div className='cursor-pointer' onClick={()=>{localStorage.setItem("visited",true);handleModelClick(false)}}>
                         <Image
                             src={"/icons/cross.webp"}
                             width={13}

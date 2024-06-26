@@ -1,17 +1,19 @@
 import Banners from "@/components/Homepage/Banners";
 import SuggestivePackage from "@/components/Homepage/SuggestivePackage";
 import { wrapper} from "../redux/store";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import {  getPackagesData, setFilters } from "@/redux/reducers/packageReducer";
 import { END } from "redux-saga";
 import { getFiltersApi } from "@/redux/requests/packageRequests";
-import { getCookie } from "cookies-next";
+import { getCookie} from "cookies-next";
 import SnackboxCard from "@/components/Homepage/SnackboxCard";
 import MiniThaliCard from "@/components/Homepage/MiniThaliCard";
+import { useSelector } from "react-redux";
+import { useRouter } from "next/router";
 
 
 export default function Home(props) {
-  const {filters,packages,noOfPeople} = props;
+  const {noOfPeople,packages,filters} = props;
   return (
     <div
       className={`${ process.env.NEXT_PUBLIC_ENVIRONMENT === "DEV" ? "flex flex-col md:gap-6 gap-4 py-8  page-spacing ":""}`} style={{alignItems:"stretch"}}
@@ -64,6 +66,7 @@ export const getServerSideProps =  wrapper.getServerSideProps(
     }
     let data = await fetchData(store,location);
     data.noOfPeople = noOfPeople;
+    data.location = location ?? null;
     return {
       props:{
         ...data

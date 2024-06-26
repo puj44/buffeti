@@ -6,7 +6,7 @@ function PeopleQuantityInput({quantity, handleChangeQuantity,isPackage}) {
         document.getElementById("")
     },[])
   return (
-    <div className={`flex flex-row justify-between items-center ${isPackage ? "gap-4 md:gap-6 lg:gap-8":""}`}>
+    <div className={`flex flex-col mt-2 sm:mt-0 sm:flex-row justify-between sm:items-center ${isPackage ? "gap-2 md:gap-6 lg:gap-8":""}`}>
         <p className='package-title font-semibold '>Number of people</p>
         <div className='flex flex-row gap-1 items-center'>
             <div id={"decrease-quantity"} className={`flex items-center justify-center w-[24px]  h-[24px]  ${parseInt(quantity) === 10 ?"":"cursor-pointer"}`}

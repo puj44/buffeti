@@ -6,7 +6,7 @@ export const homeSlice = createSlice({
         isLoading:false,
         locations:[],
         filters:{},
-        location:"",
+        currentLocation:"",
     },
     reducers:{
         getData:(state) =>{
@@ -22,10 +22,13 @@ export const homeSlice = createSlice({
         },
         setMenuOptions:(state) =>{
             state.isLoading = false;
+        },
+        setCurrentLocation:(state,{payload}) =>{
+            state.currentLocation = payload?.location ?? null;
         }
     }
 });
 
-export const {getData,setData,setMenuOptions,getMenuOptions} = homeSlice.actions;
+export const {getData,setData,setMenuOptions,getMenuOptions,setCurrentLocation} = homeSlice.actions;
 
 export default homeSlice.reducer;

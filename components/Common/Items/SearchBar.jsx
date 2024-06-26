@@ -11,11 +11,12 @@ function SearchBar({
   return (
    
         <div className='search-bar md:max-w-[70%] 2xl:max-w-[40%] ' id="search-bar">
-            <div className='w-[24px] h-[24px] flex align-middle items-center ' id="search-button">
+            <div className='w-[18px] h-[18px] sm:w-[24px] sm:h-[24px] flex align-middle items-center ' id="search-button">
                 <Image
                     src={"/icons/search.webp"}
                     width={15}
                     height={15}
+                    className='w-[12px] h-[12px] sm:w-[15px] sm:h-[15px]'
                     alt={"Search"}
                     priority
                 />
@@ -24,7 +25,7 @@ function SearchBar({
                 onChange={(e)=>{handleSearchChange(e)}}
                 id="search-input"
                 placeholder={placeholder ?? 'Search "Italian Sandwich"'}
-                className='text-color-dark-gray'
+                className='text-color-dark-gray  overflow-hidden placeholder'
             />
         </div>
   )

@@ -376,6 +376,18 @@ input{
 }
 //Tablet Screen
 @media screen and (max-width:786px){
+  //active sidebar 
+  .active-sidebar{
+    color:$primary;
+    padding-left:6px;
+    background: $lightestRed;
+    border-radius: 4px;
+
+    &::after{
+      content: "";
+      display: none;
+    }
+  }
   .input-quantity{
     width:fit-content;
   }
@@ -410,6 +422,8 @@ input{
   //  padding:6px;
   //  width:100px;
   // }
-  
+  .search-bar{
+    padding:0px 10px;
+  }
 }
 

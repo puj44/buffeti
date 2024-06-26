@@ -18,7 +18,7 @@ function ItemCard({
       <div 
           className={`p-2 flex flex-col justify-between w-full items-start ${itemsSelected?.[item.category.slug]?.[item?.slug] ? "bg-[#FFFAEB]" :""} rounded-lg `}
         >
-          <div className='flex flex-row gap-4 items-start justify-start w-full'>
+          <div className='flex flex-row gap-4 items-start justify-start w-fit md:w-full'>
 
             {/* IMAGE */}
             <div>
@@ -131,7 +131,7 @@ function ItemCard({
                     <>
                       {
                         (Object.keys(item.extra_items)?.length >= 2) &&
-                        <div className='flex w-full justify-end pt-2'>
+                        <div className='flex  justify-end pt-2'>
                           <div className='flex flex-row gap-4'>
                             <div className='w-[44px] h-[44px]'>
                               <Image
@@ -154,13 +154,13 @@ function ItemCard({
                           </div>
                         </div>
                       }
-                      <div className='flex flex-row gap-3 w-full overflow-x-hidden' id={`${item?.slug}-extra-items`} >
+                      <div className='flex flex-row gap-3  overflow-x-hidden' id={`${item?.slug}-extra-items`} >
                         {/* <p className='description'>Add ons</p> */}
                         {
                           Object.keys(item.extra_items).map((extra,extraIndex)=>{
                             const extraItem = item.extra_items[extra];
                             return(
-                              <div key={"extra-item-"+extra} className='border-[1px] border-[#E3E5E5] rounded-lg flex flex-col gap-4 max-w-[247px] p-4'>
+                              <div key={"extra-item-"+extra} className='border-[1px]  border-[#E3E5E5] rounded-lg flex flex-col gap-4 max-w-[247px] p-4'>
                                   <p className='description font-medium'>{extraItem.item_name}</p>
                                   <p className='text-color-primary-gray pb-2' style={{borderBottomColor:"#E3E5E5", borderBottomWidth:"1px"}}>₹ {extraItem.rate_per_serving}/ piece ({extraItem.serving_per_pax+" "+extraItem.unit})</p>
                                   <div className='btn primary-btn cursor-pointer' 
