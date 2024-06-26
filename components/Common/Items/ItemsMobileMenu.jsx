@@ -30,13 +30,13 @@ function ItemsMobileMenu({
 
 if(show)
     return (
-        <div className='fixed right-[20px] bottom-[20px] flex justify-end w-full '>
+        <div className='fixed right-[20px] bottom-[20px] flex justify-end w-full z-20'>
             <Flowbite theme={customTheme}>
                 <Dropdown 
                     label="" 
                     placement='top'
                     renderTrigger={()=>
-                        <div className='flex flex-col gap-0.5 justify-center items-center bg-primary rounded-full w-[64px] h-[64px]'>
+                        <div className='flex flex-col gap-0.5 justify-center items-center bg-primary rounded-full w-[64px] h-[64px] '>
                             <Image 
                                 src={"/icons/menu.webp"}
                                 width={15.8}
