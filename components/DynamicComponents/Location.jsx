@@ -1,8 +1,10 @@
+import { setCurrentLocation } from '@/redux/reducers/homeReducer';
 import { getCookie, setCookie } from 'cookies-next';
 import { Dropdown, Flowbite } from 'flowbite-react'
 import Image from 'next/image'
-import React, { useState } from 'react'
-import { useSelector } from 'react-redux';
+import { useRouter } from 'next/router';
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
 const customTheme = {
     dropdown:{
         floating:{
@@ -24,7 +26,15 @@ const customTheme = {
   };
 function Location() {
     const {locations} = useSelector((state) => state.home);
-    const [location, setLocation] = useState(getCookie("location") ?? false);
+    const [location, setLocation] = useState(getCookie("location") ?? null);
+    const router = useRouter();
+    const {currentLocation} = useSelector((state) => state.home)
+    useEffect(()=>{
+        if(currentLocation && (currentLocation !== location)){
+
+            setLocation(currentLocation)
+        }
+    },[currentLocation])
   return (
     location &&
         <Flowbite theme={{ theme: customTheme }}>
@@ -49,6 +59,8 @@ function Location() {
                             <>
                                 <Dropdown.Item as="p"  key={`item-`+data} onClick={()=>{
                                     setCookie("location",data,{maxAge:9.461e+7})
+                                    router.replace(router.asPath);
+                                    setLocation(data)
                                 }}>  
                                     {data?.charAt(0)?.toUpperCase() + data?.slice(1)}
                                 </Dropdown.Item>

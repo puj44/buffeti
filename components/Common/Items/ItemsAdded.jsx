@@ -12,11 +12,11 @@ function ItemsAdded({
     noOfPeople
 }) {
   return (
-    <div className='max-w-[323px]  bg-[#FAFAFA] p-4 md:sticky md:top-0'>
+    <div className='max-w-[323px] w-fit  bg-[#FAFAFA] p-2 sm:p-4 md:sticky md:top-0'>
         <div className='flex flex-col gap-4 w-full'>
             {
                 (items && Object.keys(items).length > 0) ?
-                <div className='flex flex-col w-full min-w-[291px]'>
+                <div className='flex flex-col w-full sm:min-w-[291px]'>
                     <p className='px-6 py-3 bg-primary justify-start rounded-t-lg text-white'>Selected Items</p>
                     <div className=' pt-6 bg-[#FFFAEB] rounded-b-lg p-2 grid grid-flow-row gap-4'>
                         {
@@ -24,12 +24,12 @@ function ItemsAdded({
                                 const item = items[it];
                                 return(
                                     <div key={"added-item-"+it} className='grid grid-flow-col gap-4 items-start justify-start'>
-                                        <div className='block w-[100px] h-[100px]'>
+                                        <div className=''>
                                             <Image
                                                 src={"/packages/dummy_pack.webp"}
                                                 width={102}
                                                 height={106}
-                                                style={{width:"100%",height:"100%"}}
+                                                // style={{width:"100%",height:"100%"}}
                                                 alt={item?.item_name}
                                             />
                                         </div>

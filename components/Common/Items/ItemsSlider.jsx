@@ -25,7 +25,7 @@ function ItemsSlider({
         items && Object.keys(items).map((subCategory)=>{
           let item = items[subCategory];
           return(
-            <div key={"item-"+subCategory} id={`body-${subCategory}`} className='flex flex-col gap-4'>
+            <div key={"item-"+subCategory} id={`body-${subCategory}`} className='flex flex-col gap-4 '>
               {
                 (categories[category]?.sub_categories) &&
                 <h5 className='item-name small-title'>{categories[category]?.sub_categories?.[subCategory]?.toString()?.toUpperCase() ?? category?.toString()?.toUpperCase()}</h5>

@@ -19,11 +19,10 @@ function ItemsSelection({
   
 
   return (
-        <div className='flex flex-col gap-6 w-full '>
+        <div className='flex flex-col gap-6 sm:w-full relative'>
             <SearchBar 
                 handleSearchChange={handleSearchChange}
             />
-            <div className=' '>
                 <ItemsSlider 
                     items={{...items ?? {}}} 
                     itemsSelected={itemsSelected} 
@@ -35,7 +34,6 @@ function ItemsSelection({
                     noOfPeople={noOfPeople}
                     menuOption={menuOption}
                 />
-            </div>
         </div>
   )
 }

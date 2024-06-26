@@ -59,13 +59,7 @@ function Header({handleModelClick}) {
   return (
     <div className='page-spacing bg-primary'>
         <div id="navbar" className='navbar flex justify-between '>
-            <div className='block md:hidden my-auto'>
-                <div className={`hamburger cursor-pointer`} onClick={()=>{setMobileMenu(!mobileMenu)}}>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
-            </div>
+          
             <div className='flex flex-row gap-[85px]'>
                 <div className='w-[66.9px] h-[44px] md:w-[76.01px] md:h-[50px]'>
                     <Link href="/" className='focus:outline-none'>
@@ -133,7 +127,7 @@ function Header({handleModelClick}) {
                                     </div>
                                     :
                                     
-                                    <Link key={"navbar-"+idx} href={"/"+(n.url)} onClick={()=>{setMobileMenu(false)}} className={`${n.isMobile ? "flex md:hidden" :""} text-white font-medium  relative  md:flex flex-row gap-2 xl:gap-3 align-middle my-auto ${n.className ?? ""}`}>
+                                    <Link key={"navbar-"+idx} href={"/"+(n.url)} onClick={()=>{setMobileMenu(false)}} className={`${n.isMobile ? "flex md:hidden" :""} md:text-white font-medium  relative  md:flex flex-row gap-2 xl:gap-3 align-middle my-auto ${n.className ?? ""}`}>
                                         {
                                         n.img && 
                                         <Image
@@ -161,11 +155,18 @@ function Header({handleModelClick}) {
                     </div>
                 </div>
             </div>
-            <div className='flex flex-row gap-6'>
+            <div className='block md:hidden my-auto'>
+                <div className={`hamburger cursor-pointer`} onClick={()=>{setMobileMenu(!mobileMenu)}}>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+            <div className='hidden md:flex flex-row gap-6'>
                 <div className='hidden md:block my-auto'>
                         <Location />
                 </div>
-                <Link className='block my-auto' 
+                <Link className='hidden md:block my-auto' 
                     onClick={(e)=>{ 
                         if(!(auth?.isAuthenticated)){
                             e.preventDefault();
