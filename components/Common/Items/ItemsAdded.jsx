@@ -12,7 +12,7 @@ function ItemsAdded({
     noOfPeople
 }) {
   return (
-    <div className='max-w-[323px] w-fit  bg-[#FAFAFA] p-2 sm:p-4 md:sticky md:top-0 '>
+    <div className='max-w-[323px] w-fit  bg-[#FAFAFA] p-2 sm:p-4 md:sticky md:top-0 mt-4 md:mt-0'>
         <div className='flex flex-col gap-4 w-full '>
             {
                 (items && Object.keys(items).length > 0) ?

@@ -2,6 +2,7 @@ import React from 'react'
 import QuantityInput from '../QuantityInput'
 import Image from 'next/image'
 import { convertToUnits, convertToUnitsExtraItem } from '@/commonjs/unitConversion'
+import ExtraItems from './ExtraItems'
 
 function ItemCard({
     itemsSelected,
@@ -12,6 +13,9 @@ function ItemCard({
     handleAddItem,
     noOfPeople
 }) {
+  const handleChangeExtraItem = (id, action) =>{
+     
+  }
     
   return (
     <>
@@ -128,85 +132,13 @@ function ItemCard({
       {
                   itemsSelected?.[item.category.slug]?.[item.slug] &&
                   ((item.extra_items && Object.keys(item.extra_items)?.length > 0) ?
-                    <>
-                      {
-                        (Object.keys(item.extra_items)?.length >= 2) &&
-                        <div className='flex  justify-end pt-2'>
-                          <div className='flex flex-row gap-4'>
-                            <div className='w-[44px] h-[44px]'>
-                              <Image
-                                src={"/arrows/l_arrow_d.webp"}
-                                width={8}
-                                height={14}
-                                alt="arrow"
-                                className='cursor-pointer'
-                              />
-                            </div>
-                            <div className='w-[24px] h-[44px]'>
-                              <Image
-                                src={"/arrows/l_arrow_d.webp"}
-                                width={8}
-                                height={14}
-                                alt="arrow"
-                                className='cursor-pointer rotate-180 '
-                              />
-                            </div>
-                          </div>
-                        </div>
-                      }
-                      <div className='flex flex-row gap-3  overflow-x-hidden' id={`${item?.slug}-extra-items`} >
-                        {/* <p className='description'>Add ons</p> */}
-                        {
-                          Object.keys(item.extra_items).map((extra,extraIndex)=>{
-                            const extraItem = item.extra_items[extra];
-                            return(
-                              <div key={"extra-item-"+extra} className='border-[1px]  border-[#E3E5E5] rounded-lg flex flex-col gap-4 max-w-[247px] p-4'>
-                                  <p className='description font-medium'>{extraItem.item_name}</p>
-                                  <p className='text-color-primary-gray pb-2' style={{borderBottomColor:"#E3E5E5", borderBottomWidth:"1px"}}>₹ {extraItem.rate_per_serving}/ piece ({extraItem.serving_per_pax+" "+extraItem.unit})</p>
-                                  <div className='btn primary-btn cursor-pointer' 
-                                    onClick={()=>{ 
-                                      if(!itemsSelected?.[item.category.slug]?.[item?.slug]?.added_extra_items?.[extra]){
-
-                                        handleAddItem(category, item,extra) 
-                                      }
-                                    }}
-                                  >
-                                    {
-                                       Number(itemsSelected?.[item.category.slug]?.[item?.slug]?.added_extra_items?.[extra] ?? 0) > 0 ?
-
-                                      <div className='flex flex-row gap-4'>
-                                        <span className='rounded-[45px] h-[36px] w-[64px] bg-white flex justify-center items-center '
-                                          onClick={()=>{
-                                            handleChangeAdditionalQty(item.category.slug,item?.slug, true,extra)
-                                          }}
-                                        >
-                                          <span className='w-[14px] h-[2px] rounded-full bg-primary'>
-                                          </span>
-                                        </span>
-                                        <p className='text-white font-bold sub-title '>{Number(itemsSelected?.[item.category.slug]?.[item?.slug]?.added_extra_items?.[extra])}</p>
-                                        <span className='relative rounded-[45px] h-[36px] w-[64px] bg-white flex justify-center items-center '
-                                          onClick={()=>{
-                                            handleChangeAdditionalQty(item.category.slug,item?.slug, false,extra)
-                                          }}
-                                        >
-                                          <span className='absolute-center w-[14px] h-[2px] rounded-full bg-primary'>
-                                          </span>
-                                          <span className='absolute-center w-[2px] h-[14px] rounded-full bg-primary'>
-                                          </span>
-                                        </span>
-                                      </div>
-                                       :
-                                       <p className='font-bold sub-title'>
-                                        {`Add for ₹ ${extraItem.rate_per_serving}`}
-                                       </p>
-                                    }
-                                  </div>
-                              </div>
-                            )
-                          })
-                        }
-                      </div>
-                    </>:"")
+                  <ExtraItems 
+                    item={item}
+                    handleAddItem={handleAddItem ?? (()=>{})}
+                    handleChangeAdditionalQty={handleChangeAdditionalQty ?? (()=>{})}
+                    itemsSelected={itemsSelected ?? {}}
+                  />
+                    :"")
                 }
     </>
   )
