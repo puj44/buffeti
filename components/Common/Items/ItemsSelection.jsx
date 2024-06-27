@@ -37,7 +37,11 @@ function ItemsSelection({
                     menuOption={menuOption}
                 />
             <div className='flex justify-end '>
-                <div className='btn primary-btn gap-1' style={{padding:"16px",paddingLeft:"28px",paddingRight:"28px"}}>
+                <div 
+                    className='btn primary-btn gap-1' 
+                    style={{padding:"16px",paddingLeft:"28px",paddingRight:"28px"}}
+                    onClick={()=>{handleAddToCart()}}
+                >
                     <p className=''>Add to Cart</p>
                     <Image
                         src="/icons/cart.webp"
