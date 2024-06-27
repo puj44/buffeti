@@ -37,7 +37,11 @@ function CreatePackage({packageName, menuOption ,packageDetails, itemsData, cate
     if(hasCookie("no_of_people") && getCookie("no_of_people") !== ""){
       setQuantity(Number(getCookie("no_of_people")))
     }
-  },[])
+  },[]);
+
+  const handleAddToCart = () =>{
+
+  }
 
   const handleChangeQuantity = (e, isUpdate = false, val) =>{
     e.preventDefault();
@@ -159,6 +163,7 @@ function CreatePackage({packageName, menuOption ,packageDetails, itemsData, cate
           handleChangeAdditionalQty={handleChangeAdditionalQty}
           noOfPeople={noOfPeople}
           menuOption={menuOption}
+          handleAddToCart={handleAddToCart}
         />
       </div>
     

@@ -16,7 +16,8 @@ function ItemsSelectionBody({
   handleChangeActiveItem,
   handleChangeAdditionalQty,
   noOfPeople,
-  menuOption
+  menuOption,
+  handleAddToCart
 }) {
  
   const addedItems = useMemo(()=>{
@@ -53,6 +54,7 @@ function ItemsSelectionBody({
         handleChangeAdditionalQty={handleChangeAdditionalQty ?? (()=>{})}
         noOfPeople={noOfPeople}
         menuOption={menuOption}
+        handleAddToCart={handleAddToCart ?? (()=>{})}
       />
       {
         addedItems && Object.keys(addedItems).length > 0?
