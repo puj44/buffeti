@@ -11,7 +11,8 @@ function ItemCard({
     handleDeleteItem,
     handleChangeAdditionalQty,
     handleAddItem,
-    noOfPeople
+    noOfPeople,
+    hideExtraItems
 }) {
   const handleChangeExtraItem = (id, action) =>{
      
@@ -20,7 +21,7 @@ function ItemCard({
   return (
     <>
       <div 
-          className={`p-2 flex flex-col justify-between w-full items-start ${itemsSelected?.[item.category.slug]?.[item?.slug] ? "bg-[#FFFAEB]" :""} rounded-lg `}
+          className={` p-2 flex flex-col justify-between w-full items-start ${itemsSelected?.[item?.category?.slug]?.[item?.slug] ? "bg-[#FFFAEB]" :""} rounded-lg `}
         >
           <div className='flex flex-row gap-4 items-start justify-start w-fit md:w-full'>
 
@@ -34,7 +35,7 @@ function ItemCard({
               />
             </div>
             {/* ITEM NAME, CHARGES AND ADD BUTTON */}
-            <div className='flex flex-col md:flex-row w-full md:justify-between gap-2'>
+            <div className={`flex ${hideExtraItems ? "md:flex-col":"md:flex-row"} flex-col w-full md:justify-between gap-2`}>
               <div className='flex flex-col gap-1 sm:gap-2'>
                 <div className='flex flex-col md:flex-row gap-1 md:gap-2'>
                   <p className={`description w-fit font-semibold`}>
@@ -42,10 +43,10 @@ function ItemCard({
                     <span className='description text-color-dark-gray font-medium'>
                       {
                         ( 
-                          !(itemsSelected?.[item.category.slug]?.[item?.slug]) &&
+                          !(itemsSelected?.[item?.category?.slug]?.[item?.slug]) &&
                           (
-                          (item.preparations && Object.keys(item.preparations)?.length > 0) || 
-                          (item.extra_items && Object.keys(item.extra_items)?.length > 0)
+                          (item?.preparations && Object.keys(item?.preparations)?.length > 0) || 
+                          (item?.extra_items && Object.keys(item?.extra_items)?.length > 0)
                         )) ?
                         " (options available)"
                         :""
@@ -59,15 +60,15 @@ function ItemCard({
                 }
               </div>
               <div className=''>
-                  {itemsSelected?.[item.category.slug]?.[item?.slug] ? 
+                  {itemsSelected?.[item?.category?.slug]?.[item?.slug] ? 
                       <QuantityInput 
                         handleChangeQuantity={
                           (action) =>{
-                            if(action === "sub" && Number(itemsSelected?.[item.category.slug]?.[item?.slug]?.additional_qty ?? 0) === 0){
-                              handleDeleteItem(item.category.slug,item)
+                            if(action === "sub" && Number(itemsSelected?.[item?.category?.slug]?.[item?.slug]?.additional_qty ?? 0) === 0){
+                              handleDeleteItem(item?.category?.slug,item)
                             }else{
 
-                              handleChangeAdditionalQty(item.category.slug,item?.slug, action === "sub" ? true:false)
+                              handleChangeAdditionalQty(item?.category?.slug,item?.slug, action === "sub" ? true:false)
                             }
                           }
                         }
@@ -75,10 +76,10 @@ function ItemCard({
                           convertToUnits(item,itemsSelected, noOfPeople)
                         }
                         disableButtons={item?.extra_items && Object.keys(item?.extra_items)?.length > 0}
-                        quantity={Number(itemsSelected?.[item.category.slug]?.[item?.slug]?.additional_qty ?? 0) ?? 0}
+                        quantity={Number(itemsSelected?.[item?.category?.slug]?.[item?.slug]?.additional_qty ?? 0) ?? 0}
                       />
                       :
-                      <div className='btn transparent-orange-btn text-color-secondary cursor-pointer py-1 px-2 sm:py-2 sm:px-2.5 w-[124px] h-fit' onClick={()=>{ handleAddItem(item.category.slug, item) }}>
+                      <div className='btn transparent-orange-btn text-color-secondary cursor-pointer py-1 px-2 sm:py-2 sm:px-2.5 w-[124px] h-fit' onClick={()=>{ handleAddItem(item?.category?.slug, item) }}>
                         {"Add"}
                       </div>
                   }
@@ -89,12 +90,12 @@ function ItemCard({
           <div className='mt-3 w-full'>
                   {/* SELECT PREPARATION */}
                   {
-                    (itemsSelected?.[item.category.slug]?.[item?.slug] && item.preparations && Object.keys(item.preparations)?.length > 0)?
+                    (itemsSelected?.[item?.category?.slug]?.[item?.slug] && item?.preparations && Object.keys(item?.preparations)?.length > 0)?
                     <div className='flex flex-col gap-2 w-full  md:ps-[116px]'>
                       <p className='description font-semibold'>Select Preparation</p>
                       {
-                          Object.keys(item.preparations).map((prep,prepIdx)=>{
-                              const selected = itemsSelected?.[item.category.slug]?.[item.slug]?.selected_preparation === prep ?? false;
+                          Object.keys(item?.preparations).map((prep,prepIdx)=>{
+                              const selected = itemsSelected?.[item?.category?.slug]?.[item?.slug]?.selected_preparation === prep ?? false;
                               return(
                                   <div key={"prep-"+prep} className='flex flex-row gap-2 w-full items-center'>
                                       <span className={`
@@ -104,7 +105,7 @@ function ItemCard({
                                               flex justify-center items-center
                                               
                                           `}
-                                          onClick={()=>{handleAddItem(item.category.slug,item,false,prep)}}
+                                          onClick={()=>{handleAddItem(item?.category?.slug,item,false,prep)}}
                                       >
                                         {
                                           selected && 
@@ -113,7 +114,7 @@ function ItemCard({
                                           </span>
                                         }
                                       </span>
-                                      <p className='font-medium'>{item.preparations[prep].name}</p>
+                                      <p className='font-medium'>{item?.preparations[prep].name}</p>
                                   </div>
                               )
                           })
@@ -130,8 +131,8 @@ function ItemCard({
 
       </div>
       {
-                  itemsSelected?.[item.category.slug]?.[item.slug] &&
-                  ((item.extra_items && Object.keys(item.extra_items)?.length > 0) ?
+                  (itemsSelected?.[item?.category?.slug]?.[item?.slug] && !hideExtraItems) &&
+                  ((item?.extra_items && Object.keys(item?.extra_items)?.length > 0) ?
                   <ExtraItems 
                     item={item}
                     handleAddItem={handleAddItem ?? (()=>{})}

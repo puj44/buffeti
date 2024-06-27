@@ -8,17 +8,19 @@ import {wrapper} from "@/redux/store";
 import PeopleQuantityInput from '../Common/PeopleQuantityInput';
 import { getCookie, hasCookie } from 'cookies-next';
 import { useDispatch, useSelector } from 'react-redux';
-import { getItemsData, resetAction } from '@/redux/reducers/itemsReducer';
+import { getItemsData, resetAction, searchItems } from '@/redux/reducers/itemsReducer';
+import { searchDebounce } from '@/commonjs/debounce';
 
 
 
 function CreatePackage({packageName, menuOption ,packageDetails, itemsData, categories, noOfPeople}) {
-  const [quantity, setQuantity] = useState(10);
+  const [quantity, setQuantity] = useState(Number(noOfPeople ?? 10));
   const [itemsSelected, setItemsSelected] = useState({...itemsData ?? {}});
   const [searchValue, setSearchValue] = useState("");
   const [activeItem, setActiveItem] = useState(Object.keys(categories)[0]);
   const [displayItems, setDisplayItems] = useState({...packageDetails});
   const {items, response} = useSelector((state) => state.items);
+  const [isJain, setJain] = useState(false);
   const dispatch = useDispatch();
 
   const handleChangeActiveItem = (val) =>{
@@ -33,15 +35,36 @@ function CreatePackage({packageName, menuOption ,packageDetails, itemsData, cate
     }
   },[response, items])
 
-  useEffect(()=>{
-    if(hasCookie("no_of_people") && getCookie("no_of_people") !== ""){
-      setQuantity(Number(getCookie("no_of_people")))
-    }
-  },[]);
 
   const handleAddToCart = () =>{
 
   }
+
+ 
+
+  useEffect(()=>{
+
+  },[quantity])
+ 
+  //HANDLE SEARCH
+  const handleSearchChange = searchDebounce((e) =>{
+    if(e.target?.value?.toString()?.trim() !== ""){
+
+      setSearchValue(e.target?.value?.toString()?.trim());
+    }
+  });
+
+  useEffect(()=>{
+    if(searchValue){
+
+      dispatch(searchItems({
+        menuOption,
+        category:activeItem,
+        jain:isJain,
+        search:searchValue
+      }))
+    }
+  },[searchValue]);
 
   const handleChangeQuantity = (e, isUpdate = false, val) =>{
     e.preventDefault();
@@ -104,14 +127,6 @@ function CreatePackage({packageName, menuOption ,packageDetails, itemsData, cate
     setItemsSelected({...itemsData});
   }
 
-  useEffect(()=>{
-
-  },[quantity])
- 
-
-  const handleSearchChange = (e) =>{
-
-  }
   const handleChangeAdditionalQty = (category,itemSlug,isSubtract, extraItemSlug = false) =>{
     let itemsData = JSON.parse(JSON.stringify((itemsSelected)));
     if(extraItemSlug){
@@ -137,9 +152,7 @@ function CreatePackage({packageName, menuOption ,packageDetails, itemsData, cate
     setItemsSelected({...itemsData});
   }
 
-  useEffect(()=>{
-
-  },[searchValue])
+  
 
   return (
     <div className='page-spacing py-6'>
