@@ -2,7 +2,7 @@ import { takeLatest, all, takeEvery } from "redux-saga/effects";
 //AUTH HANDLERS
 import {handleGetMobileOtp, handleGetTokenStatus, handleSignup, handleVerifyOtp} from "../handlers/authHandler";
 import { handleGetData } from "../handlers/homeHandler";
-import { handleGetFilters, handleGetPackagesData } from "../handlers/packageHandler";
+import { handleGetFilters, handleGetPackage, handleGetPackagesData } from "../handlers/packageHandler";
 import { handleGetCategories, handleGetItemsData } from "../handlers/itemsHandler";
 
 export function* watcherSaga() {
@@ -19,6 +19,7 @@ export function* watcherSaga() {
             //PACKAGES
             yield takeLatest('packages/getPackagesData',handleGetPackagesData),
             yield takeLatest('packages/getFilters',handleGetFilters),
+            yield takeLatest('packages/getPackage',handleGetPackage),
             //ITEMS
             yield takeLatest('items/getItemsData',handleGetItemsData),
             yield takeLatest('items/getCategories',handleGetCategories),
