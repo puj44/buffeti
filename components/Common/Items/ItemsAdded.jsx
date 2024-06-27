@@ -12,8 +12,8 @@ function ItemsAdded({
     noOfPeople
 }) {
   return (
-    <div className='max-w-[323px] w-fit  bg-[#FAFAFA] p-2 sm:p-4 md:sticky md:top-0'>
-        <div className='flex flex-col gap-4 w-full'>
+    <div className='max-w-[323px] w-fit  bg-[#FAFAFA] p-2 sm:p-4 md:sticky md:top-0 mt-4 md:mt-0'>
+        <div className='flex flex-col gap-4 w-full '>
             {
                 (items && Object.keys(items).length > 0) ?
                 <div className='flex flex-col w-full sm:min-w-[291px]'>
@@ -24,7 +24,7 @@ function ItemsAdded({
                                 const item = items[it];
                                 return(
                                     <div key={"added-item-"+it} className='grid grid-flow-col gap-4 items-start justify-start'>
-                                        <div className=''>
+                                        <div className='md:w-[100px] md:h-[100px]'>
                                             <Image
                                                 src={"/packages/dummy_pack.webp"}
                                                 width={102}

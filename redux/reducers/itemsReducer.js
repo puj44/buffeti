@@ -4,9 +4,12 @@ export const itemsSlice = createSlice({
     name:"items",
     initialState:{
         isLoading:false,
+        isSearchLoading:false,
         items:{},
         response:false,
+        searchResponse:false,
         categories:{},
+        searchedItems:{},
     },
     reducers:{
         getCategories:(state) =>{
@@ -25,15 +28,28 @@ export const itemsSlice = createSlice({
             state.items = {...payload?.data?.items ?? {}}
             state.response = true;
         },
-    
+        searchItems:(state) =>{
+            state.isSearchLoading = true;
+        },
+
+        setSearchItems:(state,{payload}) =>{
+            state.isSearchLoading = false;
+            state.searchedItems = {...payload?.data?.items ?? {}}
+            state.searchResponse = true;
+        },
+        resetSearch:(state) =>{
+            state.searchedItems = {};
+        },
         resetAction:(state) =>{
             state.isLoading = false;
-            state.response = false
+            state.response = false;
+            state.searchResponse = false;
+            
         }
     }
 });
 
-export const {setItemsData,getItemsData,resetAction, setCategories,
+export const {setItemsData,getItemsData,resetAction, setCategories, setSearchItems, searchItems, resetSearch,
     getCategories} = itemsSlice.actions;
 
 export default itemsSlice.reducer;

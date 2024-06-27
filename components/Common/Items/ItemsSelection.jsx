@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react'
 import SearchBar from './SearchBar'
 import ItemsSlider from './ItemsSlider';
+import Image from 'next/image';
 
 function ItemsSelection({
     items,
@@ -13,7 +14,8 @@ function ItemsSelection({
     categories,
     handleChangeAdditionalQty,
     noOfPeople,
-    menuOption
+    menuOption,
+    handleAddToCart
 }) {
     
   
@@ -22,6 +24,11 @@ function ItemsSelection({
         <div className='flex flex-col gap-6 sm:w-full relative'>
             <SearchBar 
                 handleSearchChange={handleSearchChange}
+                itemsSelected={itemsSelected}
+                handleAddItem={handleAddItem ?? (()=>{})} 
+                handleDeleteItem={handleDeleteItem ?? (()=>{})}
+                handleChangeAdditionalQty={handleChangeAdditionalQty ?? (()=>{})}
+                noOfPeople={noOfPeople}
             />
                 <ItemsSlider 
                     items={{...items ?? {}}} 
@@ -34,6 +41,22 @@ function ItemsSelection({
                     noOfPeople={noOfPeople}
                     menuOption={menuOption}
                 />
+            <div className='flex justify-end '>
+                <div 
+                    className='btn primary-btn gap-1' 
+                    style={{padding:"16px",paddingLeft:"28px",paddingRight:"28px"}}
+                    onClick={()=>{handleAddToCart()}}
+                >
+                    <p className=''>Add to Cart</p>
+                    <Image
+                        src="/icons/cart.webp"
+                        alt={"cart"}
+                        width={20}
+                        height={20}
+                        priority
+                    />
+                </div>
+            </div>
         </div>
   )
 }

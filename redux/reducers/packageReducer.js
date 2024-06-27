@@ -7,6 +7,7 @@ export const packagesSlice = createSlice({
         filters:{},
         packages:{},
         response:false,
+        packageData:{}
     },
     reducers:{
         getFilters:(state) =>{
@@ -16,7 +17,14 @@ export const packagesSlice = createSlice({
             state.isLoading = true;
         },
 
+        getPackage:(state) =>{
+            state.isLoading = true;
+        },
 
+        setPackage:(state,{payload}) =>{
+            state.isLoading = false;
+            state.packageData = {...payload?.data?.package}
+        },
         setFilters:(state,{payload}) =>{
             state.filters = {...payload?.data?.filters ?? {}}
         },
@@ -33,6 +41,6 @@ export const packagesSlice = createSlice({
     }
 });
 
-export const {getPackagesData,getFilters,setPackages,setFilters,resetAction} = packagesSlice.actions;
+export const {getPackagesData,getFilters,setPackages,setFilters,resetAction,getPackage,setPackage} = packagesSlice.actions;
 
 export default packagesSlice.reducer;

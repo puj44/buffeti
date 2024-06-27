@@ -113,6 +113,35 @@ body{
     100% {clip-path:polygon(50% 50%,0 0,100% 0,100% 100%,0 100%,0 0)}
 }
 
+.primary-loader {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  position: relative;
+  animation: rotate 1s linear infinite
+}
+.primary-loader::before {
+  content: "";
+  box-sizing: border-box;
+  position: absolute;
+  inset: 0px;
+  border-radius: 50%;
+  border: 3px solid $primary;
+  animation: prixClipFix 2s linear infinite ;
+}
+
+@keyframes rotate {
+  100%   {transform: rotate(360deg)}
+}
+
+@keyframes prixClipFix {
+    0%   {clip-path:polygon(50% 50%,0 0,0 0,0 0,0 0,0 0)}
+    25%  {clip-path:polygon(50% 50%,0 0,100% 0,100% 0,100% 0,100% 0)}
+    50%  {clip-path:polygon(50% 50%,0 0,100% 0,100% 100%,100% 100%,100% 100%)}
+    75%  {clip-path:polygon(50% 50%,0 0,100% 0,100% 100%,0 100%,0 100%)}
+    100% {clip-path:polygon(50% 50%,0 0,100% 0,100% 100%,0 100%,0 0)}
+}
+
 //Items
 .item-name{
   background: $lightestGray;
@@ -214,13 +243,36 @@ input{
 }
 
 
-
+.sidebar{
+  &::before{
+    position: absolute;
+    content: "";
+    inset: 0; 
+    background-image: linear-gradient(90deg, rgba(180, 35, 24, 0.15) 0%, rgba(180, 35, 24, 0) 100%);
+    z-index: 1;
+    opacity: 0;
+    -webkit-transition: opacity 0.2s linear;
+    -moz-transition: opacity 0.2s linear;
+    -o-transition: opacity 0.2s linear;
+    -ms-transition: opacity 0.2s linear;
+    transition: opacity 0.2s linear;
+  }
+ 
+}
 //active sidebar 
 .active-sidebar{
   color:$primary;
   padding-left:6px;
-  background: linear-gradient(90deg, rgba(180, 35, 24, 0.15) 0%, rgba(180, 35, 24, 0) 100%);
-
+  // background-image: linear-gradient(90deg, rgba(180, 35, 24, 0.15) 0%, rgba(180, 35, 24, 0) 100%);
+  &::before{
+    opacity:1 !important;
+    -webkit-transition: opacity 0.2s linear;
+    -moz-transition: opacity 0.2s linear;
+    -o-transition: opacity 0.2s linear;
+    -ms-transition: opacity 0.2s linear;
+    transition: opacity 0.2s linear;
+  }
+  
   &::after{
     content: "";
     display: inline-block;
@@ -255,6 +307,28 @@ input{
 
   input{
     width: -webkit-fill-available;
+  }
+}
+.search-box{
+  position: absolute;
+  top:48px;
+  left:0;
+  background-color: #fff;
+  width:-webkit-fill-available;
+  z-index:99;
+  ::-webkit-scrollbar{
+    width:6px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: $lightGray;
+    background-clip: padding-box;
+    border-radius: 8px;
+    
+  }
+  ::-webkit-scrollbar-track {
+   background: #E3E5E5;
+   border-radius: 8px;
+   margin: 4px;
   }
 }
 

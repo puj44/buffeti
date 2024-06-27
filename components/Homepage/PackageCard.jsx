@@ -24,7 +24,7 @@ function PackageCard({data,numberOfPeople, menuOption}) {
         <h5 className='text-color-primary-gray '>{menuOption === "mini-meals" ?data?.description :data?.items_description ?? data?.categories_description}</h5>
       </div>
       <div className='h-full items-end flex'>
-        <Link href={`/customise-package/${data?.slug}`} className='weird-btn primary-btn items-end h-fit'>
+        <Link href={`/catering/${data?.slug}`} className='weird-btn primary-btn items-end h-fit'>
             <p className='font-bold md:font-extrabold sub-title'>₹ { menuOption === "mini-meals" ?data?.price :data?.[("_"+numberOfPeople+"_pax")]}</p>
             <span className='w-[64px] h-[48px] flex justify-center items-center bg-white py-4 px-6 rounded-[45px]'>
 

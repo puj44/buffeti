@@ -23,7 +23,7 @@ function ItemsSideBar({
             return(
               <>
                 <h4 
-                  className={`product-title flex  flex-row gap-1 w-full relative cursor-pointer items-center ${activeItem === i ? "active-sidebar my-auto" :""}`} 
+                  className={`product-title flex  flex-row gap-1 w-full relative cursor-pointer items-center sidebar ${activeItem === i ? "active-sidebar my-auto" :""}`} 
                   key={"item-"+idx} 
                   onClick={()=>{handleChangeActiveItem(i)}}
                 >

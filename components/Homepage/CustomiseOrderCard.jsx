@@ -16,7 +16,7 @@ function CustomiseOrderCard({mobile}) {
             />
         </div>
         <p className='font-bold card-heading text-color-primary z-10'>{"Create your Own Package"}</p>
-        <Link href="/customise-package" className='btn primary-btn z-10 max-w-[182px] self-end md:self-center'>
+        <Link href="/catering" className='btn primary-btn z-10 max-w-[182px] self-end md:self-center'>
             <p className='text-white font-bold'>{"Create Package"}</p>
             <Image
                 src={"/arrows/r_arrow.webp"}
