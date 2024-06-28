@@ -17,7 +17,7 @@ function CreatePackage({packageName, menuOption ,packageDetails, itemsData, cate
   const [quantity, setQuantity] = useState(Number(noOfPeople ?? 10));
   const [itemsSelected, setItemsSelected] = useState({...itemsData ?? {}});
   const [searchValue, setSearchValue] = useState("");
-  const [activeItem, setActiveItem] = useState(Object.keys(categories)[0]);
+  const [activeItem, setActiveItem] = useState(menuOption === "snack-boxes" ? "beverages" : "starters");
   const [displayItems, setDisplayItems] = useState({...packageDetails});
   const {items, response} = useSelector((state) => state.items);
   const [isJain, setJain] = useState(false);
