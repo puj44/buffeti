@@ -29,6 +29,7 @@ function ItemsSelection({
                 handleDeleteItem={handleDeleteItem ?? (()=>{})}
                 handleChangeAdditionalQty={handleChangeAdditionalQty ?? (()=>{})}
                 noOfPeople={noOfPeople}
+                menuOption={menuOption}
             />
                 <ItemsSlider 
                     items={{...items ?? {}}} 

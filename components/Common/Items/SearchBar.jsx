@@ -11,7 +11,8 @@ function SearchBar({
     handleAddItem,
     handleDeleteItem,
     handleChangeAdditionalQty,
-    noOfPeople
+    noOfPeople,
+    menuOption
 }) {
 
     const [isSearched, setSearched] = useState(false);
@@ -86,6 +87,7 @@ function SearchBar({
                                     noOfPeople={noOfPeople}
                                     hideExtraItems={true}
                                     itemsSelected={itemsSelected}
+                                    menuOption={menuOption}
                                 />
                             )})
                         
