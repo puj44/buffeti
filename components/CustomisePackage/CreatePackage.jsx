@@ -174,7 +174,7 @@ function CreatePackage({packageName, menuOption ,packageDetails, itemsData, cate
           activeItem={activeItem}
           handleChangeActiveItem={handleChangeActiveItem}
           handleChangeAdditionalQty={handleChangeAdditionalQty}
-          noOfPeople={noOfPeople}
+          noOfPeople={quantity}
           menuOption={menuOption}
           handleAddToCart={handleAddToCart}
         />
