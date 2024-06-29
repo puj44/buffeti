@@ -93,7 +93,7 @@ function Component({mealBox, data, filters,noOfPeople}) {
         </div> */}
         <div className='grid grid-flow-row gap-6  h-full items-start'>
         <h1 className="font-semibold sub-title">{mealBox === "click2cater" ? "Select Your Package":"Select Your Mini Meal"}</h1>
-            <div className='grid grid-flow-col gap-6  h-full items-start'>
+            <div className='grid grid-flow-col gap-6 justify-self-start h-full items-start'>
 
                 <div className='hidden md:flex'>
                     <ItemsSideBar
