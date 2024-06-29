@@ -5,7 +5,7 @@ import { getCookie, hasCookie } from "cookies-next";
 export const BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001/api/v1";
 
 const api = (BASE_URL, location = null) => {
-  const loc = location ? location : hasCookie("location") ? getCookie("location") : null 
+  const loc = location ? location : hasCookie("location") ? getCookie("location") : "ahmedabad" 
   // initialize axios
   const service = axios.create({
     baseURL: BASE_URL,
