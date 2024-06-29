@@ -107,15 +107,16 @@ function Header({handleModelClick}) {
                                                 
                                                 {
                                                     n.dropdownData.map((data,index)=>{
+                                                        const isActive = isPathActive(data.slug);
                                                         return(
                                                             <>
-                                                                <Dropdown.Item as="div" className={`${isPathActive(data.slug) ? "active-path border-b-[0px] border-none":""} `} key={`item-`+data.slug} >  
-                                                                        <Link href={data.url}>
+                                                                <Dropdown.Item as="div" className={`${isActive ? "active-path border-b-[0px] border-none":""} `} key={`item-`+data.slug} >  
+                                                                        <Link href={data.url} className={`${isActive ? "text-color-primary":""}`}>
                                                                             {data.title}
                                                                         </Link>
                                                                 </Dropdown.Item>
                                                                 {
-                                                                    index+1 !== n.dropdownData.length && <Dropdown.Divider className={`${isPathActive(data.slug) ? "bg-primary":""}`} key={`item-`+index}  />
+                                                                    index+1 !== n.dropdownData.length && <Dropdown.Divider  key={`item-`+index}  />
                                                                 }
                                                             </>
                                                         )

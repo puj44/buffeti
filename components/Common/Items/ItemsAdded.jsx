@@ -34,9 +34,9 @@ function ItemsAdded({
                                             />
                                         </div>
                                         <div className='flex flex-col items-start gap-4'>
-                                            <p className={`description w-fit font-semibold`}>
+                                            <p className={`description-title w-fit font-semibold`}>
                                                 {item?.item_name} 
-                                                <span className='description text-color-dark-gray font-medium'>
+                                                <span className='description-title text-color-dark-gray font-medium'>
                                                 {
                                                     ( 
                                                     

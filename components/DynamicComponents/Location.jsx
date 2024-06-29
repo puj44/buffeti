@@ -59,8 +59,8 @@ function Location() {
                             <>
                                 <Dropdown.Item as="p"  key={`item-`+data} onClick={()=>{
                                     setCookie("location",data,{maxAge:9.461e+7})
-                                    router.replace(router.asPath);
                                     setLocation(data)
+                                    router.replace(router.asPath);
                                 }}>  
                                     {data?.charAt(0)?.toUpperCase() + data?.slice(1)}
                                 </Dropdown.Item>

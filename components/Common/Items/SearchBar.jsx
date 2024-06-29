@@ -11,7 +11,8 @@ function SearchBar({
     handleAddItem,
     handleDeleteItem,
     handleChangeAdditionalQty,
-    noOfPeople
+    noOfPeople,
+    menuOption
 }) {
 
     const [isSearched, setSearched] = useState(false);
@@ -42,7 +43,7 @@ function SearchBar({
 
   return (
    
-        <div className='search-bar relative md:max-w-[70%] 2xl:max-w-[50%] ' id="search-bar">
+        <div className='search-bar relative md:max-w-[70%] 2xl:max-w-[60%] ' id="search-bar">
             <div className='w-[18px] h-[18px] sm:w-[24px] sm:h-[24px] flex align-middle items-center ' id="search-button">
                 <Image
                     src={"/icons/search.webp"}
@@ -86,6 +87,7 @@ function SearchBar({
                                     noOfPeople={noOfPeople}
                                     hideExtraItems={true}
                                     itemsSelected={itemsSelected}
+                                    menuOption={menuOption}
                                 />
                             )})
                         

@@ -274,6 +274,7 @@ function LoginContainer({step,changeStep, onInputChange, values,error,changeNumb
     <div className='flex flex-row gap-0'>
         <div className='hidden md:block w-full'>
             <Image
+                loader={({ src }) => src}
                 src={step === "get_started" ? `${process.env.NEXT_PUBLIC_IMAGES_URL}/banners/start_banner.webp`:`${process.env.NEXT_PUBLIC_IMAGES_URL}/banners/signup_banner.webp`}
                 width={400}
                 height={493}

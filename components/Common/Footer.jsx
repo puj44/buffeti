@@ -17,12 +17,10 @@ function Footer() {
                                 alt={"signin"}
                                 width={90}
                                 height={60}
-                                className='my-auto w-[88px] h-[58px] md:w-[90px] md:h-[60px]'
+                                className='my-auto w-[142px] h-[93px] md:w-[142px] md:h-[73px]'
                                 loading='lazy'
-                                unoptimized
                             />
                         </Link>
-                        <p className='text-color-light-gray  block md:hidden'>{"Copyright © 2024 Buffeti"}</p>
                     </div>
                     <div className='flex flex-col md:flex-row gap-4 md:gap-6 md:items-center'>
                             {

@@ -7,17 +7,14 @@ import ExtraItems from './ExtraItems'
 function ItemCard({
     itemsSelected,
     item,
-    category,
     handleDeleteItem,
     handleChangeAdditionalQty,
     handleAddItem,
     noOfPeople,
-    hideExtraItems
+    hideExtraItems,
+    menuOption
 }) {
-  const handleChangeExtraItem = (id, action) =>{
-     
-  }
-    
+  
   return (
     <>
       <div 
@@ -38,9 +35,9 @@ function ItemCard({
             <div className={`flex ${hideExtraItems ? "md:flex-col":"md:flex-row"} flex-col w-full md:justify-between gap-2`}>
               <div className='flex flex-col gap-1 sm:gap-2'>
                 <div className='flex flex-col md:flex-row gap-1 md:gap-2'>
-                  <p className={`description w-fit font-semibold`}>
+                  <p className={`description-title w-fit font-semibold`}>
                     {item?.item_name} 
-                    <span className='description text-color-dark-gray font-medium'>
+                    <span className='description-title text-color-dark-gray font-medium'>
                       {
                         ( 
                           !(itemsSelected?.[item?.category?.slug]?.[item?.slug]) &&
@@ -55,8 +52,16 @@ function ItemCard({
                   </p>
                 </div>
                 {
+                  item?.item_description &&
+                  <p className=' description-title '>{item.item_description-title}</p>
+                }
+                {
+                  menuOption === "snack-boxes" &&
+                  <p className=' description-title font-bold'>{`₹ ${item.rate_per_serving}/ Piece`}</p>
+                }
+                {
                   item?.additional_serving &&
-                  <p className=' description font-bold'>{`Add-On Charges ₹ ${item?.additional_serving_rate}/ (Per Unit)`}</p>
+                  <p className=' description-title font-bold'>{`Add-On Charges ₹ ${item.additional_serving_rate}/ (Per Unit)`}</p>
                 }
               </div>
               <div className=''>
@@ -75,7 +80,7 @@ function ItemCard({
                         label={
                           convertToUnits(item,itemsSelected, noOfPeople)
                         }
-                        disableButtons={item?.extra_items && Object.keys(item?.extra_items)?.length > 0}
+                        disableButtons={(item?.extra_items && Object.keys(item?.extra_items)?.length > 0 || menuOption === "snack-boxes")}
                         quantity={Number(itemsSelected?.[item?.category?.slug]?.[item?.slug]?.additional_qty ?? 0) ?? 0}
                       />
                       :
@@ -87,12 +92,12 @@ function ItemCard({
             </div>
           </div>
           {/* EXTRA ITEMS AND PREPARATIONS */}
-          <div className='mt-3 w-full'>
+          <div className=' w-full'>
                   {/* SELECT PREPARATION */}
                   {
                     (itemsSelected?.[item?.category?.slug]?.[item?.slug] && item?.preparations && Object.keys(item?.preparations)?.length > 0)?
-                    <div className='flex flex-col gap-2 w-full  md:ps-[116px]'>
-                      <p className='description font-semibold'>Select Preparation</p>
+                    <div className='flex flex-col gap-2 w-full mt-3 md:ps-[116px]'>
+                      <p className='description-title font-semibold'>Select Preparation</p>
                       {
                           Object.keys(item?.preparations).map((prep,prepIdx)=>{
                               const selected = itemsSelected?.[item?.category?.slug]?.[item?.slug]?.selected_preparation === prep ?? false;
@@ -114,7 +119,7 @@ function ItemCard({
                                           </span>
                                         }
                                       </span>
-                                      <p className='font-medium'>{item?.preparations[prep].name}</p>
+                                      <p className='font-medium description-title'>{item?.preparations[prep].name}</p>
                                   </div>
                               )
                           })

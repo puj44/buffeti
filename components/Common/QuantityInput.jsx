@@ -18,10 +18,10 @@ function QuantityInput({label ,handleChangeQuantity,disableButtons}) {
             />
         </div>
         <div>
-        <label>{label}</label>
+        <label>{label?.includes("glass") ? label?.replace("glass","cup"): label}</label>
         </div>
-        <div id="increase-quantity" className={`cursor-pointer flex items-center justify-center w-[24px]  h-[24px] ${disableButtons ? "opacity-50":""}`}
-            onClick={(e)=>{handleChangeQuantity("add")}}
+        <div id="increase-quantity" className={` flex items-center justify-center w-[24px]  h-[24px] ${disableButtons ? "opacity-50":"cursor-pointer"}`}
+            onClick={(e)=>{!disableButtons && handleChangeQuantity("add")}}
             >
             <Image
                 src={"/icons/qty_plus.webp"}

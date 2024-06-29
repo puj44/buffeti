@@ -17,12 +17,15 @@
     border:1px solid $primary;
     flex-direction: row;
     border-radius: 24px 24px 8px 8px;
-    transform:none;
-    transition: all 0.2 ease;
+    .arrow-rotate{
+        transition: all 0.2s ease;
+    }
     &:hover{
-        img{
+        .arrow-rotate{
             transform:rotate(-45deg);
-            transition: all 0.2 ease-in;
+            -ms-transform: rotate(-45deg); /* IE 9 */
+            -webkit-transform: rotate(-45deg);
+            transition: transform 0.2 ease;
         }
     }
 }
