@@ -4,7 +4,7 @@ import React from 'react'
 
 function PackageCard({data,numberOfPeople, menuOption}) {
   return (
-    <div className='package-card relative max-w-[305px] flex flex-col gap-4 h-full'>
+    <div className='package-card relative max-w-[372px] flex flex-col gap-4 h-full'>
        <div className='px-4  mx-auto'>
         <Image
           src={"/catering_services/mini_thali.webp"}

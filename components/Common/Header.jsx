@@ -111,7 +111,7 @@ function Header({handleModelClick}) {
                                                         return(
                                                             <>
                                                                 <Dropdown.Item as="div" className={`${isActive ? "active-path border-b-[0px] border-none":""} `} key={`item-`+data.slug} >  
-                                                                        <Link href={data.url} className={`${isActive ? "text-color-primary":""}`}>
+                                                                        <Link href={data.url} className={`w-full ${isActive ? "text-color-primary":""}`}>
                                                                             {data.title}
                                                                         </Link>
                                                                 </Dropdown.Item>
