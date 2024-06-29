@@ -198,7 +198,7 @@ if(mobile)
 else
   return (
 
-    <div className='grid grid-flow-row gap-4 md:gap-6 w-full  overflow-x-scroll'>
+    <div className='grid grid-flow-row gap-4 md:gap-6 w-full  '>
             {
                 (packageCategory && categories && Object.keys(categories).length) ?
                     <div className='category-filter  w-full mx-auto  '>
