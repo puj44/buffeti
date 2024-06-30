@@ -61,6 +61,15 @@ export const authSlice = createSlice({
                 }
             }
         },
+        signout:(state) =>{
+
+        },
+        setSignout:(state,{payload}) =>{
+            if(payload?.statusCode === 200 || payload?.status === 200){
+                state.isAuthenticated = false;
+                deleteCookie("accessToken");
+            }
+        },
         resetResponse:(state) =>{
             state.otpResponse = false
             state.errorMessage = "";
@@ -70,6 +79,6 @@ export const authSlice = createSlice({
     }
 });
 
-export const {getMobileOtp, setMobileOtpResponse, getTokenStatus, isAuthenticated, signup, resetResponse, verifyOtp, setTokenStatus} = authSlice.actions;
+export const {getMobileOtp, setMobileOtpResponse, getTokenStatus, isAuthenticated, signup, resetResponse, verifyOtp, setTokenStatus, signout,setSignout} = authSlice.actions;
 
 export default authSlice.reducer;

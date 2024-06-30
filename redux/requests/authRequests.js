@@ -20,3 +20,8 @@ export const getTokenStatusApi = ({payload}) =>{
 
     return get("/auth/get-status",payload);
 }
+
+export const signoutApi = ({payload}) =>{
+
+    return post("/auth/sign-out");
+}

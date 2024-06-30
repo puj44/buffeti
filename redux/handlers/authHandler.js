@@ -1,6 +1,6 @@
 import { put, call } from "redux-saga/effects";
-import { setMobileOtpResponse,isAuthenticated, setTokenStatus } from "../reducers/authReducer";
-import { getOtpApi, getTokenStatusApi, signupApi, verifyOtpApi} from "../requests/authRequests";
+import { setMobileOtpResponse,isAuthenticated, setTokenStatus, setSignout } from "../reducers/authReducer";
+import { getOtpApi, getTokenStatusApi, signoutApi, signupApi, verifyOtpApi} from "../requests/authRequests";
 
 
 export function* handleGetMobileOtp(action){
@@ -35,8 +35,18 @@ export function* handleGetTokenStatus(action){
         
         const response = yield call(getTokenStatusApi,action);
         
-        let authenticated = response.status === 200 ?? false
         yield put(setTokenStatus(response?.response?.data || response?.data));
+    }catch(err){
+        
+    }
+}
+
+export function* handleSignout(action){
+    try{
+        
+        const response = yield call(signoutApi,action);
+        
+        yield put(setSignout(response?.response?.data || response?.data));
     }catch(err){
         
     }
