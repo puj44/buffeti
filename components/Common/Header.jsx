@@ -35,7 +35,6 @@ function Header({handleModelClick}) {
     const router = useRouter();
     const auth = useSelector((state)=>state.auth);
     const [mobileMenu, setMobileMenu] = useState(false);
-   
     const isPathActive = (url) =>{
         if(url === ""){
             if(router.asPath === "/"){
@@ -149,11 +148,11 @@ function Header({handleModelClick}) {
 
                     </div>
                     <div className='fixed bottom-0 left-0 pb-5 flex w-full pt-5  md:hidden' style={{borderTopColor:"#F2F4F7", borderTopWidth:"1px"}}>
-                        <div className={`flex flex-row justify-between px-5 w-full`}>
+                        <div className={`flex flex-row justify-between px-5 w-full items-center`}>
                             <p className={`${!(auth?.isAuthenticated) ? "btn primary-btn w-full h-fit font-semibold":"hidden"} cursor-pointer`} onClick={()=>{setMobileMenu(false);handleModelClick(true);}}>
                                 {"Login"}
                             </p>
-                            <div className={`flex ${auth?.isAuthenticated ? "":"hidden"} flex-row gap-3`}>
+                            <div className={`flex ${auth?.isAuthenticated ? "":"hidden"} flex-row gap-3 items-center`}>
                                 <div onClick={()=>{ }} className={` flex justify-center cursor-pointer orange-circle text-white w-[38px] h-[38px] items-center align-middle my-auto`}>
                                     {auth?.user?.name?.toString()?.charAt(0) ?? "N"}
                                 </div>
@@ -203,7 +202,7 @@ function Header({handleModelClick}) {
                 </Link>
                 <div className='hidden md:flex md:items-center my-auto'>
                    
-                    <div onClick={()=>{!(auth?.isAuthenticated) && handleModelClick(true)}} className={`${auth?.isAuthenticated ? "hidden":""} btn text-color-primary font-semibold bg-white flex justify-center items-center my-auto`}>
+                    <div onClick={()=>{!(auth?.isAuthenticated) && handleModelClick(true)}} className={`${auth?.isAuthenticated ? "hidden":"flex btn text-color-primary font-semibold bg-white  justify-center items-center my-auto"} `}>
                         {'Login'}
                     </div>
                     
