@@ -33,7 +33,7 @@ function ItemsSelectionBody({
   
 
   return (
-    <div className='flex flex-col md:flex-row md:gap-6 w-full items-start '>
+    <div className='flex flex-col md:flex-row md:gap-6 w-full items-start items-section'>
       {/* LEFT SIDE SECTION ITEMS CATEGORY SELECTION */}
       <div className='hidden md:flex'>
         <ItemsSideBar show={true} activeItem={activeItem} itemsSelected={itemsSelected} items={categories} handleChangeActiveItem={handleChangeActiveItem} />

@@ -8,7 +8,7 @@ export function* handleGetItemsData(action){
         const response = yield call(getItemsDataApi,action);
         yield put(setItemsData(response?.response?.data || response?.data));
     }catch(err){
-        console.log(err);
+        
     }
 }
 export function* handleSearchItems(action){
@@ -16,7 +16,7 @@ export function* handleSearchItems(action){
         const response = yield call(searchItemsApi,action);
         yield put(setSearchItems(response?.response?.data || response?.data));
     }catch(err){
-        console.log(err);
+        
     }
 }
 export function* handleGetCategories(action){
@@ -24,6 +24,6 @@ export function* handleGetCategories(action){
         const response = yield call(getCategoriesApi,action);
         yield put(setCategories(response?.response?.data || response?.data));
     }catch(err){
-        console.log(err);
+        
     }
 }

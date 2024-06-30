@@ -8,7 +8,7 @@ export function* handleGetFilters(action){
         const response = yield call(getFiltersApi,action);
         yield put(setFilters(response?.response?.data || response?.data));
     }catch(err){
-        console.log(err);
+        
     }
 }
 export function* handleGetPackagesData(action){
@@ -16,7 +16,7 @@ export function* handleGetPackagesData(action){
         const response = yield call(getPackagesApi,action);
         yield put(setPackages(response?.response?.data || response?.data));
     }catch(err){
-        console.log(err);
+        
     }
 }
 export function* handleGetPackage(action){
@@ -24,6 +24,6 @@ export function* handleGetPackage(action){
         const response = yield call(getPackageApi,action);
         yield put(setPackage(response?.response?.data || response?.data));
     }catch(err){
-        console.log(err);
+        
     }
 }

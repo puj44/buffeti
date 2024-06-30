@@ -30,13 +30,14 @@ export const packagesSlice = createSlice({
         },
         
         setPackages:(state,{payload}) =>{
-            state.isLoading = false;
-            state.response = true;
             state.filters = {...payload?.data?.filters ?? {}}
             state.packages = {...payload?.data?.packages ?? {}} 
+            state.response = true;
+            state.isLoading = false;
         },
         resetAction:(state) =>{
-            state.response = false
+            state.response = false;
+            state.isLoading = false;
         }
     }
 });

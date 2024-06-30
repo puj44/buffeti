@@ -2,6 +2,7 @@ import Image from 'next/image'
 import React, { useMemo } from 'react'
 import QuantityInput from '../QuantityInput';
 import ItemCard from './ItemCard';
+import { useSelector } from 'react-redux';
 
 
 
@@ -16,15 +17,19 @@ function ItemsSlider({
   noOfPeople,
   menuOption
 }) {
-
-
+  const {isLoading} = useSelector((state) => state.items);
   
   return (
     <div className='grid grid-flow-row gap-6'>
+      
       {
+        isLoading?
+        <div className='w-full flex h-48 justify-center items-center'>
+          <div className='primary-loader '></  div>
+        </div>
+        :
         items && Object.keys(items).map((subCategory)=>{
           let item = items[subCategory];
-          console.log("HERE",subCategory);
           return(
             <div key={"item-"+subCategory} id={`body-${subCategory}`} className='grid grid-flow-row gap-4 '>
               {
