@@ -24,7 +24,7 @@ function ItemsAdded({
                                 const item = items[it];
                                 return(
                                     <div key={"added-item-"+it} className='grid grid-flow-col gap-4 items-start justify-start'>
-                                        <div className='md:w-[100px] md:h-[100px]'>
+                                        <div className='w-[100px] h-[100px]'>
                                             <Image
                                                 src={"/packages/dummy_pack.webp"}
                                                 width={102}
