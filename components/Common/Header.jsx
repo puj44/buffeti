@@ -4,10 +4,11 @@ import React, { useEffect, useState } from 'react'
 import navbar from '@/json/navbar.json';
 import { useRouter } from 'next/router';
 import { store } from '@/redux/store';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Dropdown } from 'flowbite-react';
 import { Flowbite } from "flowbite-react";
 import dynamic from 'next/dynamic';
+import { signout } from '@/redux/reducers/authReducer';
 const Location = dynamic(() => import('../DynamicComponents/Location'), {
     ssr:false
   })
@@ -35,6 +36,7 @@ function Header({handleModelClick}) {
     const router = useRouter();
     const auth = useSelector((state)=>state.auth);
     const [mobileMenu, setMobileMenu] = useState(false);
+    const dispatch = useDispatch();
     const isPathActive = (url) =>{
         if(url === ""){
             if(router.asPath === "/"){
@@ -158,7 +160,12 @@ function Header({handleModelClick}) {
                                 </div>
                                 <p className='font-semibold'>{auth?.user?.name ?? ""}</p>
                             </div>
-                            <div className={`w-[15px] h-[15px] cursor-pointer ${!auth?.isAuthenticated ? "hidden":""} `}>
+                            <div 
+                                className={`w-[15px] h-[15px] cursor-pointer ${!auth?.isAuthenticated ? "hidden":""} `} 
+                                onClick={()=>{
+                                    dispatch(signout());
+                                }}
+                            >
                                 <Image
                                     src={"/icons/logout.webp"}
                                     width={68}
