@@ -114,8 +114,8 @@ body{
 }
 
 .primary-loader {
-  width: 24px;
-  height: 24px;
+  width: 48px;
+  height: 48px;
   border-radius: 50%;
   position: relative;
   animation: rotate 1s linear infinite
@@ -126,7 +126,7 @@ body{
   position: absolute;
   inset: 0px;
   border-radius: 50%;
-  border: 3px solid $primary;
+  border: 4px solid $primary;
   animation: prixClipFix 2s linear infinite ;
 }
 
@@ -309,6 +309,7 @@ input{
     width: -webkit-fill-available;
   }
 }
+
 .search-box{
   position: absolute;
   top:48px;
@@ -316,6 +317,22 @@ input{
   background-color: #fff;
   width:-webkit-fill-available;
   z-index:99;
+  ::-webkit-scrollbar{
+    width:6px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: $lightGray;
+    background-clip: padding-box;
+    border-radius: 8px;
+    
+  }
+  ::-webkit-scrollbar-track {
+   background: #E3E5E5;
+   border-radius: 8px;
+   margin: 4px;
+  }
+}
+.items-section{
   ::-webkit-scrollbar{
     width:6px;
   }

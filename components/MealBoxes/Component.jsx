@@ -17,17 +17,22 @@ function Component({mealBox, data, filters,noOfPeople}) {
         noOfPeople:noOfPeople
     });
     const [packagesData, setPackagesData] = useState({...data ?? {}});
-    const {packages,response, isLoading} = useSelector((state) => state.packages);
+    const {packages,response} = useSelector((state) => state.packages);
+    const [isLoading, setLoading] = useState(false);
     const dispatch = useDispatch();
 
     const handleChangeActiveItem = (val) =>{
+        setLoading(true);
         setActiveFilters({...activeFilters, category:val})
     }
     
     useEffect(()=>{
         if(response){
-            setPackagesData({...packages ?? {}});
-            dispatch(resetAction());
+            setTimeout(()=>{
+                setPackagesData({...packages ?? {}});
+                setLoading(false);
+                dispatch(resetAction());
+            },100)
         }
     },[dispatch,response,packages])
 
@@ -61,14 +66,6 @@ function Component({mealBox, data, filters,noOfPeople}) {
         
     }
 
-    const convertToName = (str) =>{
-        let string = str?.toString()?.trim();
-        string = string.replaceAll("-", " ");
-        string = string.split(" ");
-        string = string.filter((s) => s.charAt(0)?.toUpperCase() + s.slice(1));
-        string = string.join(" ");
-        return string
-    }
   return (
     <div className='flex flex-col gap-6 page-spacing h-full py-6'>
       
@@ -106,29 +103,35 @@ function Component({mealBox, data, filters,noOfPeople}) {
                     />
                 </div>
                 <div className=' w-[1.5px] h-full border-[1.5px] border-[#E3E5E5] hidden md:flex'></div>
-                <div className='flex flex-col gap-6 w-full'>
-                    <SearchBar 
+                <div className='flex flex-col gap-6 w-full h-full'>
+                    {/* <SearchBar 
                         handleSearchChange={handleSearchChange}
-                    />
-                    <div className='grid grid-flow-row sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-flow-col justify-between w-full gap-6'>
+                    /> */}
+                    {
+                        isLoading?
+                        <div className=' flex h-48 justify-center w-60 items-center'>
+                            <div className='primary-loader m-auto'></  div>
+                        </div>:
+                        <div className='grid grid-flow-row sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3  justify-between w-full gap-6'>
 
-                        {
-                            (packagesData?.[activeFilters?.category] && Object.keys(packagesData?.[activeFilters?.category])?.length > 0) ?
-                                Object.keys(packagesData?.[activeFilters?.category]).map((pd,idx) =>{
-                                    const pack = packagesData?.[activeFilters?.category][pd];
-                                    return(
-                                        <PackageCard
-                                            numberOfPeople={noOfPeople}
-                                            menuOption={mealBox}
-                                            key={"package-"+pd}
-                                            data={{...pack ?? {}}}
-                                        />
-                                    )
-                                })
+                            {
+                                (packagesData?.[activeFilters?.category] && Object.keys(packagesData?.[activeFilters?.category])?.length > 0) ?
+                                    Object.keys(packagesData?.[activeFilters?.category]).map((pd,idx) =>{
+                                        const pack = packagesData?.[activeFilters?.category][pd];
+                                        return(
+                                            <PackageCard
+                                                numberOfPeople={noOfPeople}
+                                                menuOption={mealBox}
+                                                key={"package-"+pd}
+                                                data={{...pack ?? {}}}
+                                            />
+                                        )
+                                    })
 
-                            :""
-                        }
-                    </div>
+                                :""
+                            }
+                        </div>
+                    }
                 </div>
             </div>
         </div>

@@ -39,7 +39,6 @@ export const post = async (url, payload, location) => {
       }
       return res;
     } catch (err) {
-        console.log("here",err);
       if (err?.response) {
         if (err?.response?.status === 401) {
         //   localStorage.clear();

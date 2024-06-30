@@ -2,7 +2,7 @@ import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import ItemCard from './ItemCard';
-import { resetSearch } from '@/redux/reducers/itemsReducer';
+import { resetAction, resetSearch } from '@/redux/reducers/itemsReducer';
 
 function SearchBar({
     handleSearchChange,
@@ -17,17 +17,21 @@ function SearchBar({
 
     const [isSearched, setSearched] = useState(false);
     const [searchData, setSearchData] = useState({});
-    const {searchedItems,isSearchLoading} = useSelector((state) => state.items);
+    const {searchedItems,isSearchLoading, searchResponse} = useSelector((state) => state.items);
     const [isLoading, setLoading] = useState(false);
     const [searchVal, setSearchVal] = useState("");
     const dispatch = useDispatch();
     useEffect(()=>{
-        setSearchData({...searchedItems ?? {}});
-    },[searchedItems]);
+        if(searchResponse){
+            setSearchData({...searchedItems ?? {}});
+            setLoading(false);
+            dispatch(resetAction());
+        }
+    },[searchedItems,searchResponse]);
 
-    useEffect(()=>{
-        setLoading(isSearchLoading);
-    },[isSearchLoading])
+    // useEffect(()=>{
+    //     setLoading(isSearchLoading);
+    // },[isSearchLoading])
 
     const handleClickEvent = (e) =>{
         if(e.target.id !== "search-box" && e.target.id !== "search-input" && e.target.id !== "search-button" && e.target.id !== "search-bar" && e.target.id !== "search-dropdown"){
@@ -43,7 +47,7 @@ function SearchBar({
 
   return (
    
-        <div className='search-bar relative md:max-w-[70%] 2xl:max-w-[60%] ' id="search-bar">
+        <div className='search-bar relative md:max-w-[590px] ' id="search-bar">
             <div className='w-[18px] h-[18px] sm:w-[24px] sm:h-[24px] flex align-middle items-center ' id="search-button">
                 <Image
                     src={"/icons/search.webp"}
@@ -61,16 +65,18 @@ function SearchBar({
                     setSearched(true);
                     if(e.target.value === ""){
                         dispatch(resetSearch())
+                    }else{
+                        setLoading(true);
                     }
                 }}
                 onClick={()=>{setSearched(true)}}
                 id="search-input"
                 placeholder={placeholder ?? 'Search "Italian Sandwich"'}
                 className='text-color-dark-gray  overflow-hidden placeholder'
+                autoComplete='off'
             />
             <div className={`search-box ${isSearched && searchVal !== "" ? "flex" :"hidden"} `} id="search-box">
                 <div id="search-dropdown" className={`w-full grid grid-flow-row p-4 overflow-y-scroll scrollbar rounded-lg gap-6 border-[1px] max-h-[420px] items-center ${isLoading ? "justify-center":"justify-start"} border-[#E3E5E5]`}>
-                    {console.log(isLoading)}
                     {
                         isLoading ?
                         <div className='primary-loader'></div>

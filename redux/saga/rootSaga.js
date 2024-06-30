@@ -26,6 +26,5 @@ export function* watcherSaga() {
             yield takeLatest('items/getCategories',handleGetCategories),
         ]);
     }catch(err){
-        console.log("SAGA ERR:",err)
     }
 }

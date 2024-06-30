@@ -295,6 +295,7 @@ function LoginContainer({step,changeStep, onInputChange, values,error,changeNumb
                             width={13}
                             height={13}
                             alt={"Close"}
+                            priority
                         />
                     </div>
                 </div>
@@ -306,7 +307,7 @@ function LoginContainer({step,changeStep, onInputChange, values,error,changeNumb
                                 width={8}
                                 height={14}
                                 alt={"Close"}
-                                
+                                priority
                             />
                         </div>
                         <div className='grid grid-flow-row gap-2  self-start '>

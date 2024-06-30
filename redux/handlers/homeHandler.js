@@ -8,6 +8,6 @@ export function* handleGetData(action){
         const response = yield call(getDataApi,action);
         yield put(setData(response?.response?.data || response?.data));
     }catch(err){
-        console.log(err);
+        
     }
 }
