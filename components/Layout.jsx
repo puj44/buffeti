@@ -3,13 +3,26 @@ import PageHead from './Common/PageHead'
 import Header from './Common/Header'
 import Footer from "@/components/Common/Footer";
 import LoginModel from './Common/LoginModel';
+import { useDispatch, useSelector } from 'react-redux';
+import { setLoginModel } from '@/redux/reducers/homeReducer';
 
 function Layout({children}) {
   const [isModalOpen, setModalOpen] = useState(false);
   const [visited, setVisited] = useState(false);
+  const {loginModel} = useSelector((state) => state.home);
+  const dispatch = useDispatch();
   const handleModelClick = (val) =>{
     setModalOpen(val);
+    if(val === false){
+      dispatch(setLoginModel({open:false}));
+    }
   }
+
+  useEffect(()=>{
+    if(loginModel){
+      setModalOpen(true);
+    }
+  },[loginModel])
 
   useEffect(()=>{
     const visited = localStorage?.getItem("visited");
