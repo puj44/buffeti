@@ -10,6 +10,7 @@ import { getCookie, hasCookie } from 'cookies-next';
 import { useDispatch, useSelector } from 'react-redux';
 import { getItemsData, resetAction, searchItems } from '@/redux/reducers/itemsReducer';
 import { searchDebounce } from '@/commonjs/debounce';
+import { setLoginModel } from '@/redux/reducers/homeReducer';
 
 
 
@@ -21,6 +22,7 @@ function CreatePackage({packageName, menuOption ,packageDetails, itemsData, cate
   const [displayItems, setDisplayItems] = useState({...packageDetails});
   const {items, response} = useSelector((state) => state.items);
   const [isJain, setJain] = useState(false);
+  const {isAuthenticated} = useSelector((state) => state.auth)
   const dispatch = useDispatch();
 
   const handleChangeActiveItem = (val) =>{
@@ -37,7 +39,9 @@ function CreatePackage({packageName, menuOption ,packageDetails, itemsData, cate
 
 
   const handleAddToCart = () =>{
-
+    if(!isAuthenticated){
+      dispatch(setLoginModel({open:true}));
+    }
   }
 
  

@@ -1,8 +1,12 @@
+import { setLoginModel } from '@/redux/reducers/homeReducer';
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 
 function PackageCard({data,numberOfPeople, menuOption}) {
+  const {isAuthenticated} = useSelector((state) => state.home);
+  const dispatch = useDispatch();
   return (
     <div className='package-card relative max-w-[372px] flex flex-col gap-4 h-full'>
        <div className='px-4  mx-auto'>
@@ -29,6 +33,9 @@ function PackageCard({data,numberOfPeople, menuOption}) {
           onClick={(e)=>{if(menuOption === "mini-meals"){
               e.preventDefault();
               e.stopPropagation();
+              if(!isAuthenticated){
+                dispatch(setLoginModel({open:true}));
+              }
             }
           }} 
           className='weird-btn primary-btn items-end h-fit'
