@@ -69,7 +69,7 @@ function SuggestivePackage({data,filters,noOfPeople}) {
         </div>
      <p className='hidden lg:block font-semibold sub-title pt-2'>Select Your Package</p>
         {/* ALL PACKAGES CARD */}
-        <div className='grid grid-flow-row md:grid-flow-col justify-between w-full gap-2 mt-[-4px]'>
+        <div className='grid grid-flow-row sm:grid-cols-2 lg:grid-cols-3  justify-center md:justify-between w-full gap-4 mt-[-4px]'>
             {
                 (packagesData && Object.keys(packagesData).length > 0) &&
                 Object.keys(packagesData).map((pd,idx)=>{

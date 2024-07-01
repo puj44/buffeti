@@ -41,32 +41,35 @@ function ItemsSelectionBody({
       <div className='flex md:hidden'>
         <ItemsMobileMenu show={true} activeItem={activeItem} itemsSelected={itemsSelected} items={categories} handleChangeActiveItem={handleChangeActiveItem} />
       </div>
-      <div className='h-full w-[1.5px] border-[1.5px] border-[#E3E5E5] hidden md:block'></div>
-      {/* RIGHT SIDE SECTION ITEMS SELECTION */}
-      <ItemsSelection 
-        items={{...items ?? {}}} 
-        handleSearchChange={handleSearchChange ?? (()=>{})} 
-        category={activeItem} 
-        handleDeleteItem={handleDeleteItem ?? (()=>{})} 
-        handleAddItem={handleAddItem ?? (()=>{})} 
-        itemsSelected={itemsSelected} 
-        categories={{...categories ?? {}}}
-        handleChangeAdditionalQty={handleChangeAdditionalQty ?? (()=>{})}
-        noOfPeople={noOfPeople}
-        menuOption={menuOption}
-        handleAddToCart={handleAddToCart ?? (()=>{})}
-      />
-      {
-        addedItems && Object.keys(addedItems).length > 0?
-        <ItemsAdded
-          items={{...addedItems}}
-          handleChangeAdditionalQty={handleChangeAdditionalQty ?? (()=>{})}
+      <div className='h-full  w-[1.5px] border-[1.5px] border-[#E3E5E5] hidden md:block'></div>
+      <div className='flex flex-col md:flex-row gap-6 w-full items-start items-section'>
+        {/* RIGHT SIDE SECTION ITEMS SELECTION */}
+        <ItemsSelection 
+          items={{...items ?? {}}} 
+          handleSearchChange={handleSearchChange ?? (()=>{})} 
+          category={activeItem} 
           handleDeleteItem={handleDeleteItem ?? (()=>{})} 
-          menuOption={menuOption}
-          noOfPeople={noOfPeople}
+          handleAddItem={handleAddItem ?? (()=>{})} 
           itemsSelected={itemsSelected} 
-        />:""
-      }
+          categories={{...categories ?? {}}}
+          handleChangeAdditionalQty={handleChangeAdditionalQty ?? (()=>{})}
+          noOfPeople={noOfPeople}
+          menuOption={menuOption}
+          handleAddToCart={handleAddToCart ?? (()=>{})}
+        />
+        {
+          addedItems && Object.keys(addedItems).length > 0?
+          <ItemsAdded
+            items={{...addedItems}}
+            handleChangeAdditionalQty={handleChangeAdditionalQty ?? (()=>{})}
+            handleDeleteItem={handleDeleteItem ?? (()=>{})} 
+            menuOption={menuOption}
+            noOfPeople={noOfPeople}
+            itemsSelected={itemsSelected} 
+            handleAddToCart={handleAddToCart ?? (()=>{})}
+          />:""
+        }
+      </div>
     </div>
   )
 }

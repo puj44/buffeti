@@ -1,21 +1,21 @@
 import React from 'react'
 import { Dropdown, Flowbite } from 'flowbite-react';
 import Image from 'next/image';
-const customTheme = {
+const customMenuTheme = {
     dropdown:{
         floating:{
             divider:"my-1 h-px bg-[#E3E5E5]",
             item:{
                 container: "",
-                base: "flex  cursor-pointer px-0 py-1.5 pe-4 items-center justify-start small-title focus:outline-none",
+                base: "  cursor-pointer px-0   justify-start focus:outline-none",
                 icon: "mr-2 h-4 w-4"
             },
             
     
             style:{
-                dark:"dropdown-box",
-                light:"dropdown-box",
-                auto:"dropdown-box",
+                dark:"menu-box",
+                light:"menu-box",
+                auto:"menu-box",
             }
         }
     }
@@ -27,24 +27,36 @@ function ItemsMobileMenu({
     items,
     handleChangeActiveItem
 }) {
-
+    const onClick = (subCategory) =>{
+        const element = document.getElementById("body-"+subCategory);
+        if(element){
+            element.scrollIntoView({
+                behavior:"smooth"
+            });
+        }
+      }
+    const scrollToTop = () =>{
+        window.scrollTo(0,0);
+    }
 if(show)
     return (
         <div className='fixed right-[20px] bottom-[20px] flex justify-end w-full z-20'>
-            <Flowbite theme={customTheme}>
+            <Flowbite theme={{...customMenuTheme}}>
                 <Dropdown 
                     label="" 
                     placement='top'
                     renderTrigger={()=>
-                        <div className='flex flex-col gap-0.5 justify-center items-center bg-primary rounded-full w-[64px] h-[64px] '>
-                            <Image 
-                                src={"/icons/menu.webp"}
-                                width={15.8}
-                                height={24}
-                                priority
-                                alt="menu"
-                            />
-                            <p className='placeholder text-white'>{"Menu"}</p>
+                        <div className='flex flex-row justify-center px-3 py-2 gap-1 items-center bg-primary rounded-[30px]  '>
+                            <div className='w-[18px] h-[14px]'>
+                                <Image 
+                                    src={"/icons/menu_i.webp"}
+                                    width={76}
+                                    height={57}
+                                    priority
+                                    alt="menu"
+                                />
+                            </div>
+                            <p className='placeholder font-bold text-white'>{"Menu"}</p>
                         </div>
                     }
                 >
@@ -56,16 +68,40 @@ if(show)
                                         <Dropdown.Item 
                                             key={"category-"+i}
                                             as='p' 
-                                            className={`font-medium ${activeItem === i ? "active-sidebar my-auto" :""}`} 
-                                            onClick={()=>{
-                                                handleChangeActiveItem(i)
-                                            }}
+                                            className={` flex  flex-col gap-1`} 
+                                           
+                                            
                                         >
-                                            {items[i]?.name ?? items[i]}
+                                            <h4 
+                                                className={`relative self-baseline  flex h-[34px] w-full items-center flex-row gap-1 package-title font-medium sidebar ${activeItem === i ? "active-sidebar font-medium my-auto" :""}`}
+                                                onClick={()=>{
+                                                    handleChangeActiveItem(i);
+                                                    scrollToTop();
+                                                }}
+                                            >
+                                                <p className='w-fit'>{items[i]?.name ?? items[i]}</p>
+                                                {
+                                                    (itemsSelected?.[i] && (Object.keys(itemsSelected?.[i]).length) > 0) &&
+                                                    <div 
+                                                        className={`w-[24px] h-[24px] rounded-full  flex justify-content align-middle items-center z-10 ${activeItem === i ?"bg-white text-color-primary":"bg-primary text-white"}`}
+                                                    >
+                                                        <p className=' number flex self-center m-auto'>{Object.keys(itemsSelected?.[i]).length}</p>
+                                                    </div>
+                                                }
+                                            </h4>
+                                            {
+                                            (activeItem === i && item.sub_categories && Object.keys(item.sub_categories).length > 0) ?
+                                            <div className='ps-2 flex self-baseline flex-col gap-2'>
+                                                {
+                                                Object.keys(item.sub_categories).map((sub)=>{
+                                                    return(
+                                                    <p key={sub} onClick={()=>{onClick(sub)}} className='text-color-primary cursor-pointer package-title'>{item.sub_categories[sub]}</p>
+                                                    )
+                                                })
+                                                }
+                                            </div>:""
+                                            }
                                         </Dropdown.Item>
-                                        {
-                                            idx !== (Object.keys(items)?.length - 1) && <Dropdown.Divider  key={`category-div-`+idx}  />
-                                        }
                                     </>
                                 )
                             })

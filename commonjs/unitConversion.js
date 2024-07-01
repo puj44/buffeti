@@ -18,7 +18,7 @@ export const convert = (qty,unit) =>{
     
 export const convertToUnits = (item,itemsSelected,noOfPeople) =>{
         const additionalQty = Number(itemsSelected?.[item?.category?.slug]?.[item.slug]?.additional_qty ?? 0);
-        const additionalUnits = additionalQty > 0 ? additionalQty * Number(item.additional_serving_rate) :0;
+        const additionalUnits = additionalQty > 0 ? additionalQty * Number(item.additional_serving) :0;
         const totalQty = additionalUnits+(Number(item.serving_per_pax) * Number(noOfPeople));
         const unit = item.unit;
         

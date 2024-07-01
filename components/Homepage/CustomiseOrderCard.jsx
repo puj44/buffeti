@@ -15,7 +15,7 @@ function CustomiseOrderCard({mobile}) {
                 priority
             />
         </div>
-        <p className='font-bold card-heading text-color-primary z-10'>{"Create your Own Package"}</p>
+        <p className='font-bold card-heading self-baseline text-color-primary z-10'>{"Create your Own Package"}</p>
         <Link href="/catering" className='btn primary-btn z-10 max-w-[182px] self-end md:self-center'>
             <p className='text-white font-bold'>{"Create Package"}</p>
             <Image
