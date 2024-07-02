@@ -61,7 +61,7 @@ function ItemCard({
                 }
                 {
                   item?.additional_serving &&
-                  <p className=' description-title font-bold'>{`Add-On Charges ₹ ${item.additional_serving_rate}/ (Per Unit)`}</p>
+                  <p className=' description-title font-bold'>{`Add-On Charges ₹ ${item.additional_serving_rate}/ (Per ${item.additional_serving} ${item.unit})`}</p>
                 }
               </div>
               <div className=''>
@@ -91,6 +91,7 @@ function ItemCard({
                 </div>
             </div>
           </div>
+          {/** TODO: SELECT PREPARATION FROM BACKEND */}
           {/* EXTRA ITEMS AND PREPARATIONS */}
           <div className=' w-full'>
                   {/* SELECT PREPARATION */}

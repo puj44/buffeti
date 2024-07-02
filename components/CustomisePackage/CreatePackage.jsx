@@ -110,10 +110,13 @@ function CreatePackage({packageName, menuOption ,packageDetails, itemsData, cate
         }
       }
     }else{
-
+      let itemData = JSON.parse(JSON.stringify(item));
+      if( Object.keys(itemData?.preparations ?? {}).length > 0){
+        itemData["selected_preparation"] = Object.keys(itemData.preparations)[0];
+      }
       itemsData[category] = {
         ...itemsData[category] ?? {},
-        [item?.slug]:item
+        [item?.slug]:itemData
       };
     }
     

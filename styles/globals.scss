@@ -189,6 +189,22 @@ input{
   z-index: 9999;
 }
 
+.menu-box{
+  min-width: 124px;
+  height:auto;
+  // transform:translate(-5px,65px);
+  z-index:99;
+  border-radius: 8px;
+  padding:10px 14px;
+  display: flex;
+  flex-direction: column;
+  gap:6px;
+  background: $white;
+  box-shadow: 0px 4px 15px 0px #0000000D;
+  opacity:1;
+  z-index: 9999;
+}
+
 
 //Banners
 .order-now-banner{
@@ -286,11 +302,10 @@ input{
   }
 }
 .item-number{
-  padding-left:4px;
   border-radius:100%;
   background-color: $primary;
-  width:24px;
-  height:24px;
+  width:24px !important;
+  height:24px !important;
   color:$white;
 }
 
@@ -471,18 +486,12 @@ input{
 }
 //Tablet Screen
 @media screen and (max-width:786px){
-  //active sidebar 
-  .active-sidebar{
-    color:$primary;
-    padding-left:6px;
-    background: $lightestRed;
-    border-radius: 4px;
-
-    &::after{
-      content: "";
-      display: none;
-    }
+//active sidebar 
+.active-sidebar{
+  &::after{
+    height:100%;
   }
+}
   .input-quantity{
     width:fit-content;
   }

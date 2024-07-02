@@ -301,7 +301,7 @@ function LoginContainer({step,changeStep, onInputChange, values,error,changeNumb
                 </div>
                 <div className='px-[20px] pt-[11px] h-[177px]  m-0 relative block md:hidden bg-[#F5F5F5] '>
                     <div className='grid grid-rows-[50%_50%] h-full '>
-                        <div onClick={()=>{handleModelClick(false)}} className='pt-5'>
+                        <div onClick={()=>{localStorage.setItem("visited",true); handleModelClick(false)}} className='pt-5'>
                             <Image
                                 src={"/arrows/l_arrow_d.webp"}
                                 width={8}

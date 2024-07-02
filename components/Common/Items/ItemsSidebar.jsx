@@ -10,8 +10,13 @@ function ItemsSideBar({
 }) {
   const onClick = (subCategory) =>{
     const element = document.getElementById("body-"+subCategory);
-    const topPos = element.offsetTop - 5;
-    window.scrollTo(0,topPos)
+    if(element){
+      element.scrollIntoView({
+        behavior:"smooth"
+      });
+      // const topPos = element.scr - 5;
+      // window.scrollTo({left:0,top:topPos, behavior:"smooth"})
+    }
   }
   if(show)
   return (
@@ -23,18 +28,16 @@ function ItemsSideBar({
             return(
               <>
                 <h4 
-                  className={`product-title flex  flex-row gap-1 w-full relative cursor-pointer items-center sidebar ${activeItem === i ? "active-sidebar my-auto" :""}`} 
+                  className={`number flex  flex-row gap-1 w-full relative cursor-pointer items-center sidebar ${activeItem === i ? "active-sidebar my-auto" :""}`} 
                   key={"item-"+idx} 
                   onClick={()=>{handleChangeActiveItem(i)}}
                 >
-                  <p className=' py-1 font-medium'>{items[i]?.name ?? items[i]}</p>
+                  <p className={` py-1 ${activeItem === i ?"font-medium":""}`}>{items[i]?.name ?? items[i]}</p>
                   {
                     (itemsSelected?.[i] && (Object.keys(itemsSelected?.[i]).length) > 0) &&
-                    <div className=' '>
-                      <div className='item-number relative'>
-                        <p className='absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-52%] number '>{Object.keys(itemsSelected?.[i]).length}</p>
+                      <div className='item-number flex justify-content align-middle items-center'>
+                        <p className=' number flex self-center m-auto'>{Object.keys(itemsSelected?.[i]).length}</p>
                       </div>
-                    </div>
                   }
                 </h4>
                 {
