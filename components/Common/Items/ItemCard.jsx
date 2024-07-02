@@ -98,7 +98,7 @@ function ItemCard({
                   {
                     (itemsSelected?.[item?.category?.slug]?.[item?.slug] && item?.preparations && Object.keys(item?.preparations)?.length > 0)?
                     <div className='flex flex-col gap-2 w-full mt-3 md:ps-[116px]'>
-                      <p className='description-title font-semibold'>Select Preparation</p>
+                      <p className='description-title font-semibold'>{"Select Preparation"}</p>
                       {
                           Object.keys(item?.preparations).map((prep,prepIdx)=>{
                               const selected = itemsSelected?.[item?.category?.slug]?.[item?.slug]?.selected_preparation === prep ?? false;
