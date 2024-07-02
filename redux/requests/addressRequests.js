@@ -15,9 +15,9 @@ export const editAddressesApi = ({payload}) =>{
     delete obj.location;
     delete obj.token;
     delete obj.id;
-    return put("/profile/addresses/edit/"+payload.id,obj,payload?.location ?? null, payload?.token ?? null);
+    return put("/profile/addresses/edit/"+payload?.id,obj,payload?.location ?? null, payload?.token ?? null);
 }
 export const deleteAddressesApi = ({payload}) =>{
     
-    return remove("/profile/addresses/delete"+payload.id,payload?.location ?? null, payload?.token ?? null);
+    return remove("/profile/addresses/delete/"+payload?.id,payload?.location ?? null, payload?.token ?? null);
 }
