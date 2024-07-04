@@ -52,14 +52,11 @@ function SavedAddresses({
             />
             <p className='font-medium'>Add New Address</p>
         </div>
-        {
-            show && 
             <AddressModel
                 handleCloseModel={handleCloseModel}
                 
                 show={show}
             />
-        }
     </div>
   )
 }
