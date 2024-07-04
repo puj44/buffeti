@@ -3,7 +3,7 @@
     "short_name": "",
     "icons": [
         {
-            "src": "/logo/primary_logo.png",
+            "src": "/logo/primary_red.png",
             "sizes": "305x200",
             "type": "image/png"
         }

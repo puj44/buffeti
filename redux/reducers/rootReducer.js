@@ -1,3 +1,4 @@
+import addressReducer from "./addressReducer";
 import authReducer from "./authReducer"
 import homeReducer from "./homeReducer";
 import itemsReducer from "./itemsReducer";
@@ -8,6 +9,7 @@ const rootReducer = {
     home:homeReducer,
     packages:packageReducer,
     items:itemsReducer,
+    address:addressReducer
 }
 
 export default  rootReducer;

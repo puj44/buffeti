@@ -4,6 +4,7 @@ import {handleGetMobileOtp, handleGetTokenStatus, handleSignout, handleSignup, h
 import { handleGetData } from "../handlers/homeHandler";
 import { handleGetFilters, handleGetPackage, handleGetPackagesData } from "../handlers/packageHandler";
 import { handleGetCategories, handleGetItemsData, handleSearchItems } from "../handlers/itemsHandler";
+import { handleAddAddress, handleDeleteAddress, handleEditAddress, handleGetAddresses } from "../handlers/addressHandler";
 
 export function* watcherSaga() {
     try{
@@ -25,6 +26,11 @@ export function* watcherSaga() {
             yield takeLatest('items/getItemsData',handleGetItemsData),
             yield takeLatest('items/searchItems',handleSearchItems),
             yield takeLatest('items/getCategories',handleGetCategories),
+            //ADDRESS
+            yield takeLatest('address/getAddresses',handleGetAddresses),
+            yield takeLatest('address/addAddress',handleAddAddress),
+            yield takeLatest('address/editAddress',handleEditAddress),
+            yield takeLatest('address/deleteAddress',handleDeleteAddress),
         ]);
     }catch(err){
     }
