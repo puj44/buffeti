@@ -15,7 +15,13 @@ function LoginModel({handleModelClick, isModalOpen, isFirstTime}) {
 
     const dispatch = useDispatch();
 
-    
+    useEffect(()=>{
+        if(isModalOpen){
+            document.body.style.overflow = 'hidden';
+        }else{
+            document.body.style.overflow = "scroll"
+        }
+    },[isModalOpen])
 
 
     const changeStep = (val) =>{
@@ -32,7 +38,7 @@ function LoginModel({handleModelClick, isModalOpen, isFirstTime}) {
 
     const onInputChange =(e, field) =>{
         if(field === "otp" || 
-            (field === "full_name" && /^[A-Za-z ]*$/.test((e.target.value?.toString()?.trim())) ) || 
+            (field === "full_name" && /^[A-Za-z0-9 ]*$/.test((e.target.value?.toString()?.trim())) ) || 
             ( field === "mobile_number" && (/^[0-9]\d*$/g.test(e.target.value) && e.target.value?.length <= 10) || e.target.value === "") ||
             (field === "email" && /^[a-zA-Z0-9._%+-@]*$/.test((e.target.value?.toString()?.trim())))
         

@@ -6,12 +6,12 @@ function AddressCard({
     selectedAddress
 }) {
   return (
-    <div className='flex flex-row gap-3 items-baseline self-baseline'>
+    <div className='flex flex-row  gap-3 '>
         <span className={`
-                w-[20px] h-[20px] rounded-full border-[1px]
+                w-[20px] h-[20px] rounded-full border-[1px] 
                 ${selectedAddress === data?._id ? "border-[#B42318]"
                 :"border-[#D0D5DD] cursor-pointer"}
-                flex justify-center items-center
+                flex justify-center items-center 
                 
             `}
             onClick={()=>{handleSelectAddress(data?._id)}}
@@ -23,7 +23,7 @@ function AddressCard({
                     </span>
                 }
         </span>
-        <div className='flex flex-col gap-0.5 items-baseline self-baseline'>
+        <div className='flex flex-col gap-0.5'>
             <p className='font-medium'>{data?.full_name}</p>
             <p className='text-color-dark-gray'>{data?.house_building_no + " "+ data?.address}</p>
         </div>

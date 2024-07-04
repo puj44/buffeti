@@ -1,18 +1,32 @@
 import SavedAddresses from '@/components/Cart/SavedAddresses';
-import { getAddresses } from '@/redux/reducers/addressReducer';
+import { getAddresses, resetAddress } from '@/redux/reducers/addressReducer';
 import React, { useEffect, useState } from 'react'
 import { END } from 'redux-saga';
 import {wrapper} from "../redux/store"
 import { getCookie } from 'cookies-next';
+import { useDispatch, useSelector } from 'react-redux';
 function Cart({
-    addresses
+    addressesData
 }) {
-  const [cartData, setCartData] = useState({});
+  const [cartData, setCartData] = useState({
+    delivery_address_id:addressesData?.[0]?._id
+  });
+  const [savedAddresses,setSavedAddresses] = useState([...addressesData ?? []])
+  const {addresses,response, errorMessage} = useSelector((state)=>state.address);
+  const dispatch = useDispatch();
   useEffect(()=>{
-    if(!cartData?.delivery_address_id){
-        setCartData({...cartData, delivery_address_id:addresses?.[0]?._id});
+    if(response && !errorMessage){
+      setSavedAddresses([...addresses ?? []]);
+      if(addresses?.length){
+        setCartData({
+          ...cartData,
+          delivery_address_id:addresses?.[addresses?.length -1]?._id
+        })
+      }
     }
-  },[]);
+    dispatch(resetAddress());
+  },[addresses,response, errorMessage]);
+
 
 
   const handleSelectAddress = (id) =>{
@@ -23,7 +37,7 @@ function Cart({
     <div className="page-spacing py-4">
         <div className='flex flex-col md:flex-row gap-6 w-full'>
             <SavedAddresses 
-                addresses={addresses} 
+                addresses={[...savedAddresses]} 
                 handleSelectAddress={handleSelectAddress}
                 selectedAddress={cartData?.delivery_address_id}
             />
@@ -46,7 +60,7 @@ async function fetchData(store,location,token) {
       const {addresses} = await store.getState().address;
       return {
         props:{
-            addresses:addresses ?? []
+          addressesData:addresses ?? []
         }
       }
     }
