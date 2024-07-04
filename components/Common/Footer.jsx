@@ -41,7 +41,7 @@ function Footer() {
                 <div className='flex flex-col text-color-dark-gray md:flex-row md:justify-between w-full lg:px-8 items-center  pt-8' style={{borderTopWidth:"1px",borderTopColor:"#595959"}}>
                     <p className=' items-center hidden md:block'>{"© 2024 Buffeti. All rights reserved."}</p>
                     <div className='grid grid-cols-3 md:flex md:flex-row gap-4 md:gap-6 items-center justify-center'>
-                            <p className=' items-center'>Terms</p>
+                            <Link href="/terms-and-conditions" className=' items-center'>Terms</Link>
                             <p className=' items-center'>Privacy</p>
                             <p className=' items-center'>Cookies</p>
                             {socials.map((s,idx)=>{
