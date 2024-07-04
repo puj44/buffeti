@@ -5,27 +5,35 @@ import { END } from 'redux-saga';
 import {wrapper} from "../redux/store"
 import { getCookie } from 'cookies-next';
 import { useDispatch, useSelector } from 'react-redux';
-function Cart({
-    addressesData
-}) {
-  const [cartData, setCartData] = useState({
-    delivery_address_id:addressesData?.[0]?._id
-  });
-  const [savedAddresses,setSavedAddresses] = useState([...addressesData ?? []])
+import { useRouter } from 'next/router';
+function Cart() {
+  const [savedAddresses,setSavedAddresses] = useState([])
   const {addresses,response, errorMessage} = useSelector((state)=>state.address);
+  const [cartData, setCartData] = useState({
+  });
+  const {isAuthenticated} = useSelector((state) => state.auth);
+  const router = useRouter()
   const dispatch = useDispatch();
   useEffect(()=>{
+    dispatch(getAddresses())
+  },[dispatch]);
+  useEffect(()=>{
+    setSavedAddresses([...addresses ?? []]);
+    if(!cartData?.delivery_address_id){
+      setCartData({...cartData, delivery_address_id:addresses?.[0]?._id})
+    }
     if(response && !errorMessage){
-      setSavedAddresses([...addresses ?? []]);
+
       if(addresses?.length){
         setCartData({
           ...cartData,
           delivery_address_id:addresses?.[addresses?.length -1]?._id
         })
       }
+      dispatch(resetAddress());
     }
-    dispatch(resetAddress());
-  },[addresses,response, errorMessage]);
+    
+  },[addresses,response,errorMessage]);
 
 
 
@@ -45,24 +53,4 @@ function Cart({
     </div>
   )
 }
-async function fetchData(store,location,token) {
-  
-    await store.dispatch(getAddresses({token, location}))
-    await store.dispatch(END);
-    await store.sagaTask.toPromise();
-  }
-  
-  export const getServerSideProps =  wrapper.getServerSideProps(
-    (store) => async(props) =>{
-      const location = getCookie("location",{req:props?.req,res:props?.res});
-      const token = getCookie("accessToken",{req:props?.req,res:props?.res});
-      await fetchData(store,location,token);
-      const {addresses} = await store.getState().address;
-      return {
-        props:{
-          addressesData:addresses ?? []
-        }
-      }
-    }
-  )
 export default Cart

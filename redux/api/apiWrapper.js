@@ -3,9 +3,9 @@ import api from "./api";
 
 export const BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001/api/v1";
 
-export const get = async (url, location, accessToken) => {
+export const get = async (url, location) => {
     try {
-      const res = await api( BASE_URL, location,accessToken).get(url);
+      const res = await api( BASE_URL, location).get(url);
       if (res.status === 200) {
    
         if (res.data?.code === 200) {
@@ -25,9 +25,9 @@ export const get = async (url, location, accessToken) => {
     }
 };
 
-export const post = async (url, payload, location, accessToken) => {
+export const post = async (url, payload, location) => {
     try {
-        const res = await api(BASE_URL, location,accessToken).post(url,payload);
+        const res = await api(BASE_URL, location).post(url,payload);
         
       if (res.status === 200) {
         if (res.data?.code === 200) {
@@ -46,9 +46,9 @@ export const post = async (url, payload, location, accessToken) => {
       return err;
     }
 };
-export const put = async (url, payload,location,accessToken) => {
+export const put = async (url, payload,location) => {
     try {
-      const res = await api(BASE_URL,location,accessToken).put(url,payload);
+      const res = await api(BASE_URL,location).put(url,payload);
   
       if (res.status === 200) {
         if (res.data?.code === 200) {
@@ -66,9 +66,9 @@ export const put = async (url, payload,location,accessToken) => {
       return false;
     }
 };
-export const remove = async (url,location,accessToken) => {
+export const remove = async (url,location) => {
   try {
-    const res = await api(BASE_URL,location,accessToken).delete(url);
+    const res = await api(BASE_URL,location).delete(url);
 
     if (res.status === 200) {
       if (res.data?.code === 200) {
