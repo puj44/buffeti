@@ -6,15 +6,14 @@ export const BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:300
 
 const api = (BASE_URL, location = null, accessToken = null) => {
   const loc = location ? location : hasCookie("location") ? getCookie("location") : "ahmedabad";
-  const token = accessToken ? ("Bearer "+accessToken) : hasCookie("accessToken") ? ("Bearer "+getCookie("accessToken")) : null
   // initialize axios
   const service = axios.create({
     baseURL: BASE_URL,
     headers: {
-      "Authorization":token,
       "Content-Type": "application/json",
       location :loc
     },
+    withCredentials:true
   });
 
   // Add a request interceptor
