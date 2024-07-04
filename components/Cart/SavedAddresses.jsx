@@ -8,22 +8,11 @@ function SavedAddresses({
     handleSelectAddress,
     selectedAddress
 }) {
-  const [addressData, setAddressData] = useState([...addresses ?? []]);
   const [show, setShow] = useState(false);
   const handleCloseModel = ()=>{
     setShow(false);
   }
-  const handleChangeInput = (e, field)=>{
-    
-  }
-
-  const handleSubmit =()=>{
-
-  }
-
-  const handleDetectLocation = ()=>{
-
-  }
+ 
   return (
     <div
         className='
@@ -34,12 +23,12 @@ function SavedAddresses({
         '
     >
         {
-            addressData.length > 0 &&
+            addresses.length > 0 &&
             <>
             <p className='font-medium product-title'>{"From Saved Address"}</p>
-                <div className='grid grid-flow-row gap-4'>
+                <div className='flex flex-col gap-4'>
                     {
-                        addressData.map((addr,idx)=>{
+                        addresses.map((addr,idx)=>{
                             return(
                                 <AddressCard 
                                     key={"address-"+idx}
@@ -53,7 +42,7 @@ function SavedAddresses({
                 </div>
             </>
         }
-        <div className="flex flex-row gap-3 items-center w-fit cursor-pointer" onClick={()=>{}}>
+        <div className="flex flex-row gap-3 items-center w-fit cursor-pointer" onClick={()=>{setShow(true);}}>
             <Image 
                 src={"/icons/plus.webp"}
                 width={14}
@@ -63,15 +52,11 @@ function SavedAddresses({
             />
             <p className='font-medium'>Add New Address</p>
         </div>
-        {
-            show && 
             <AddressModel
                 handleCloseModel={handleCloseModel}
-                handleChangeInput={handleChangeInput}
-                handleSubmit={handleSubmit}
-                handleDetectLocation={handleDetectLocation}
+                
+                show={show}
             />
-        }
     </div>
   )
 }

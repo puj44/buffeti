@@ -42,8 +42,8 @@ function Footer() {
                     <p className=' items-center hidden md:block'>{"© 2024 Buffeti. All rights reserved."}</p>
                     <div className='grid grid-cols-3 md:flex md:flex-row gap-4 md:gap-6 items-center justify-center'>
                             <Link href="/terms-and-conditions" className=' items-center'>Terms</Link>
-                            <p className=' items-center'>Privacy</p>
-                            <p className=' items-center'>Cookies</p>
+                            <Link href="/privacy-policy" className=' items-center'>Privacy</Link>
+                            <Link href="/cookies-policy" className=' items-center'>Cookies</Link>
                             {socials.map((s,idx)=>{
                                 return(
                                     <Link href={s.url} key={"social-"+s.title} className='m-auto'>
