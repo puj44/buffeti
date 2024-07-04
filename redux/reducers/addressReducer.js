@@ -10,6 +10,7 @@ export const addressSlice = createSlice({
     },
     reducers:{
         getAddresses:(state) =>{
+            
         },
         setAddresses:(state,{payload}) =>{
             state.addresses = payload?.data?.addresses ?? [];
