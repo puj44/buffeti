@@ -1,5 +1,6 @@
 import addressReducer from "./addressReducer";
 import authReducer from "./authReducer"
+import cartReducer from "./cartReducer";
 import homeReducer from "./homeReducer";
 import itemsReducer from "./itemsReducer";
 import packageReducer from "./packageReducer";
@@ -9,7 +10,8 @@ const rootReducer = {
     home:homeReducer,
     packages:packageReducer,
     items:itemsReducer,
-    address:addressReducer
+    address:addressReducer,
+    cart:cartReducer
 }
 
 export default  rootReducer;

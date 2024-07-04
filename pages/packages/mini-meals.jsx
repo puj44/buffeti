@@ -9,7 +9,7 @@ import { END } from 'redux-saga'
 import { useDispatch } from 'react-redux'
 
 function MiniMeals({filters,packages,noOfPeople}) {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   return (
     <Component 
       mealBox={"mini-meals"} 

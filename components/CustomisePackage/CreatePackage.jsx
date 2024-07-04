@@ -11,6 +11,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getItemsData, resetAction, searchItems } from '@/redux/reducers/itemsReducer';
 import { searchDebounce } from '@/commonjs/debounce';
 import { setLoginModel } from '@/redux/reducers/homeReducer';
+import { addToCart, resetCart } from '@/redux/reducers/cartReducer';
+import { useRouter } from 'next/router';
+import ConfirmationPopup from '../Common/ConfirmationPopup';
 
 
 
@@ -23,8 +26,11 @@ function CreatePackage({packageName, menuOption ,packageDetails, itemsData, cate
   const {items, response} = useSelector((state) => state.items);
   const [isJain, setJain] = useState(false);
   const {isAuthenticated} = useSelector((state) => state.auth)
+  const cart = useSelector((state) => state.cart);
+  const [showModel, setShowModel] = useState(false);
+  const [modelMessage,setModelMessage] = useState("");
   const dispatch = useDispatch();
-
+  const router = useRouter();
   const handleChangeActiveItem = (val) =>{
     setActiveItem(val);
     dispatch(getItemsData({menuOption,category:val}));
@@ -41,8 +47,43 @@ function CreatePackage({packageName, menuOption ,packageDetails, itemsData, cate
   const handleAddToCart = () =>{
     if(!isAuthenticated){
       dispatch(setLoginModel({open:true}));
+    }else{
+      dispatch(addToCart({
+        menu_option:menuOption,
+        no_of_people:quantity,
+        package_name:packageName,
+        items:itemsSelected
+      }))
     }
   }
+  
+  const handleClose = () =>{
+    setShowModel(false);
+  }
+
+  const handleConfirm = () =>{
+    dispatch(addToCart({
+      menu_option:menuOption,
+      no_of_people:quantity,
+      package_name:packageName,
+      items:itemsSelected,
+      replace:true
+    }));
+    setShowModel(false);
+  }
+
+  useEffect(()=>{
+    if(cart?.response){
+      if(!cart.is_invalid && !cart?.already_exists){
+        dispatch(resetCart())
+        router.push("/cart")
+      }else{1
+        setShowModel(true);
+        dispatch(resetCart())
+      }
+     
+    }
+  },[cart])
 
  
 
@@ -186,7 +227,14 @@ function CreatePackage({packageName, menuOption ,packageDetails, itemsData, cate
           handleAddToCart={handleAddToCart}
         />
       </div>
-    
+      {
+        <ConfirmationPopup
+          handleClose={handleClose}
+          show={showModel}
+          description={"You already have existing items in the cart. Do you wish to remove them and add this to your cart?"}
+          handleConfirm={handleConfirm}
+        />
+      }
     </div>
   )
 }

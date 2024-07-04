@@ -9,6 +9,7 @@ import CateringPackageCard from '../Common/CateringPackageCard';
 import ItemsSideBar from '../Common/Items/ItemsSidebar';
 import SearchBar from '../Common/Items/SearchBar';
 import PackageCard from '../Homepage/PackageCard';
+import ItemsMobileMenu from '../Common/Items/ItemsMobileMenu';
 
 function Component({mealBox, data, filters,noOfPeople}) {
     const router = useRouter();
@@ -101,6 +102,9 @@ function Component({mealBox, data, filters,noOfPeople}) {
                         items={filters?.categories}
                         show={true}
                     />
+                </div>
+                <div className='contents md:hidden '>
+                    <ItemsMobileMenu show={true}  activeItem={activeFilters?.category} itemsSelected={{}} items={filters?.categories} handleChangeActiveItem={handleChangeActiveItem} />
                 </div>
                 <div className=' w-[1.5px] h-full border-[1.5px] border-[#E3E5E5] hidden md:flex'></div>
                 <div className='flex flex-col gap-6 w-full h-full'>
