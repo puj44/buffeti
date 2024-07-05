@@ -148,7 +148,7 @@ function Cart() {
     }else{
       extraServicesData.push(field);
     }
-    cartDetails.extra_services = extraServicesData
+    cartDetails.extra_services = extraServicesData;
     //TODO: CALL CART API
     setCartData({...cartDetails});
   }
@@ -159,12 +159,12 @@ function Cart() {
   const handleChangeInstruction = searchDebounce((val) =>{
     let cartDetails = JSON.parse(JSON.stringify((cartData)));
     cartDetails.cooking_instruction = val;
+   
     setCartData({...cartDetails});
     //TODO: CALL CART API
   })
 
   const handleChangeDate = (e) =>{
-    console.log("HERE",e);
     let cartDetails = JSON.parse(JSON.stringify((cartData)));
     cartDetails.delivery_date = e;
     setCartData({...cartDetails});

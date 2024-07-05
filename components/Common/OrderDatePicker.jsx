@@ -108,16 +108,19 @@ function OrderDatePicker({
 }) {
     const formatDate = (val) =>{
         const today = val;
-        const yyyy = today.getFullYear();
-        let mm = today.getMonth() + 1; // Months start at 0!
-        let dd = today.getDate();
+        if(today){
 
-        if (dd < 10) dd = '0' + dd;
-        if (mm < 10) mm = '0' + mm;
-
-        const formattedToday = dd + '/' + mm + '/' + yyyy;
-
-        return formattedToday;
+            const yyyy = today?.getFullYear();
+            let mm = today?.getMonth() + 1; // Months start at 0!
+            let dd = today.getDate();
+    
+            if (dd < 10) dd = '0' + dd;
+            if (mm < 10) mm = '0' + mm;
+    
+            const formattedToday = dd + '/' + mm + '/' + yyyy;
+    
+            return formattedToday;
+        }
     }
   return (
     <div className='border-[1px] border-[#E3E5E5] rounded-lg flex   py-2 px-4'>
