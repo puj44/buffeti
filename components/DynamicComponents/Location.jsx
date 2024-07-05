@@ -6,7 +6,6 @@ import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 const customTheme = {
-    dropdown:{
         floating:{
             divider:"my-1 h-px bg-[#E3E5E5]",
             item:{
@@ -22,7 +21,6 @@ const customTheme = {
                 auto:"dropdown-box",
             }
         }
-    }
   };
 function Location() {
     const {locations} = useSelector((state) => state.home);
@@ -37,8 +35,7 @@ function Location() {
     },[currentLocation])
   return (
     location &&
-        <Flowbite theme={{ theme: customTheme }}>
-            <Dropdown label="" className='cursor-pointer' dismissOnClick={true} renderTrigger={() =>
+            <Dropdown theme={customTheme} label="" className='cursor-pointer' dismissOnClick={true} renderTrigger={() =>
                 <div className='flex flex-row my-auto gap-2 cursor-pointer'>
                     <div className='w-[20px] h-[20px] my-auto'>
                         <Image
@@ -73,7 +70,6 @@ function Location() {
                 }
                 
             </Dropdown>
-        </Flowbite>
   )
 }
 

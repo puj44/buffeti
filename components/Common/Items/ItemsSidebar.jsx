@@ -21,7 +21,7 @@ function ItemsSideBar({
   if(show)
   return (
     <div className='flex flex-col gap-3 md:w-[160px] 2xl:w-[220px] '>
-        <p className='product-title font-bold mb-3' style={{borderBottomWidth:"1px", borderBottomColor:"#E3E5E5"}}>{`Select ${isCategory ? "Category":"Items"}`}</p>
+        <p className='product-title font-bold mb-2 pb-1' style={{borderBottomWidth:"1px", borderBottomColor:"#E3E5E5"}}>{`${isCategory ? "Categories":"Select Items"}`}</p>
         {
           (items && Object.keys(items)?.length > 0) && Object.keys(items).map((i,idx)=>{
             const item = items[i];

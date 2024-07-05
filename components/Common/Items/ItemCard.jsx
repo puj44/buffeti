@@ -53,7 +53,7 @@ function ItemCard({
                 </div>
                 {
                   item?.item_description &&
-                  <p className=' description-title '>{item.item_description-title}</p>
+                  <p className=' description-title '>{item.item_description}</p>
                 }
                 {
                   menuOption === "snack-boxes" &&
@@ -130,7 +130,6 @@ function ItemCard({
                     :""
                   
                   }
-                  {/* EXTRA ITEMS */}
                
                 
               </div>

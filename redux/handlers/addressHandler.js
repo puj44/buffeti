@@ -9,7 +9,6 @@ export function* handleGetAddresses(action){
         const response = yield call(getAddressesApi,action);
         yield put(setAddresses(response?.response?.data || response?.data));
     }catch(err){
-        console.log("HERE",err);
     }
 }
 export function* handleAddAddress(action){
