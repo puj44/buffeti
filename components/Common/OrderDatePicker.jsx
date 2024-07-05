@@ -107,7 +107,7 @@ function OrderDatePicker({
     value
 }) {
     const formatDate = (val) =>{
-        const today = val;
+        const today = new Date(val);
         if(today){
 
             const yyyy = today?.getFullYear();
