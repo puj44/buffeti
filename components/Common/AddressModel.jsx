@@ -152,7 +152,7 @@ function AddressModel({
   return (
     <div className='fixed z-50 left-0 top-0  overflow-hidden w-dvw h-dvh bg-[rgb(0,0,0,0.3)] '>
         <div className="relative w-full h-full flex justify-center align-middle ">
-            <div className='bg-white flex flex-col gap-5 justify-between overflow-y-scroll sm:overflow-y-visible py-6 px-5 relative w-full h-full md:h-fit md:max-w-[642px] md:max-h-[800px] my-auto  rounded-lg '>
+            <div className='bg-white address-model flex flex-col gap-5 justify-between overflow-y-scroll sm:overflow-y-visible py-6 px-5 relative w-full h-full md:h-fit md:max-w-[642px] md:max-h-[800px] my-auto  rounded-lg '>
               <div className='grid grid-flow-row   gap-5'>
                 <p className='font-semibold'>{"Address Details"}</p>
                 <div className='btn primary-btn w-fit justify-self-end mt-2' onClick={()=>{handleDetectLocation()}}>
@@ -242,7 +242,7 @@ function AddressModel({
                   responseError && <span className='text-color-secondary-red small-title'>{responseError}</span>
                 }
               </div>
-              <div className=' flex flex-col sm:flex-row gap-3 w-full '>
+              <div className=' flex flex-row gap-3 w-full '>
                   <button 
                     className='w-full flex border-[1px] order-2 sm:order-1 font-semibold border-[#D0D5DD]  rounded-lg items-center justify-center py-2.5 px-[18px]' 
                     onClick={()=>{setData({});setErrors({});handleCloseModel()}}

@@ -18,7 +18,6 @@ function SavedAddresses({
         className='
             p-4
             grid grid-flow-row gap-4 md:gap-6
-            w-full
             address-card
         '
     >
@@ -42,6 +41,9 @@ function SavedAddresses({
                 </div>
             </>
         }
+        {
+            addresses?.length < 5?
+
         <div className="flex flex-row gap-3 items-center w-fit cursor-pointer" onClick={()=>{setShow(true);}}>
             <Image 
                 src={"/icons/plus.webp"}
@@ -52,6 +54,8 @@ function SavedAddresses({
             />
             <p className='font-medium'>Add New Address</p>
         </div>
+            :""
+        }
             <AddressModel
                 handleCloseModel={handleCloseModel}
                 

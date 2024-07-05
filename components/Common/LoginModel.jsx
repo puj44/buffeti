@@ -15,14 +15,6 @@ function LoginModel({handleModelClick, isModalOpen, isFirstTime}) {
 
     const dispatch = useDispatch();
 
-    useEffect(()=>{
-        if(isModalOpen){
-            document.body.style.overflow = 'hidden';
-        }else{
-            document.body.style.overflow = "scroll"
-        }
-    },[isModalOpen])
-
 
     const changeStep = (val) =>{
         setError(false);

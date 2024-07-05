@@ -6,6 +6,7 @@ export const cartSlice = createSlice({
         isLoading:false,
         cartDetails:{},
         cart:{},
+        extraServices:[],
         response:false,
         updateResponse:false,
         errorMessage:false,
@@ -51,6 +52,14 @@ export const cartSlice = createSlice({
             if(payload?.statusCode === 400){
             }
         },
+        getExtraServices:(state) =>{
+
+        },
+        setExtraServices:(state,{payload}) =>{
+            state.extraServices = payload?.data?.extraServices ?? [];
+            if(payload?.statusCode === 400){
+            }
+        },
         resetCart:(state) =>{
             state.response = false;
             state.updateResponse = false;
@@ -72,6 +81,8 @@ export const {
     setUpdateCart,
     updateCartItem,
     setUpdateCartItem,
+    getExtraServices,
+    setExtraServices,
     resetCart
 } = cartSlice.actions;
 
