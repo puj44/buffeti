@@ -10,6 +10,9 @@ import { getCart, getExtraServices } from '@/redux/reducers/cartReducer';
 import CartItems from '@/components/Cart/CartItems';
 import { searchDebounce } from '@/commonjs/debounce';
 import ExtraServices from '@/components/Cart/ExtraServices';
+import CouponCard from '@/components/Cart/CouponCard';
+import CookingInstruction from '@/components/Cart/CookingInstruction';
+import CartSummary from '@/components/Cart/CartSummary';
 function Cart() {
   const [savedAddresses,setSavedAddresses] = useState([])
   const {addresses,response, errorMessage} = useSelector((state)=>state.address);
@@ -150,6 +153,27 @@ function Cart() {
     setCartData({...cartDetails});
   }
 
+  const handleApplyCoupon = (val) =>{
+    //TODO: APPLY COUPON API
+  }
+  const handleChangeInstruction = searchDebounce((val) =>{
+    let cartDetails = JSON.parse(JSON.stringify((cartData)));
+    cartDetails.cooking_instruction = val;
+    setCartData({...cartDetails});
+    //TODO: CALL CART API
+  })
+
+  const handleChangeDate = (e) =>{
+    console.log("HERE",e);
+    let cartDetails = JSON.parse(JSON.stringify((cartData)));
+    cartDetails.delivery_date = e;
+    setCartData({...cartDetails});
+    //TODO: CALL CART API
+  }
+  const handleChangeTime = () =>{
+
+  }
+
   return (
     <div className="page-spacing py-4">
         <div className='flex flex-col md:flex-row gap-4 w-full'>
@@ -168,7 +192,7 @@ function Cart() {
               handleChangeAdditionalQty={handleChangeAdditionalQty}
             />
           </div>
-          <div className='grid grid-flow-row gap-4 md:max-w-[380px] w-full'>
+          <div className='grid grid-flow-row self-start gap-4 md:max-w-[380px] w-full'>
             {
               extraServices && extraServices?.length ?
                 <ExtraServices
@@ -179,6 +203,20 @@ function Cart() {
 
               :""
             }
+            <CouponCard
+              handleApplyCoupon={handleApplyCoupon}
+            />
+            <CookingInstruction
+              value={cartData?.cooking_instruction ?? ""}
+              handleChangeInstruction={handleChangeInstruction}
+            />
+            <CartSummary
+                data={cartData?.billing_details ?? {}}
+                handleChangeDate={handleChangeDate}
+                handleChangeTime={handleChangeTime}
+                deliveryDate={cartData?.delivery_date}
+                deliveryTime={cartData?.delivery_time}
+            />
           </div>
         </div>
     </div>

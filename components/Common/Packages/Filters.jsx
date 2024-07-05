@@ -27,7 +27,6 @@ const noOfPeople = [
 ]
 
 const customTheme = {
-    dropdown:{
         floating:{
             divider:"my-1 h-px bg-[#E3E5E5]",
             item:{
@@ -43,7 +42,6 @@ const customTheme = {
                 auto:"dropdown-box",
             }
         }
-    }
   };
 
 function Filters({
@@ -63,96 +61,94 @@ function Filters({
 if(mobile)
     return(
         <div className='flex flex-row gap-2 overflow-x-scroll w-full'>
-            <Flowbite theme={customTheme}>
-                    <Dropdown label="" dismissOnClick={false}  placement='bottom' renderTrigger={() =>  
-                        <div className=' filter-box inter' id="filter-box-dropdown">
+            <Dropdown label="" theme={customTheme} dismissOnClick={false}  placement='bottom' renderTrigger={() =>  
+                <div className=' filter-box inter' id="filter-box-dropdown">
+                    <Image
+                        src={"/icons/filter.webp"}
+                        width={16}
+                        height={16}
+                        alt={"filter"}
+                        priority
+                        
+                    />
+                    
+                    <p className='w-fit' style={{fontSize:"14px"}}>Filter</p>
+                </div>
+            }>
+                <div>
+                    <Dropdown.Item as='div' className={`ps-4 flex flex-col gap-4 justify-start w-full  inter`} >
+                        <div className='flex flex-row justify-between w-full min-w-[200px] items-center'>
+                            <p className='font-medium big-title'>Filter</p>
                             <Image
-                                src={"/icons/filter.webp"}
-                                width={16}
-                                height={16}
-                                alt={"filter"}
+                                src={"/icons/cross.webp"}
+                                width={12}
+                                height={12}
                                 priority
-                                
+                                alt='cross'
+                                className='cursor-pointer'
+                                onClick={()=>{onClose()}}
                             />
-                            
-                            <p className='w-fit' style={{fontSize:"14px"}}>Filter</p>
                         </div>
-                    }>
-                        <div>
-                            <Dropdown.Item as='div' className={`ps-4 flex flex-col gap-4 justify-start w-full  inter`} >
-                                <div className='flex flex-row justify-between w-full min-w-[200px] items-center'>
-                                    <p className='font-medium big-title'>Filter</p>
-                                    <Image
-                                        src={"/icons/cross.webp"}
-                                        width={12}
-                                        height={12}
-                                        priority
-                                        alt='cross'
-                                        className='cursor-pointer'
-                                        onClick={()=>{onClose()}}
-                                    />
-                                </div>
-                                <div className='flex flex-col gap-2 self-baseline w-full' style={{fontSize:"14px"}}>
-                                    {
-                                        pricing?.length > 0 ?
-                                            <>
-                                                <div className='flex flex-col gap-2 '>
-                                                    <p className='' style={{fontSize:"14px"}}>Pricing</p>
-                                                    {pricing.map((p,idx) => {
-                                                        return(
-                                                            <div 
-                                                                className={`flex flex-row items-center gap-2`} 
-                                                                key={"price-"+idx}
-                                                                onClick={()=>{
-                                                                    handleChangeFilter("pricing",idx)
-                                                                }}
-                                                            >
-                                                            
-                                                                <Tickmark isSelected={activeFilters?.pricing === idx} />
-                                                                <p>{!p?.max ? `₹ ${p.min} +` :`₹ ${p.min}-₹ ${p.max}`}</p>
-                                                            </div>
-                                                        )
-                                                    })}
-                                                </div>
-                                            
-                                            </>
-                                        :""
-                                    }   
-                                        <Dropdown.Divider className='w-full'  />
-                                    {
-                                        (categories && Object.keys(categories)?.length > 0) ?
-                                            <>
-                                                <div className='flex flex-col gap-2 '>
-                                                    <p>Categories</p>
-                                                    {Object.keys(categories).map((cat,idx) => {
-                                                        return(
-                                                            <div 
-                                                                className={`flex flex-row items-center gap-2`} 
-                                                                key={"category-"+idx}
-                                                                onClick={()=>{
-                                                                    handleChangeFilter("category",cat)
-                                                                }}
-                                                            >
-                                                            
-                                                                <Tickmark isSelected={cat === activeFilters?.category} />
-                                                                <p>{categories[cat]}</p>
-                                                            </div>
-                                                        )
-                                                    })}
-                                                </div>
-                                            </>
-                                        :""
-                                    }  
+                        <div className='flex flex-col gap-2 self-baseline w-full' style={{fontSize:"14px"}}>
+                            {
+                                pricing?.length > 0 ?
+                                    <>
+                                        <div className='flex flex-col gap-2 '>
+                                            <p className='' style={{fontSize:"14px"}}>Pricing</p>
+                                            {pricing.map((p,idx) => {
+                                                return(
+                                                    <div 
+                                                        className={`flex flex-row items-center gap-2`} 
+                                                        key={"price-"+idx}
+                                                        onClick={()=>{
+                                                            handleChangeFilter("pricing",idx)
+                                                        }}
+                                                    >
+                                                    
+                                                        <Tickmark isSelected={activeFilters?.pricing === idx} />
+                                                        <p>{!p?.max ? `₹ ${p.min} +` :`₹ ${p.min}-₹ ${p.max}`}</p>
+                                                    </div>
+                                                )
+                                            })}
+                                        </div>
                                     
-                                </div>
+                                    </>
+                                :""
+                            }   
                                 <Dropdown.Divider className='w-full'  />
-                                <div className='flex flex-row w-full justify-between items-center' style={{fontSize:"14px"}} >
-                                    <p className='text-color-primary font-medium' onClick={()=>{clearFilters(); onClose()}}>Clear All</p>
-                                </div>
-                            </Dropdown.Item>                 
+                            {
+                                (categories && Object.keys(categories)?.length > 0) ?
+                                    <>
+                                        <div className='flex flex-col gap-2 '>
+                                            <p>Categories</p>
+                                            {Object.keys(categories).map((cat,idx) => {
+                                                return(
+                                                    <div 
+                                                        className={`flex flex-row items-center gap-2`} 
+                                                        key={"category-"+idx}
+                                                        onClick={()=>{
+                                                            handleChangeFilter("category",cat)
+                                                        }}
+                                                    >
+                                                    
+                                                        <Tickmark isSelected={cat === activeFilters?.category} />
+                                                        <p>{categories[cat]}</p>
+                                                    </div>
+                                                )
+                                            })}
+                                        </div>
+                                    </>
+                                :""
+                            }  
+                            
                         </div>
-                    </Dropdown>
-            </Flowbite>
+                        <Dropdown.Divider className='w-full'  />
+                        <div className='flex flex-row w-full justify-between items-center' style={{fontSize:"14px"}} >
+                            <p className='text-color-primary font-medium' onClick={()=>{clearFilters(); onClose()}}>Clear All</p>
+                        </div>
+                    </Dropdown.Item>                 
+                </div>
+            </Dropdown>
             {
                 activeFilters?.category &&
                 <div 

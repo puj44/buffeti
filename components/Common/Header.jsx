@@ -13,7 +13,6 @@ const Location = dynamic(() => import('../DynamicComponents/Location'), {
     ssr:false
   })
 const customTheme = {
-    dropdown:{
         floating:{
             divider:"my-1 h-px bg-[#E3E5E5]",
             item:{
@@ -29,7 +28,6 @@ const customTheme = {
                 auto:"dropdown-box focus:outline-none",
             }
         }
-    }
   };
 
 function Header({handleModelClick}) {
@@ -99,8 +97,7 @@ function Header({handleModelClick}) {
                                     n.isDropdown ?
                                     <div className='hidden md:flex md:items-center my-auto' key={"navbar-"+idx}>
 
-                                        <Flowbite theme={{ theme: customTheme }}>
-                                            <Dropdown label="" className={`hidden md:flex md:items-center cursor-pointer`}   renderTrigger={() =>  
+                                            <Dropdown label="" theme={customTheme} className={`hidden md:flex md:items-center cursor-pointer`}   renderTrigger={() =>  
                                                 <div className='flex flex-row my-auto gap-2 cursor-pointer'>
                                                     <h4 className='font-medium text-white' id={`nav-dropdown-label `}>{n.title}</h4>
                                                     <div className=' w-[13px] h-[8px] my-auto' id={`nav-dropdown-arrow`}>
@@ -135,7 +132,6 @@ function Header({handleModelClick}) {
                                                 }
                                                 
                                             </Dropdown>
-                                        </Flowbite>
                                     </div>
                                     :
                                     
