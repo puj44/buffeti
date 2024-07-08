@@ -16,6 +16,7 @@ function Catering({filters,packages,noOfPeople}) {
       data={{...packages}}
       filters={{...filters}}
       noOfPeople={noOfPeople}
+      handleShowModel={()=>{}}
     />
   )
 }

@@ -11,7 +11,7 @@ import SearchBar from '../Common/Items/SearchBar';
 import PackageCard from '../Homepage/PackageCard';
 import ItemsMobileMenu from '../Common/Items/ItemsMobileMenu';
 
-function Component({mealBox, data, filters,noOfPeople}) {
+function Component({mealBox, data, filters,noOfPeople, handleShowModel}) {
     const router = useRouter();
     const [activeFilters, setActiveFilters] = useState({
         category:Object.keys(filters?.categories ?? {})?.[0] ?? null,
@@ -123,12 +123,16 @@ function Component({mealBox, data, filters,noOfPeople}) {
                                     Object.keys(packagesData?.[activeFilters?.category]).map((pd,idx) =>{
                                         const pack = packagesData?.[activeFilters?.category][pd];
                                         return(
-                                            <PackageCard
-                                                numberOfPeople={noOfPeople}
-                                                menuOption={mealBox}
-                                                key={"package-"+pd}
-                                                data={{...pack ?? {}}}
-                                            />
+                                            <div key={"package-card-"+pd}>
+
+                                                <PackageCard
+                                                    numberOfPeople={noOfPeople}
+                                                    menuOption={mealBox}
+                                                    
+                                                    data={{...pack ?? {}}}
+                                                    handleShowModel={handleShowModel ?? (()=>{})}
+                                                />
+                                            </div>
                                         )
                                     })
 
