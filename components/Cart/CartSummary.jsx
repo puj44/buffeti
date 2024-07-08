@@ -70,10 +70,10 @@ function CartSummary({
                 </>
             }
             {
-                data?.coupon_code !== "" && data?.coupon_discount &&
+                data?.coupon_discount_value && data?.coupon_discount_value !== 0 &&
                 <div className='flex flex-row gap-1 justify-between' >
                     <p className='font-medium'>{"Coupon"}</p>
-                    <p className='text-nowrap'>{"- ₹"+data?.coupon_discount}</p>
+                    <p className='text-nowrap'>{"- ₹"+data?.coupon_discount_value}</p>
                 </div>
             }
              <div className='flex flex-row gap-1 justify-between w-full mt-2'>

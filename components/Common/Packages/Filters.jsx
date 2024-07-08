@@ -202,7 +202,7 @@ else
                             Object.keys(categories).map((cat)=>{
                                 return(
                                     <p key={`category-filter-${cat}`} 
-                                        className={`flex justify-center cursor-pointer py-4 px-6 md:py-[22px]  items-center rounded-full w-full 
+                                        className={`flex justify-center cursor-pointer py-4 px-6 md:py-[22px] text-nowrap items-center rounded-full w-full 
                                              font-semibold sub-title 
                                             ${activeFilters?.category === cat ? "active-filter-box text-color-primary border-[0px_1px_0px_0px] border-[#E3E5E5]":""}`}
                                         onClick={()=>{handleChangeFilter("category",cat)}}

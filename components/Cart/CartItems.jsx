@@ -14,7 +14,7 @@ function CartItems({
 
         cartItemsData?.items && Object.keys(cartItemsData?.items).length > 0 ?
     
-        <div className='border-[1px] border-[#A8A8AD80] flex flex-col gap-6 p-4 overflow-x-hidden'>
+        <div className='border-[1px] border-[#A8A8AD80] border-b-0 flex flex-col gap-6 p-4 overflow-x-hidden'>
             <div className='flex flex-col sm:flex-row gap-3 justify-between items-center'>
                 <p className='font-medium package-title'>{cartData?.menu_option === "click2cater" ? "Click to Cater": cartData?.menu_option === "mini-meals" ?"Mini Meals" :"Snack Box"}</p>
                 {
