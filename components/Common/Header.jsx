@@ -34,6 +34,7 @@ function Header({handleModelClick}) {
     const router = useRouter();
     const auth = useSelector((state)=>state.auth);
     const [mobileMenu, setMobileMenu] = useState(false);
+    const {cartDetails} = useSelector((state) => state.cart);
     const dispatch = useDispatch();
     const isPathActive = (url) =>{
         if(url === ""){
@@ -119,7 +120,7 @@ function Header({handleModelClick}) {
                                                         return(
                                                             <>
                                                                 <Dropdown.Item as="div" className={`${isActive ? "active-path border-b-[0px] border-none":""} `} key={`item-`+data.slug} >  
-                                                                        <Link href={data.url} className={`w-full ${isActive ? "text-color-primary":""}`}>
+                                                                        <Link href={data.url} className={`w-full font-semibold ${isActive ? "text-color-primary":""}`}>
                                                                             {data.title}
                                                                         </Link>
                                                                 </Dropdown.Item>
@@ -185,24 +186,27 @@ function Header({handleModelClick}) {
                 <div className='hidden md:block my-auto'>
                         <Location />
                 </div>
-                <Link className='hidden md:block my-auto' 
-                    onClick={(e)=>{ 
-                        if(!(auth?.isAuthenticated)){
-                            e.preventDefault();
-                            e.stopPropagation();
-                            handleModelClick(true)
-                        }
-                    }}
-                    href="/cart">
-                    <Image
-                        src={"/icons/cart.webp"}
-                        alt={"cart"}
-                        width={20}
-                        height={20}
-                        className='my-auto'
-                        priority
-                    />
-                </Link>
+                {
+                    cartDetails?.items &&
+                    <Link className='hidden md:block my-auto' 
+                        onClick={(e)=>{ 
+                            if(!(auth?.isAuthenticated)){
+                                e.preventDefault();
+                                e.stopPropagation();
+                                handleModelClick(true)
+                            }
+                        }}
+                        href="/cart">
+                        <Image
+                            src={"/icons/cart.webp"}
+                            alt={"cart"}
+                            width={20}
+                            height={20}
+                            className='my-auto'
+                            priority
+                        />
+                    </Link>
+                }
                 <div className='hidden md:flex md:items-center my-auto'>
                    
                     <div onClick={()=>{!(auth?.isAuthenticated) && handleModelClick(true)}} className={`${auth?.isAuthenticated ? "hidden":"flex btn text-color-primary font-semibold bg-white  justify-center items-center my-auto"} `}>

@@ -7,7 +7,7 @@ function ExtraServices({
     selectedData
 }) {
   return (
-    <div className='relative min-h-[194px] text-white h-fit overflow-hidden bg-primary flex flex-col p-4 gap-4 rounded-lg w-full'>
+    <div className='relative min-h-[194px] text-white h-fit overflow-hidden bg-primary flex flex-col p-4 gap-4 rounded-lg '>
         <div className=' absolute right-[-1px] bottom-[-1px]'>
             <Image
                 src={"/banners/services.webp"}

@@ -32,12 +32,12 @@ function CartItemCard({
                             {item?.item_name} 
                         </p>
                         {
-                            item?.item_description &&
-                            <p className=' description-title '>{item.item_description}</p>
+                            item?.item_description || item?.description &&
+                            <p className=' description-title lg:max-w-[90%]'>{item?.item_description || item?.description}</p>
                         }
                         {
                             menuOption === "snack-boxes" &&
-                            <p className=' description-title font-bold'>{`₹ ${item.rate_per_serving}/ Piece`}</p>
+                            <p className=' description-title font-bold'>{`₹ ${menuOption === "mini-meals"? item.price :item.rate_per_serving}/ ${menuOption === "mini-meals" ?"Box":"Piece"}`}</p>
                         }
                         {
                             item?.additional_serving_rate &&
@@ -48,19 +48,28 @@ function CartItemCard({
                         <QuantityInput 
                             handleChangeQuantity={
                             (action) =>{
-                                if(action === "sub" && Number(item?.additional_qty ?? 0) === 0){
-                                handleDeleteItem(item)
-                                }else{
+                                if(action === "sub"  
+                                    
+                                ){
+                                    if((menuOption === "click2cater" && Number(item?.additional_qty ?? 0) === 0) ||
+                                    (menuOption === "mini-meals" && Number(item?.no_of_people) === 10) || menuOption === "snack-boxes"){
 
-                                handleChangeAdditionalQty(item, action === "sub" ? true:false)
+                                        handleDeleteItem(item)
+                                    }else{
+                                        handleChangeAdditionalQty(item, action === "sub" ? true:false, false, menuOption)
+                                    }
+                                }else{
+                                    
+                                handleChangeAdditionalQty(item, action === "sub" ? true:false, false, menuOption)
                                 }
                             }
                             }
                             label={
+                                menuOption === "mini-meals" ? item.no_of_people:
                                 convertToUnits(item,null, noOfPeople,true)
                             }
-                            disableButtons={(item?.extra_items && Object.keys(item?.extra_items)?.length > 0 || menuOption === "snack-boxes" || !item?.additional_serving_rate)}
-                            quantity={Number(item?.additional_qty ?? 0) ?? 0}
+                            disableButtons={menuOption === "mini-meals"? false :(item?.extra_items && Object.keys(item?.extra_items)?.length > 0 || menuOption === "snack-boxes" || !item?.additional_serving_rate)}
+                            quantity={ menuOption === "mini-meals" ? item.no_of_people: Number(item?.additional_qty ?? 0) ?? 0}
                         />
                     </div>
                 </div>

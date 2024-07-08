@@ -48,12 +48,14 @@ function CreatePackage({packageName, menuOption ,packageDetails, itemsData, cate
     if(!isAuthenticated){
       dispatch(setLoginModel({open:true}));
     }else{
-      dispatch(addToCart({
-        menu_option:menuOption,
-        no_of_people:quantity,
-        package_name:packageName,
-        items:itemsSelected
-      }))
+      if(Object.keys(itemsSelected ?? {}).length > 0){
+          dispatch(addToCart({
+            menu_option:menuOption,
+            no_of_people:quantity,
+            package_name:packageName,
+            items:itemsSelected
+          }))
+      }
     }
   }
   

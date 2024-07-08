@@ -5,7 +5,7 @@ import { handleGetData } from "../handlers/homeHandler";
 import { handleGetFilters, handleGetPackage, handleGetPackagesData } from "../handlers/packageHandler";
 import { handleGetCategories, handleGetItemsData, handleSearchItems } from "../handlers/itemsHandler";
 import { handleAddAddress, handleDeleteAddress, handleEditAddress, handleGetAddresses } from "../handlers/addressHandler";
-import { handleAddToCart, handleGetCartData, handleGetCartDetails, handleGetExtraServices } from "../handlers/cartHandler";
+import { handleAddToCart, handleCartDelete, handleCartItemDelete, handleCartItemUpdate, handleCartUpdate, handleGetCartData, handleGetCartDetails, handleGetExtraServices } from "../handlers/cartHandler";
 
 export function* watcherSaga() {
     try{
@@ -37,6 +37,10 @@ export function* watcherSaga() {
             yield takeLatest('cart/addToCart',handleAddToCart),
             yield takeLatest('cart/getCart',handleGetCartData),
             yield takeLatest('cart/getExtraServices',handleGetExtraServices),
+            yield takeLatest('cart/updateCart',handleCartUpdate),
+            yield takeLatest('cart/updateCartItem',handleCartItemUpdate),
+            yield takeLatest('cart/deleteCart',handleCartDelete),
+            yield takeLatest('cart/deleteCartItem',handleCartItemDelete),
         ]);
     }catch(err){
     }

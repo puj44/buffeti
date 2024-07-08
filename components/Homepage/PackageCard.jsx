@@ -1,4 +1,4 @@
-import { addToCart, resetCart } from '@/redux/reducers/cartReducer';
+import { addToCart, deleteCartItem, resetCart, updateCartItem } from '@/redux/reducers/cartReducer';
 import { setLoginModel } from '@/redux/reducers/homeReducer';
 import Image from 'next/image'
 import Link from 'next/link'
@@ -9,7 +9,7 @@ import { useRouter } from 'next/router';
 
 function PackageCard({data,numberOfPeople, menuOption}) {
   const {isAuthenticated} = useSelector((state) => state.auth);
-  const {cartDetails,response,is_invalid} = useSelector((state) => state.cart);
+  const {cartDetails,response,is_invalid,updateResponse} = useSelector((state) => state.cart);
   const [showModel, setShowModel] = useState(false);
   const dispatch = useDispatch();
   const router = useRouter()
@@ -33,6 +33,18 @@ function PackageCard({data,numberOfPeople, menuOption}) {
     }));
     setShowModel(false);
   }
+  const handleChangeQuantity = (action) =>{
+    dispatch(updateCartItem({
+      "cart_item_id":cartDetails?.items?.[data?.slug]?.cart_item_id,
+      "no_of_people":action === "sub" ? Number(cartDetails?.items?.[data?.slug]?.no_of_people - 1) :Number(cartDetails?.items?.[data?.slug]?.no_of_people + 1)
+    }));
+  }
+
+  useEffect(()=>{
+    if(updateResponse){
+      dispatch(resetCart())
+    }
+  },[updateResponse])
 
   useEffect(()=>{
     if(response){
@@ -89,6 +101,13 @@ function PackageCard({data,numberOfPeople, menuOption}) {
                           onClick={(e)=>{
                             e.preventDefault();
                             e.stopPropagation();
+                            if(cartDetails?.items?.[data?.slug]?.no_of_people <= 10) {
+                              dispatch(deleteCartItem({
+                                "cart_item_id":cartDetails?.items?.[data?.slug]?.cart_item_id,
+                              }));
+                            }else{
+                              handleChangeQuantity("sub");
+                            }
                             // handleChangeAdditionalQty(item.category.slug,item?.slug, true,extra)
                           }}
                         >
@@ -100,6 +119,7 @@ function PackageCard({data,numberOfPeople, menuOption}) {
                         onClick={(e)=>{
                           e.preventDefault();
                           e.stopPropagation();
+                          handleChangeQuantity("add");
                           // handleChangeAdditionalQty(item.category.slug,item?.slug, false,extra)
                         }}
                       >
