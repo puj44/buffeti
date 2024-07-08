@@ -257,7 +257,7 @@ function Cart() {
               />
             }
           </div>
-          <div className='grid grid-flow-row self-start gap-4 md:max-w-[380px] w-full'>
+          <div className='flex flex-col self-start gap-4 md:max-w-[380px] w-full'>
             {
               extraServices && extraServices?.length ?
                 <ExtraServices
@@ -268,9 +268,12 @@ function Cart() {
 
               :""
             }
-            <CouponCard
-              handleApplyCoupon={handleApplyCoupon}
-            />
+            <div className='flex w-full'>
+
+              <CouponCard
+                handleApplyCoupon={handleApplyCoupon}
+              />
+            </div>
             <CookingInstruction
               value={cartData?.cooking_instruction ?? ""}
               handleChangeInstruction={handleChangeInstruction}
