@@ -11,7 +11,7 @@ function PageHead() {
         <meta name="language" content="English" />
         <meta name="revisit-after" content="1 days" />
         <link rel="shortcut icon" href="/logo/primary_red.ico" />
-        <link rel="icon" type="image/png" sizes="128x128" href="/logo/primary_logo.png" />
+        <link rel="icon" type="image/png" sizes="128x128" href="/logo/primary_red.png" />
         <link rel="icon" type="image/png" sizes="64x64" href="/logo/primary_red.png" />
         <link rel="icon" type="image/png" sizes="32x32" href="/logo/primary_red.png" />
         {/* OG */}
