@@ -7,32 +7,25 @@ import { useDispatch, useSelector } from 'react-redux'
 import ConfirmationPopup from '../Common/ConfirmationPopup';
 import { useRouter } from 'next/router';
 
-function PackageCard({data,numberOfPeople, menuOption}) {
+function PackageCard({data,numberOfPeople, menuOption, handleShowModel}) {
   const {isAuthenticated} = useSelector((state) => state.auth);
-  const {cartDetails,response,is_invalid,updateResponse} = useSelector((state) => state.cart);
-  const [showModel, setShowModel] = useState(false);
+  const {response,is_invalid,updateResponse} = useSelector((state) => state.cart);
+  const cart = useSelector((state) => state.cart);
+  const [cartDetails, setCartDetails] = useState({});
+  const [currentItem,setCurrentItem] = useState();
+  useEffect(()=>{
+    setCartDetails({...cart?.cartDetails ?? {}})
+  },[cart])
   const dispatch = useDispatch();
-  const router = useRouter()
   const isAdded = (slug) =>{
     if(cartDetails && cartDetails?.menu_option === menuOption && cartDetails?.items?.[slug])
       return true
     else 
       return false
   }
+  
 
-  const handleClose = () =>{
-    setShowModel(false);
-  }
-
-  const handleConfirm = () =>{
-    dispatch(addToCart({
-      menu_option:menuOption,
-      no_of_people:numberOfPeople,
-      package_name:data?.slug,
-      replace:true
-    }));
-    setShowModel(false);
-  }
+ 
   const handleChangeQuantity = (action) =>{
     dispatch(updateCartItem({
       "cart_item_id":cartDetails?.items?.[data?.slug]?.cart_item_id,
@@ -48,17 +41,16 @@ function PackageCard({data,numberOfPeople, menuOption}) {
 
   useEffect(()=>{
     if(response){
-      if(!is_invalid){
-        dispatch(resetCart())
+      if(is_invalid){
+        currentItem && handleShowModel(currentItem)
       }else{
-        setShowModel(true);
-        dispatch(resetCart())
+        handleShowModel(false);
       }
-     
+      dispatch(resetCart())
     }
-  },[response,is_invalid])
+  },[currentItem,dispatch, handleShowModel,response,is_invalid])
   return (
-    <div className='package-card relative max-w-[372px] flex flex-col gap-4 h-full'>
+    <div className='package-card relative max-w-[372px] flex flex-col gap-4 h-full' key={"package-"+data.slug}>
        <div className='px-4  mx-auto'>
         <Image
           src={"/catering_services/mini_thali.webp"}
@@ -85,6 +77,9 @@ function PackageCard({data,numberOfPeople, menuOption}) {
                 if(!isAuthenticated){
                   dispatch(setLoginModel({open:true}));
                 }else{
+                  if(data.slug){
+                    setCurrentItem(data.slug);
+                  }
                   dispatch(addToCart({
                     menu_option:menuOption,
                     no_of_people:process.env.NEXT_PUBLIC_MINI_MEAL_MINIMUM_QTY ?? 10,
@@ -108,7 +103,6 @@ function PackageCard({data,numberOfPeople, menuOption}) {
                             }else{
                               handleChangeQuantity("sub");
                             }
-                            // handleChangeAdditionalQty(item.category.slug,item?.slug, true,extra)
                           }}
                         >
                       <span className='w-[14px] h-[2px] rounded-full bg-primary'>
@@ -120,7 +114,6 @@ function PackageCard({data,numberOfPeople, menuOption}) {
                           e.preventDefault();
                           e.stopPropagation();
                           handleChangeQuantity("add");
-                          // handleChangeAdditionalQty(item.category.slug,item?.slug, false,extra)
                         }}
                       >
                         <span className='absolute-center w-[14px] h-[2px] rounded-full bg-primary'>
@@ -155,12 +148,7 @@ function PackageCard({data,numberOfPeople, menuOption}) {
           </Link>
         }
       </div>
-      <ConfirmationPopup
-          handleClose={handleClose}
-          show={showModel}
-          description={"You already have existing items in the cart. Do you wish to remove them and add this to your cart?"}
-          handleConfirm={handleConfirm}
-        />
+      
     </div>
   )
 }
