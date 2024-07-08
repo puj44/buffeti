@@ -44,7 +44,7 @@ function ItemsSelection({
                 />
             <div className='flex justify-end '>
                 <div 
-                    className='btn primary-btn gap-1' 
+                    className={`btn primary-btn gap-1 ${Object.keys(itemsSelected ?? {}).length <= 0 ? "opacity-60 cursor-default":""}`}
                     style={{padding:"16px",paddingLeft:"28px",paddingRight:"28px"}}
                     onClick={()=>{handleAddToCart()}}
                 >

@@ -6,20 +6,22 @@ import {wrapper} from "../redux/store"
 import { getCookie } from 'cookies-next';
 import { useDispatch, useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
-import { getCart, getExtraServices } from '@/redux/reducers/cartReducer';
+import { deleteCartItem, getCart, getExtraServices, resetCart, updateCart, updateCartItem } from '@/redux/reducers/cartReducer';
 import CartItems from '@/components/Cart/CartItems';
 import { searchDebounce } from '@/commonjs/debounce';
 import ExtraServices from '@/components/Cart/ExtraServices';
 import CouponCard from '@/components/Cart/CouponCard';
 import CookingInstruction from '@/components/Cart/CookingInstruction';
-import CartSummary from '@/components/Cart/CartSummary';
+// import CartSummary from '@/components/Cart/CartSummary';
+import dynamic from 'next/dynamic';
+const CartSummary = dynamic(()=>import("@/components/Cart/CartSummary"),{ssr:false})
 function Cart() {
   const [savedAddresses,setSavedAddresses] = useState([])
   const {addresses,response, errorMessage} = useSelector((state)=>state.address);
   const [cartData, setCartData] = useState({
   });
   const [cartItemsData, setCartItemsData] = useState({});
-  const {cart, extraServices} = useSelector((state) => state.cart);
+  const {cart, extraServices, updateResponse,deleteResponse,redirect} = useSelector((state) => state.cart);
   const {isAuthenticated} = useSelector((state) => state.auth);
   const router = useRouter()
   const dispatch = useDispatch();
@@ -30,7 +32,23 @@ function Cart() {
   },[dispatch]);
 
 
-  
+  useEffect(()=>{
+    if(updateResponse){
+      if(redirect){
+        router.push("/");
+      }
+      dispatch(resetCart())
+    }
+  },[updateResponse,redirect])
+
+  useEffect(()=>{
+    if(deleteResponse){
+      if(redirect){
+        router.push("/");
+      }
+      dispatch(resetCart())
+    }
+  },[deleteResponse,redirect])
 
   useEffect(()=>{
     setSavedAddresses([...addresses ?? []]);
@@ -59,28 +77,57 @@ function Cart() {
     }
   },[cart])
 
-  const handleSelectAddress = (id) =>{
-    setCartData({...cartData, delivery_address_id:id});
-    //CALL CART API
+  const callCartItemUpdate = (item) =>{
+    if(cartData?.menu_option === "mini-meals"){
+      dispatch(updateCartItem({
+        "cart_item_id":item?.cart_item_id,
+        "no_of_people":item?.no_of_people
+      }));
+    }
+    else{
+      dispatch(updateCartItem({
+        "cart_item_id":item?.cart_item_id,
+        "no_of_people":item?.no_of_people,
+        "items":item?.items
+      }));
+    }
+  }
+  const callCartItemDelete = (id) =>{
+    dispatch(deleteCartItem({
+      "cart_item_id":id,
+    }));
   }
 
-  const handleChangeQuantity = searchDebounce((e, isUpdate = false, val) =>{
+  const callCartUpdate = (data) =>{
+    dispatch(updateCart({
+      cart_id:cartData?.cart_id,
+      ...data
+    }))
+  }
+
+  const handleSelectAddress = (id) =>{
+    // setCartData();
+    callCartUpdate({...cartData, delivery_address_id:id})
+  }
+
+  const handleChangeQuantity = (e, isUpdate = false, val) =>{
     e.preventDefault();
     e.stopPropagation();
+    let itemsData = JSON.parse(JSON.stringify(cartItemsData))
     if(isUpdate){
       if(val >= 10){
-        setCartItemsData({...cartItemsData, no_of_people:val});
+        callCartItemUpdate({...itemsData,no_of_people:val}, cartData?.menu_option)
       }
     }else{
       if(/^[\+\-]?\d*\.?\d+(?:[Ee][\+\-]?\d+)?$/.test(e.target.value) || e.target.value === ""){
         if(parseInt(e.target.value) < 10){
+          callCartItemDelete(itemsData?.cart_item_id)
         }else{
-            setCartItemsData({...cartItemsData, no_of_people:e.target.value});
-            //TODO: UPDATE CALL CART ITEMS API
+            callCartItemUpdate({...itemsData,no_of_people:e.target.value}, cartData?.menu_option)
         }
       }
     }
-  })
+  }
 
   //ITEMS FUNCTIONS
   const handleAddItem = ( item,extraItem = false, preparation = false ) =>{
@@ -97,8 +144,7 @@ function Cart() {
         }
       }
     }
-    setCartItemsData({...itemsData});
-    //TODO: CALL CART ITEMS API
+    callCartItemUpdate(itemsData, cartData?.menu_option)
     
   }
   
@@ -107,36 +153,53 @@ function Cart() {
     let itemsData = JSON.parse(JSON.stringify((cartItemsData)));
     if(extraItemSlug){
       delete itemsData?.items?.[item?.slug]?.added_extra_items?.[extraItemSlug];
+      callCartItemUpdate(itemsData, menuOption)
     }else{
-      delete itemsData?.items?.[item?.slug];
+      if(cartData?.menu_option === "mini-meals"){
+        callCartItemDelete(itemsData?.items?.[item?.slug]?.cart_item_id);
+      }else{
+        delete itemsData?.items?.[item?.slug];
+        callCartItemUpdate(itemsData, cartData?.menu_option)
+      }
     }
-    setCartItemsData({...itemsData});
-     //TODO: CALL CART ITEMS API
   }
 
-  const handleChangeAdditionalQty = (item,isSubtract, extraItemSlug = false) =>{
+  const handleChangeAdditionalQty = (item,isSubtract, extraItemSlug = false,menuOption) =>{
     let itemsData = JSON.parse(JSON.stringify((cartItemsData)));
-    if(extraItemSlug){
-      const qty = Number(itemsData?.items?.[item.slug]?.added_extra_items?.[extraItemSlug] ?? 0);
-      
-      itemsData.items[item.slug].added_extra_items = {
-        ...itemsData.items[item.slug]?.added_extra_items,
-        [extraItemSlug]:isSubtract ? (Number(qty) > 0) ?
-        (Number(qty) - 1) : 0
-        :
-        (Number(qty) + 1)
+    if(menuOption !== "mini-meals"){
+
+      if(extraItemSlug){
+        const qty = Number(itemsData?.items?.[item.slug]?.added_extra_items?.[extraItemSlug] ?? 0);
+        
+        itemsData.items[item.slug].added_extra_items = {
+          ...itemsData.items[item.slug]?.added_extra_items,
+          [extraItemSlug]:isSubtract ? (Number(qty) > 0) ?
+          (Number(qty) - 1) : 0
+          :
+          (Number(qty) + 1)
+        }
+    
+      }else{
+        itemsData.items[item.slug] = {
+          ...itemsData.items[item.slug],
+          additional_qty:isSubtract ? (Number(itemsData.items[item.slug].additional_qty ?? 0) > 0) ?
+             (Number(itemsData.items[item.slug].additional_qty) - 1) : 0
+             :
+             (Number(itemsData.items[item.slug].additional_qty ?? 0) + 1)
+        }
+   
+        
       }
+      callCartItemUpdate(itemsData, menuOption)
     }else{
-      itemsData.items[item.slug] = {
-        ...itemsData.items[item.slug],
-        additional_qty:isSubtract ? (Number(itemsData.items[item.slug].additional_qty ?? 0) > 0) ?
-           (Number(itemsData.items[item.slug].additional_qty) - 1) : 0
-           :
-           (Number(itemsData.items[item.slug].additional_qty ?? 0) + 1)
-      }
+      
+      itemsData.items[item.slug].no_of_people = isSubtract ? 
+      itemsData.items[item.slug].no_of_people - 1
+      :
+      itemsData.items[item.slug].no_of_people + 1
+      callCartItemUpdate(itemsData.items[item.slug], menuOption)
     }
-    setCartItemsData({...itemsData});
-        //TODO: CALL CART ITEMS API
+    // setCartItemsData({...itemsData});
   }
 
   const handleChangeExtraService = (field) =>{
@@ -149,8 +212,8 @@ function Cart() {
       extraServicesData.push(field);
     }
     cartDetails.extra_services = extraServicesData;
-    //TODO: CALL CART API
-    setCartData({...cartDetails});
+    callCartUpdate(cartDetails)
+    // setCartData({...cartDetails});
   }
 
   const handleApplyCoupon = (val) =>{
@@ -159,9 +222,7 @@ function Cart() {
   const handleChangeInstruction = searchDebounce((val) =>{
     let cartDetails = JSON.parse(JSON.stringify((cartData)));
     cartDetails.cooking_instruction = val;
-   
-    setCartData({...cartDetails});
-    //TODO: CALL CART API
+    callCartUpdate(cartDetails)
   })
 
   const handleChangeDate = (e) =>{
@@ -177,7 +238,7 @@ function Cart() {
   return (
     <div className="page-spacing py-4">
         <div className='flex flex-col md:flex-row gap-4 w-full'>
-          <div className='grid grid-flow-row gap-4 w-full md:max-w-[650px] lg:max-w-[1180px] 2xl:max-w-[1180px]'>
+          <div className='flex flex-col gap-4 w-full md:max-w-[650px] lg:max-w-[1180px] 2xl:max-w-[1180px]'>
             <SavedAddresses 
                 addresses={[...savedAddresses]} 
                 handleSelectAddress={handleSelectAddress}
@@ -210,6 +271,8 @@ function Cart() {
               value={cartData?.cooking_instruction ?? ""}
               handleChangeInstruction={handleChangeInstruction}
             />
+            {
+            cartData?.billing_details && 
             <CartSummary
                 data={cartData?.billing_details ?? {}}
                 handleChangeDate={handleChangeDate}
@@ -217,6 +280,7 @@ function Cart() {
                 deliveryDate={cartData?.delivery_date}
                 deliveryTime={cartData?.delivery_time}
             />
+            }
           </div>
         </div>
     </div>

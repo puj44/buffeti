@@ -12,6 +12,8 @@ export const cartSlice = createSlice({
         errorMessage:false,
         is_invalid:false,
         already_exists:false,
+        deleteResponse:false,
+        redirect:false
     },
     reducers:{
         getCartDetails:(state) =>{
@@ -49,6 +51,29 @@ export const cartSlice = createSlice({
         },
         setUpdateCartItem:(state,{payload}) =>{
             state.updateResponse = true;
+            if(payload?.redirect ){
+                state.redirect = true;
+            }
+            if(payload?.statusCode === 400){
+            }
+        },
+        deleteCart:(state) =>{
+
+        },
+        setDeleteCart:(state,{payload}) =>{
+            state.deleteResponse = true;
+            state.redirect = true;
+            if(payload?.statusCode === 400){
+            }
+        },
+        deleteCartItem:(state) =>{
+
+        },
+        setDeleteCartItem:(state,{payload}) =>{
+            state.deleteResponse = true;
+            if(payload?.redirect ){
+                state.redirect = true;
+            }
             if(payload?.statusCode === 400){
             }
         },
@@ -66,6 +91,8 @@ export const cartSlice = createSlice({
             state.errorMessage = false;
             state.is_invalid =  false;
             state.already_exists = false;
+            state.deleteResponse = false;
+            state.redirect = false;
         }
     }
 });
@@ -83,6 +110,10 @@ export const {
     setUpdateCartItem,
     getExtraServices,
     setExtraServices,
+    deleteCart,
+    setDeleteCart,
+    deleteCartItem,
+    setDeleteCartItem,
     resetCart
 } = cartSlice.actions;
 

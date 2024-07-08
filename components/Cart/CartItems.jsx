@@ -10,43 +10,36 @@ function CartItems({
     handleDeleteItem,
     handleAddItem
 }) {
-    switch(cartData?.menu_option){
-        case "mini-meals":
+    return(
 
-
-            return (
-              <div>
-          
-              </div>
-            )
-        default:
-            return(
-                cartItemsData?.items && Object.keys(cartItemsData?.items).length > 0 ?
-
-                <div className='border-[1px] border-[#A8A8AD80] flex flex-col gap-6 p-4 overflow-x-hidden'>
-                    <div className='flex flex-col sm:flex-row gap-3 justify-between items-center'>
-                        <p className='font-medium package-title'>{cartData?.menu_option === "click2cater" ? "Click to Cater":"Snack Box"}</p>
-                        <PeopleQuantityInput quantity={cartItemsData?.no_of_people} handleChangeQuantity={handleChangeQuantity ?? (()=>{})} isPackage={true} />
-                    </div>
-                    {
-                        Object.keys(cartItemsData?.items).map((ci,idx)=>{
-                            return(
-                                <CartItemCard
-                                    key={ci}
-                                    item={cartItemsData?.items[ci]}
-                                    noOfPeople={cartItemsData?.no_of_people}
-                                    menuOption={cartData?.menu_option}
-                                    handleChangeAdditionalQty={handleChangeAdditionalQty ?? (()=>{})}
-                                    handleDeleteItem={handleDeleteItem ?? (()=>{})}
-                                    handleAddItem={handleAddItem ?? (()=>{})}
-                                />
-                            )
-                        })
-                    }
-                </div>
-                :""
-            )
-    }
+        cartItemsData?.items && Object.keys(cartItemsData?.items).length > 0 ?
+    
+        <div className='border-[1px] border-[#A8A8AD80] flex flex-col gap-6 p-4 overflow-x-hidden'>
+            <div className='flex flex-col sm:flex-row gap-3 justify-between items-center'>
+                <p className='font-medium package-title'>{cartData?.menu_option === "click2cater" ? "Click to Cater": cartData?.menu_option === "mini-meals" ?"Mini Meals" :"Snack Box"}</p>
+                {
+                    cartData?.menu_option !== "mini-meals" &&
+                    <PeopleQuantityInput quantity={cartItemsData?.no_of_people} handleChangeQuantity={handleChangeQuantity ?? (()=>{})} isPackage={true} />
+                }
+            </div>
+            {
+                Object.keys(cartItemsData?.items).map((ci,idx)=>{
+                    return(
+                        <CartItemCard
+                            key={ci}
+                            item={cartItemsData?.items[ci]}
+                            noOfPeople={cartItemsData?.no_of_people}
+                            menuOption={cartData?.menu_option}
+                            handleChangeAdditionalQty={handleChangeAdditionalQty ?? (()=>{})}
+                            handleDeleteItem={handleDeleteItem ?? (()=>{})}
+                            handleAddItem={handleAddItem ?? (()=>{})}
+                        />
+                    )
+                })
+            }
+        </div>
+        :""
+    )
 }
 
 export default CartItems

@@ -1,8 +1,8 @@
 
 import React from 'react'
-// import OrderDatePicker from '../Common/OrderDatePicker'
+import OrderDatePicker from '../Common/OrderDatePicker'
 import dynamic from 'next/dynamic'
-const OrderDatePicker = dynamic(()=>import("../Common/OrderDatePicker"),{ssr:false})
+
 function CartSummary({
     data,
     handleChangeDate,
@@ -55,6 +55,20 @@ function CartSummary({
                 </div>
 
             }
+             {
+                data?.extra_services_charges?.length > 0 &&
+                <>
+                <p className='font-semibold'>Extra Services</p>
+              {      data?.extra_services_charges.map((extraServiceCharge,idx)=>{
+                        return(
+                            <div className='flex flex-row w-full gap-1 justify-between' key={"extra-service-charge-"+idx} >
+                                <p className=''>{extraServiceCharge.name}</p>
+                                <p className='text-nowrap'>{"₹"+extraServiceCharge.price}</p>
+                            </div>
+                        )
+                    })}
+                </>
+            }
             {
                 data?.coupon_code !== "" && data?.coupon_discount &&
                 <div className='flex flex-row gap-1 justify-between' >
@@ -64,7 +78,7 @@ function CartSummary({
             }
              <div className='flex flex-row gap-1 justify-between w-full mt-2'>
                 <p className='font-medium'>{"GST"}</p>
-                <p>{"₹"+Number(data?.total_billed_amount - data?.total_amount)}</p>
+                <p>{"₹"+Number(data?.total_billed_amount - data?.total_amount).toFixed(2)}</p>
             </div>
         </div>
         <span className='border-[1px] border-dashed  border-[#595959] w-full'></span>
