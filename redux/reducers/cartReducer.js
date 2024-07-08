@@ -13,7 +13,8 @@ export const cartSlice = createSlice({
         is_invalid:false,
         already_exists:false,
         deleteResponse:false,
-        redirect:false
+        redirect:false,
+        couponMessage:"",
     },
     reducers:{
         getCartDetails:(state) =>{
@@ -85,6 +86,27 @@ export const cartSlice = createSlice({
             if(payload?.statusCode === 400){
             }
         },
+        applyCoupon:(state) =>{
+
+        },
+        setApplyCoupon:(state,{payload}) =>{
+            if(payload?.statusCode === 400){
+                state.couponMessage = payload?.message ?? "";
+            }
+            else{
+                state.couponMessage = false;
+            }
+        },
+        removeCoupon:(state) =>{
+
+        },
+        setRemoveCoupon:(state,{payload}) =>{
+            if(payload?.statusCode === 400){
+                state.couponMessage = payload?.message ?? "";
+            }else{
+                state.couponMessage = false;
+            }
+        },
         resetCart:(state) =>{
             state.response = false;
             state.updateResponse = false;
@@ -114,6 +136,10 @@ export const {
     setDeleteCart,
     deleteCartItem,
     setDeleteCartItem,
+    applyCoupon,
+    setApplyCoupon,
+    removeCoupon,
+    setRemoveCoupon,
     resetCart
 } = cartSlice.actions;
 

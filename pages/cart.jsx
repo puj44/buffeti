@@ -6,7 +6,7 @@ import {wrapper} from "../redux/store"
 import { getCookie } from 'cookies-next';
 import { useDispatch, useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
-import { deleteCartItem, getCart, getExtraServices, resetCart, updateCart, updateCartItem } from '@/redux/reducers/cartReducer';
+import { applyCoupon, deleteCart, deleteCartItem, getCart, getExtraServices, removeCoupon, resetCart, updateCart, updateCartItem } from '@/redux/reducers/cartReducer';
 // import CartItems from '@/components/Cart/CartItems';
 import { searchDebounce } from '@/commonjs/debounce';
 import ExtraServices from '@/components/Cart/ExtraServices';
@@ -22,7 +22,8 @@ function Cart() {
   const [cartData, setCartData] = useState({
   });
   const [cartItemsData, setCartItemsData] = useState({});
-  const {cart, extraServices, updateResponse,deleteResponse,redirect} = useSelector((state) => state.cart);
+  const [couponError,setCouponError] = useState("");
+  const {cart, extraServices, updateResponse,deleteResponse,redirect, couponMessage} = useSelector((state) => state.cart);
   const {isAuthenticated} = useSelector((state) => state.auth);
   const router = useRouter()
   const dispatch = useDispatch();
@@ -32,6 +33,11 @@ function Cart() {
     dispatch(getExtraServices());
   },[dispatch]);
 
+  useEffect(()=>{
+    if(couponMessage){
+      setCouponError(couponMessage);
+    }
+  },[couponMessage])
 
   useEffect(()=>{
     if(updateResponse){
@@ -107,7 +113,6 @@ function Cart() {
   }
 
   const handleSelectAddress = (id) =>{
-    // setCartData();
     callCartUpdate({...cartData, delivery_address_id:id})
   }
 
@@ -218,7 +223,15 @@ function Cart() {
   }
 
   const handleApplyCoupon = (val) =>{
-    //TODO: APPLY COUPON API
+    dispatch(applyCoupon({
+      cart_id:cartData?.cart_id,
+      code:val
+    }))
+  }
+  const handleRemoveCoupon = (val) =>{
+    dispatch(removeCoupon({
+      cart_id:cartData?.cart_id,
+    }))
   }
   const handleChangeInstruction = searchDebounce((val) =>{
     let cartDetails = JSON.parse(JSON.stringify((cartData)));
@@ -231,6 +244,12 @@ function Cart() {
     cartDetails.delivery_date = e;
     setCartData({...cartDetails});
     //TODO: CALL CART API
+  }
+
+  const handleRemoveCart = () =>{
+    dispatch(deleteCart({
+      cart_id:cartData?.cart_id
+    }))
   }
   const handleChangeTime = () =>{
 
@@ -245,17 +264,29 @@ function Cart() {
                 handleSelectAddress={handleSelectAddress}
                 selectedAddress={cartData?.delivery_address_id}
             />
-            {
-              Object.keys(cartItemsData ?? {})?.length > 0 &&
-              <CartItems
-                cartData={cartData}
-                cartItemsData={cartItemsData}
-                handleChangeQuantity={handleChangeQuantity}
-                handleAddItem={handleAddItem}
-                handleDeleteItem={handleDeleteItem}
-                handleChangeAdditionalQty={handleChangeAdditionalQty}
-              />
-            }
+            <div className='flex flex-col'>
+              {
+                Object.keys(cartItemsData ?? {})?.length > 0 &&
+                <CartItems
+                  cartData={cartData}
+                  cartItemsData={cartItemsData}
+                  handleChangeQuantity={handleChangeQuantity}
+                  handleAddItem={handleAddItem}
+                  handleDeleteItem={handleDeleteItem}
+                  handleChangeAdditionalQty={handleChangeAdditionalQty}
+                  handleRemoveCart={handleRemoveCart}
+                />
+              }
+              <div className='w-full hidden md:flex bg-white flex-col sm:flex-row gap-3 p-4 justify-between sticky bottom-0' style={{"boxShadow":" 0px -1px 8px 0px #0000001A"
+                  }}>
+                  <button className='order-2 md:order-1 border-[1px] py-2 sm:py-3 px-8 rounded-lg font-medium border-[#B42318] flex justify-center items-center text-color-primary' onClick={()=>{handleRemoveCart()}}>
+                  {"Remove all"}
+                  </button> 
+                  <button className='btn primary-btn font-medium order-1 md:order-2'>
+                      {"Place Order"}
+                  </button>
+              </div>
+            </div>
           </div>
           <div className='flex flex-col self-start gap-4 md:max-w-[380px] w-full'>
             {
@@ -272,6 +303,11 @@ function Cart() {
 
               <CouponCard
                 handleApplyCoupon={handleApplyCoupon}
+                couponError={couponError}
+                couponDiscount={cartData?.coupon_discount ?? null}
+                couponType={cartData?.coupon_type}
+                couponCode={cartData?.coupon_code ?? null}
+                handleRemoveCoupon={handleRemoveCoupon}
               />
             </div>
             <CookingInstruction
@@ -290,6 +326,15 @@ function Cart() {
             }
           </div>
         </div>
+        <div className='w-full flex md:hidden bg-white flex-row gap-3 p-4 justify-between sticky bottom-0' style={{"boxShadow":" 0px -1px 8px 0px #0000001A"
+                  }}>
+                  <button className=' border-[1px] py-2 px-4 sm:py-3 sm:px-8 rounded-lg font-medium border-[#B42318] flex justify-center items-center text-color-primary' onClick={()=>{handleRemoveCart()}}>
+                  {"Remove all"}
+                  </button> 
+                  <button className='bg-primary rounded-lg text-white py-2 px-4 sm:py-3 sm:px-8 flex justify-center items-center font-medium  ' >
+                      {"Place Order"}
+                  </button>
+              </div>
     </div>
   )
 }

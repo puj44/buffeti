@@ -41,7 +41,7 @@ export const put = async (url, payload,location) => {
         
         }
       }
-      return false;
+      return err;
     }
 };
 export const remove = async (url,location) => {
@@ -53,6 +53,6 @@ export const remove = async (url,location) => {
       if (err?.response?.status === 401) {
       }
     }
-    return false;
+    return err;
   }
 };

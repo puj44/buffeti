@@ -27,3 +27,9 @@ export const deleteCartApi = ({payload}) =>{
 export const deleteCartItemApi = ({payload}) =>{
     return remove("/cart/cart-items-delete/"+payload.cart_item_id);
 }
+export const applyCouponApi = ({payload}) =>{
+    return put("/cart/add-coupon/"+payload.cart_id,payload);
+}
+export const removeCouponApi = ({payload}) =>{
+    return remove("/cart/remove-coupon/"+payload.cart_id);
+}
