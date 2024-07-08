@@ -7,7 +7,7 @@ import { getCookie } from 'cookies-next';
 import { useDispatch, useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
 import { deleteCartItem, getCart, getExtraServices, resetCart, updateCart, updateCartItem } from '@/redux/reducers/cartReducer';
-import CartItems from '@/components/Cart/CartItems';
+// import CartItems from '@/components/Cart/CartItems';
 import { searchDebounce } from '@/commonjs/debounce';
 import ExtraServices from '@/components/Cart/ExtraServices';
 import CouponCard from '@/components/Cart/CouponCard';
@@ -15,6 +15,7 @@ import CookingInstruction from '@/components/Cart/CookingInstruction';
 // import CartSummary from '@/components/Cart/CartSummary';
 import dynamic from 'next/dynamic';
 const CartSummary = dynamic(()=>import("@/components/Cart/CartSummary"),{ssr:false})
+const CartItems = dynamic(()=>import("@/components/Cart/CartItems"),{ssr:false})
 function Cart() {
   const [savedAddresses,setSavedAddresses] = useState([])
   const {addresses,response, errorMessage} = useSelector((state)=>state.address);
@@ -244,14 +245,17 @@ function Cart() {
                 handleSelectAddress={handleSelectAddress}
                 selectedAddress={cartData?.delivery_address_id}
             />
-            <CartItems
-              cartData={cartData}
-              cartItemsData={cartItemsData}
-              handleChangeQuantity={handleChangeQuantity}
-              handleAddItem={handleAddItem}
-              handleDeleteItem={handleDeleteItem}
-              handleChangeAdditionalQty={handleChangeAdditionalQty}
-            />
+            {
+              Object.keys(cartItemsData ?? {})?.length > 0 &&
+              <CartItems
+                cartData={cartData}
+                cartItemsData={cartItemsData}
+                handleChangeQuantity={handleChangeQuantity}
+                handleAddItem={handleAddItem}
+                handleDeleteItem={handleDeleteItem}
+                handleChangeAdditionalQty={handleChangeAdditionalQty}
+              />
+            }
           </div>
           <div className='grid grid-flow-row self-start gap-4 md:max-w-[380px] w-full'>
             {
