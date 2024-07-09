@@ -9,7 +9,6 @@ import { useRouter } from 'next/router';
 
 function LoginContainer({step,changeStep, onInputChange, values,error,changeNumber,sendOTP,handleModelClick,verifyOtp, timer,isLoading,resendOTP}) {
     const {locations} = useSelector((state) => state.home);
-    const [qty, setQty] = useState(10);
     const [location, setLocation] = useState();
     const [err, setErr] = useState(false);
     const [position,setPosition] = useState({ latitude: null, longitude: null });
@@ -242,11 +241,10 @@ function LoginContainer({step,changeStep, onInputChange, values,error,changeNumb
                             </div>
                             {err && <span className={'text-color-secondary-red'} id="location-error">{err}</span>}
                         </div>
-                        <PeopleQuantityInput quantity={qty ?? 10} handleChangeQuantity={handleChangeQuantity} />
+                        {/* <PeopleQuantityInput quantity={qty ?? 10} handleChangeQuantity={handleChangeQuantity} /> */}
                         <button className={`btn primary-btn ${isLoading ? "opacity-60":""}`} onClick={()=>{
                             if(location){
                                 setErr(false)
-                                localStorage.setItem("no_of_people",qty);
                                 localStorage.setItem("visited",true)
                                 setCookie("location",location,{maxAge:9.461e+7});
                                 handleModelClick(false);
