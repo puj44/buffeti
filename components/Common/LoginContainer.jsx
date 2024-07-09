@@ -289,15 +289,18 @@ function LoginContainer({step,changeStep, onInputChange, values,error,changeNumb
             {/* TITLE DIV */}
             <div className='hidden p-[24px] pb-0 md:flex flex-row justify-between items-center'>
                     <p className='sub-title font-medium'>{step === "login" ? "Login" : step === "register" ? "Register" : step === "get_started"?"Let's get started":"OTP Verification"}</p>
-                    <div className='cursor-pointer' onClick={()=>{localStorage.setItem("visited",true);handleModelClick(false)}}>
-                        <Image
-                            src={"/icons/cross.webp"}
-                            width={13}
-                            height={13}
-                            alt={"Close"}
-                            priority
-                        />
-                    </div>
+                    {
+                        step !== "get_started" && 
+                        <div className='cursor-pointer' onClick={()=>{localStorage.setItem("visited",true);handleModelClick(false)}}>
+                            <Image
+                                src={"/icons/cross.webp"}
+                                width={13}
+                                height={13}
+                                alt={"Close"}
+                                priority
+                            />
+                        </div>
+                    }
                 </div>
                 <div className='px-[20px] pt-[11px] h-[177px]  m-0 relative block md:hidden bg-[#F5F5F5] '>
                     <div className='grid grid-rows-[50%_50%] h-full '>
