@@ -2,24 +2,23 @@ import React from 'react'
 import { Dropdown, Flowbite } from 'flowbite-react';
 import Image from 'next/image';
 const customMenuTheme = {
-    dropdown:{
-        floating:{
-            divider:"my-1 h-px bg-[#E3E5E5]",
-            item:{
-                container: "",
-                base: "  cursor-pointer px-0   justify-start focus:outline-none",
-                icon: "mr-2 h-4 w-4"
-            },
-            
-    
-            style:{
-                dark:"menu-box",
-                light:"menu-box",
-                auto:"menu-box",
-            }
+    floating:{
+        divider:"my-1 h-px bg-[#E3E5E5]",
+        item:{
+            container: "",
+            base: "flex  cursor-pointer px-0 py-1.5 pe-4 items-center justify-start small-title focus:outline-none",
+            icon: "mr-2 h-4 w-4"
+        },
+        
+
+        style:{
+            dark:"dropdown-box focus:outline-none",
+            light:"dropdown-box focus:outline-none",
+            auto:"dropdown-box focus:outline-none",
         }
     }
-  };
+};
+
 function ItemsMobileMenu({
     show,
     activeItem,
@@ -41,10 +40,10 @@ function ItemsMobileMenu({
 if(show)
     return (
         <div className='fixed right-[20px] bottom-[20px] flex justify-end w-full z-20'>
-            <Flowbite theme={{...customMenuTheme}}>
                 <Dropdown 
                     label="" 
                     placement='top'
+                    theme={customMenuTheme}
                     renderTrigger={()=>
                         <div className='flex flex-row justify-center px-3 py-2 gap-1 items-center bg-primary rounded-[30px]  '>
                             <div className='w-[18px] h-[14px]'>
@@ -108,7 +107,6 @@ if(show)
                     }
                        
                 </Dropdown>
-            </Flowbite>
         </div>
     )
 }
