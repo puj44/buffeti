@@ -87,7 +87,6 @@ function LoginModel({handleModelClick, isModalOpen, isFirstTime}) {
     }
 
     useEffect(()=>{
-        
         if(otpResponse){
             if(otpSecondsLeft && Number(otpSecondsLeft) > 0){
                 setTimer(Number(otpSecondsLeft));
@@ -118,7 +117,7 @@ function LoginModel({handleModelClick, isModalOpen, isFirstTime}) {
             }
             
         }
-    },[dispatch, step,otpResponse,errorMessage])
+    },[dispatch, step,otpResponse,errorMessage,otpSecondsLeft])
 
     useEffect(()=>{
         let interval;

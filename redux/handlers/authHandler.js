@@ -15,7 +15,7 @@ export function* handleGetMobileOtp(action){
 export function* handleSignup(action){
     try{
         const response = yield call(signupApi,action);
-        yield put(setMobileOtpResponse(response?.response?.data));
+        yield put(setMobileOtpResponse(response?.response?.data || response?.data));
     }catch(err){
         
     }
