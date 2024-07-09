@@ -2,6 +2,7 @@ import React from 'react'
 import { Dropdown, Flowbite } from 'flowbite-react';
 import Image from 'next/image';
 const customMenuTheme = {
+    content:"py-0 pt-1 focus:outline-none",
     floating:{
         divider:"my-1 h-px bg-[#E3E5E5]",
         item:{
@@ -12,9 +13,9 @@ const customMenuTheme = {
         
 
         style:{
-            dark:"dropdown-box focus:outline-none",
-            light:"dropdown-box focus:outline-none",
-            auto:"dropdown-box focus:outline-none",
+            dark:"menu-box focus:outline-none",
+            light:"menu-box focus:outline-none",
+            auto:"menu-box focus:outline-none",
         }
     }
 };
@@ -46,7 +47,7 @@ if(show)
                     theme={customMenuTheme}
                     renderTrigger={()=>
                         <div className='flex flex-row justify-center px-3 py-2 gap-1 items-center bg-primary rounded-[30px]  '>
-                            <div className='w-[18px] h-[14px]'>
+                            <div className='w-[18px] h-[14px] my-auto'>
                                 <Image 
                                     src={"/icons/menu_i.webp"}
                                     width={76}
