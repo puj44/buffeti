@@ -194,16 +194,16 @@ if(mobile)
 else
   return (
 
-    <div className='grid grid-flow-row gap-4 md:gap-6 w-full overflow-x-scroll md:overflow-x-hidden'>
+    <div className='grid grid-flow-row bg-white pt-1 pb-0 md:pb-1 w-full overflow-x-scroll  md:overflow-x-hidden sticky top-0 z-20'>
             {
                 (packageCategory && categories && Object.keys(categories).length) ?
-                    <div className='category-filter  w-full mx-auto  '>
+                    <div className='category-filter  w-full mx-auto  bg-white'>
                         {
                             Object.keys(categories).map((cat)=>{
                                 return(
                                     <p key={`category-filter-${cat}`} 
                                         className={`flex justify-center cursor-pointer py-4 px-6 md:py-[22px] text-nowrap items-center rounded-full w-full 
-                                             font-semibold sub-title 
+                                             font-semibold sub-title bg-white
                                             ${activeFilters?.category === cat ? "active-filter-box text-color-primary border-[0px_1px_0px_0px] border-[#E3E5E5]":""}`}
                                         onClick={()=>{handleChangeFilter("category",cat)}}
                                     >
@@ -217,6 +217,8 @@ else
 
                 : ""
             }
+            {
+                pricing?.length > 0 || displayNoOfPeople || (!packageCategory && categories && Object.keys(categories)?.length > 0) && 
             <div className='flex flex-col gap-2 md:flex-row items-center w-full  md:gap-4 justify-between py-2 px-4'>
 
                 {
@@ -321,6 +323,7 @@ else
                     :""
                 }
             </div>
+            }
             
         
     </div>

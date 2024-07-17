@@ -20,7 +20,7 @@ function ItemsSlider({
   const {isLoading} = useSelector((state) => state.items);
   
   return (
-    <div className='grid grid-flow-row gap-6'>
+    <div className='grid grid-flow-row gap-6 '>
       
       {
         isLoading?

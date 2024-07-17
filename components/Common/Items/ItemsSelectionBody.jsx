@@ -20,14 +20,14 @@ function ItemsSelectionBody({
   handleAddToCart
 }) {
  
-  const addedItems = useMemo(()=>{
-    let items = {};
-    itemsSelected && Object.keys(itemsSelected).map((i)=>{
-      items = {...items, ...itemsSelected[i]};
-    })
+  // const addedItems = useMemo(()=>{
+  //   let items = {};
+  //   itemsSelected && Object.keys(itemsSelected).map((i)=>{
+  //     items = {...items, ...itemsSelected[i]};
+  //   })
     
-    return items ?? {}
-  },[itemsSelected])
+  //   return items ?? {}
+  // },[itemsSelected])
 
 
   
@@ -35,14 +35,14 @@ function ItemsSelectionBody({
   return (
     <div className='flex flex-col md:flex-row md:gap-6 w-full items-start items-section'>
       {/* LEFT SIDE SECTION ITEMS CATEGORY SELECTION */}
-      <div className='hidden md:flex'>
+      <div className='hidden md:flex sticky top-0 left-0 h-fit bg-white'>
         <ItemsSideBar show={true} activeItem={activeItem} itemsSelected={itemsSelected} items={categories} handleChangeActiveItem={handleChangeActiveItem} />
       </div>
       <div className='contents md:hidden'>
         <ItemsMobileMenu show={true} activeItem={activeItem} itemsSelected={itemsSelected} items={categories} handleChangeActiveItem={handleChangeActiveItem} />
       </div>
       <div className='h-full  w-[1.5px] border-[1.5px] border-[#E3E5E5] hidden md:block'></div>
-      <div className='flex flex-col md:flex-row gap-6 w-full items-start items-section'>
+      <div className='flex flex-col lg:flex-row gap-6 w-full items-start items-section'>
         {/* RIGHT SIDE SECTION ITEMS SELECTION */}
         <ItemsSelection 
           items={{...items ?? {}}} 
@@ -58,15 +58,14 @@ function ItemsSelectionBody({
           handleAddToCart={handleAddToCart ?? (()=>{})}
         />
         {
-          addedItems && Object.keys(addedItems).length > 0?
+          itemsSelected && Object.keys(itemsSelected).length > 0?
           <ItemsAdded
-            items={{...addedItems}}
+          itemsSelected={itemsSelected}
             handleChangeAdditionalQty={handleChangeAdditionalQty ?? (()=>{})}
             handleDeleteItem={handleDeleteItem ?? (()=>{})} 
             menuOption={menuOption}
             noOfPeople={noOfPeople}
-            itemsSelected={itemsSelected} 
-            handleAddToCart={handleAddToCart ?? (()=>{})}
+            categories={categories}
           />:""
         }
       </div>

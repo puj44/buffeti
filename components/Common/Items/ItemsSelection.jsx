@@ -21,7 +21,7 @@ function ItemsSelection({
   
 
   return (
-        <div className='flex flex-col order-2 md:order-1 gap-6 sm:w-full relative max-w-[991px]'>
+        <div className='flex flex-col order-2 lg:order-1 gap-6 sm:w-full relative max-w-[991px]'>
             <SearchBar 
                 handleSearchChange={handleSearchChange}
                 itemsSelected={itemsSelected}

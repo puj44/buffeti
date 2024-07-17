@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import PeopleQuantityInput from '../Common/PeopleQuantityInput'
 import CartItemCard from './CartItemCard'
 
@@ -10,9 +10,16 @@ function CartItems({
     handleDeleteItem,
     handleAddItem
 }) {
+    const items = useMemo(()=>{
+        if(cartData?.menu_option !== "mini-meals"){
+            return cartItemsData?.items;
+        }else{
+            return cartItemsData;
+        }
+    },[cartData,cartItemsData])
     return(
 
-        cartItemsData?.items && Object.keys(cartItemsData?.items).length > 0 ?
+        items && Object.keys(items).length > 0 ?
     
         <div className='border-[1px] border-[#A8A8AD80] border-b-0 flex flex-col gap-6 p-4 overflow-x-hidden'>
             <div className='flex flex-col sm:flex-row gap-3 justify-between items-center'>
@@ -23,11 +30,11 @@ function CartItems({
                 }
             </div>
             {
-                Object.keys(cartItemsData?.items).map((ci,idx)=>{
+                Object.keys(items).map((ci,idx)=>{
                     return(
                         <CartItemCard
                             key={ci}
-                            item={cartItemsData?.items[ci]}
+                            item={items[ci]}
                             noOfPeople={cartItemsData?.no_of_people}
                             menuOption={cartData?.menu_option}
                             handleChangeAdditionalQty={handleChangeAdditionalQty ?? (()=>{})}

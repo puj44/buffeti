@@ -1,6 +1,8 @@
 import { put, call } from "redux-saga/effects";
 import { setMobileOtpResponse,isAuthenticated, setTokenStatus, setSignout } from "../reducers/authReducer";
 import { getOtpApi, getTokenStatusApi, signoutApi, signupApi, verifyOtpApi} from "../requests/authRequests";
+import { getCartDetailsApi } from "../requests/cartRequests";
+import { setCartDetails } from "../reducers/cartReducer";
 
 
 export function* handleGetMobileOtp(action){
@@ -25,6 +27,8 @@ export function* handleVerifyOtp(action){
     try{
         const response = yield call(verifyOtpApi,action);
         yield put(isAuthenticated(response?.response?.data || response?.data));
+        const res = yield call(getCartDetailsApi,action);
+        yield put(setCartDetails(res?.response?.data || res?.data));
     }catch(err){
         
     }
