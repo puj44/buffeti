@@ -44,6 +44,7 @@ function Footer() {
                             <Link href="/terms-and-conditions" className=' items-center'>Terms</Link>
                             <Link href="/privacy-policy" className=' items-center'>Privacy</Link>
                             <Link href="/cookies-policy" className=' items-center'>Cookies</Link>
+                            <Link href="/cancellation-refund-policy" className=' items-center'>Cancellation & Refund Policy</Link>
                             {socials.map((s,idx)=>{
                                 return(
                                     <Link href={s.url} key={"social-"+s.title} className='m-auto'>
