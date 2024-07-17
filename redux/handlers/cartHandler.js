@@ -25,8 +25,8 @@ export function* handleAddToCart(action){
     try{
         const response = yield call(addToCartApi,action);
         yield put(setAddToCart(response?.response?.data || response?.data));
-        const res = yield call(getCartDetailsApi,action);
-        yield put(setCartDetails(res?.response?.data || res?.data));
+        // const res = yield call(getCartDetailsApi,action);
+        yield put(setCartDetails(response?.response?.data || response?.data));
     }catch(err){
         
     }
@@ -58,6 +58,7 @@ export function* handleCartUpdate(action){
         const response = yield call(updateCartApi,action);
         yield put(setUpdateCart(response?.response?.data || response?.data));
         yield put(setCart(response?.response?.data || response?.data));
+        
     }catch(err){
         
     }
@@ -68,6 +69,7 @@ export function* handleCartDelete(action){
         yield put(setDeleteCart(response?.response?.data || response?.data));
         const res = yield call(getCartApi,action);
         yield put(setCart(res?.response?.data || res?.data));
+        yield put(setCartDetails(response?.response?.data || response?.data));
     }catch(err){
         
     }

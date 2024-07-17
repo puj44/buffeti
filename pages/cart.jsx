@@ -162,7 +162,7 @@ function Cart() {
       callCartItemUpdate(itemsData, menuOption)
     }else{
       if(cartData?.menu_option === "mini-meals"){
-        callCartItemDelete(itemsData?.items?.[item?.slug]?.cart_item_id);
+        callCartItemDelete(itemsData?.[item?.slug]?.cart_item_id);
       }else{
         delete itemsData?.items?.[item?.slug];
         callCartItemUpdate(itemsData, cartData?.menu_option)
@@ -199,11 +199,11 @@ function Cart() {
       callCartItemUpdate(itemsData, menuOption)
     }else{
       
-      itemsData.items[item.slug].no_of_people = isSubtract ? 
-      itemsData.items[item.slug].no_of_people - 1
+      itemsData[item.slug].no_of_people = isSubtract ? 
+      Number(itemsData[item.slug].no_of_people - 1)
       :
-      itemsData.items[item.slug].no_of_people + 1
-      callCartItemUpdate(itemsData.items[item.slug], menuOption)
+      Number(itemsData[item.slug].no_of_people + 1)
+      callCartItemUpdate(itemsData[item.slug], menuOption)
     }
     // setCartItemsData({...itemsData});
   }
@@ -304,8 +304,8 @@ function Cart() {
               <CouponCard
                 handleApplyCoupon={handleApplyCoupon}
                 couponError={couponError}
-                couponDiscount={cartData?.coupon_discount ?? null}
-                couponType={cartData?.coupon_type}
+                couponDiscount={cartData?.billing_details?.coupon_discount ?? null}
+                couponType={cartData?.billing_details?.coupon_type}
                 couponCode={cartData?.coupon_code ?? null}
                 handleRemoveCoupon={handleRemoveCoupon}
               />

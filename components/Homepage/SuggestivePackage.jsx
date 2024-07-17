@@ -48,16 +48,16 @@ function SuggestivePackage({data,filters,noOfPeople}) {
     }
   return (
     <div className='flex flex-col gap-4 md:gap-6  max-w-[1182px] w-full mx-auto  ' id={"suggestive-package"}>
-        <h3 className='sub-title py-2 px-4 bg-[#FFEFEE] text-color-primary rounded-2xl w-fit font-medium md:font-semibold mx-auto  '>Click-to-cater</h3>
-        <div className='hidden md:block'>
+        {/* <h3 className='sub-title py-2 px-4 bg-[#FFEFEE] text-color-primary rounded-2xl w-fit font-medium md:font-semibold mx-auto  '>Click-to-cater</h3> */}
             <Filters 
-                pricing={filters?.pricing} 
+                // pricing={filters?.pricing} 
                 activeFilters={activeFilters} 
                 categories={filters?.categories} 
                 packageCategory={true} 
-                displayNoOfPeople={true} 
+                // displayNoOfPeople={true} 
                 handleChangeFilter={handleChangeFilter} 
             />
+        {/* <div className='hidden md:block'>
         </div>
         <div className='block md:hidden'>
             <Filters 
@@ -66,7 +66,7 @@ function SuggestivePackage({data,filters,noOfPeople}) {
                 packageCategory={true} 
                 handleChangeFilter={handleChangeFilter} 
             />
-        </div>
+        </div> */}
      <p className='hidden lg:block font-semibold sub-title pt-2'>Select Your Package</p>
         {/* ALL PACKAGES CARD */}
         <div className='grid grid-flow-row sm:grid-cols-2 lg:grid-cols-3  justify-center md:justify-between w-full gap-4 mt-[-4px]'>
