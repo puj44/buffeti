@@ -40,11 +40,15 @@ function Footer() {
                 {/* <div className='border-[#595959] border-[0.5px] h-[0.5px] hidden md:block '></div> */}
                 <div className='flex flex-col text-color-dark-gray md:flex-row md:justify-between w-full lg:px-8 items-center  pt-8' style={{borderTopWidth:"1px",borderTopColor:"#595959"}}>
                     <p className=' items-center hidden md:block'>{"© 2024 Buffeti. All rights reserved."}</p>
-                    <div className='grid grid-cols-3 md:flex md:flex-row gap-4 md:gap-6 items-center justify-center'>
-                            <Link href="/terms-and-conditions" className=' items-center'>Terms</Link>
-                            <Link href="/privacy-policy" className=' items-center'>Privacy</Link>
-                            <Link href="/cookies-policy" className=' items-center'>Cookies</Link>
-                            <Link href="/cancellation-refund-policy" className=' items-center'>Cancellation & Refund Policy</Link>
+                    <div className='flex-col flex md:flex-row gap-4 md:gap-6 items-center justify-center'>
+                        <div className='grid grid-cols-2 md:flex md:flex-row gap-4 md:gap-6 items-center justify-center'>
+                            <Link href="/terms-and-conditions" className='flex justify-center items-center'>Terms</Link>
+                            <Link href="/privacy-policy" className='flex justify-center items-center'>Privacy</Link>
+                            <Link href="/cookies-policy" className='flex justify-center items-center'>Cookies</Link>
+                            <Link href="/cancellation-refund-policy" className='flex justify-center items-center'>Cancellation & Refund Policy</Link>
+                        </div>
+                        <div className='grid grid-cols-3 md:flex md:flex-row gap-4 md:gap-6 items-center justify-center'>
+
                             {socials.map((s,idx)=>{
                                 return(
                                     <Link href={s.url} key={"social-"+s.title} className='m-auto'>
@@ -58,6 +62,7 @@ function Footer() {
                                     </Link>
                                 )
                             })}
+                        </div>
                     </div>
                 </div>
             {/* </div> */}

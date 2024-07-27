@@ -40,7 +40,7 @@ function ItemsMobileMenu({
     }
 if(show)
     return (
-        <div className='fixed right-[20px] bottom-[20px] flex justify-end w-full z-20'>
+        <div className='fixed right-[26px] bottom-[20px] flex justify-end w-full z-20'>
                 <Dropdown 
                     label="" 
                     placement='top'

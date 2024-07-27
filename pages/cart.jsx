@@ -16,10 +16,14 @@ import CookingInstruction from '@/components/Cart/CookingInstruction';
 import dynamic from 'next/dynamic';
 const CartSummary = dynamic(()=>import("@/components/Cart/CartSummary"),{ssr:false})
 const CartItems = dynamic(()=>import("@/components/Cart/CartItems"),{ssr:false})
+let nextDate = new Date();
+  nextDate.setDate(nextDate.getDate()+1)
 function Cart() {
   const [savedAddresses,setSavedAddresses] = useState([])
   const {addresses,response, errorMessage} = useSelector((state)=>state.address);
   const [cartData, setCartData] = useState({
+    delivery_date:nextDate,
+    delivery_time:"11:45",
   });
   const [cartItemsData, setCartItemsData] = useState({});
   const [couponError,setCouponError] = useState("");
@@ -75,6 +79,10 @@ function Cart() {
   useEffect(()=>{
     if(cart){
       let cartDetails = JSON.parse(JSON.stringify(cart));
+      if(!cartDetails?.delivery_date){
+        cartDetails.delivery_date = nextDate;
+        cartDetails.delivery_time = "11:45";
+      }
       setCartItemsData({...cart?.cart_data});
       delete cartDetails?.cart_data;
       if(!cartDetails.delivery_address_id){
@@ -240,9 +248,9 @@ function Cart() {
   })
 
   const handleChangeDate = (e) =>{
-    let cartDetails = JSON.parse(JSON.stringify((cartData)));
-    cartDetails.delivery_date = e;
-    setCartData({...cartDetails});
+    // let cartDetails = JSON.parse(JSON.stringify((cartData)));
+    // cartDetails.delivery_date = e;
+    setCartData({...cartData, delivery_date:e});
     //TODO: CALL CART API
   }
 
@@ -251,8 +259,10 @@ function Cart() {
       cart_id:cartData?.cart_id
     }))
   }
-  const handleChangeTime = () =>{
-
+  const handleChangeTime = (val) =>{
+    // let cartDetails = JSON.parse(JSON.stringify((cartData)));
+    // cartDetails.delivery_time = e;
+    setCartData({...cartData, delivery_time:val});
   }
 
   return (
@@ -277,9 +287,16 @@ function Cart() {
                   handleRemoveCart={handleRemoveCart}
                 />
               }
-              <div className='w-full hidden md:flex bg-white flex-col sm:flex-row gap-3 p-4 justify-between sticky bottom-0' style={{"boxShadow":" 0px -1px 8px 0px #0000001A"
-                  }}>
-                  <button className='order-2 md:order-1 border-[1px] py-2 sm:py-3 px-8 rounded-lg font-medium border-[#B42318] flex justify-center items-center text-color-primary' onClick={()=>{handleRemoveCart()}}>
+              <div className='w-full hidden  md:flex bg-white flex-col sm:flex-row gap-3 p-4 justify-between sticky bottom-0 left-0' 
+                style={{
+                  "boxShadow":" 0px -1px 8px 0px #0000001A",
+                  zIndex:"10"
+                }}
+              >
+                  <button 
+                    className='order-2 md:order-1 border-[1px] py-2 sm:py-3 px-8 rounded-lg font-medium border-[#B42318] flex justify-center items-center text-color-primary' 
+                    onClick={()=>{handleRemoveCart()}}
+                  >
                   {"Remove all"}
                   </button> 
                   <button className='btn primary-btn font-medium order-1 md:order-2'>
@@ -326,7 +343,7 @@ function Cart() {
             }
           </div>
         </div>
-        <div className='w-full flex md:hidden bg-white flex-row gap-3 p-4 justify-between sticky bottom-0' style={{"boxShadow":" 0px -1px 8px 0px #0000001A"
+        <div className='w-full mt-2 flex md:hidden bg-white flex-row gap-3 p-4 justify-between sticky bottom-0' style={{"boxShadow":" 0px -1px 8px 0px #0000001A"
                   }}>
                   <button className=' border-[1px] py-2 px-4 sm:py-3 sm:px-8 rounded-lg font-medium border-[#B42318] flex justify-center items-center text-color-primary' onClick={()=>{handleRemoveCart()}}>
                   {"Remove all"}

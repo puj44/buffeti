@@ -102,6 +102,9 @@ const customDateTheme = {
             }
         }
   };
+
+  let nextDate = new Date();
+  nextDate.setDate(nextDate.getDate()+1)
 function OrderDatePicker({
     handleChangeDate,
     value
@@ -123,14 +126,14 @@ function OrderDatePicker({
         }
     }
   return (
-    <div className='border-[1px] border-[#E3E5E5] rounded-lg flex   py-2 px-4'>
+    <div className='border-[1px] border-[#E3E5E5] rounded-lg flex   py-2 px-2 md:px-4'>
        
         {
             <Dropdown 
                 theme={{...customDropdownTheme}}
                 label=""
                 renderTrigger={()=>
-                    <div className='flex flex-row gap-3 justify-start items-center cursor-pointer'>
+                    <div className='flex flex-row gap-3 w-full justify-start items-center cursor-pointer'>
                          <Image
                             src={"/icons/calender.webp"}
                             width={24}
@@ -151,9 +154,9 @@ function OrderDatePicker({
                     <Datepicker
                         dateFormat="dd/MM/yyyy"
                         theme={customDateTheme}
-                        value={value ?? new Date()}
+                        value={value ?? nextDate}
                         onSelectedDateChanged={(date)=>{handleChangeDate(date)}}
-                        minDate={new Date()}
+                        minDate={nextDate}
                         showTodayButton={false}
                         showClearButton={false}
                         inline

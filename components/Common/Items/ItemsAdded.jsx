@@ -9,11 +9,12 @@ function ItemsAdded({
     menuOption,
     itemsSelected,
     noOfPeople,
-    categories
+    categories,
+    handleAddToCart
 }) {
     const [isOpen,setOpen] = useState({});
   return (
-    <div className='lg:max-w-[320px] xl:max-w-[350px] order-1 lg:order-2  w-full overflow-y-scroll overflow-x-hidden max-h-[820px]  bg-[#FAFAFA] z-20 p-2 sm:p-4 md:sticky md:top-0 mt-4 md:mt-0'>
+    <div className='lg:max-w-[320px] xl:max-w-[350px] order-1 lg:order-2  w-full md:overflow-y-scroll overflow-x-hidden md:max-h-[820px]  bg-[#FAFAFA] z-20 p-2 sm:p-4 md:sticky md:top-0 mt-4 md:mt-0'>
         <div className='flex flex-col gap-4 w-full ' >
             {
                 (itemsSelected && Object.keys(itemsSelected).length > 0) ?
@@ -106,6 +107,22 @@ function ItemsAdded({
                 </div>:""
             }
         </div>
+        {/* <div className=' justify-end hidden md:mt-4 md:block'>
+                <div 
+                    className={`btn primary-btn gap-1 ${Object.keys(itemsSelected ?? {}).length <= 0 ? "opacity-60 cursor-default":""}`}
+                    style={{padding:"16px",paddingLeft:"28px",paddingRight:"28px"}}
+                    onClick={()=>{handleAddToCart()}}
+                >
+                    <p className=''>Add to Cart</p>
+                    <Image
+                        src="/icons/cart.webp"
+                        alt={"cart"}
+                        width={20}
+                        height={20}
+                        priority
+                    />
+                </div>
+            </div> */}
     </div>
   )
 }

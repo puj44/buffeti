@@ -41,8 +41,9 @@ function ItemsSelection({
                     handleChangeAdditionalQty={handleChangeAdditionalQty ?? (()=>{})}
                     noOfPeople={noOfPeople}
                     menuOption={menuOption}
-                />
-            <div className='flex justify-end '>
+                /> 
+
+            <div className='flex md:justify-end bg-white p-3  sticky bottom-0 left-0 shadow-[0px_-1px_8px_0px_#0000001A]  '>
                 <div 
                     className={`btn primary-btn gap-1 ${Object.keys(itemsSelected ?? {}).length <= 0 ? "opacity-60 cursor-default":""}`}
                     style={{padding:"16px",paddingLeft:"28px",paddingRight:"28px"}}
