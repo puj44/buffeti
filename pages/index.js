@@ -9,11 +9,21 @@ import { getCookie} from "cookies-next";
 import SnackboxCard from "@/components/Homepage/SnackboxCard";
 import MiniThaliCard from "@/components/Homepage/MiniThaliCard";
 import { useSelector } from "react-redux";
-import { useRouter } from "next/router";
-
+// import ViewCart from "@/components/Common/ViewCart";
+import dynamic from "next/dynamic";
+const ViewCart = dynamic(()=> import("@/components/Common/ViewCart"),{ssr:false});
 
 export default function Home(props) {
   const {noOfPeople,packages,filters} = props;
+  const [isCartAdded, setIsCartAdded] = useState(false);
+  const {cartDetails} = useSelector((state) => state.cart);
+  useEffect(()=>{
+    if(Object.keys(cartDetails ?? {}).length > 0){
+      setIsCartAdded(true);
+    }else{
+      setIsCartAdded(false);
+    }
+  },[cartDetails])
   return (
     <div
       className={`${ process.env.NEXT_PUBLIC_ENVIRONMENT === "DEV" ? "flex flex-col md:gap-6 gap-4 py-8  page-spacing ":""}`} style={{alignItems:"stretch"}}
@@ -27,6 +37,12 @@ export default function Home(props) {
               <MiniThaliCard />
             </div>
           </div>
+          {
+            isCartAdded &&
+            <div className="block md:hidden">
+              <ViewCart show={true} />
+            </div>
+          }
     </div>
   );
 }
