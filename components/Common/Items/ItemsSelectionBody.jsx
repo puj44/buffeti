@@ -66,6 +66,7 @@ function ItemsSelectionBody({
             menuOption={menuOption}
             noOfPeople={noOfPeople}
             categories={categories}
+            handleAddToCart={handleAddToCart ?? (()=>{})}
           />:""
         }
       </div>

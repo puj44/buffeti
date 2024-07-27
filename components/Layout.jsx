@@ -37,7 +37,7 @@ function Layout({children}) {
           setModalOpen(true);
 
           setVisited(true);
-        },4000)
+        },6000)
     }
   },[])
   return (
@@ -48,7 +48,7 @@ function Layout({children}) {
             {children}
         </main>
         { process.env.NEXT_PUBLIC_ENVIRONMENT === "DEV" ?  <Footer /> :""}
-        {isModalOpen && <LoginModel isFirstTime={visited ?? false} isModalOpen={isModalOpen} handleModelClick={handleModelClick}/>}
+        {process.env.NEXT_PUBLIC_ENVIRONMENT === "DEV" && isModalOpen && <LoginModel isFirstTime={visited ?? false} isModalOpen={isModalOpen} handleModelClick={handleModelClick}/>}
     </>
   )
 }

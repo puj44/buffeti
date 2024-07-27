@@ -7,8 +7,17 @@ function ExtraServices({
     selectedData
 }) {
   return (
-    <div className='relative min-h-[194px] text-white h-fit overflow-hidden bg-primary flex flex-col p-4 gap-4 rounded-lg '>
-        <div className=' absolute right-[-1px] bottom-[-1px]'>
+    <div 
+        className='relative min-h-[194px] text-white h-fit overflow-hidden bg-primary flex flex-col p-4 gap-4 rounded-lg '
+        style={{
+            backgroundImage:"url('/banners/services.webp')",
+            backgroundSize:"135.73px 127.95px",
+            backgroundRepeat:"no-repeat",
+            backgroundPositionX:"100%",
+            backgroundPositionY:"100%"
+        }}
+    >
+        {/* <div className=' absolute right-[-1px] bottom-[-1px] z-0'>
             <Image
                 src={"/banners/services.webp"}
                 width={135.73}
@@ -16,9 +25,9 @@ function ExtraServices({
                 priority
                 alt=''
             />
-        </div>
+        </div> */}
         <p className='sub-title font-normal'>{"Add Extra Services"}</p>
-        <div className='grid grid-flow-row gap-5 items-center  w-full z-10'>
+        <div className='grid grid-flow-row gap-5 items-center  w-full '>
             {
                 data?.length > 0 && 
                 data.map((service,idx)=>{

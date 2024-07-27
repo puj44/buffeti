@@ -2,6 +2,7 @@
 import React from 'react'
 import OrderDatePicker from '../Common/OrderDatePicker'
 import dynamic from 'next/dynamic'
+import OrderTimePicker from '../Common/OrderTimePicker'
 
 function CartSummary({
     data,
@@ -10,13 +11,18 @@ function CartSummary({
     deliveryDate,
     deliveryTime
 }) {
+    console.log("HERE",deliveryDate);
   return (
     <div className='border-[1px] border-[#A8A8AD80] rounded-lg w-full flex flex-col p-4 gap-5'>
         <p>{"Delivery Schedule"}</p>
-        <div className='grid grid-cols-2 gap-4 w-full'>
+        <div className='grid grid-cols-2 gap-2 md:gap-3 w-full'>
            <OrderDatePicker
-            handleChangeDate={handleChangeDate ?? (()=>{})}
-            value={deliveryDate}
+                handleChangeDate={handleChangeDate ?? (()=>{})}
+                value={deliveryDate}
+           />
+           <OrderTimePicker
+                handleChangeTime={handleChangeTime ?? (()=>{})}
+                value={deliveryTime}
            />
         </div>
         <span className='border-[1px] border-dashed border-[#595959] w-full'></span>
