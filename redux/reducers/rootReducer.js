@@ -4,6 +4,7 @@ import cartReducer from "./cartReducer";
 import homeReducer from "./homeReducer";
 import itemsReducer from "./itemsReducer";
 import packageReducer from "./packageReducer";
+import customerReducer from "./customerReducer";
 
 const rootReducer = {
     auth:authReducer,
@@ -11,7 +12,8 @@ const rootReducer = {
     packages:packageReducer,
     items:itemsReducer,
     address:addressReducer,
-    cart:cartReducer
+    cart:cartReducer,
+    customer:customerReducer
 }
 
 export default  rootReducer;

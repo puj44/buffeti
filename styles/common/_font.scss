@@ -66,6 +66,10 @@ $primaryFont: $inter;
   font-size:16px;
 }
 
+.account-heading{
+  font-size:30px;
+}
+
 .description-title{
   font-size:16px !important;
 }
@@ -149,6 +153,9 @@ $primaryFont: $inter;
 
       font-family: $primaryFont;
     }
+  }
+  .account-heading{
+    font-size:24px;
   }
 }
 

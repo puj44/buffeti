@@ -69,6 +69,11 @@ body{
 
 
 }
+
+.active-setting{
+  color:$primary;
+  border-bottom: 2px solid $primary;
+}
 .select-box{
   appearance: none;
   border:1px solid $offWhitePrimary;
