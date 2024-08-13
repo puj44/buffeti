@@ -209,14 +209,20 @@ function Header({handleModelClick}) {
                 }
                 <div className='hidden md:flex md:items-center my-auto'>
                    
-                    <div onClick={()=>{!(auth?.isAuthenticated) && handleModelClick(true)}} className={`${auth?.isAuthenticated ? "hidden":"flex btn text-color-primary font-semibold bg-white  justify-center items-center my-auto"} `}>
+                    <p 
+                        onClick={()=>{!(auth?.isAuthenticated) && handleModelClick(true)}} 
+                        className={`${auth?.isAuthenticated ? "hidden":"flex btn text-color-primary font-semibold bg-white  justify-center items-center my-auto"} `}
+                    >
                         {'Login'}
-                    </div>
+                    </p>
                     
-                    <div onClick={()=>{ }} className={`flex ${auth?.isAuthenticated ? "":"md:hidden"} justify-center cursor-pointer orange-circle text-white w-[38px] h-[38px] items-center align-middle my-auto`}>
+                    <Link 
+                        href={"/account"} 
+                        className={`flex ${auth?.isAuthenticated ? "":"md:hidden"} justify-center cursor-pointer orange-circle text-white w-[38px] h-[38px] items-center align-middle my-auto`}
+                        >
 
                         {auth?.user?.name?.toString()?.charAt(0) ?? "N"}
-                    </div>
+                    </Link>
                 </div>
               
             </div>
