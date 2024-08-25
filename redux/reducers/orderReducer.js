@@ -5,13 +5,13 @@ export const orderSlice = createSlice({
     initialState:{
         orderPlaceResponse:{},
         orders:[],
+        orderPaymentResponse:{}
     },
     reducers:{
         placeOrder:(state) =>{
 
         },
         setOrderPlaced:(state,{payload}) =>{
-            console.log("placeOrder",payload);
             if(payload?.status === 200 || payload?.statusCode === 200){
 
                 state.orderPlaceResponse = {
@@ -20,6 +20,22 @@ export const orderSlice = createSlice({
                 }
             }else{
                 state.orderPlaceResponse = {
+                    error:true
+                }
+            }
+        },
+        orderPayment:(state) =>{
+
+        },
+        setOrderPayment:(state,{payload}) =>{
+            if(payload?.status === 200 || payload?.statusCode === 200){
+
+                state.orderPaymentResponse = {
+                    success:true,
+                    data:payload?.data
+                }
+            }else{
+                state.orderPaymentResponse = {
                     error:true
                 }
             }
@@ -36,6 +52,6 @@ export const orderSlice = createSlice({
     }
 });
 
-export const {placeOrder, setOrderPlaced,getOrders, setOrders,resetAction} = orderSlice.actions;
+export const {placeOrder, setOrderPlaced,orderPayment , setOrderPayment, getOrders, setOrders,resetAction} = orderSlice.actions;
 
 export default orderSlice.reducer;

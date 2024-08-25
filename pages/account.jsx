@@ -1,5 +1,6 @@
 // import AccountHeader from '@/components/Common/Account/AccountHeader';
 import OrderListingCard from "@/components/Orders/OrderListingCard";
+import PaymentModel from "@/components/Payment/PaymentModel";
 import { getProfile } from "@/redux/reducers/customerReducer";
 import { getOrders } from "@/redux/reducers/orderReducer";
 import dynamic from "next/dynamic";
@@ -21,8 +22,16 @@ function Account() {
 
   const { profile } = useSelector((state) => state.customer);
   const { orders } = useSelector((state) => state.order);
-
+  const [showPayment, setShowPayment] = useState(false);
   const dispatch = useDispatch();
+
+  const handleShowPayment = (number) => {
+    setShowPayment(number);
+  };
+
+  const handleClosePayment = () => {
+    setShowPayment(false);
+  };
 
   useEffect(() => {
     setLoading(true);
@@ -60,7 +69,13 @@ function Account() {
           <div className="flex flex-col gap-4 py-4 w-full">
             {orders?.length > 0
               ? orders.map((order, idx) => {
-                  return <OrderListingCard key={"order-" + idx} data={order} />;
+                  return (
+                    <OrderListingCard
+                      handleShowPayment={handleShowPayment}
+                      key={"order-" + idx}
+                      data={order}
+                    />
+                  );
                 })
               : ""}
           </div>
@@ -98,6 +113,9 @@ function Account() {
         </div>
       ) : (
         renderSetting()
+      )}
+      {showPayment && (
+        <PaymentModel data={showPayment} handleClose={handleClosePayment} />
       )}
     </div>
   );

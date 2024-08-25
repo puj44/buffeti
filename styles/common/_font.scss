@@ -39,6 +39,10 @@ $primaryFont: $inter;
 }
 //Font Size
 
+.huge-title{
+  font-size:64px !important;
+}
+
 .big-title{
   font-size: 40px !important;
 }
@@ -127,6 +131,9 @@ $primaryFont: $inter;
 }
 //Tablet Screen
 @media screen and (max-width:786px){
+  .huge-title{
+    font-size:32px !important;
+  }
   .description{
     font-size:14px !important;
   }
