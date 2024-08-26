@@ -71,7 +71,7 @@ function PaymentModel({ data, handleClose }) {
   return (
     <div className="fixed z-50 left-0 top-0  overflow-hidden w-dvw h-dvh bg-[rgb(0,0,0,0.3)] ">
       <div className="relative w-full h-full flex justify-center align-middle ">
-        <div className="bg-white  relative p-6 w-full h-full md:w-[642px] md:h-fit my-auto grid grid-flow-row gap-4 rounded-lg ">
+        <div className="bg-white  relative p-6 w-full h-full md:w-[642px] md:h-fit my-auto flex flex-col gap-4 rounded-lg ">
           <div className="flex flex-row justify-between align-middle">
             <span
               className="flex justify-center align-middle w-[48px] h-[48px]"
@@ -140,7 +140,7 @@ function PaymentModel({ data, handleClose }) {
             </p>
           </div>
           <button
-            className="btn primary-btn w-full"
+            className="btn primary-btn w-full h-fit"
             onClick={() => {
               !isLoading && handlePayment();
             }}
@@ -148,7 +148,9 @@ function PaymentModel({ data, handleClose }) {
             {isLoading ? (
               <span className="loader"></span>
             ) : (
-              `Proceed to pay ₹ ${isAdvancePayment ?? data.total_billed_amount}`
+              `Proceed to pay ₹ ${
+                isAdvancePayment ? isAdvancePayment : data.total_billed_amount
+              }`
             )}
           </button>
         </div>
