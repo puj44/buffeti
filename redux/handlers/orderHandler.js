@@ -1,11 +1,13 @@
 import { call, put } from "redux-saga/effects";
 import { getOrdersApi, orderPaymentApi, placeOrderApi } from "../requests/orderRequests";
 import { setOrderPayment, setOrderPlaced, setOrders } from "../reducers/orderReducer";
+import { setCartDetails } from "../reducers/cartReducer";
 
 export function* handlePlaceOrder(action){
     try{
         const response = yield call(placeOrderApi,action);
         yield put(setOrderPlaced(response?.response?.data || response?.data));
+        yield put(setCartDetails(response?.response?.data || response?.data));
     }catch(err){
         console.log("PLACE ORDER ERR:",err)
     }
