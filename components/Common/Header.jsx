@@ -79,7 +79,7 @@ function Header({ handleModelClick }) {
           <div
             className={`${
               mobileMenu
-                ? "flex flex-col fixed left-0 top-0 w-screen h-screen z-50  py-5 bg-white"
+                ? "flex flex-col fixed left-0 top-0 w-screen h-screen z-50  py-5 bg-white z-50"
                 : "hidden"
             } md:flex md:items-center`}
           >
