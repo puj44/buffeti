@@ -140,7 +140,7 @@ function PaymentModel({ data, handleClose }) {
             </p>
           </div>
           <button
-            className="btn primary-btn w-full h-fit"
+            className="btn primary-btn w-full h-fit font-semibold"
             onClick={() => {
               !isLoading && handlePayment();
             }}
