@@ -98,7 +98,7 @@ function Account() {
         />
       </div>
       <div
-        className="hidden sm:flex w-full mx-8"
+        className="hidden sm:flex  mx-8"
         style={{ borderBottom: "1px solid #EAECF0" }}
       >
         <AccountHeader
