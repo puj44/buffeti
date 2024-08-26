@@ -426,7 +426,12 @@ function Cart() {
         >
           {"Remove all"}
         </button>
-        <button className="bg-primary rounded-lg text-white py-2 px-4 sm:py-3 sm:px-8 flex justify-center items-center font-medium  ">
+        <button
+          onClick={() => {
+            handlePlaceOrder();
+          }}
+          className="bg-primary rounded-lg text-white py-2 px-4 sm:py-3 sm:px-8 flex justify-center items-center font-medium  "
+        >
           {"Place Order"}
         </button>
       </div>
