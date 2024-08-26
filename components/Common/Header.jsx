@@ -223,6 +223,9 @@ function Header({ handleModelClick }) {
                   <Link
                     href="/account"
                     className={` flex justify-center cursor-pointer orange-circle text-white w-[38px] h-[38px] items-center align-middle my-auto`}
+                    onClick={() => {
+                      setMobileMenu(false);
+                    }}
                   >
                     {auth?.user?.name?.toString()?.charAt(0) ?? "N"}
                   </Link>
