@@ -136,7 +136,7 @@ function PaymentModel({ data, handleClose }) {
             <p className="small-title" style={{ color: "#475467" }}>
               {isAdvancePayment
                 ? "20% of Total Amount will be paid in Advance."
-                : "Full Payment will be Paid."}
+                : "Total Amount will be Paid."}
             </p>
           </div>
           <button
