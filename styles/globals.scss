@@ -375,6 +375,45 @@ input{
   border-radius: 50px;
 }
 
+//toaster
+.toaster {
+  min-width: 250px;
+  border-radius:8px;
+  background: rgb(247 247 247);
+  box-shadow: rgba(0, 0, 0, 0.1) 0px -1px 8px 0px;
+  text-align: center;
+  border-radius: 2px;
+  padding: 16px;
+  position: fixed;
+  z-index: 99;
+  right: 30px;
+  top: 30px;
+  font-size: 16px;
+  -webkit-animation: fadein 0.5s, fadeout 0.5s 4s;
+  animation: fadein 0.5s, fadeout 0.5s 4s;
+}
+
+
+@-webkit-keyframes fadein {
+  from {top: 0; opacity: 0;} 
+  to {top: 30px; opacity: 1;}
+}
+
+@keyframes fadein {
+  from {top: 0; opacity: 0;}
+  to {top: 30px; opacity: 1;}
+}
+
+@-webkit-keyframes fadeout {
+  from {top: 30px; opacity: 1;} 
+  to {top: 0; opacity: 0;}
+}
+
+@keyframes fadeout {
+  from {top: 30px; opacity: 1;}
+  to {top: 0; opacity: 0;}
+}
+
 //active sidebar 
 .active-sidebar{
   color:$primary;
