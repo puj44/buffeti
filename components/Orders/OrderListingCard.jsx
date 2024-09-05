@@ -35,7 +35,7 @@ function OrderListingCard({ data, handleShowPayment }) {
             {`Pay${
               data.payment_status === "pending"
                 ? " Now"
-                : " ₹" + data.total_billed_amount
+                : " ₹" + data.amount_due
             }`}
           </button>
         ) : (
