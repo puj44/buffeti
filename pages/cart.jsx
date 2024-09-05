@@ -124,6 +124,7 @@ function Cart() {
       delete cartDetails?.cart_data;
       if (!cartDetails.delivery_address_id) {
         cartDetails.delivery_address_id = addresses?.[0]?._id;
+        callCartUpdate(cartDetails);
       }
       setCartData({ ...cartDetails });
     }
