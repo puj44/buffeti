@@ -63,7 +63,6 @@ function Cart() {
   useEffect(() => {
     if (response) {
       dispatch(getAddresses());
-      dispatch(resetAddress());
     }
   }, [response]);
   useEffect(() => {
@@ -115,6 +114,7 @@ function Cart() {
           ...cartData,
           delivery_address_id: addresses?.[addresses?.length - 1]?._id,
         });
+        dispatch(resetAddress());
       }
     }
   }, [addresses, response, errorMessage]);
