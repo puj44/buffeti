@@ -66,7 +66,7 @@ function Account() {
         break;
       case "Orders":
         return (
-          <div className="flex flex-col gap-4 py-4 w-full">
+          <div className="flex flex-col gap-8 py-4 w-full">
             {orders?.length > 0
               ? orders.map((order, idx) => {
                   return (

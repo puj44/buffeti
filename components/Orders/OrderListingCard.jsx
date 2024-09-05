@@ -9,8 +9,8 @@ function OrderListingCard({ data, handleShowPayment }) {
     handleShowPayment(orderNumber);
   };
   return (
-    <div className="flex flex-col gap-4 w-full">
-      <div className="w-full items-center flex flex-row justify-between">
+    <div className="flex flex-col gap-3 w-full">
+      <div className="w-full items-center mb-2 flex flex-row justify-between">
         <p className="sub-title font-semibold">{data.order_number}</p>
         {(data.payment_status === "partially_paid" ||
           data.payment_status === "fully_paid") && (
