@@ -25,6 +25,7 @@ import CookingInstruction from "@/components/Cart/CookingInstruction";
 // import CartSummary from '@/components/Cart/CartSummary';
 import dynamic from "next/dynamic";
 import { placeOrder, resetAction } from "@/redux/reducers/orderReducer";
+import moment from "moment";
 const CartSummary = dynamic(() => import("@/components/Cart/CartSummary"), {
   ssr: false,
 });
@@ -157,6 +158,9 @@ function Cart() {
   };
 
   const callCartUpdate = (data) => {
+    if (data?.delivery_date) {
+      data.delivery_date = moment(data.delivery_date).format("YYYY-MM-DD");
+    }
     dispatch(
       updateCart({
         cart_id: cartData?.cart_id,
@@ -306,10 +310,10 @@ function Cart() {
   });
 
   const handleChangeDate = (e) => {
-    // let cartDetails = JSON.parse(JSON.stringify((cartData)));
-    // cartDetails.delivery_date = e;
-    setCartData({ ...cartData, delivery_date: e });
-    //TODO: CALL CART API
+    let cartDetails = JSON.parse(JSON.stringify(cartData));
+    cartDetails.delivery_date = e;
+    callCartUpdate(cartDetails);
+    // setCartData({ ...cartData, delivery_date: e });
   };
 
   const handleRemoveCart = () => {
@@ -320,9 +324,10 @@ function Cart() {
     );
   };
   const handleChangeTime = (val) => {
-    // let cartDetails = JSON.parse(JSON.stringify((cartData)));
-    // cartDetails.delivery_time = e;
-    setCartData({ ...cartData, delivery_time: val });
+    let cartDetails = JSON.parse(JSON.stringify(cartData));
+    cartDetails.delivery_time = val;
+    callCartUpdate(cartDetails);
+    // setCartData({ ...cartData, delivery_time: val });
   };
 
   const handlePlaceOrder = () => {
