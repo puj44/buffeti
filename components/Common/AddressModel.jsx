@@ -131,7 +131,6 @@ function AddressModel({ values, handleCloseModel, show }) {
       setLoading(false);
       if (!errorMessage) {
         handleCloseModel();
-        dispatch(resetAddress());
       } else {
         setResponseError(errorMessage);
       }
