@@ -47,7 +47,6 @@ function PaymentModel({ data, handleClose }) {
     let orderOption = {
       ...data,
       key: process.env.NEXT_PUBLIC_TEST_KEY_ID,
-      key_secret: process.env.NEXT_PUBLIC_TEST_KEY_SECRET,
       razorpay_order_id: data.order_id,
       callback_url:
         process.env.NEXT_PUBLIC_ENVIRONMENT === "DEV"
