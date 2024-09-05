@@ -62,7 +62,7 @@ function Cart() {
 
   useEffect(() => {
     if (response) {
-      dispatch(getCart());
+      dispatch(getAddresses());
       dispatch(resetAddress());
     }
   }, [response]);
