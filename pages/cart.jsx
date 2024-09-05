@@ -60,12 +60,12 @@ function Cart() {
   const router = useRouter();
   const dispatch = useDispatch();
 
-  const address = useSelector((state) => state.address);
   useEffect(() => {
-    if (address?.response) {
+    if (response) {
       dispatch(getCart());
+      dispatch(resetAddress());
     }
-  }, [address?.response]);
+  }, [response]);
   useEffect(() => {
     dispatch(getCart());
     dispatch(getAddresses());
@@ -116,7 +116,6 @@ function Cart() {
           delivery_address_id: addresses?.[addresses?.length - 1]?._id,
         });
       }
-      dispatch(resetAddress());
     }
   }, [addresses, response, errorMessage]);
 
