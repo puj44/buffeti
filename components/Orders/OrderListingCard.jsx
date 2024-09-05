@@ -12,6 +12,24 @@ function OrderListingCard({ data, handleShowPayment }) {
     <div className="flex flex-col gap-4 w-full">
       <div className="w-full items-center flex flex-row justify-between">
         <p className="sub-title font-semibold">{data.order_number}</p>
+        {(data.payment_status === "partially_paid" ||
+          data.payment_status === "fully_paid") && (
+          <span className="flex flex-row gap-1 px-3 py-1 align-middle justify-center border-[1px] border-[#039855] rounded-2xl">
+            <div className="my-auto">
+              <Image
+                src={"/icons/check.webp"}
+                width={16}
+                height={16}
+                alt="Tick"
+              />
+            </div>
+            <p>
+              {data.payment_status === "partially_paid"
+                ? "Partially Paid"
+                : "Paid"}
+            </p>
+          </span>
+        )}
       </div>
       <div className="flex flex-col sm:flex-row justify-between gap-4">
         <p className="text-color-dark-gray description max-w-[500px]">
@@ -21,26 +39,25 @@ function OrderListingCard({ data, handleShowPayment }) {
             })}
         </p>
         {data.payment_status === "pending" ||
-        data.payment_status === "partially_paid" ? (
-          <button
-            className="btn primary-btn w-fit h-fit self-end"
-            onClick={() => {
-              handlePayClick({
-                order_number: data.order_number,
-                total_billed_amount: data.total_billed_amount,
-                amount_due: data.amount_due,
-              });
-            }}
-          >
-            {`Pay${
-              data.payment_status === "pending"
-                ? " Now"
-                : " ₹" + data.amount_due
-            }`}
-          </button>
-        ) : (
-          <p className="description">{"Paid"}</p>
-        )}
+          (data.payment_status === "partially_paid" && (
+            <button
+              className="btn primary-btn w-fit h-fit self-end"
+              onClick={() => {
+                handlePayClick({
+                  order_number: data.order_number,
+                  total_billed_amount: data.total_billed_amount,
+                  amount_due: data.amount_due,
+                  payment_status: data.payment_status,
+                });
+              }}
+            >
+              {`Pay${
+                data.payment_status === "pending"
+                  ? " Now"
+                  : " ₹" + data.amount_due
+              }`}
+            </button>
+          ))}
       </div>
       <Link
         href={"/orders/" + data.order_number}
