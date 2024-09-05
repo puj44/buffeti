@@ -2,7 +2,7 @@ import Image from "next/image";
 import React, { useEffect, useMemo } from "react";
 const statusEnum = {
   placed: { value: "Order Placed", statusIndex: 0 },
-  confirmed: { value: "Order Confirmed", statusIndex: 1 },
+  confirmed: { value: "Order Accepted", statusIndex: 1 },
   preparing: { value: "Order Preparing", statusIndex: 2 },
   out_for_delivery: { value: "Out for Delivery", statusIndex: 3 },
   delivered: { value: "Delivered", statusIndex: 4 },
