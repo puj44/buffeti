@@ -26,6 +26,7 @@ import CookingInstruction from "@/components/Cart/CookingInstruction";
 import dynamic from "next/dynamic";
 import { placeOrder, resetAction } from "@/redux/reducers/orderReducer";
 import moment from "moment";
+import { setToaster } from "@/redux/reducers/uiReducer";
 const CartSummary = dynamic(() => import("@/components/Cart/CartSummary"), {
   ssr: false,
 });
@@ -124,6 +125,7 @@ function Cart() {
       delete cartDetails?.cart_data;
       if (!cartDetails.delivery_address_id) {
         cartDetails.delivery_address_id = addresses?.[0]?._id;
+        // callCartUpdate(cartDetails);
       }
       setCartData({ ...cartDetails });
     }
@@ -160,6 +162,9 @@ function Cart() {
   const callCartUpdate = (data) => {
     if (data?.delivery_date) {
       data.delivery_date = moment(data.delivery_date).format("YYYY-MM-DD");
+    }
+    if (!data?.delivery_address_id) {
+      data.delivery_address_id = addresses?.[0]?._id;
     }
     dispatch(
       updateCart({
@@ -331,8 +336,17 @@ function Cart() {
   };
 
   const handlePlaceOrder = () => {
-    setLoading(true);
-    dispatch(placeOrder());
+    if (!cartData?.delivery_address_id) {
+      dispatch(
+        setToaster({
+          type: "error",
+          message: "Please select or add an address",
+        })
+      );
+    } else {
+      setLoading(true);
+      dispatch(placeOrder());
+    }
   };
 
   return (
