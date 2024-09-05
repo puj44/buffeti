@@ -41,7 +41,7 @@ function OrderListingCard({ data, handleShowPayment }) {
         {data.payment_status === "pending" ||
           (data.payment_status === "partially_paid" && (
             <button
-              className="btn primary-btn w-fit h-fit self-end"
+              className="btn primary-btn w-fit h-fit sm:self-end"
               onClick={() => {
                 handlePayClick({
                   order_number: data.order_number,
@@ -61,12 +61,12 @@ function OrderListingCard({ data, handleShowPayment }) {
       </div>
       <Link
         href={"/orders/" + data.order_number}
-        className="flex flex-col sm:flex-row w-full"
+        className="flex flex-col sm:flex-row w-full "
       >
         <p className="text-color-dark-gray description w-full">
           {moment(data.createdAt).format("DD MMM YYYY")}
         </p>
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-4 mt-2 sm:mt-0">
           <span className="flex flex-row items-center gap-2 ">
             <p className="font-bold description">{`₹${data.total_billed_amount}`}</p>
             <Image
