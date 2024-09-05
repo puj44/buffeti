@@ -38,26 +38,26 @@ function OrderListingCard({ data, handleShowPayment }) {
               return `${index > 0 ? ", " : ""}${item.item_name}`;
             })}
         </p>
-        {data.payment_status === "pending" ||
-          (data.payment_status === "partially_paid" && (
-            <button
-              className="btn primary-btn w-fit h-fit sm:self-end"
-              onClick={() => {
-                handlePayClick({
-                  order_number: data.order_number,
-                  total_billed_amount: data.total_billed_amount,
-                  amount_due: data.amount_due,
-                  payment_status: data.payment_status,
-                });
-              }}
-            >
-              {`Pay${
-                data.payment_status === "pending"
-                  ? " Now"
-                  : " ₹" + data.amount_due
-              }`}
-            </button>
-          ))}
+        {(data.payment_status === "pending" ||
+          data.payment_status === "partially_paid") && (
+          <button
+            className="btn primary-btn w-fit h-fit sm:self-end"
+            onClick={() => {
+              handlePayClick({
+                order_number: data.order_number,
+                total_billed_amount: data.total_billed_amount,
+                amount_due: data.amount_due,
+                payment_status: data.payment_status,
+              });
+            }}
+          >
+            {`Pay${
+              data.payment_status === "pending"
+                ? " Now"
+                : " ₹" + data.amount_due
+            }`}
+          </button>
+        )}
       </div>
       <Link
         href={"/orders/" + data.order_number}
