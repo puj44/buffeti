@@ -22,6 +22,7 @@ function Account() {
 
   const { profile } = useSelector((state) => state.customer);
   const { orders } = useSelector((state) => state.order);
+  const { isAuthenticated } = useSelector((state) => state.auth);
   const [showPayment, setShowPayment] = useState(false);
   const dispatch = useDispatch();
 
@@ -47,7 +48,7 @@ function Account() {
       default:
         break;
     }
-  }, [setting]);
+  }, [setting, isAuthenticated]);
 
   useEffect(() => {
     setLoading(false);
