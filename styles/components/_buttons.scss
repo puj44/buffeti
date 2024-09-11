@@ -41,6 +41,11 @@
     background-color: $primary;
     border:1px solid $primary;
     color:$white;
+    &:disabled{
+        background-color: #a19999;
+        border-color: #a19999;
+        cursor: default;
+    }
 }
 .secondary-btn{
     background: $secondary;
