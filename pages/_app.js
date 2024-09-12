@@ -25,8 +25,6 @@ function App({ Component, pageProps, props }) {
   dispatch(setData({statusCode:200, data:{locations}}))
   return(
     // <Provider store={store}>
-        process.env.NEXT_PUBLIC_ENVIRONMENT !== "DEV" ? 
-        <LaunchingSoon />:
         <div className="page-content min-h-[80vh]">
           
           <Layout>
