@@ -7,8 +7,12 @@ const nextConfig = {
     remotePatterns:[
       {
         protocol:"https",
-        hostname: process.env.NEXT_PUBLIC_IMAGES_URL
-      }
+        hostname: "dev-api.buffeti.com"
+      },
+      {
+        protocol:"https",
+        hostname: "api.buffeti.com"
+      },
     ]
   },
   async redirects() {
