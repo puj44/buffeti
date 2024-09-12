@@ -63,7 +63,7 @@ function ItemsAdded({
                         >
                           <div className="w-[100px] h-[100px]">
                             <Image
-                              src={"/packages/dummy_pack.webp"}
+                              src={`${process.env.NEXT_PUBLIC_IMAGES_URL}/packages/dummy_pack.webp`}
                               width={102}
                               height={106}
                               // style={{width:"100%",height:"100%"}}
