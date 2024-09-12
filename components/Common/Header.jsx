@@ -62,7 +62,7 @@ function Header({ handleModelClick }) {
             <Link href="/" className="focus:outline-none">
               <Image
                 loader={({ src }) => src}
-                src={`/logo/primary_white.webp`}
+                src={`${process.env.NEXT_PUBLIC_IMAGES_URL}/logo/primary_white.webp`}
                 alt="Buffeti"
                 width={2049}
                 height={1354}
