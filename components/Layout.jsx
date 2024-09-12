@@ -5,6 +5,7 @@ import Footer from "@/components/Common/Footer";
 import LoginModel from "./Common/LoginModel";
 import { useDispatch, useSelector } from "react-redux";
 import { setLoginModel } from "@/redux/reducers/homeReducer";
+import Toaster from "./Toaster/Toaster";
 
 function Layout({ children }) {
   const [isModalOpen, setModalOpen] = useState(false);
@@ -53,6 +54,7 @@ function Layout({ children }) {
           handleModelClick={handleModelClick}
         />
       )}
+      <Toaster />
     </>
   );
 }

@@ -379,39 +379,59 @@ input{
 .toaster {
   min-width: 250px;
   border-radius:8px;
-  background: rgb(247 247 247);
-  box-shadow: rgba(0, 0, 0, 0.1) 0px -1px 8px 0px;
+  background: #F6FEF9;
+  // box-shadow: rgba(0, 0, 0, 0.1) 0px -1px 8px 0px;
   text-align: center;
-  border-radius: 2px;
+  border-radius: 12px;
   padding: 16px;
   position: fixed;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
   z-index: 99;
-  right: 30px;
-  top: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom:30px;
   font-size: 16px;
-  -webkit-animation: fadein 0.5s, fadeout 0.5s 4s;
-  animation: fadein 0.5s, fadeout 0.5s 4s;
+  gap:12px;
+  -webkit-animation: fadein 0.5s, fadeout 0.5s 4.5s;
+  animation: fadein 0.5s, fadeout 0.5s 4.5s;
+}
+.toaster-success{
+  border:1px solid #6CE9A6;
+  p{
+
+    color:#027A48 !important;
+  }
+}
+.toaster-error{
+  border:1px solid #FDA29B;
+  p{
+
+    color:$primary !important
+  }
 }
 
 
 @-webkit-keyframes fadein {
-  from {top: 0; opacity: 0;} 
-  to {top: 30px; opacity: 1;}
+  from {bottom: 0; opacity: 0;} 
+  to {bottom: 30px; opacity: 1;}
 }
 
 @keyframes fadein {
-  from {top: 0; opacity: 0;}
-  to {top: 30px; opacity: 1;}
+  from {bottom: 0; opacity: 0;}
+  to {bottom: 30px; opacity: 1;}
 }
 
 @-webkit-keyframes fadeout {
-  from {top: 30px; opacity: 1;} 
-  to {top: 0; opacity: 0;}
+  from {bottom: 30px; opacity: 1;} 
+  to {bottom: 0; opacity: 0;}
 }
 
 @keyframes fadeout {
-  from {top: 30px; opacity: 1;}
-  to {top: 0; opacity: 0;}
+  from {bottom: 30px; opacity: 1;}
+  to {bottom: 0; opacity: 0;}
 }
 
 //active sidebar 

@@ -12,7 +12,6 @@ import { getTokenStatus } from "@/redux/reducers/authReducer";
 import { useEffect } from "react";
 import { END } from "redux-saga";
 import { getCartDetails } from "@/redux/reducers/cartReducer";
-import Toaster from "@/components/Toaster/Toaster";
 
 function App({ Component, pageProps, props }) {
   const {locations} = props;
@@ -30,7 +29,7 @@ function App({ Component, pageProps, props }) {
           <Layout>
             <Component {...pageProps} />
           </Layout>
-          <Toaster />
+        
         </div>
   )
 }
