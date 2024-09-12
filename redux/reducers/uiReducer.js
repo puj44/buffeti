@@ -1,7 +1,7 @@
 const { createSlice } = require("@reduxjs/toolkit");
 
 export const uiSlice = createSlice({
-    name:"order",
+    name:"ui",
     initialState:{
         toasterPayload:{},
     },
