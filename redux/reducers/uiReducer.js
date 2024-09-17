@@ -1,23 +1,24 @@
 const { createSlice } = require("@reduxjs/toolkit");
 
 export const uiSlice = createSlice({
-    name:"order",
+    name:"ui",
     initialState:{
         toasterPayload:{},
     },
     reducers:{
         setToaster:(state,{payload}) =>{
+            
             state.toasterPayload = {
                 type:payload?.type,
                 message:payload?.message ?? null
             }
         },
-        resetAction:(state) =>{
+        resetUiAction:(state) =>{
             state.toasterPayload = {};
         }
     }
 });
 
-export const {setToaster,resetAction} = uiSlice.actions;
+export const {setToaster,resetUiAction} = uiSlice.actions;
 
 export default uiSlice.reducer;

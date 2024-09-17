@@ -1,6 +1,7 @@
 // import AccountHeader from '@/components/Common/Account/AccountHeader';
 import OrderListingCard from "@/components/Orders/OrderListingCard";
 import PaymentModel from "@/components/Payment/PaymentModel";
+import { getAddresses } from "@/redux/reducers/addressReducer";
 import { getProfile } from "@/redux/reducers/customerReducer";
 import { getOrders } from "@/redux/reducers/orderReducer";
 import dynamic from "next/dynamic";
@@ -14,7 +15,7 @@ import { useDispatch, useSelector } from "react-redux";
 const settings = [
   // "Profile",
   "Orders",
-  // "Saved Address"
+  "Saved Address",
 ];
 function Account() {
   const [setting, setSetting] = useState("Orders");
@@ -35,18 +36,21 @@ function Account() {
   };
 
   useEffect(() => {
-    setLoading(true);
-    switch (setting) {
-      case "Profile":
-        dispatch(getProfile());
-        break;
-      case "Orders":
-        dispatch(getOrders());
-        break;
-      case "Saved Address":
-        break;
-      default:
-        break;
+    if (isAuthenticated) {
+      setLoading(true);
+      switch (setting) {
+        case "Profile":
+          dispatch(getProfile());
+          break;
+        case "Orders":
+          dispatch(getOrders());
+          break;
+        case "Saved Address":
+          dispatch(getAddresses());
+          break;
+        default:
+          break;
+      }
     }
   }, [setting, isAuthenticated]);
 

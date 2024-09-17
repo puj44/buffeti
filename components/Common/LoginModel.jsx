@@ -26,6 +26,7 @@ function LoginModel({ handleModelClick, isModalOpen, isFirstTime }) {
   const [values, setValues] = useState({});
   const [error, setError] = useState(false);
   const [timer, setTimer] = useState(0);
+  const [otpResent, setOtpResent] = useState(false);
 
   const executeRecaptcha = useRecaptcha();
 
@@ -69,6 +70,7 @@ function LoginModel({ handleModelClick, isModalOpen, isFirstTime }) {
         token: token,
       })
     );
+    setOtpResent(true);
   };
 
   const sendOTP = async () => {
@@ -143,6 +145,7 @@ function LoginModel({ handleModelClick, isModalOpen, isFirstTime }) {
           }
         }
       }
+      setOtpResent(false);
     }
   }, [dispatch, step, otpResponse, errorMessage, otpSecondsLeft]);
 
