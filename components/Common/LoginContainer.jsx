@@ -108,6 +108,11 @@ function LoginContainer({
               onClick={() => {
                 sendOTP();
               }}
+              onKeyDown={(e) => {
+                if (e.key === "enter") {
+                  sendOTP();
+                }
+              }}
             >
               {isLoading ? <span className="loader"></span> : "Send OTP"}
             </button>
@@ -182,6 +187,11 @@ function LoginContainer({
               className={`btn primary-btn ${isLoading ? "opacity-60" : ""}`}
               onClick={() => {
                 sendOTP();
+              }}
+              onKeyDown={(e) => {
+                if (e.key === "enter") {
+                  sendOTP();
+                }
               }}
             >
               {isLoading ? <span className="loader"></span> : "Continue"}

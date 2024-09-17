@@ -43,10 +43,7 @@ export function* handleOrderPayment(action){
         const data = response?.response?.data || response?.data;
         
         if(data?.status === 200 || data?.statusCode === 200){
-            yield put(setToaster({
-                type:"success",
-                message:"Payment Initialized!"
-            }))
+           
         }else{
             const message = data?.status === 500 || data?.statusCode === 500 ? "Something went wrong, please try again!" : data?.message
             yield put(setToaster({

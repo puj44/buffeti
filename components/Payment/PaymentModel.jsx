@@ -1,4 +1,6 @@
 import { orderPayment } from "@/redux/reducers/orderReducer";
+import { setToaster } from "@/redux/reducers/uiReducer";
+import axios from "axios";
 import Image from "next/image";
 import React, { useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -27,7 +29,7 @@ function PaymentModel({ data, handleClose }) {
   };
 
   // load razorpay
-  const loadScript = (src) => {
+  const loadScript = async (src) => {
     return new Promise((resolve) => {
       const script = document.createElement("script");
       script.src = src;
@@ -40,24 +42,46 @@ function PaymentModel({ data, handleClose }) {
       document.body.appendChild(script);
     });
   };
+  const initializePayment = async (data) => {
+    const callbackURL = `${
+      process.env.NEXT_PUBLIC_ENVIRONMENT === "DEV"
+        ? "https://dev.buffeti.com"
+        : "https://buffeti.com"
+    }/account`;
 
-  useEffect(() => {
-    loadScript("https://checkout.razorpay.com/v1/checkout.js");
-  }, []);
+    const container = document.createElement("div");
 
-  const createPayment = async (data) => {
-    let orderOption = {
-      ...data,
-      key: process.env.NEXT_PUBLIC_TEST_KEY_ID,
-      razorpay_order_id: data.order_id,
-      callback_url:
-        process.env.NEXT_PUBLIC_ENVIRONMENT === "DEV"
-          ? "https://dev.buffeti.com/account"
-          : "https://buffeti.com/account",
+    const bodyFormData = document.createElement("form");
+    bodyFormData.id = "rzp-embedded-form";
+    bodyFormData.method = "post";
+    bodyFormData.action = "https://api.razorpay.com/v1/checkout/embedded";
+    const fields = {
+      key_id: process.env.NEXT_PUBLIC_TEST_KEY_ID,
+      order_id: data.order_id,
+      name: "GNV CLICK2CATER",
+      "prefill[name]": data.prefill.name ?? "",
+      "prefill[contact]": data.prefill.contact ?? "",
+      "prefill[email]": data.prefill.email ?? "",
+      amount: data.amount,
+      currency: "INR",
+      callback_url: callbackURL,
+      cancel_url: callbackURL,
+      redirect: "true",
     };
-    const paymentObject = await new Razorpay(orderOption);
-    handleClose();
-    paymentObject.open();
+    Object.keys(fields).forEach((key) => {
+      const input = document.createElement("input");
+      input.type = "hidden";
+      input.name = key;
+      input.value = fields[key];
+      bodyFormData.appendChild(input);
+    });
+    container.appendChild(bodyFormData);
+    document.body.appendChild(container);
+
+    bodyFormData.submit();
+  };
+  const createPayment = async (data) => {
+    initializePayment(data);
   };
 
   useEffect(() => {
@@ -172,6 +196,7 @@ function PaymentModel({ data, handleClose }) {
           </button>
         </div>
       </div>
+      <div id="razorpay-checkout"></div>
     </div>
   );
 }
