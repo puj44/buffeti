@@ -137,7 +137,9 @@ function LoginModel({ handleModelClick, isModalOpen, isFirstTime }) {
             dispatch(resetResponse());
           } else if (step === "otp_verification") {
             if (localStorage.getItem("visited")) {
-              handleModelClick(false);
+              if (!otpResent) {
+                handleModelClick(false);
+              }
             } else {
               changeStep("get_started");
             }
@@ -147,7 +149,7 @@ function LoginModel({ handleModelClick, isModalOpen, isFirstTime }) {
       }
       setOtpResent(false);
     }
-  }, [dispatch, step, otpResponse, errorMessage, otpSecondsLeft]);
+  }, [dispatch, step, otpResponse, errorMessage, otpSecondsLeft, otpResent]);
 
   useEffect(() => {
     let interval;
