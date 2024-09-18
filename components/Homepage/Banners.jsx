@@ -38,14 +38,14 @@ function Banners() {
         </div>
       </div>
       <div className="absolute right-0 md:-right-10 bottom-0 ">
-        {/* <Image
+        <Image
           src={`${process.env.NEXT_PUBLIC_IMAGES_URL}/banners/food_banner.webp`}
           width={2303}
           height={1321}
           alt="arrow"
           className="w-[132.56px] h-[71.89px] xs:w-[172.56px] xs:h-[91.89px] md:w-[425.69px] md:h-[230.25px] lg:w-[455.69px] lg:h-[250.25px] xl:w-[575.69px] xl:h-[330.25px]"
           priority
-        /> */}
+        />
       </div>
     </div>
   );
