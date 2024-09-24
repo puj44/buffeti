@@ -35,6 +35,7 @@ export const authSlice = createSlice({
             
         },
         isAuthenticated:(state,action) =>{
+            
             state.isLoading = false;
             state.isAuthenticated = action?.payload?.statusCode === 200 ?? false;
             state.user = {
