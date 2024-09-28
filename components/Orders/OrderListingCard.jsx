@@ -3,6 +3,8 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import OrderStatusCard from "./OrderStatusCard";
+import PaymentStatus from "../OrderDetails/PaymentStatus";
+import OrderStatus from "../OrderDetails/OrderStatus";
 
 function OrderListingCard({ data, handleShowPayment }) {
   const handlePayClick = (orderNumber) => {
@@ -10,25 +12,20 @@ function OrderListingCard({ data, handleShowPayment }) {
   };
   return (
     <div className="flex flex-col gap-3 w-full">
-      <div className="w-full items-center mb-2 flex flex-row justify-between">
+      <div className="w-full items-center mb-2 flex flex-row  gap-3">
         <p className="sub-title font-semibold">{data.order_number}</p>
+        {data.payment_status === "pending" && (
+          <OrderStatus status="Payment Pending" />
+        )}
         {(data.payment_status === "partially_paid" ||
           data.payment_status === "fully_paid") && (
-          <span className="flex flex-row gap-1 px-3 py-1 align-middle justify-center border-[1px] border-[#039855] rounded-2xl">
-            <div className="my-auto">
-              <Image
-                src={"/icons/check.webp"}
-                width={16}
-                height={16}
-                alt="Tick"
-              />
-            </div>
-            <p>
-              {data.payment_status === "partially_paid"
+          <PaymentStatus
+            paymentStatus={
+              data.payment_status === "partially_paid"
                 ? "Partially Paid"
-                : "Paid"}
-            </p>
-          </span>
+                : "Paid"
+            }
+          />
         )}
       </div>
       <div className="flex flex-col sm:flex-row justify-between gap-4">
@@ -38,7 +35,7 @@ function OrderListingCard({ data, handleShowPayment }) {
               return `${index > 0 ? ", " : ""}${item.item_name}`;
             })}
         </p>
-        {(data.payment_status === "pending" ||
+        {/* {(data.payment_status === "pending" ||
           data.payment_status === "partially_paid") && (
           <button
             className="btn primary-btn w-fit h-fit sm:self-end"
@@ -57,7 +54,7 @@ function OrderListingCard({ data, handleShowPayment }) {
                 : " ₹" + data.amount_due
             }`}
           </button>
-        )}
+        )} */}
       </div>
       <Link
         href={"/orders/" + data.order_number}

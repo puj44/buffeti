@@ -1,6 +1,6 @@
 import { call, put } from "redux-saga/effects";
-import { getOrdersApi, orderPaymentApi, placeOrderApi } from "../requests/orderRequests";
-import { setOrderPayment, setOrderPlaced, setOrders } from "../reducers/orderReducer";
+import { getOrderDetailsApi, getOrdersApi, orderPaymentApi, placeOrderApi } from "../requests/orderRequests";
+import { setOrder, setOrderDetails, setOrderPayment, setOrderPlaced, setOrders } from "../reducers/orderReducer";
 import { setCartDetails } from "../reducers/cartReducer";
 import { setToaster } from "../reducers/uiReducer";
 
@@ -33,7 +33,7 @@ export function* handleGetOrders(action){
         const response = yield call(getOrdersApi,action);
         yield put(setOrders(response?.response?.data || response?.data));
     }catch(err){
-        console.log("GET ORDER ERR:",err)
+        console.log("GET ORDERS ERR:",err)
     }
 }
 
@@ -54,5 +54,14 @@ export function* handleOrderPayment(action){
         yield put(setOrderPayment(response?.response?.data || response?.data));
     }catch(err){
         console.log("ORDER PAYMENT ERR:",err)
+    }
+}
+
+export function* handleGetOrderDetails(action){
+    try{
+        const response = yield call(getOrderDetailsApi,action);
+        yield put(setOrderDetails(response?.response?.data || response?.data));
+    }catch(err){
+        console.log("GET ORDER DETAILS ERR:",err)
     }
 }

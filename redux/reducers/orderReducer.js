@@ -5,7 +5,8 @@ export const orderSlice = createSlice({
     initialState:{
         orderPlaceResponse:{},
         orders:[],
-        orderPaymentResponse:{}
+        orderPaymentResponse:{},
+        orderDetails:{}
     },
     reducers:{
         placeOrder:(state) =>{
@@ -46,12 +47,18 @@ export const orderSlice = createSlice({
         setOrders:(state,{payload}) =>{
             state.orders = payload?.data?.orderDetails ?? [];
         },
+        getOrderDetails:() =>{
+
+        },
+        setOrderDetails:(state,{payload}) =>{
+            state.orderDetails = payload?.data?.orderDetails ?? {};
+        },
         resetAction:(state) =>{
             state.orderPlaceResponse = {};
         }
     }
 });
 
-export const {placeOrder, setOrderPlaced,orderPayment , setOrderPayment, getOrders, setOrders,resetAction} = orderSlice.actions;
+export const {placeOrder, setOrderPlaced,orderPayment , setOrderPayment, getOrders, getOrderDetails, setOrderDetails, setOrders,resetAction} = orderSlice.actions;
 
 export default orderSlice.reducer;
