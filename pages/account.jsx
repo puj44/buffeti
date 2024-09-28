@@ -92,7 +92,7 @@ function Account() {
     }
   }, [setting, profile, orders]);
   return (
-    <div className="grid grid-flow-row gap-6 page-spacing py-4 w-full justify-normal">
+    <div className="grid grid-flow-row gap-2 sm:gap-6 page-spacing py-4 w-full justify-normal">
       <p className="sm:px-8 font-semibold account-heading">{"Settings"}</p>
       <div className="flex sm:hidden w-full">
         <AccountHeader
