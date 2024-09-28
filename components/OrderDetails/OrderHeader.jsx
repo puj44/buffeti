@@ -6,7 +6,7 @@ import OrderStatus from "./OrderStatus";
 
 function OrderHeader({ orderStatus, paymentStatus }) {
   return (
-    <div className="py-5 flex flex-row align-middle gap-4 px-6">
+    <div className="py-5 flex flex-row align-middle gap-4 px-6 border-b-[#EAECF0] border-b-[1px]">
       <Link href={"/account"} className="my-auto">
         <Image src={"/icons/back.webp"} width={16} height={12} alt="Back" />
       </Link>
