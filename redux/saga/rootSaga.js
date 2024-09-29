@@ -7,7 +7,7 @@ import { handleGetCategories, handleGetItemsData, handleSearchItems } from "../h
 import { handleAddAddress, handleDeleteAddress, handleEditAddress, handleGetAddresses } from "../handlers/addressHandler";
 import { handleAddToCart, handleApplyCoupon, handleCartDelete, handleCartItemDelete, handleCartItemUpdate, handleCartUpdate, handleGetCartData, handleGetCartDetails, handleGetExtraServices, handleRemoveCoupon } from "../handlers/cartHandler";
 import { handleGetCustomerDetails } from "../handlers/customerHandler";
-import { handleGetOrders, handleOrderPayment, handlePlaceOrder } from "../handlers/orderHandler";
+import { handleGetOrderDetails, handleGetOrders, handleOrderPayment, handlePlaceOrder } from "../handlers/orderHandler";
 
 export function* watcherSaga() {
     try{
@@ -52,7 +52,9 @@ export function* watcherSaga() {
             yield takeLatest('order/placeOrder',handlePlaceOrder),
             yield takeLatest('order/getOrders',handleGetOrders),
             yield takeLatest('order/orderPayment',handleOrderPayment),
+            yield takeLatest('order/getOrderDetails',handleGetOrderDetails),
         ]);
     }catch(err){
+        console.log("ROOT SAGA ERROR:", err)
     }
 }

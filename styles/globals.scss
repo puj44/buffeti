@@ -78,7 +78,7 @@ body{
   appearance: none;
   border:1px solid $offWhitePrimary;
   border-radius:8px;
-  padding:16px 8px;
+  padding:8px 16px;
   &:not([size]){
     background-image: url("/arrows/dropdown.webp");
     background-size:12px 7px;
@@ -359,10 +359,21 @@ input{
 }
 .order_prev_checked{
   background-color: $primary;
+  &::after{
+    content: "";
+    top:50%;
+    left:100%;
+    transform: translateY(-50%);
+    height: 2px;
+    position: absolute;
+    background-color: $primary;
+    // width: 100%;
+  }
 }
 .order_current_checked{
   background-color: $primary;
   box-shadow: 0px 0px 0px 4px #F4EBFF;
+
 }
 .inner_white_circle{
   position: absolute;
@@ -604,7 +615,16 @@ input{
   }
 }
 
-
+//Common
+.information-box{
+  border:1px solid #E3E5E5;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: row;
+  padding:12px 16px;
+  gap:10px;
+  align-items: center;
+}
 
 
 // Quantity Update Input

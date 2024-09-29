@@ -11,3 +11,7 @@ export const orderPaymentApi = ({payload}) =>{
 export const getOrdersApi = ({payload}) =>{
     return get(`/order/get-order`,payload);
 }
+
+export const getOrderDetailsApi = ({payload}) =>{
+    return get(`/order/get-order-info/${payload}`);
+}

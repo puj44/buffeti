@@ -74,8 +74,11 @@ function Cart() {
   useEffect(() => {
     if (orderPlaceResponse?.success) {
       setLoading(false);
-      router.push("/account");
-      dispatch(resetAction());
+      if (orderPlaceResponse?.data?.orderNumber) {
+        router.push("/orders/" + orderPlaceResponse?.data?.orderNumber);
+      } else {
+        router.push("/account");
+      }
     } else if (orderPlaceResponse?.error) {
       setLoading(false);
       dispatch(resetAction());

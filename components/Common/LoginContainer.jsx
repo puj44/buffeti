@@ -95,6 +95,11 @@ function LoginContainer({
                   }}
                   placeholder="Phone Number"
                   value={values?.mobile_number ?? ""}
+                  onKeyDown={(e) => {
+                    if (e.key?.toLowerCase() === "enter") {
+                      sendOTP();
+                    }
+                  }}
                 />
               </div>
               {error && (
@@ -160,6 +165,11 @@ function LoginContainer({
                     }}
                     placeholder="Full Name"
                     value={values?.full_name ?? ""}
+                    onKeyDown={(e) => {
+                      if (e.key === "enter") {
+                        sendOTP();
+                      }
+                    }}
                   />
                 </div>
                 <div className="input-group">
@@ -170,6 +180,11 @@ function LoginContainer({
                     }}
                     placeholder="Email (Optional)"
                     value={values?.email ?? ""}
+                    onKeyDown={(e) => {
+                      if (e.key === "enter") {
+                        sendOTP();
+                      }
+                    }}
                   />
                 </div>
               </div>
@@ -187,11 +202,6 @@ function LoginContainer({
               className={`btn primary-btn ${isLoading ? "opacity-60" : ""}`}
               onClick={() => {
                 sendOTP();
-              }}
-              onKeyDown={(e) => {
-                if (e.key === "enter") {
-                  sendOTP();
-                }
               }}
             >
               {isLoading ? <span className="loader"></span> : "Continue"}
@@ -243,7 +253,16 @@ function LoginContainer({
                   // renderSeparator={<span style={{ width: "10px" }}></span>}
                   isInputNum={true}
                   shouldAutoFocus={true}
-                  renderInput={(props) => <input {...props} />}
+                  renderInput={(props) => (
+                    <input
+                      {...props}
+                      onKeyDown={(e) => {
+                        if (e.key?.toLowerCase() === "enter") {
+                          verifyOtp();
+                        }
+                      }}
+                    />
+                  )}
                   containerStyle={{
                     justifyContent: "space-between",
                   }}
