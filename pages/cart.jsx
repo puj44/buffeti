@@ -79,7 +79,6 @@ function Cart() {
       } else {
         router.push("/account");
       }
-      dispatch(resetAction());
     } else if (orderPlaceResponse?.error) {
       setLoading(false);
       dispatch(resetAction());

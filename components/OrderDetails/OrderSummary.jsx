@@ -1,29 +1,8 @@
 import React from "react";
-import OrderDatePicker from "../Common/OrderDatePicker";
-import dynamic from "next/dynamic";
-import OrderTimePicker from "../Common/OrderTimePicker";
 
-function CartSummary({
-  data,
-  handleChangeDate,
-  handleChangeTime,
-  deliveryDate,
-  deliveryTime,
-}) {
+function OrderSummary({ data }) {
   return (
-    <div className="border-[1px] border-[#A8A8AD80] rounded-lg w-full flex flex-col p-4 gap-5">
-      <p>{"Delivery Schedule"}</p>
-      <div className="grid grid-cols-2 gap-2 md:gap-3 w-full">
-        <OrderDatePicker
-          handleChangeDate={handleChangeDate ?? (() => {})}
-          value={deliveryDate}
-        />
-        <OrderTimePicker
-          handleChangeTime={handleChangeTime ?? (() => {})}
-          value={deliveryTime}
-        />
-      </div>
-      <span className="border-[1px] border-dashed border-[#595959] w-full"></span>
+    <div className="flex flex-col gap-3 sm:gap-4">
       <p>{"Billing Details"}</p>
       <div
         className="flex flex-col gap-2 w-full"
@@ -39,7 +18,7 @@ function CartSummary({
                 <p className="">
                   {itemPrice.item_name + " X " + itemPrice.qty}
                 </p>
-                <p className="text-nowrap">{"₹" + itemPrice.amount}</p>
+                <p className="text-nowrap">{"+ ₹" + itemPrice.amount}</p>
               </div>
             );
           })}
@@ -55,20 +34,21 @@ function CartSummary({
                   <p className="">
                     {extraCharge.item_name + " X " + extraCharge.qty}
                   </p>
-                  <p className="text-nowrap">{"₹" + extraCharge.amount}</p>
+                  <p className="text-nowrap">{"+ ₹" + extraCharge.amount}</p>
                 </div>
               );
             })}
           </>
         )}
-        {Object.keys(data?.addon_charges ?? {})?.length > 0 &&
-          Number(data?.addon_charges?.addOnCharges ?? 0) > 0 && (
-            <div className="flex flex-row gap-1 justify-between pt-2">
+        {data?.addon_charges?.length > 0 &&
+          Number(data?.addon_charges?.[0]?.addOnCharges ?? 0) > 0 && (
+            <div className="flex flex-row gap-1 justify-between pt-1">
               <p className="font-medium">
-                {"Add On Charges X " + data.addon_charges.addOnChargesQty}
+                {"Add On Charges X " +
+                  data?.addon_charges?.[0]?.addOnChargesQty}
               </p>
               <p className="text-nowrap">
-                {"₹" + data.addon_charges.addOnCharges}
+                {"+ ₹" + data?.addon_charges?.[0]?.addOnCharges}
               </p>
             </div>
           )}
@@ -83,7 +63,7 @@ function CartSummary({
                 >
                   <p className="">{extraServiceCharge.name}</p>
                   <p className="text-nowrap">
-                    {"₹" + extraServiceCharge.price}
+                    {"+ ₹" + extraServiceCharge.price}
                   </p>
                 </div>
               );
@@ -92,7 +72,9 @@ function CartSummary({
         )}
         {data?.coupon_discount_value && data?.coupon_discount_value !== 0 && (
           <div className="flex flex-row gap-1 justify-between pt-2">
-            <p className="font-medium">{"Coupon"}</p>
+            <p className="font-medium">
+              {"Coupon (" + data?.coupon_code + ")"}
+            </p>
             <p className="text-nowrap">{"- ₹" + data?.coupon_discount_value}</p>
           </div>
         )}
@@ -115,4 +97,4 @@ function CartSummary({
   );
 }
 
-export default CartSummary;
+export default OrderSummary;

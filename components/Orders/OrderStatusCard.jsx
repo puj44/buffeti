@@ -9,7 +9,7 @@ const statusEnum = {
 };
 function OrderStatusCard({ orderStatus }) {
   const currentCheckedStatus = useMemo(() => {
-    return statusEnum[orderStatus].statusIndex;
+    return statusEnum?.[orderStatus]?.statusIndex;
   }, [orderStatus]);
   return (
     <div className="relative">
