@@ -7,6 +7,8 @@ export const addressSlice = createSlice({
         addresses:[],
         response:false,
         errorMessage:false,
+        addressRemoved:false,
+        addressRemoveResponse:false
     },
     reducers:{
         getAddresses:(state) =>{
@@ -38,13 +40,19 @@ export const addressSlice = createSlice({
         deleteAddress:(state) =>{
         },
         setDeleteAddress:(state,{payload}) =>{
-            state.response = true;
+            state.addressRemoveResponse = true;
+            if(payload?.statusCode === 400){
+                state.errorMessage = payload?.message;
+            }
             if(payload?.statusCode === 200){
+                state.addressRemoved = true;
                 state.addresses = payload?.data?.addresses ?? [];
             }
         },
         resetAddress:(state) =>{
             state.response = false;
+            state.addressRemoveResponse = false;
+            state.addressRemoved = false;
             state.errorMessage = false;
         }
     }

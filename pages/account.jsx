@@ -1,12 +1,26 @@
-// import AccountHeader from '@/components/Common/Account/AccountHeader';
-import OrderListingCard from "@/components/Orders/OrderListingCard";
-import PaymentModel from "@/components/Payment/PaymentModel";
-import { getAddresses } from "@/redux/reducers/addressReducer";
+import Address from "@/components/Common/Account/Address";
+import AddressModel from "@/components/Common/AddressModel";
+import ConfirmationPopup from "@/components/Common/ConfirmationPopup";
+import {
+  deleteAddress,
+  getAddresses,
+  resetAddress,
+} from "@/redux/reducers/addressReducer";
 import { getProfile } from "@/redux/reducers/customerReducer";
 import { getOrders } from "@/redux/reducers/orderReducer";
+import { setToaster } from "@/redux/reducers/uiReducer";
 import dynamic from "next/dynamic";
+import Image from "next/image";
 const AccountHeader = dynamic(
   () => import("@/components/Common/Account/AccountHeader"),
+  { ssr: false }
+);
+const OrderListingCard = dynamic(
+  () => import("@/components/Orders/OrderListingCard"),
+  { ssr: false }
+);
+const PaymentModel = dynamic(
+  () => import("@/components/Payment/PaymentModel"),
   { ssr: false }
 );
 import React, { useCallback, useEffect, useState } from "react";
@@ -24,7 +38,12 @@ function Account() {
   const { profile } = useSelector((state) => state.customer);
   const { orders } = useSelector((state) => state.order);
   const { isAuthenticated } = useSelector((state) => state.auth);
+  const { addresses, addressRemoveResponse, errorMessage, addressRemoved } =
+    useSelector((state) => state.address);
+
+  const [addressEdit, setAddressEdit] = useState(false);
   const [showPayment, setShowPayment] = useState(false);
+  const [deleteAddressShow, setDeleteAddress] = useState(false);
   const dispatch = useDispatch();
 
   const handleShowPayment = (number) => {
@@ -56,10 +75,41 @@ function Account() {
 
   useEffect(() => {
     setLoading(false);
-  }, [profile, orders]);
+  }, [profile, orders, addresses]);
+
+  useEffect(() => {
+    if (addressRemoveResponse) {
+      dispatch(
+        setToaster({
+          type: addressRemoved ? "success" : "error",
+          message: addressRemoved
+            ? "Address removed successfully"
+            : "There was a problem deleting address...",
+        })
+      );
+      handleCloseModel();
+      dispatch(resetAddress());
+    }
+  }, [addressRemoveResponse, errorMessage, addressRemoved]);
 
   const handleChangeSetting = (val) => {
     setSetting(val);
+  };
+
+  const handleDeleteAddress = (val) => {
+    setDeleteAddress(val);
+  };
+  const handleEditAddress = (val) => {
+    setAddressEdit(val);
+  };
+
+  const handleCloseModel = () => {
+    setAddressEdit(false);
+    setDeleteAddress(false);
+  };
+
+  const handleConfirmDelete = () => {
+    dispatch(deleteAddress({ id: deleteAddressShow }));
   };
 
   const renderSetting = useCallback(() => {
@@ -86,11 +136,42 @@ function Account() {
           </div>
         );
       case "Saved Address":
-        break;
+        return (
+          <div>
+            <div
+              className="flex flex-row gap-3 items-center  cursor-pointer pb-3 w-full justify-end px-2"
+              onClick={() => {
+                setAddressEdit(true);
+              }}
+            >
+              <Image
+                src={"/icons/plus.webp"}
+                width={14}
+                height={14}
+                alt="Plus"
+                priority
+              />
+              <p className="font-medium">Add New Address</p>
+            </div>
+            <div className="flex flex-col p-2 gap-4">
+              {addresses?.length > 0 &&
+                addresses.map((addr, idx) => {
+                  return (
+                    <Address
+                      data={addr}
+                      key={"address-" + idx}
+                      handleDeleteAddress={handleDeleteAddress}
+                      handleEditAddress={handleEditAddress}
+                    />
+                  );
+                })}
+            </div>
+          </div>
+        );
       default:
         break;
     }
-  }, [setting, profile, orders]);
+  }, [setting, profile, orders, addresses]);
   return (
     <div className="grid grid-flow-row gap-2 sm:gap-6 page-spacing py-4 w-full justify-normal">
       <p className="sm:px-8 font-semibold account-heading">{"Settings"}</p>
@@ -121,6 +202,21 @@ function Account() {
       )}
       {showPayment && (
         <PaymentModel data={showPayment} handleClose={handleClosePayment} />
+      )}
+      {addressEdit && (
+        <AddressModel
+          handleCloseModel={handleCloseModel}
+          values={addressEdit === true ? {} : addressEdit ?? {}}
+          show={addressEdit}
+        />
+      )}
+      {deleteAddressShow && (
+        <ConfirmationPopup
+          handleClose={handleCloseModel}
+          show={deleteAddressShow}
+          description={"Are you sure you want to delete this address?"}
+          handleConfirm={handleConfirmDelete}
+        />
       )}
     </div>
   );

@@ -3,6 +3,7 @@ import {
   editAddress,
   resetAddress,
 } from "@/redux/reducers/addressReducer";
+import { setToaster } from "@/redux/reducers/uiReducer";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -52,6 +53,7 @@ function AddressModel({ values, handleCloseModel, show }) {
   const [isLoading, setLoading] = useState(false);
   const { response, errorMessage } = useSelector((state) => state.address);
   const dispatch = useDispatch();
+
   useEffect(() => {
     if (show) {
       document.body.style.overflow = "hidden";
@@ -95,19 +97,23 @@ function AddressModel({ values, handleCloseModel, show }) {
     if (!addressData?.lattitude && !addressData?.longitude) {
       if ("geolocation" in navigator) {
         navigator.geolocation.getCurrentPosition(function (position) {
-          addressData.lattitude = position.coords.latitude;
-          addressData.longitude = position.coords.longitude;
+          addressData.lattitude = position.coords.latitude?.toString();
+          addressData.longitude = position.coords.longitude?.toString();
         });
       } else {
-        isValid = false;
-        setErrors({
-          ...errors,
-          location:
-            "Geolocation is not available in your browser, please try different browser",
-        });
+        // isValid = false;
+        // setErrors({
+        //   ...errors,
+        //   location:
+        //     "Geolocation is not available in your browser, please try different browser",
+        // });
       }
     }
     if (isValid) {
+      delete addressData?.customer;
+      delete addressData?.updatedAt;
+      delete addressData?.createdAt;
+      delete addressData?.__v;
       setLoading(true);
       if (addressData?._id) {
         dispatch(
@@ -131,9 +137,22 @@ function AddressModel({ values, handleCloseModel, show }) {
       setLoading(false);
       if (!errorMessage) {
         handleCloseModel();
+        dispatch(
+          setToaster({
+            type: "success",
+            message: "Address saved successfully",
+          })
+        );
       } else {
         setResponseError(errorMessage);
+        dispatch(
+          setToaster({
+            type: "error",
+            message: "There was a problem saving address",
+          })
+        );
       }
+      dispatch(resetAddress());
     }
   }, [response, errorMessage]);
 
@@ -142,19 +161,26 @@ function AddressModel({ values, handleCloseModel, show }) {
       navigator.geolocation.getCurrentPosition(function (position) {
         setData({
           ...data,
-          lattitude: position.coords.latitude,
-          longitude: position.coords.longitude,
+          lattitude: position.coords.latitude?.toString(),
+          longitude: position.coords.longitude?.toString(),
         });
       });
+      dispatch(
+        setToaster({
+          type: "success",
+          message: "Location detected successfully",
+        })
+      );
     } else {
-      setErrors({
-        ...errors,
-        location:
-          "Geolocation is not available in your browser, please try different browser",
-      });
+      dispatch(
+        setToaster({
+          type: "error",
+          message:
+            "Geolocation is not available in your browser, please try different browser",
+        })
+      );
     }
   };
-
   if (show)
     return (
       <div className="fixed z-50 left-0 top-0  overflow-hidden w-dvw h-dvh bg-[rgb(0,0,0,0.3)] ">
