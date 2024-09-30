@@ -17,13 +17,13 @@ export default function Home(props) {
   const {noOfPeople,packages,filters} = props;
   const [isCartAdded, setIsCartAdded] = useState(false);
   const {cartDetails} = useSelector((state) => state.cart);
-  useEffect(()=>{
-    if(Object.keys(cartDetails ?? {}).length > 0){
-      setIsCartAdded(true);
-    }else{
-      setIsCartAdded(false);
-    }
-  },[cartDetails])
+  // useEffect(()=>{
+  //   if(Object.keys(cartDetails ?? {}).length > 0){
+  //     setIsCartAdded(true);
+  //   }else{
+  //     setIsCartAdded(false);
+  //   }
+  // },[cartDetails])
   return (
     <div
       className={`${ process.env.NEXT_PUBLIC_ENVIRONMENT === "DEV" ? "flex flex-col md:gap-6 gap-4 py-8  page-spacing ":""}`} style={{alignItems:"stretch"}}
@@ -37,12 +37,12 @@ export default function Home(props) {
               <MiniThaliCard />
             </div>
           </div>
-          {
+          {/* {
             isCartAdded &&
             <div className="block md:hidden">
               <ViewCart show={true} />
             </div>
-          }
+          } */}
     </div>
   );
 }
