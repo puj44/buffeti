@@ -28,6 +28,22 @@ const customTheme = {
     },
   },
 };
+const profileDropdown = {
+  floating: {
+    divider: "my-1 h-px bg-[#E3E5E5]",
+    item: {
+      container: "",
+      base: "flex  cursor-pointer px-0 py-3 min-w-[240px] items-center justify-start small-title focus:outline-none",
+      icon: "mr-2 h-4 w-4",
+    },
+
+    style: {
+      dark: "profile-dropdown p-0 focus:outline-none",
+      light: "profile-dropdown p-0 focus:outline-none",
+      auto: "profile-dropdown p-0 focus:outline-none",
+    },
+  },
+};
 
 function Header({ handleModelClick }) {
   const router = useRouter();
@@ -55,8 +71,8 @@ function Header({ handleModelClick }) {
   }, [mobileMenu]);
 
   return (
-    <div className="page-spacing bg-primary">
-      <div id="navbar" className="navbar flex justify-between ">
+    <div className="page-spacing bg-primary ">
+      <div id="navbar" className="navbar flex justify-between">
         <div className="flex flex-row gap-[85px]">
           <div className="w-[66.9px] h-[44px] md:w-[76.01px] md:h-[50px]">
             <Link href="/" className="focus:outline-none">
@@ -323,15 +339,77 @@ function Header({ handleModelClick }) {
             >
               {"Login"}
             </p>
-
-            <Link
+            <div className={` ${auth?.isAuthenticated ? "" : "md:hidden"}`}>
+              <Dropdown
+                label=""
+                theme={profileDropdown}
+                className={` cursor-pointer`}
+                renderTrigger={() => (
+                  <div
+                    className={`flex justify-center cursor-pointer orange-circle text-white w-[38px] h-[38px] items-center align-middle my-auto`}
+                  >
+                    {auth?.user?.name?.toString()?.charAt(0) ?? "N"}
+                  </div>
+                )}
+              >
+                <Dropdown.Item as="div" className={`flex flex-col gap-3 `}>
+                  <div className="flex flex-col self-baseline gap-2.5 px-4">
+                    <p className="font-semibold small-title">
+                      {auth?.user?.name ?? ""}
+                    </p>
+                    {auth?.user?.email && (
+                      <p className="small-title">{auth?.user?.email}</p>
+                    )}
+                  </div>
+                  <Dropdown.Divider className="w-full" />
+                  <div className="flex flex-col self-baseline gap-3 px-4 py-2">
+                    <Link
+                      className="flex flex-row align-middle gap-2"
+                      href={"/account"}
+                    >
+                      <div className="my-auto">
+                        <Image
+                          src={"/icons/profile.webp"}
+                          width={16}
+                          height={16}
+                          alt="Profile"
+                        />
+                      </div>
+                      <p className="small-title font-medium">{"Profile"}</p>
+                    </Link>
+                  </div>
+                  <Dropdown.Divider className="w-full" />
+                  <div className="flex flex-col self-baseline gap-3 px-4">
+                    <div
+                      className="flex flex-row align-middle gap-2 cursor-pointer"
+                      onClick={() => {
+                        dispatch(signout());
+                      }}
+                    >
+                      <div className="my-auto">
+                        <Image
+                          src={"/icons/logout.webp"}
+                          width={16}
+                          height={16}
+                          alt="Logout"
+                        />
+                      </div>
+                      <p className="small-title font-medium text-color-primary">
+                        {"Log out"}
+                      </p>
+                    </div>
+                  </div>
+                </Dropdown.Item>
+              </Dropdown>
+            </div>
+            {/* <Link
               href={"/account"}
               className={`flex ${
                 auth?.isAuthenticated ? "" : "md:hidden"
               } justify-center cursor-pointer orange-circle text-white w-[38px] h-[38px] items-center align-middle my-auto`}
             >
               {auth?.user?.name?.toString()?.charAt(0) ?? "N"}
-            </Link>
+            </Link> */}
           </div>
         </div>
       </div>
