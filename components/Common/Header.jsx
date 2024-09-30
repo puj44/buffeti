@@ -250,9 +250,31 @@ function Header({ handleModelClick }) {
             </div>
           </div>
         </div>
-        <div className="block md:hidden my-auto">
+        <div className="flex flex-row gap-5 align-middle md:hidden ">
+          {cartDetails?.items && (
+            <Link
+              className="block my-auto"
+              onClick={(e) => {
+                if (!auth?.isAuthenticated) {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  handleModelClick(true);
+                }
+              }}
+              href="/cart"
+            >
+              <Image
+                src={"/icons/cart.webp"}
+                alt={"cart"}
+                width={20}
+                height={20}
+                className="my-auto"
+                priority
+              />
+            </Link>
+          )}
           <div
-            className={`hamburger cursor-pointer`}
+            className={`hamburger cursor-pointer my-auto`}
             onClick={() => {
               setMobileMenu(!mobileMenu);
             }}
