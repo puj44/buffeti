@@ -402,7 +402,8 @@ function LoginContainer({
           height={493}
           alt={"Signup Banner"}
           objectFit="cover"
-          className="rounded-lg"
+          className="rounded-lg bg-[#ececec] shimmer "
+          style={{ height: "100%" }}
           priority
         />
       </div>

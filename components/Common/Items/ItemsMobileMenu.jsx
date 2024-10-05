@@ -2,7 +2,7 @@ import React from "react";
 import { Dropdown, Flowbite } from "flowbite-react";
 import Image from "next/image";
 const customMenuTheme = {
-  content: "py-0 pt-1 focus:outline-none",
+  content: "py-0 pt-1 focus:outline-none w-max",
   floating: {
     divider: "my-1 h-px bg-[#E3E5E5]",
     item: {
@@ -39,19 +39,13 @@ function ItemsMobileMenu({
   };
   if (show)
     return (
-      <div
-        className="fixed right-[26px] bottom-[20px] flex justify-end w-full z-20"
-        style={{ pointerEvents: "none" }}
-      >
+      <div className="fixed right-[26px] bottom-[20px] flex justify-end  z-20">
         <Dropdown
           label=""
           placement="top"
           theme={customMenuTheme}
           renderTrigger={() => (
-            <div
-              className="flex flex-row justify-center px-3 py-2 gap-1 items-center bg-primary rounded-[30px]  "
-              style={{ pointerEvents: "all" }}
-            >
+            <div className="flex flex-row justify-center px-3 py-2 gap-1 items-center bg-primary rounded-[30px]  ">
               <div className="w-[18px] h-[14px] my-auto">
                 <Image
                   src={"/icons/menu_i.webp"}
@@ -73,21 +67,23 @@ function ItemsMobileMenu({
                 <>
                   <Dropdown.Item
                     key={"category-" + i}
-                    as="p"
+                    as="div"
                     className={` flex  flex-col gap-1`}
                   >
-                    <h4
+                    <div
                       className={`relative self-baseline  flex h-[34px] w-full items-center flex-row gap-1 package-title font-medium sidebar ${
                         activeItem === i
                           ? "active-sidebar font-medium my-auto"
                           : ""
                       }`}
                       onClick={() => {
+                        console.log("HERE222", i);
+
                         handleChangeActiveItem(i);
                         scrollToTop();
                       }}
                     >
-                      <p className="w-fit">{items[i]?.name ?? items[i]}</p>
+                      <h4 className="w-fit">{items[i]?.name ?? items[i]}</h4>
                       {itemsSelected?.[i] &&
                         Object.keys(itemsSelected?.[i]).length > 0 && (
                           <div
@@ -102,7 +98,7 @@ function ItemsMobileMenu({
                             </p>
                           </div>
                         )}
-                    </h4>
+                    </div>
                     {activeItem === i &&
                     item.sub_categories &&
                     Object.keys(item.sub_categories).length > 0 ? (
