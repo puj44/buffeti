@@ -78,13 +78,13 @@ function OrderSummary({ data }) {
             <p className="text-nowrap">{"- ₹" + data?.coupon_discount_value}</p>
           </div>
         )}
-        <div className="flex flex-row gap-1 justify-between w-full mt-2">
+        {/* <div className="flex flex-row gap-1 justify-between w-full mt-2">
           <p className="font-medium">{"GST"}</p>
           <p>
             {"₹" +
               Number(data?.total_billed_amount - data?.total_amount).toFixed(2)}
           </p>
-        </div>
+        </div> */}
       </div>
       <span className="border-[1px] border-dashed  border-[#595959] w-full"></span>
       <div className="flex flex-row gap-1 justify-between w-full items-center">

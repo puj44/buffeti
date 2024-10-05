@@ -185,7 +185,7 @@ function AddressModel({ values, handleCloseModel, show }) {
     return (
       <div className="fixed z-50 left-0 top-0  overflow-hidden w-dvw h-dvh bg-[rgb(0,0,0,0.3)] ">
         <div className="relative w-full h-full flex justify-center align-middle ">
-          <div className="bg-white address-model flex flex-col gap-5 justify-between overflow-y-scroll sm:overflow-y-visible py-6 px-5 relative w-full h-full md:h-fit md:max-w-[642px] md:max-h-[800px] my-auto  rounded-lg ">
+          <div className="bg-white address-model flex flex-col gap-5 justify-between overflow-y-scroll sm:overflow-y-visible py-6 px-5 relative w-full h-full md:h-fit md:max-w-[642px] md:max-h-[850px] my-auto  rounded-lg ">
             <div className="grid grid-flow-row   gap-5">
               <p className="font-semibold">{"Address Details"}</p>
               <div

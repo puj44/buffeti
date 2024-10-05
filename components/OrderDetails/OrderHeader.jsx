@@ -6,7 +6,7 @@ import OrderStatus from "./OrderStatus";
 
 function OrderHeader({ orderStatus, paymentStatus }) {
   return (
-    <div className="py-3 sm:py-5 flex flex-row align-middle gap-4 sm:gap-6 px-6 border-b-[#EAECF0] border-b-[1px]">
+    <div className="py-3 sm:py-5 flex flex-row align-middle gap-4 sm:gap-6 px-0 sm:px-6 border-b-[#EAECF0] border-b-[1px]">
       <Link href={"/account"} className="my-auto">
         <Image
           src={"/icons/back.webp"}
@@ -41,7 +41,9 @@ function OrderHeader({ orderStatus, paymentStatus }) {
             }
           />
         )}
-        {orderStatus && <OrderStatus status={orderStatus} />}
+        <div className="hidden sm:block my-auto">
+          {orderStatus && <OrderStatus status={orderStatus} />}
+        </div>
       </div>
     </div>
   );

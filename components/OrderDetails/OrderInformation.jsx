@@ -45,7 +45,7 @@ function OrderInformation({ packs, deliveryDate, deliveryTime, address }) {
         </div>
         <p>{deliveryTime}</p>
       </div>
-      <div className="information-box ">
+      {/* <div className="information-box ">
         <div>
           <Image
             src={"/icons/address.webp"}
@@ -59,7 +59,7 @@ function OrderInformation({ packs, deliveryDate, deliveryTime, address }) {
           />
         </div>
         <p>{address ?? "1st Floor, Moon Appartments, Sobo, Ahmedabad"}</p>
-      </div>
+      </div> */}
     </div>
   );
 }

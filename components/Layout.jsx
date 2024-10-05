@@ -18,13 +18,13 @@ function Layout({ children }) {
       dispatch(setLoginModel({ open: false }));
     }
   };
-  useEffect(() => {
-    if (isModalOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "scroll";
-    }
-  }, [isModalOpen]);
+  // useEffect(() => {
+  //   if (isModalOpen) {
+  //     document.body.style.overflow = "hidden";
+  //   } else {
+  //     document.body.style.overflow = "scroll";
+  //   }
+  // }, [isModalOpen]);
   useEffect(() => {
     if (loginModel) {
       setModalOpen(true);
