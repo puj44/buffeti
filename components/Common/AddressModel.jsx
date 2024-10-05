@@ -54,13 +54,13 @@ function AddressModel({ values, handleCloseModel, show }) {
   const { response, errorMessage } = useSelector((state) => state.address);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    if (show) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "scroll";
-    }
-  }, [show]);
+  // useEffect(() => {
+  //   if (show) {
+  //     document.body.style.overflow = "hidden";
+  //   } else {
+  //     document.body.style.overflow = "scroll";
+  //   }
+  // }, [show]);
 
   const handleChangeInput = (e, field) => {
     if (
