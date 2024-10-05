@@ -8,7 +8,7 @@ export const authSlice = createSlice({
         isLoading:false,
         resendOtpCount:0,
         otpSecondsLeft:undefined,
-        isAuthenticated:false,
+        isAuthenticated:undefined,
         otpResponse:false,
         errorMessage:"",
         user:{}

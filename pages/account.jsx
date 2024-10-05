@@ -53,6 +53,11 @@ function Account() {
   const handleClosePayment = () => {
     setShowPayment(false);
   };
+  useEffect(() => {
+    if (isAuthenticated === false) {
+      router.push("/");
+    }
+  }, [isAuthenticated]);
 
   useEffect(() => {
     if (isAuthenticated) {

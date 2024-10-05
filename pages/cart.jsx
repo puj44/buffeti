@@ -66,10 +66,15 @@ function Cart() {
     }
   }, [response]);
   useEffect(() => {
+    if (isAuthenticated === false) {
+      router.push("/");
+    }
+  }, [isAuthenticated]);
+  useEffect(() => {
     dispatch(getCart());
     dispatch(getAddresses());
     dispatch(getExtraServices());
-  }, [dispatch]);
+  }, [dispatch, isAuthenticated]);
 
   useEffect(() => {
     if (orderPlaceResponse?.success) {
