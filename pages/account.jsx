@@ -29,7 +29,7 @@ import { useDispatch, useSelector } from "react-redux";
 const settings = [
   // "Profile",
   "Orders",
-  "Saved Address",
+  "Saved Addresses",
 ];
 function Account() {
   const [setting, setSetting] = useState("Orders");
@@ -69,7 +69,7 @@ function Account() {
         case "Orders":
           dispatch(getOrders());
           break;
-        case "Saved Address":
+        case "Saved Addresses":
           dispatch(getAddresses());
           break;
         default:
@@ -140,7 +140,7 @@ function Account() {
               : ""}
           </div>
         );
-      case "Saved Address":
+      case "Saved Addresses":
         return (
           <div>
             <div

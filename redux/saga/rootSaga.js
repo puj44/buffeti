@@ -4,7 +4,7 @@ import {handleGetMobileOtp, handleGetTokenStatus, handleSignout, handleSignup, h
 import { handleGetData } from "../handlers/homeHandler";
 import { handleGetFilters, handleGetPackage, handleGetPackagesData } from "../handlers/packageHandler";
 import { handleGetCategories, handleGetItemsData, handleSearchItems } from "../handlers/itemsHandler";
-import { handleAddAddress, handleDeleteAddress, handleEditAddress, handleGetAddresses } from "../handlers/addressHandler";
+import { handleAddAddress, handleDeleteAddress, handleDetectLocation, handleEditAddress, handleGetAddresses } from "../handlers/addressHandler";
 import { handleAddToCart, handleApplyCoupon, handleCartDelete, handleCartItemDelete, handleCartItemUpdate, handleCartUpdate, handleGetCartData, handleGetCartDetails, handleGetExtraServices, handleRemoveCoupon } from "../handlers/cartHandler";
 import { handleGetCustomerDetails } from "../handlers/customerHandler";
 import { handleGetOrderDetails, handleGetOrders, handleOrderPayment, handlePlaceOrder } from "../handlers/orderHandler";
@@ -34,6 +34,7 @@ export function* watcherSaga() {
             yield takeLatest('address/addAddress',handleAddAddress),
             yield takeLatest('address/editAddress',handleEditAddress),
             yield takeLatest('address/deleteAddress',handleDeleteAddress),
+            yield takeLatest('address/detectLocation',handleDetectLocation),
             //CART
             yield takeLatest('cart/getCartDetails',handleGetCartDetails),
             yield takeLatest('cart/addToCart',handleAddToCart),

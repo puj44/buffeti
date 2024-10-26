@@ -8,7 +8,8 @@ export const addressSlice = createSlice({
         response:false,
         errorMessage:false,
         addressRemoved:false,
-        addressRemoveResponse:false
+        addressRemoveResponse:false,
+        detectedLocation:{}
     },
     reducers:{
         getAddresses:(state) =>{
@@ -16,6 +17,12 @@ export const addressSlice = createSlice({
         },
         setAddresses:(state,{payload}) =>{
             state.addresses = payload?.data?.addresses ?? [];
+        },
+        detectLocation:(state)=>{
+
+        },
+        setLocation:(state,{payload})=>{
+            state.detectedLocation = {...payload?.data ?? {}}
         },
         addAddress:(state) =>{
         },
@@ -54,6 +61,7 @@ export const addressSlice = createSlice({
             state.addressRemoveResponse = false;
             state.addressRemoved = false;
             state.errorMessage = false;
+            state.detectedLocation = {};
         }
     }
 });
@@ -67,7 +75,9 @@ export const {
     setEditAddress,
     deleteAddress,
     setDeleteAddress,
-    resetAddress
+    resetAddress,
+    detectLocation,
+    setLocation
 } = addressSlice.actions;
 
 export default addressSlice.reducer;
