@@ -22,3 +22,8 @@ export const deleteAddressesApi = ({payload}) =>{
     
     return remove("/profile/address/delete/"+payload?.id,payload?.location ?? null);
 }
+
+export const detectLocationApi = ({payload}) =>{
+
+    return post("/geolocation/get-location",(payload));
+}

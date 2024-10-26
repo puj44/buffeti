@@ -1,5 +1,6 @@
 import {
   addAddress,
+  detectLocation,
   editAddress,
   resetAddress,
 } from "@/redux/reducers/addressReducer";
@@ -35,7 +36,7 @@ const fields = [
   {
     title: "City",
     field: "city",
-    fieldType: "select",
+    fieldType: "input",
     className: "w-full md:w-fit md:min-w-[290px]",
   },
   {
@@ -51,8 +52,28 @@ function AddressModel({ values, handleCloseModel, show }) {
   const [errors, setErrors] = useState({});
   const [responseError, setResponseError] = useState(false);
   const [isLoading, setLoading] = useState(false);
-  const { response, errorMessage } = useSelector((state) => state.address);
+  const [locationLoading, setLocationLoading] = useState(false);
+  const { response, errorMessage, detectedLocation } = useSelector(
+    (state) => state.address
+  );
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (Object.keys(detectedLocation)?.length > 0) {
+      dispatch(
+        setToaster({
+          type: "success",
+          message: "Location detected successfully",
+        })
+      );
+      setData({
+        ...data,
+        ...detectedLocation,
+      });
+      dispatch(resetAddress());
+    }
+    setLocationLoading(false);
+  }, [detectedLocation]);
 
   // useEffect(() => {
   //   if (show) {
@@ -157,21 +178,23 @@ function AddressModel({ values, handleCloseModel, show }) {
   }, [response, errorMessage]);
 
   const handleDetectLocation = () => {
+    setLocationLoading(true);
     if ("geolocation" in navigator) {
       navigator.geolocation.getCurrentPosition(function (position) {
+        dispatch(
+          detectLocation({
+            lat: position.coords.latitude?.toString(),
+            lng: position.coords.longitude?.toString(),
+          })
+        );
         setData({
           ...data,
           lattitude: position.coords.latitude?.toString(),
           longitude: position.coords.longitude?.toString(),
         });
       });
-      dispatch(
-        setToaster({
-          type: "success",
-          message: "Location detected successfully",
-        })
-      );
     } else {
+      setLocationLoading(false);
       dispatch(
         setToaster({
           type: "error",
@@ -193,6 +216,7 @@ function AddressModel({ values, handleCloseModel, show }) {
                 onClick={() => {
                   handleDetectLocation();
                 }}
+                disabled={locationLoading ?? false}
               >
                 <Image
                   src={"/icons/pin.webp"}
@@ -202,6 +226,7 @@ function AddressModel({ values, handleCloseModel, show }) {
                   priority
                 />
                 <p className="font-semibold ">{"Detect Location"}</p>
+                {locationLoading && <span className="loader"></span>}
               </div>
               {errors && errors?.location && (
                 <span className="small-title" style={{ color: "#475467" }}>
@@ -245,6 +270,7 @@ function AddressModel({ values, handleCloseModel, show }) {
                             onChange={(e) => {
                               handleChangeInput(e, fd.field);
                             }}
+                            value={data?.[fd.field] ?? ""}
                           >
                             {data?.[fd.field] ?? ""}
                           </textarea>
