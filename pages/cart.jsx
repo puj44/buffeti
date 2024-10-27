@@ -337,7 +337,6 @@ function Cart() {
     let cartDetails = JSON.parse(JSON.stringify(cartData));
 
     if (!timeValues?.includes(cartDetails.delivery_time)) {
-      console.log("ASDASD2", timeValues, cartDetails?.delivery_time);
       cartDetails.delivery_time = timeValues[0];
     }
 

@@ -35,8 +35,6 @@ function Toaster() {
         <span
           className="self-center cursor-pointer ms-2"
           onClick={() => {
-            console.log("HERERE");
-
             setShow(false);
             dispatch(resetUiAction());
           }}
