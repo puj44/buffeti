@@ -336,7 +336,10 @@ function Cart() {
   const handleChangeDate = (e) => {
     let cartDetails = JSON.parse(JSON.stringify(cartData));
 
-    if (!timeValues?.includes(cartDetails.delivery_time)) {
+    if (
+      cartDetails.delivery_time &&
+      !timeValues?.includes(cartDetails.delivery_time)
+    ) {
       cartDetails.delivery_time = timeValues[0];
     }
 
