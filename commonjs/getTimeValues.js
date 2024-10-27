@@ -3,7 +3,6 @@ import moment from "moment";
 const getTimeValues = (selectedDate) =>{
     let currentTime = moment(new Date()).format("HH");
     let diff = moment(new Date(selectedDate)).diff(new Date(),"days");
-    console.log("ASDASD",diff);
     
     const hours = [
         1,
