@@ -442,6 +442,7 @@ function Cart() {
               handleChangeTime={handleChangeTime}
               deliveryDate={cartData?.delivery_date}
               deliveryTime={cartData?.delivery_time}
+              deliveryCharge={cartData?.delivery_charges}
             />
           )}
         </div>

@@ -338,7 +338,7 @@ function LoginContainer({
                   );
                 })}
               </select>
-              <div
+              {/* <div
                 className="flex flex-row gap-2 items-center cursor-pointer"
                 onClick={() => {
                   detectLocation();
@@ -354,7 +354,7 @@ function LoginContainer({
                 <p className="text-color-secondary small-title">
                   {"Detect current location"}
                 </p>
-              </div>
+              </div> */}
               {err && (
                 <span
                   className={"text-color-secondary-red"}

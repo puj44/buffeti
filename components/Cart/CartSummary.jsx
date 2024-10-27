@@ -9,6 +9,7 @@ function CartSummary({
   handleChangeTime,
   deliveryDate,
   deliveryTime,
+  deliveryCharge,
 }) {
   return (
     <div className="border-[1px] border-[#A8A8AD80] rounded-lg w-full flex flex-col p-4 gap-5">
@@ -96,13 +97,17 @@ function CartSummary({
             <p className="text-nowrap">{"- ₹" + data?.coupon_discount_value}</p>
           </div>
         )}
-        {/* <div className="flex flex-row gap-1 justify-between w-full mt-2">
-          <p className="font-medium">{"GST"}</p>
+        <div className="flex flex-row gap-1 justify-between w-full mt-2">
+          <p className="font-medium">{"Taxes"}</p>
           <p>
             {"₹" +
               Number(data?.total_billed_amount - data?.total_amount).toFixed(2)}
           </p>
-        </div> */}
+        </div>
+        <div className="flex flex-row gap-1 justify-between w-full mt-2">
+          <p className="font-medium">{"Delivery Charge"}</p>
+          {<p>{deliveryCharge > 0 ? "₹" + deliveryCharge : "FREE"}</p>}
+        </div>
       </div>
       <span className="border-[1px] border-dashed  border-[#595959] w-full"></span>
       <div className="flex flex-row gap-1 justify-between w-full items-center">
