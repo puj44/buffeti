@@ -22,7 +22,7 @@ const getTimeValues = (selectedDate) =>{
     const time = []; 
     hours.map((h)=>{
         minutes.map((t)=>{
-            time.push(h+":"+t)
+            time.push(h+":"+t+" pm")
         })
     })
     return time;

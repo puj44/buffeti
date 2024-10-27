@@ -137,18 +137,15 @@ function Cart() {
       if (!cartDetails?.delivery_date) {
         cartDetails.delivery_date = nextDate;
       }
+
       if (!timeValues?.includes(cartDetails?.delivery_time)) {
         cartDetails.delivery_time = "";
       }
       setCartItemsData({ ...cart?.cart_data });
       delete cartDetails?.cart_data;
-      if (!cartDetails.delivery_address_id) {
-        cartDetails.delivery_address_id = addresses?.[0]?._id;
-        // callCartUpdate(cartDetails);
-      }
       setCartData({ ...cartDetails });
     }
-  }, [cart]);
+  }, [cart, timeValues]);
 
   useEffect(() => {}, []);
 
