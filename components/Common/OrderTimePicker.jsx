@@ -20,12 +20,6 @@ const customDropdownTheme = {
   },
 };
 function OrderTimePicker({ handleChangeTime, value, timeValues }) {
-  const timeValue = (val) => {
-    const split = val?.split(":")?.[0];
-    const timeStamp =
-      parseInt(split) >= 12 || parseInt(split) <= 10 ? "pm" : "am";
-    return `${val} ${timeStamp}`;
-  };
   return (
     <div className="border-[1px] border-[#E3E5E5] rounded-lg flex   py-2 px-2 md:px-4">
       {
@@ -41,7 +35,7 @@ function OrderTimePicker({ handleChangeTime, value, timeValues }) {
                 priority
                 alt=""
               />
-              <div className="">{value ? timeValue(value) : "Time"}</div>
+              <div className="">{value ?? "Time"}</div>
             </div>
           )}
           placement="bottom"
@@ -55,11 +49,11 @@ function OrderTimePicker({ handleChangeTime, value, timeValues }) {
                 <div
                   key={"time-" + idx}
                   onClick={() => {
-                    handleChangeTime(timeValue(tv));
+                    handleChangeTime(tv);
                   }}
                   className="hover:bg-gray-200 p-1.5 rounded-md"
                 >
-                  {timeValue(tv)}
+                  {tv}
                 </div>
               );
             })}
