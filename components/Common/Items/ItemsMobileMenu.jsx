@@ -77,8 +77,6 @@ function ItemsMobileMenu({
                           : ""
                       }`}
                       onClick={() => {
-                        console.log("HERE222", i);
-
                         handleChangeActiveItem(i);
                         scrollToTop();
                       }}

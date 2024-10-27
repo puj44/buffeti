@@ -210,9 +210,19 @@ function AddressModel({ values, handleCloseModel, show }) {
         <div className="relative w-full h-full flex justify-center align-middle ">
           <div className="bg-white address-model flex flex-col gap-5 justify-between overflow-y-scroll sm:overflow-y-visible py-6 px-5 relative w-full h-full md:h-fit md:max-w-[642px] md:max-h-[850px] my-auto  rounded-lg ">
             <div className="grid grid-flow-row   gap-5">
-              <p className="font-semibold">{"Address Details"}</p>
+              <div className="flex flex-row gap-3 items-center">
+                <span className="border-[1px] w-fit h-fit my-auto border-[#EAECF0] shadow-[0px_1px_2px_0px_#1018280D] rounded-xl p-2">
+                  <Image
+                    src={"/icons/address_icon.webp"}
+                    width={24}
+                    height={24}
+                    alt="Address Details"
+                  />
+                </span>
+                <p className="font-semibold">{"Address Details"}</p>
+              </div>
               <div
-                className="btn primary-btn w-fit justify-self-end mt-2"
+                className="btn primary-btn w-fit justify-self-end "
                 onClick={() => {
                   handleDetectLocation();
                 }}
