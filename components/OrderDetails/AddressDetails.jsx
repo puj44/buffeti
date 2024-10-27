@@ -17,7 +17,13 @@ function AddressDetails({ address }) {
       </div>
       <div className="flex flex-row gap-3">
         <p className="text-color-dark-gray">
-          {address ? address?.toString()?.replaceAll("undefined", "") : ""}
+          {address
+            ? address
+                ?.toString()
+                ?.trim()
+                ?.replaceAll("undefined", "")
+                ?.replaceAll("  ", " ")
+            : ""}
         </p>
       </div>
     </div>

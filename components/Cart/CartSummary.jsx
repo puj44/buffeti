@@ -10,10 +10,11 @@ function CartSummary({
   deliveryDate,
   deliveryTime,
   deliveryCharge,
+  timeValues,
 }) {
   return (
     <div className="border-[1px] border-[#A8A8AD80] rounded-lg w-full flex flex-col p-4 gap-5">
-      <p>{"Delivery Schedule"}</p>
+      <p>{"Select Delivery Schedule"}</p>
       <div className="grid grid-cols-2 gap-2 md:gap-3 w-full">
         <OrderDatePicker
           handleChangeDate={handleChangeDate ?? (() => {})}
@@ -22,6 +23,7 @@ function CartSummary({
         <OrderTimePicker
           handleChangeTime={handleChangeTime ?? (() => {})}
           value={deliveryTime}
+          timeValues={timeValues}
         />
       </div>
       <span className="border-[1px] border-dashed border-[#595959] w-full"></span>

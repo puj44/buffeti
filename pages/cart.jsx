@@ -1,6 +1,6 @@
 import SavedAddresses from "@/components/Cart/SavedAddresses";
 import { getAddresses, resetAddress } from "@/redux/reducers/addressReducer";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { END } from "redux-saga";
 import { wrapper } from "../redux/store";
 import { getCookie } from "cookies-next";
@@ -27,6 +27,7 @@ import dynamic from "next/dynamic";
 import { placeOrder, resetAction } from "@/redux/reducers/orderReducer";
 import moment from "moment";
 import { setToaster } from "@/redux/reducers/uiReducer";
+import getTimeValues from "@/commonjs/getTimeValues";
 const CartSummary = dynamic(() => import("@/components/Cart/CartSummary"), {
   ssr: false,
 });
@@ -42,7 +43,6 @@ function Cart() {
   );
   const [cartData, setCartData] = useState({
     delivery_date: nextDate,
-    delivery_time: "11:45",
   });
   const [cartItemsData, setCartItemsData] = useState({});
   const [couponError, setCouponError] = useState("");
@@ -59,6 +59,10 @@ function Cart() {
   const { orderPlaceResponse } = useSelector((state) => state.order);
   const router = useRouter();
   const dispatch = useDispatch();
+  const timeValues = useMemo(() => {
+    const values = getTimeValues(cartData?.delivery_date);
+    return values;
+  }, [cartData?.delivery_date]);
 
   useEffect(() => {
     if (response) {
@@ -132,7 +136,9 @@ function Cart() {
       let cartDetails = JSON.parse(JSON.stringify(cart));
       if (!cartDetails?.delivery_date) {
         cartDetails.delivery_date = nextDate;
-        cartDetails.delivery_time = "11:45";
+      }
+      if (!timeValues?.includes(cartDetails?.delivery_time)) {
+        cartDetails.delivery_time = "";
       }
       setCartItemsData({ ...cart?.cart_data });
       delete cartDetails?.cart_data;
@@ -329,6 +335,12 @@ function Cart() {
 
   const handleChangeDate = (e) => {
     let cartDetails = JSON.parse(JSON.stringify(cartData));
+
+    if (!timeValues?.includes(cartDetails.delivery_time)) {
+      console.log("ASDASD2", timeValues, cartDetails?.delivery_time);
+      cartDetails.delivery_time = timeValues[0];
+    }
+
     cartDetails.delivery_date = e;
     callCartUpdate(cartDetails);
     // setCartData({ ...cartData, delivery_date: e });
@@ -443,6 +455,7 @@ function Cart() {
               deliveryDate={cartData?.delivery_date}
               deliveryTime={cartData?.delivery_time}
               deliveryCharge={cartData?.delivery_charges}
+              timeValues={timeValues}
             />
           )}
         </div>

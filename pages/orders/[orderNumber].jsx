@@ -1,5 +1,6 @@
 import AddressDetails from "@/components/OrderDetails/AddressDetails";
 import { getOrderDetails, resetAction } from "@/redux/reducers/orderReducer";
+import moment from "moment";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import React, { useEffect, useMemo, useState } from "react";
@@ -68,9 +69,17 @@ function OrderDetails() {
       />
       <div className="flex flex-col md:grid md:grid-cols-[70%_30%] gap-3  w-full my-3">
         <div className="flex flex-col border-[1px] w-full border-[#A8A8AD80] rounded-lg p-3  sm:p-6 gap-5 sm:gap-7 ">
-          <p className="px-2 sm:px-4 " style={{ color: "#525866" }}>
-            {`ID: ` + (order?.order_number ?? "")}
-          </p>
+          <div className="flex flex-wrap  justify-between">
+            <p
+              className="px-2 sm:px-4 font-medium"
+              style={{ color: "#525866" }}
+            >
+              {`ID: ` + (order?.order_number ?? "")}
+            </p>
+            <p className="px-2" style={{ color: "#525866" }}>{` ${moment(
+              order?.createdAt
+            ).format("DD/MM/YYYY hh:mm A")}`}</p>
+          </div>
           <OrderInformation
             packs={order?.no_of_people ?? ""}
             deliveryDate={order?.delivery_date}

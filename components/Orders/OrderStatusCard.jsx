@@ -42,7 +42,9 @@ function OrderStatusCard({ orderStatus }) {
                     width={16}
                     height={14}
                     alt="tick"
-                    className={`${!isPrevChecked ? "hidden" : ""}`}
+                    className={`${
+                      !isPrevChecked ? "hidden" : ""
+                    } w-[14px] h-[12px] sm:w-[16px] sm:h-[14px]`}
                   />
                 </span>
                 <p

@@ -353,7 +353,7 @@ input{
 @media screen and (max-width:786px) {
   .order-status-line{
     &::after{
-      left:15px;
+      left:11px;
       top:10px;
       height:calc(100% - 10px);
       width:2px;
@@ -733,6 +733,14 @@ input{
 }
 //Tablet Screen
 @media screen and (max-width:786px){
+  .order_status{
+    width: 24px;
+    height: 24px;
+  }
+  .inner_white_circle {
+    width: 8px;
+    height: 8px;
+  }
 //active sidebar 
 .active-sidebar{
   &::after{

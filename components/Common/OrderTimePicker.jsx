@@ -19,10 +19,7 @@ const customDropdownTheme = {
     },
   },
 };
-function OrderTimePicker({ handleChangeTime, value }) {
-  const timeValues = useMemo(() => {
-    return getTimeValues();
-  }, []);
+function OrderTimePicker({ handleChangeTime, value, timeValues }) {
   const timeValue = (val) => {
     const split = val?.split(":")?.[0];
     const timeStamp =
@@ -44,7 +41,7 @@ function OrderTimePicker({ handleChangeTime, value }) {
                 priority
                 alt=""
               />
-              <div className="">{timeValue(value)}</div>
+              <div className="">{value ? timeValue(value) : "Time"}</div>
             </div>
           )}
           placement="bottom"
@@ -58,7 +55,7 @@ function OrderTimePicker({ handleChangeTime, value }) {
                 <div
                   key={"time-" + idx}
                   onClick={() => {
-                    handleChangeTime(tv);
+                    handleChangeTime(timeValue(tv));
                   }}
                   className="hover:bg-gray-200 p-1.5 rounded-md"
                 >
