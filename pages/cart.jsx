@@ -28,6 +28,7 @@ import { placeOrder, resetAction } from "@/redux/reducers/orderReducer";
 import moment from "moment";
 import { setToaster } from "@/redux/reducers/uiReducer";
 import getTimeValues from "@/commonjs/getTimeValues";
+import { hourMinutes } from "@/config/deliverySchedule";
 const CartSummary = dynamic(() => import("@/components/Cart/CartSummary"), {
   ssr: false,
 });
@@ -59,10 +60,17 @@ function Cart() {
   const { orderPlaceResponse } = useSelector((state) => state.order);
   const router = useRouter();
   const dispatch = useDispatch();
+  const hourMinutesValues = useMemo(() => {
+    return hourMinutes();
+  }, []);
   const timeValues = useMemo(() => {
-    const values = getTimeValues(cartData?.delivery_date);
+    const values = getTimeValues(
+      // cartData?.delivery_date,
+      cartData?.menu_option,
+      hourMinutesValues
+    );
     return values;
-  }, [cartData?.delivery_date]);
+  }, [cartData?.menu_option, hourMinutesValues]);
 
   useEffect(() => {
     if (response) {
@@ -138,16 +146,11 @@ function Cart() {
         cartDetails.delivery_date = nextDate;
       }
 
-      if (!timeValues?.includes(cartDetails?.delivery_time)) {
-        cartDetails.delivery_time = "";
-      }
       setCartItemsData({ ...cart?.cart_data });
       delete cartDetails?.cart_data;
       setCartData({ ...cartDetails });
     }
-  }, [cart, timeValues]);
-
-  useEffect(() => {}, []);
+  }, [cart]);
 
   const callCartItemUpdate = (item) => {
     if (cartData?.menu_option === "mini-meals") {
