@@ -15,7 +15,7 @@ import PackageCardLoader from "@/components/SkeletonLoader/PackageCardLoader";
 // const ViewCart = dynamic(()=> import("@/components/Common/ViewCart"),{ssr:false});
 const SuggestivePackage = dynamic(()=> import("@/components/Homepage/SuggestivePackage"),{
   loading:()=>
-    <div className="flex flex-wrap sm:grid sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3  justify-between w-full gap-6">
+    <div className="flex flex-wrap sm:grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3  justify-between w-full gap-6">
     <PackageCardLoader /><PackageCardLoader /><PackageCardLoader />
     </div>
 });
