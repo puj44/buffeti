@@ -1,5 +1,5 @@
 import Banners from "@/components/Homepage/Banners";
-import SuggestivePackage from "@/components/Homepage/SuggestivePackage";
+// import SuggestivePackage from "@/components/Homepage/SuggestivePackage";
 import { wrapper} from "../redux/store";
 import { useEffect, useState } from "react";
 import {  getPackagesData, setFilters } from "@/redux/reducers/packageReducer";
@@ -11,7 +11,10 @@ import MiniThaliCard from "@/components/Homepage/MiniThaliCard";
 import { useSelector } from "react-redux";
 // import ViewCart from "@/components/Common/ViewCart";
 import dynamic from "next/dynamic";
-const ViewCart = dynamic(()=> import("@/components/Common/ViewCart"),{ssr:false});
+import PackageCardLoader from "@/components/SkeletonLoader/PackageCardLoader";
+// const ViewCart = dynamic(()=> import("@/components/Common/ViewCart"),{ssr:false});
+const SuggestivePackage = dynamic(()=> import("@/components/Homepage/SuggestivePackage"),{loading:()=><><PackageCardLoader /><PackageCardLoader /><PackageCardLoader /></>});
+
 
 export default function Home(props) {
   const {noOfPeople,packages,filters} = props;
