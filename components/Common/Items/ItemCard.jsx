@@ -64,7 +64,7 @@ function ItemCard({
                 <p className=" description-title font-bold">{`₹ ${item.rate_per_serving}/ Piece`}</p>
               )}
               {item?.additional_serving && (
-                <p className=" description-title font-bold">{`Add-On Charges ₹ ${item.additional_serving_rate}/ (Per ${item.additional_serving} ${item.unit})`}</p>
+                <p className=" description-title font-bold">{`Add-On Charges (Per ${item.additional_serving} ${item.unit})`}</p>
               )}
             </div>
             <div className="">

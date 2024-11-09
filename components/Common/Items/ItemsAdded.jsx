@@ -105,8 +105,9 @@ function ItemsAdded({
                                 noOfPeople
                               )}
                               disableButtons={
-                                item?.extra_items &&
-                                Object.keys(item?.extra_items)?.length > 0
+                                (item?.extra_items &&
+                                  Object.keys(item?.extra_items)?.length > 0) ||
+                                menuOption === "snack-boxes"
                               }
                               quantity={Number(item?.additional_qty ?? 0) ?? 0}
                             />
