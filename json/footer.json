@@ -1,0 +1,19 @@
+[
+    {
+        "url":"",
+        "title":"Home"
+    },
+    {
+        "url":"packages/catering",
+        "title":"Click2Cater"
+    },
+    {
+        "title":"Snack Boxes",
+        "url":"snack-boxes"
+    },
+    {
+        "url":"packages/mini-meals",
+        "title":"Mini Meals"
+    }
+  
+]

@@ -11,6 +11,7 @@ import { hasCookie } from "cookies-next";
 import { getTokenStatus } from "@/redux/reducers/authReducer";
 import { useEffect } from "react";
 import { END } from "redux-saga";
+import { getCartDetails } from "@/redux/reducers/cartReducer";
 
 function App({ Component, pageProps, props }) {
   const {locations} = props;
@@ -18,17 +19,17 @@ function App({ Component, pageProps, props }) {
   const dispatch = useDispatch();
   useEffect(()=>{
     dispatch(getTokenStatus());
+    dispatch(getCartDetails());
   },[dispatch])
   dispatch(setData({statusCode:200, data:{locations}}))
   return(
     // <Provider store={store}>
-        process.env.NEXT_PUBLIC_ENVIRONMENT !== "DEV" ? 
-        <LaunchingSoon />:
         <div className="page-content min-h-[80vh]">
           
           <Layout>
             <Component {...pageProps} />
           </Layout>
+        
         </div>
   )
 }

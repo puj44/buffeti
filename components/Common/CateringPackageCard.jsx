@@ -1,44 +1,75 @@
-import Image from 'next/image'
-import Link from 'next/link'
-import React from 'react'
+import Image from "next/image";
+import Link from "next/link";
+import React, { useMemo } from "react";
 
-function CateringPackageCard({pack,packageName,numberOfPeople}) {
+function CateringPackageCard(props) {
+  const { pack, packageName, numberOfPeople, mobile, miniMeal } =
+    useMemo(() => {
+      return props;
+    }, [props]);
   return (
-    <div 
-        className={`p-0 lg:p-0 2xl:p-4  lg:bg-[#F5F5F5] md:bg-transparent
-            flex flex-row w-full lg:grid-flow-row  gap-2 md:gap-4
+    <div
+      className={`p-0 md:p-4 ${
+        !miniMeal ? "md:border-[#E3E5E5] md:border-[1px]" : ""
+      }
+            flex flex-row w-full  md:flex-col  ${
+              !miniMeal ? "md:max-w-[356px]" : "md:max-w-[381px]"
+            } gap-2 md:gap-4 md:h-full
             rounded-md 
-        `} 
-        key={"s-package-"+packageName}>
-            <div className='w-max flex  h-[100px]'>
-                <Image
-                    src={"/catering_services/mini_thali.webp"}
-                    width={100}
-                    height={100}
-                    alt={pack.package_name}
-                    style={{
-                        width:"100%",
-                        height:"100%"
-                    }}
-                    className=' rounded-md '
-                />
-            </div>
-        <div className='flex flex-col gap-1 justify-between w-full'>
-            <div className='flex flex-col'> 
-
-                <p className='package-title font-medium md:font-normal'>{pack.package_name}</p>
-                <p className='text-color-dark-gray block '>{pack.categories_description}</p>
-            </div>
-            <div className='flex  flex-row justify-between w-full'>
-                <p className='package-title my-auto font-medium '>{"₹"+pack[`_${numberOfPeople}_pax`]}</p>
-                <Link className=' btn transparent-orange-btn text-color-secondary w-[80px] sm:w-[124px] shadow-[0px_4px_15px_0px_#00000008] ' href={`/suggestive-package/${packageName}`}>
-                    Add
-                </Link>
-            </div>
-
+        `}
+      key={"s-package-" + packageName}
+    >
+      <div className="w-[100px] flex h-[100px] md:w-full md:h-[148.64px]">
+        <Image
+          src={`${process.env.NEXT_PUBLIC_IMAGES_URL}/catering_services/mini_thali.webp`}
+          width={mobile ? 100 : 349}
+          height={mobile ? 100 : 148.64}
+          alt={pack.package_name}
+          style={{
+            width: "100%",
+            height: "100%",
+          }}
+          className=" rounded-md "
+        />
+      </div>
+      <div
+        className={`flex flex-col gap-1  md:gap-4 md:max-w-[${
+          !miniMeal ? "356px" : "381px"
+        }] justify-between md:h-full w-full`}
+      >
+        <div className="flex flex-col md:gap-4">
+          <p className="package-title font-medium md:font-normal">
+            {miniMeal ? pack.item_name : pack.package_name}
+          </p>
+          <p className="text-color-dark-gray block ">
+            {miniMeal ? pack.description : pack.categories_description}
+          </p>
         </div>
+        <div className="flex  flex-row justify-between w-full">
+          <p className="package-title my-auto font-medium ">
+            {miniMeal
+              ? "₹ " + pack.price
+              : "₹ " + pack[`_${numberOfPeople}_pax`]}
+          </p>
+          {!miniMeal ? (
+            <Link
+              className=" btn transparent-orange-btn text-color-secondary w-[80px] sm:w-[124px] shadow-[0px_4px_15px_0px_#00000008] "
+              href={`/catering/${packageName}`}
+            >
+              {mobile ? "Add" : "Select"}
+            </Link>
+          ) : (
+            <div
+              className=" btn transparent-orange-btn cursor-pointer text-color-secondary w-[80px] sm:w-[124px] shadow-[0px_4px_15px_0px_#00000008] "
+              onClick={() => {}}
+            >
+              {mobile ? "Add" : "Select"}
+            </div>
+          )}
+        </div>
+      </div>
     </div>
-  )
+  );
 }
 
-export default CateringPackageCard
+export default CateringPackageCard;

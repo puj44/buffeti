@@ -8,7 +8,7 @@ export const authSlice = createSlice({
         isLoading:false,
         resendOtpCount:0,
         otpSecondsLeft:undefined,
-        isAuthenticated:false,
+        isAuthenticated:undefined,
         otpResponse:false,
         errorMessage:"",
         user:{}
@@ -35,15 +35,13 @@ export const authSlice = createSlice({
             
         },
         isAuthenticated:(state,action) =>{
+            
             state.isLoading = false;
             state.isAuthenticated = action?.payload?.statusCode === 200 ?? false;
             state.user = {
                 name:action?.payload?.data?.user?.name,
                 mobile_number:action?.payload?.data?.user?.mobile_number,
                 email:action?.payload?.data?.user?.email ?? null,
-            }
-            if(state.isAuthenticated){
-                // setCookie(`accessToken`,action?.payload?.data?.accessToken),action?.payload?.data?.accessToken
             }
             state.otpResponse = action?.payload?.statusCode ? true :false;
             state.errorMessage = action?.payload?.statusCode !== 200 ?  (action?.payload?.message ?? "") :""
@@ -61,6 +59,15 @@ export const authSlice = createSlice({
                 }
             }
         },
+        signout:(state) =>{
+
+        },
+        setSignout:(state,{payload}) =>{
+            if(payload?.statusCode === 200 || payload?.status === 200){
+                state.isAuthenticated = false;
+                deleteCookie("accessToken");
+            }
+        },
         resetResponse:(state) =>{
             state.otpResponse = false
             state.errorMessage = "";
@@ -70,6 +77,6 @@ export const authSlice = createSlice({
     }
 });
 
-export const {getMobileOtp, setMobileOtpResponse, getTokenStatus, isAuthenticated, signup, resetResponse, verifyOtp, setTokenStatus} = authSlice.actions;
+export const {getMobileOtp, setMobileOtpResponse, getTokenStatus, isAuthenticated, signup, resetResponse, verifyOtp, setTokenStatus, signout,setSignout} = authSlice.actions;
 
 export default authSlice.reducer;

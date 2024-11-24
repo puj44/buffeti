@@ -6,7 +6,8 @@ export const homeSlice = createSlice({
         isLoading:false,
         locations:[],
         filters:{},
-        location:"",
+        currentLocation:"",
+        loginModel:false
     },
     reducers:{
         getData:(state) =>{
@@ -22,10 +23,16 @@ export const homeSlice = createSlice({
         },
         setMenuOptions:(state) =>{
             state.isLoading = false;
+        },
+        setCurrentLocation:(state,{payload}) =>{
+            state.currentLocation = payload?.location ?? null;
+        },
+        setLoginModel:(state,{payload}) =>{
+            state.loginModel = payload?.open ?? false;
         }
     }
 });
 
-export const {getData,setData,setMenuOptions,getMenuOptions} = homeSlice.actions;
+export const {getData,setData,setMenuOptions,getMenuOptions,setCurrentLocation,setLoginModel} = homeSlice.actions;
 
 export default homeSlice.reducer;

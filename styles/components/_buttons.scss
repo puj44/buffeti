@@ -2,9 +2,32 @@
     display:flex;
     align-items: center;
     justify-content: center;
-    padding:10px 16px;
+    padding:8px 16px;
     border-radius: 8px;
- 
+    gap:8px;
+    cursor: pointer;
+}
+
+.weird-btn{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width:100%;
+    padding:8px 16px;
+    border:1px solid $primary;
+    flex-direction: row;
+    border-radius: 24px 24px 8px 8px;
+    .arrow-rotate{
+        transition: all 0.2s ease;
+    }
+    &:hover{
+        .arrow-rotate{
+            transform:rotate(-45deg);
+            -ms-transform: rotate(-45deg); /* IE 9 */
+            -webkit-transform: rotate(-45deg);
+            transition: transform 0.2 ease;
+        }
+    }
 }
 
 //Button Paddings
@@ -15,9 +38,14 @@
 
 //Button Colours
 .primary-btn{
-    background: $primary;
+    background-color: $primary;
     border:1px solid $primary;
     color:$white;
+    &:disabled{
+        background-color: #a19999;
+        border-color: #a19999;
+        cursor: default;
+    }
 }
 .secondary-btn{
     background: $secondary;
@@ -63,9 +91,6 @@
 }
 //Mobile Screen
 @media screen and (max-width:368px){
-    .btn{
-        padding:8px 10px !important;
-    }
     // .btn{
     //     padding:16px;
     // }

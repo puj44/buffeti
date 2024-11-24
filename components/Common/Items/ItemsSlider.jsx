@@ -1,51 +1,72 @@
 import Image from 'next/image'
 import React, { useMemo } from 'react'
+import QuantityInput from '../QuantityInput';
+import ItemCard from './ItemCard';
+import { useSelector } from 'react-redux';
+
+
 
 function ItemsSlider({
   items,
   handleAddItem,
   handleDeleteItem,
   category,
-  itemsSelected
+  itemsSelected,
+  categories,
+  handleChangeAdditionalQty,
+  noOfPeople,
+  menuOption
 }) {
-
-
+  const {isLoading} = useSelector((state) => state.items);
+  
   return (
-    <div className='flex flex-col gap-6'>
+    <div className='grid grid-flow-row gap-6 '>
+      
       {
+        isLoading?
+        <div className='w-full flex h-48 justify-center items-center'>
+          <div className='primary-loader '></  div>
+        </div>
+        :
         items && Object.keys(items).map((subCategory)=>{
+          let item = items[subCategory];
           return(
-            <div key={"item-"+subCategory} id={`body-${subCategory}`} className='flex flex-col gap-4'>
-              <h5 className='item-name small-title'>{subCategory?.toString()?.toUpperCase()}</h5>
+            <div key={"item-"+subCategory} id={`body-${subCategory}`} className='grid grid-flow-row gap-4 '>
               {
-                (items[subCategory]?.length > 0) &&
-                items[subCategory].map((item,index)=>{
+                (categories[category]?.sub_categories && Object.keys(categories[category]?.sub_categories).length > 0) &&
+                <h5 className='item-name small-title'>{categories[category]?.sub_categories?.[subCategory]?.toString()?.toUpperCase() ?? category?.toString()?.toUpperCase()}</h5>
+              }
+              {
+                (menuOption !== "snack-boxes" )?
+                (items[subCategory] && Object.keys(items[subCategory])?.length > 0) &&
+                Object.keys(items[subCategory]).map((sc,index)=>{
+                  item = items[subCategory][sc];
                   return(
-                    <div 
-                      key={"sub-item-"+index}
-                      className={`p-2 flex flex-row justify-between w-full items-center ${itemsSelected?.[category]?.[item?.name] ? "bg-[#FFFAEB]" :""} rounded-lg `}
-                    >
-                      <div className='flex flex-row gap-4 items-center justify-start'>
-                        <div>
-                          <Image
-                            src={item?.img}
-                            width={item?.width}
-                            height={item?.height}
-                            alt={item?.name}
-                          />
-                        </div>
-                        <div className='flex flex-col gap-2'>
-                          <p className={`description ${itemsSelected?.[category]?.[item?.name] ? "" :"font-medium"}`}>{item?.name}</p>
-                          <p className='text-color-dark-gray description'>Add on charges ₹300</p>
-                        </div>
-                      </div>
-                      <div className='btn transparent-orange-btn text-color-secondary cursor-pointer w-[124px] h-fit' onClick={()=>{ itemsSelected?.[category]?.[item?.name] ? handleDeleteItem(category, item,subCategory)  :handleAddItem(category, item,subCategory) }}>
-                        {itemsSelected?.[category]?.[item?.name] ? "Remove":"Add"}
-                      </div>
-
-                    </div>
+                    <ItemCard 
+                      key={"item-"+sc}
+                      itemsSelected={itemsSelected}
+                      item={item}
+                      noOfPeople={noOfPeople}
+                      handleChangeAdditionalQty={handleChangeAdditionalQty ?? (()=>{})}
+                      handleDeleteItem={handleDeleteItem ?? (()=>{})}
+                      handleAddItem={handleAddItem ?? (()=>{})}
+                      category={item?.category?.slug}
+                      menuOption={menuOption}
+                    />
                   )
                 })
+                :
+                <ItemCard 
+                  key={"item-"+subCategory}
+                  itemsSelected={itemsSelected}
+                  item={item}
+                  noOfPeople={noOfPeople}
+                  handleChangeAdditionalQty={handleChangeAdditionalQty ?? (()=>{})}
+                  handleDeleteItem={handleDeleteItem ?? (()=>{})}
+                  handleAddItem={handleAddItem ?? (()=>{})}
+                  category={item?.category?.slug}
+                  menuOption={menuOption}
+                />
               }
             </div>
           )

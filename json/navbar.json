@@ -4,25 +4,28 @@
         "title":"Home"
     },
     {
-        "title":"Menu Options",
+        "title":"Meals",
         "isDropdown":true,
         "dropdownData":[
             {
                 "title":"Catering",
-                "slug":"click2cater"
+                "slug":"catering",
+                "url":"/packages/catering"
             },
             {
                 "title":"Snack Boxes",
-                "slug":"snack-boxes"
+                "slug":"snack-boxes",
+                "url":"/snack-boxes/create-snackbox"
             },
             {
                 "title":"Mini Meals",
-                "slug":"mini-meals"
+                "slug":"mini-meals",
+                "url":"/packages/mini-meals"
             }
         ]
     },
     {
-        "url":"click2cater",
+        "url":"packages/catering",
         "title":"Catering",
         "isMobile":true
     },
@@ -32,32 +35,9 @@
         "isMobile":true
     },
     {
-        "url":"coming-soon",
+        "url":"packages/mini-meals",
         "title":"Mini Meals",
         "isMobile":true
-    },
-    {
-        "url":"coming-soon",
-        "title":"Blogs"
-    },
-    {
-        "url":"coming-soon",
-        "title":"Cart",
-        "isCart":true,
-        "isDesktop":true
-    },
-    {
-        "url":"coming-soon",
-        "title":"Orders"
-    },
-    {
-        "url":"coming-soon",
-        "title":"Create your own",
-        "img":"/icons/plus_white.webp",
-        "width":14,
-        "height":14,
-        "isDesktop":true,
-        "className":"btn primary-btn gap-2"
     }
   
 ]

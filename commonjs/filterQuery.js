@@ -9,7 +9,6 @@ function filterQuery(filters,arr) {
             if(d.field === "pricing"){
                 const value = arr[field][val];
                 apiQuery = apiQuery.concat(`min=${value?.min}${value?.max ? ("&max="+value.max):""}`)
-                console.log("ASD",apiQuery);
             }else{
                 apiQuery = apiQuery.concat(`${field}=${arr[field][val]}`)
             }

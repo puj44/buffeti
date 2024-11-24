@@ -1,50 +1,57 @@
 import Image from 'next/image'
 import React from 'react'
-import navbar from '@/json/navbar.json';
+import navbar from '@/json/footer.json';
 import socials from '@/json/social_links.json';
 import Link from 'next/link';
 
 function Footer() {
   return (
-    <div className='page-spacing'>
-        <div className='footer'>
-            <div className='flex flex-col gap-6 md:gap-3'>
-                <div className='flex flex-col md:flex-row gap-6 md:gap-0 md:justify-between w-full'>
-                    <div className=' flex flex-col gap-2'>          
-                        <Link className='flex flex-row gap-2  items-center ' href="/">
+    <div className='page-spacing pt-16 pb-8'>
+        <div className='flex flex-col gap-6 md:gap-16'>
+            <div className='flex flex-col md:flex-row gap-6 md:gap-0 md:justify-between w-full'>
+                <div className=' grid grid-flow-row md:grid-flow-col md:justify-between gap-2'>  
+                    <div className='grid grid-flow-row gap-8 justify-center md:justify-normal'>
+                        <Link href="/" className='mx-auto md:mx-0'>
                             <Image
-                                src={`${process.env.NEXT_PUBLIC_IMAGES_URL}/logo/primary_logo.webp`}
+                                src={`/logo/primary_red.webp`}
                                 alt={"signin"}
-                                width={90}
-                                height={60}
-                                className='my-auto w-[88px] h-[58px] md:w-[90px] md:h-[60px]'
+                                width={568}
+                                height={293}
+                                className='my-auto w-[142px] h-[93px] md:w-[142px] md:h-[73px]'
                                 loading='lazy'
-                                unoptimized
                             />
-                            <p className='text-color-primary page-title hidden md:block decorative-1'>Buffeti</p>
                         </Link>
-                        <p className='text-color-light-gray  block md:hidden'>{"Copyright © 2024 Buffeti"}</p>
-                    </div>
-                    <div className='flex flex-col md:flex-row gap-4 md:gap-6 md:items-center'>
+                        <div className='grid grid-cols-2 md:flex md:flex-row gap-4 md:gap-8  md:items-center'>
                             {
                                 navbar.map((nv,idx)=>{
                                     
                                     return(
                                         !(nv.isDropdown) &&
-                                        idx !== (navbar.length -1) &&
-                                        <Link href={nv.url} key={"menu-"+idx}>{nv.title}</Link>
+                                        <Link href={nv.url} className='font-semibold mx-auto md:mx-0' key={"menu-"+idx}>{nv.title}</Link>
                                     )
                                 })
                             }
-                    </div>
+                        </div>
+                    </div>        
                 </div>
-                <div className='border-[#E4E4E7] border-[1px] hidden md:block '></div>
-                <div className='flex md:justify-between w-full'>
-                    <p className='text-color-light-gray items-center hidden md:block'>{"Copyright © 2024 Buffeti"}</p>
-                    <div className='flex flex-row gap-6 items-center'>
+                
+            </div>
+            {/* <div className='grid grid-flow-row gap-8 '> */}
+                {/* <div className='border-[#595959] border-[0.5px] h-[0.5px] hidden md:block '></div> */}
+                <div className='flex flex-col text-color-dark-gray md:flex-row md:justify-between w-full lg:px-8 items-center  pt-8' style={{borderTopWidth:"1px",borderTopColor:"#595959"}}>
+                    <p className=' items-center hidden md:block'>{"© 2024 Buffeti. All rights reserved."}</p>
+                    <div className='flex-col flex md:flex-row gap-4 md:gap-6 items-center justify-center'>
+                        <div className='grid grid-cols-2 md:flex md:flex-row gap-4 md:gap-6 items-center justify-center'>
+                            <Link href="/terms-and-conditions" className='flex justify-center items-center'>Terms</Link>
+                            <Link href="/privacy-policy" className='flex justify-center items-center'>Privacy</Link>
+                            <Link href="/cookies-policy" className='flex justify-center items-center'>Cookies</Link>
+                            <Link href="/cancellation-refund-policy" className='flex justify-center items-center'>Cancellation & Refund Policy</Link>
+                        </div>
+                        <div className='grid grid-cols-3 md:flex md:flex-row gap-4 md:gap-6 items-center justify-center'>
+
                             {socials.map((s,idx)=>{
                                 return(
-                                    <Link href={s.url} key={"social-"+s.title}>
+                                    <Link href={s.url} key={"social-"+s.title} className='m-auto'>
                                         <Image
                                             src={s.img}
                                             width={s.width}
@@ -55,11 +62,12 @@ function Footer() {
                                     </Link>
                                 )
                             })}
+                        </div>
                     </div>
                 </div>
-            </div>
-
+            {/* </div> */}
         </div>
+
     </div>
   )
 }

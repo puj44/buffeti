@@ -1,20 +1,19 @@
 import axios from "axios";
-import { getCookie, hasCookie } from "cookies-next";
+import { getCookie, getCookies, hasCookie } from "cookies-next";
 // import { store } from "../store";
 
 export const BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001/api/v1";
 
-const api = (BASE_URL, location = null) => {
-  console.log("LOCATION",location);
-  const loc = location ? location : hasCookie("location") ? getCookie("location") : null  
+const api = (BASE_URL, location = null, serverCtx = null) => {
+  const loc = location ? location : hasCookie("location") ? getCookie("location") : "ahmedabad";
   // initialize axios
   const service = axios.create({
     baseURL: BASE_URL,
     headers: {
-      "Authorization":hasCookie("accessToken") ? ("Bearer "+getCookie("accessToken")) : null,
       "Content-Type": "application/json",
-      location :loc
+      location :loc,
     },
+    withCredentials:true,
   });
 
   // Add a request interceptor
