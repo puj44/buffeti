@@ -29,7 +29,7 @@ function App({ Component, pageProps, props }) {
     // <Provider store={store}>
         <div className="page-content min-h-[80vh]">
           {
-            process.env.NEXT_PUBLIC_ENVIRONMENT = "PROD" ? 
+            process.env.NEXT_PUBLIC_ENVIRONMENT === "PROD" ? 
             <LaunchingSoon/> :
           <Layout>
             <Component {...pageProps} />
