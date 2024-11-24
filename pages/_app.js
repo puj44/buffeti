@@ -18,17 +18,23 @@ function App({ Component, pageProps, props }) {
 
   const dispatch = useDispatch();
   useEffect(()=>{
-    dispatch(getTokenStatus());
-    dispatch(getCartDetails());
+    if(process.env.NEXT_PUBLIC_ENVIRONMENT !== "PROD"){
+
+      dispatch(getTokenStatus());
+      dispatch(getCartDetails());
+    }
   },[dispatch])
   dispatch(setData({statusCode:200, data:{locations}}))
   return(
     // <Provider store={store}>
         <div className="page-content min-h-[80vh]">
-          
+          {
+            process.env.NEXT_PUBLIC_ENVIRONMENT = "PROD" ? 
+            <LaunchingSoon/> :
           <Layout>
             <Component {...pageProps} />
           </Layout>
+          }
         
         </div>
   )
@@ -44,13 +50,20 @@ export async function fetchData() {
 
 
 App.getInitialProps = async(props)=>{
+  if(process.env.NEXT_PUBLIC_ENVIRONMENT !== "PROD"){
     await fetchData();
     const {locations} = await store?.getState()?.home;
-      return {
-      props:{
-        locations
-      }
+    return {
+    props:{
+      locations
     }
+  }
+  }
+  return {
+    props:{
+      locations:[]
+    }
+  }
 }
 
 export default wrapper.withRedux(App);
