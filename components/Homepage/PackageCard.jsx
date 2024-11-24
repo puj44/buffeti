@@ -161,7 +161,7 @@ function PackageCard({ data, numberOfPeople, menuOption, handleShowModel }) {
           >
             <p
               className={`font-bold md:font-extrabold sub-title leading-9 `}
-            >{`₹ ${data?.["_" + numberOfPeople + "_pax"] ?? ""}`}</p>
+            >{`₹ ${data?.rate ?? ""}`}</p>
             <span className="w-[64px] h-[48px] flex justify-center items-center bg-white py-4 px-6 rounded-[45px]">
               <div className="arrow-rotate">
                 <Image
