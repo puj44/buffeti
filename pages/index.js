@@ -103,17 +103,17 @@ export const getServerSideProps = wrapper.getServerSideProps(
       req: props?.req,
       res: props?.res,
     });
-    let noOfPeople = getCookie("no_of_people") ?? "10_20";
-    if (noOfPeople) {
-      const qty = Number(noOfPeople);
-      if (qty > 20 && qty <= 30) {
-        noOfPeople = "20_30";
-      } else if (qty > 30) {
-        noOfPeople = "30_plus";
-      }
-    }
+    // let noOfPeople = getCookie("no_of_people") ?? "10_20";
+    // if (noOfPeople) {
+    //   const qty = Number(noOfPeople);
+    //   if (qty > 20 && qty <= 30) {
+    //     noOfPeople = "20_30";
+    //   } else if (qty > 30) {
+    //     noOfPeople = "30_plus";
+    //   }
+    // }
     let data = await fetchData(store, location);
-    data.noOfPeople = noOfPeople;
+
     data.location = location ?? null;
     return {
       props: {
