@@ -182,20 +182,48 @@ function AddressModel({ values, handleCloseModel, show }) {
     console.log("HERE");
     try {
       if ("geolocation" in navigator) {
-        navigator.geolocation.getCurrentPosition(function (position) {
-          console.log("HERE PASS");
-          setData({
-            ...data,
-            lattitude: position.coords.latitude?.toString(),
-            longitude: position.coords.longitude?.toString(),
-          });
-          dispatch(
-            detectLocation({
-              lat: position.coords.latitude?.toString(),
-              lng: position.coords.longitude?.toString(),
-            })
-          );
-        });
+        navigator.geolocation.getCurrentPosition(
+          function (position) {
+            console.log("HERE PASS");
+            setData({
+              ...data,
+              lattitude: position.coords.latitude?.toString(),
+              longitude: position.coords.longitude?.toString(),
+            });
+            dispatch(
+              detectLocation({
+                lat: position.coords.latitude?.toString(),
+                lng: position.coords.longitude?.toString(),
+              })
+            );
+          },
+          // Error callback
+          function (error) {
+            setLocationLoading(false);
+            let errorMessage = "";
+            switch (error.code) {
+              case error.PERMISSION_DENIED:
+                errorMessage =
+                  "Please allow location access to use this feature.";
+                break;
+              case error.POSITION_UNAVAILABLE:
+                errorMessage = "Location information is unavailable.";
+                break;
+              case error.TIMEOUT:
+                errorMessage = "Location request timed out.";
+                break;
+              default:
+                errorMessage = "An unknown error occurred.";
+            }
+            dispatch(
+              setToaster({
+                type: "error",
+                message: errorMessage,
+              })
+            );
+            console.log("Geolocation error:", error);
+          }
+        );
       } else {
         setLocationLoading(false);
         dispatch(
@@ -207,7 +235,14 @@ function AddressModel({ values, handleCloseModel, show }) {
         );
       }
     } catch (err) {
+      setLocationLoading(false);
       console.log("errerr", err);
+      dispatch(
+        setToaster({
+          type: "error",
+          message: "Failed to get location. Please try again.",
+        })
+      );
     }
   };
   if (show)
