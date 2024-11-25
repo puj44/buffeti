@@ -45,7 +45,7 @@ function Component({ mealBox, data, filters, noOfPeople, handleShowModel }) {
   useEffect(() => {
     const filtersData = JSON.parse(JSON.stringify(activeFilters));
     const query = filterQuery(filtersData, { pricing: filters?.pricing });
-    dispatch(getPackagesData({ menuOption: mealBox + "?" + query }));
+    dispatch(getPackagesData({ menuOption: mealBox }));
   }, [activeFilters]);
 
   const handleChangeFilter = (field, val) => {
