@@ -26,7 +26,8 @@ function SuggestivePackage({ data, filters, noOfPeople }) {
 
   useEffect(() => {
     const filtersData = JSON.parse(JSON.stringify(activeFilters));
-    dispatch(getPackagesData({ menuOption: "click2cater" }));
+    const query = filterQuery(filtersData, { pricing: filters?.pricing });
+    dispatch(getPackagesData({ menuOption: "click2cater?" + query }));
   }, [activeFilters]);
 
   useEffect(() => {
