@@ -180,31 +180,34 @@ function AddressModel({ values, handleCloseModel, show }) {
   const handleDetectLocation = () => {
     setLocationLoading(true);
     console.log("HERE");
-
-    if ("geolocation" in navigator) {
-      navigator.geolocation.getCurrentPosition(function (position) {
-        console.log("HERE PASS");
-        setData({
-          ...data,
-          lattitude: position.coords.latitude?.toString(),
-          longitude: position.coords.longitude?.toString(),
+    try {
+      if ("geolocation" in navigator) {
+        navigator.geolocation.getCurrentPosition(function (position) {
+          console.log("HERE PASS");
+          setData({
+            ...data,
+            lattitude: position.coords.latitude?.toString(),
+            longitude: position.coords.longitude?.toString(),
+          });
+          dispatch(
+            detectLocation({
+              lat: position.coords.latitude?.toString(),
+              lng: position.coords.longitude?.toString(),
+            })
+          );
         });
+      } else {
+        setLocationLoading(false);
         dispatch(
-          detectLocation({
-            lat: position.coords.latitude?.toString(),
-            lng: position.coords.longitude?.toString(),
+          setToaster({
+            type: "error",
+            message:
+              "Geolocation is not available in your browser, please try different browser",
           })
         );
-      });
-    } else {
-      setLocationLoading(false);
-      dispatch(
-        setToaster({
-          type: "error",
-          message:
-            "Geolocation is not available in your browser, please try different browser",
-        })
-      );
+      }
+    } catch (err) {
+      console.log("errerr", err);
     }
   };
   if (show)
