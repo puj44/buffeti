@@ -47,8 +47,7 @@ function PaymentModel({ data, handleClose }) {
       process.env.NEXT_PUBLIC_ENVIRONMENT === "DEV"
         ? "https://dev.buffeti.com"
         : "https://buffeti.com"
-    }/account`;
-    console.log("HERE", data);
+    }/orders/${data.order_number}`;
 
     const container = document.createElement("div");
 
