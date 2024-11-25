@@ -57,7 +57,7 @@ function PaymentModel({ data, handleClose }) {
     bodyFormData.method = "post";
     bodyFormData.action = "https://api.razorpay.com/v1/checkout/embedded";
     const fields = {
-      key_id: process.env.NEXT_PUBLIC_TEST_KEY_ID,
+      key_id: data.key_id,
       order_id: data.order_id,
       name: "GNV CLICK2CATER",
       "prefill[name]": data.prefill.name ?? "",
