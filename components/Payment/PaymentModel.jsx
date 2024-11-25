@@ -48,6 +48,7 @@ function PaymentModel({ data, handleClose }) {
         ? "https://dev.buffeti.com"
         : "https://buffeti.com"
     }/account`;
+    console.log("HERE", data);
 
     const container = document.createElement("div");
 
@@ -68,13 +69,13 @@ function PaymentModel({ data, handleClose }) {
       cancel_url: callbackURL,
       redirect: "true",
     };
-    Object.keys(fields).forEach((key) => {
+    for (const key in fields) {
       const input = document.createElement("input");
       input.type = "hidden";
       input.name = key;
       input.value = fields[key];
       bodyFormData.appendChild(input);
-    });
+    }
     container.appendChild(bodyFormData);
     document.body.appendChild(container);
 
