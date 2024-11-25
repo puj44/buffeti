@@ -1,3 +1,4 @@
+import useRecaptcha from "@/hooks/useRecaptcha";
 import {
   addAddress,
   detectLocation,
@@ -57,7 +58,7 @@ function AddressModel({ values, handleCloseModel, show }) {
     (state) => state.address
   );
   const dispatch = useDispatch();
-
+  const executeRecaptcha = useRecaptcha();
   useEffect(() => {
     if (Object.keys(detectedLocation)?.length > 0) {
       dispatch(
@@ -179,12 +180,11 @@ function AddressModel({ values, handleCloseModel, show }) {
 
   const handleDetectLocation = () => {
     setLocationLoading(true);
-    console.log("HERE");
     try {
       if ("geolocation" in navigator) {
         navigator.geolocation.getCurrentPosition(
-          function (position) {
-            console.log("HERE PASS");
+          async function (position) {
+            const token = await executeRecaptcha("login");
             setData({
               ...data,
               lattitude: position.coords.latitude?.toString(),
@@ -192,6 +192,7 @@ function AddressModel({ values, handleCloseModel, show }) {
             });
             dispatch(
               detectLocation({
+                token: token,
                 lat: position.coords.latitude?.toString(),
                 lng: position.coords.longitude?.toString(),
               })
@@ -221,7 +222,6 @@ function AddressModel({ values, handleCloseModel, show }) {
                 message: errorMessage,
               })
             );
-            console.log("Geolocation error:", error);
           }
         );
       } else {
@@ -236,7 +236,6 @@ function AddressModel({ values, handleCloseModel, show }) {
       }
     } catch (err) {
       setLocationLoading(false);
-      console.log("errerr", err);
       dispatch(
         setToaster({
           type: "error",
