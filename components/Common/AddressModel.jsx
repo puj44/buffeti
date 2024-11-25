@@ -179,19 +179,22 @@ function AddressModel({ values, handleCloseModel, show }) {
 
   const handleDetectLocation = () => {
     setLocationLoading(true);
+    console.log("HERE");
+
     if ("geolocation" in navigator) {
       navigator.geolocation.getCurrentPosition(function (position) {
+        console.log("HERE PASS");
+        setData({
+          ...data,
+          lattitude: position.coords.latitude?.toString(),
+          longitude: position.coords.longitude?.toString(),
+        });
         dispatch(
           detectLocation({
             lat: position.coords.latitude?.toString(),
             lng: position.coords.longitude?.toString(),
           })
         );
-        setData({
-          ...data,
-          lattitude: position.coords.latitude?.toString(),
-          longitude: position.coords.longitude?.toString(),
-        });
       });
     } else {
       setLocationLoading(false);
