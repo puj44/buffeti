@@ -1,3 +1,4 @@
+import useRecaptcha from "@/hooks/useRecaptcha";
 import {
   addAddress,
   detectLocation,
@@ -57,7 +58,7 @@ function AddressModel({ values, handleCloseModel, show }) {
     (state) => state.address
   );
   const dispatch = useDispatch();
-
+  const executeRecaptcha = useRecaptcha();
   useEffect(() => {
     if (Object.keys(detectedLocation)?.length > 0) {
       dispatch(
@@ -179,27 +180,66 @@ function AddressModel({ values, handleCloseModel, show }) {
 
   const handleDetectLocation = () => {
     setLocationLoading(true);
-    if ("geolocation" in navigator) {
-      navigator.geolocation.getCurrentPosition(function (position) {
+    try {
+      if ("geolocation" in navigator) {
+        navigator.geolocation.getCurrentPosition(
+          async function (position) {
+            const token = await executeRecaptcha("login");
+            setData({
+              ...data,
+              lattitude: position.coords.latitude?.toString(),
+              longitude: position.coords.longitude?.toString(),
+            });
+            dispatch(
+              detectLocation({
+                token: token,
+                lat: position.coords.latitude?.toString(),
+                lng: position.coords.longitude?.toString(),
+              })
+            );
+          },
+          // Error callback
+          function (error) {
+            setLocationLoading(false);
+            let errorMessage = "";
+            switch (error.code) {
+              case error.PERMISSION_DENIED:
+                errorMessage =
+                  "Please allow location access to use this feature.";
+                break;
+              case error.POSITION_UNAVAILABLE:
+                errorMessage = "Location information is unavailable.";
+                break;
+              case error.TIMEOUT:
+                errorMessage = "Location request timed out.";
+                break;
+              default:
+                errorMessage = "An unknown error occurred.";
+            }
+            dispatch(
+              setToaster({
+                type: "error",
+                message: errorMessage,
+              })
+            );
+          }
+        );
+      } else {
+        setLocationLoading(false);
         dispatch(
-          detectLocation({
-            lat: position.coords.latitude?.toString(),
-            lng: position.coords.longitude?.toString(),
+          setToaster({
+            type: "error",
+            message:
+              "Geolocation is not available in your browser, please try different browser",
           })
         );
-        setData({
-          ...data,
-          lattitude: position.coords.latitude?.toString(),
-          longitude: position.coords.longitude?.toString(),
-        });
-      });
-    } else {
+      }
+    } catch (err) {
       setLocationLoading(false);
       dispatch(
         setToaster({
           type: "error",
-          message:
-            "Geolocation is not available in your browser, please try different browser",
+          message: "Failed to get location. Please try again.",
         })
       );
     }

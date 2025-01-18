@@ -83,9 +83,11 @@ function Cart() {
     }
   }, [isAuthenticated]);
   useEffect(() => {
-    dispatch(getCart());
-    dispatch(getAddresses());
-    dispatch(getExtraServices());
+    if (isAuthenticated) {
+      dispatch(getCart());
+      dispatch(getAddresses());
+      dispatch(getExtraServices());
+    }
   }, [dispatch, isAuthenticated]);
 
   useEffect(() => {
@@ -130,14 +132,17 @@ function Cart() {
     setSavedAddresses([...(addresses ?? [])]);
     if (response && !errorMessage) {
       if (addresses?.length) {
-        setCartData({
-          ...cartData,
-          delivery_address_id: addresses?.[addresses?.length - 1]?._id,
-        });
-        dispatch(resetAddress());
+        let cartData = JSON.parse(JSON.stringify(cart));
+        cartData.delivery_address_id = addresses?.[addresses?.length - 1]?._id;
+        callCartUpdate(cartData);
+        // setCartData({
+        //   ...cartData,
+        //   delivery_address_id: addresses?.[addresses?.length - 1]?._id,
+        // });
       }
+      dispatch(resetAddress());
     }
-  }, [addresses, response, errorMessage]);
+  }, [addresses, response, errorMessage, cart]);
 
   useEffect(() => {
     if (cart) {

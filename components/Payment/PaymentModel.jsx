@@ -47,7 +47,7 @@ function PaymentModel({ data, handleClose }) {
       process.env.NEXT_PUBLIC_ENVIRONMENT === "DEV"
         ? "https://dev.buffeti.com"
         : "https://buffeti.com"
-    }/account`;
+    }/orders/${data.order_number}`;
 
     const container = document.createElement("div");
 
@@ -56,7 +56,7 @@ function PaymentModel({ data, handleClose }) {
     bodyFormData.method = "post";
     bodyFormData.action = "https://api.razorpay.com/v1/checkout/embedded";
     const fields = {
-      key_id: process.env.NEXT_PUBLIC_TEST_KEY_ID,
+      key_id: data.key_id,
       order_id: data.order_id,
       name: "GNV CLICK2CATER",
       "prefill[name]": data.prefill.name ?? "",
@@ -68,13 +68,13 @@ function PaymentModel({ data, handleClose }) {
       cancel_url: callbackURL,
       redirect: "true",
     };
-    Object.keys(fields).forEach((key) => {
+    for (const key in fields) {
       const input = document.createElement("input");
       input.type = "hidden";
       input.name = key;
       input.value = fields[key];
       bodyFormData.appendChild(input);
-    });
+    }
     container.appendChild(bodyFormData);
     document.body.appendChild(container);
 
