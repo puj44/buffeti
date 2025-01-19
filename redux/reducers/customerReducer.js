@@ -10,7 +10,7 @@ export const customerSlice = createSlice({
         },
         setProfile:(state,action) =>{
             
-            state.profile = action?.payload?.profile ?? {};
+            state.profile = action?.payload?.data?.profile ?? {};
         },
     }
 });
