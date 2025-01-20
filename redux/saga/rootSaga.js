@@ -17,6 +17,7 @@ export function* watcherSaga() {
             yield takeLatest('auth/signup',handleSignup),
             yield takeLatest('auth/getMobileOtp',handleGetMobileOtp),
             yield takeLatest('auth/verifyOtp',handleVerifyOtp),
+            yield takeLatest('auth/verifyEmail',handleVerifyEmail),
             yield takeLatest('auth/getTokenStatus',handleGetTokenStatus),
             yield takeLatest('auth/signout',handleSignout),
             //HOME

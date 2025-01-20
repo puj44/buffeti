@@ -37,6 +37,20 @@ export function* handleVerifyOtp(action){
         
     }
 }
+export function* handleVerifyEmail(action){
+    try{
+        const response = yield call(verifyEmailApi,action);
+        const data = response?.response?.data || response?.data;
+        
+        yield put(isAuthenticated(data));
+        if(data?.statusCode === 200){
+            const res = yield call(getCartDetailsApi,action);
+            yield put(setCartDetails(res?.response?.data || res?.data));
+        }
+    }catch(err){
+        
+    }
+}
 
 export function* handleGetTokenStatus(action){
     try{

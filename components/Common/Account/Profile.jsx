@@ -18,7 +18,7 @@ function Profile({ details }) {
             <input
               value={profileData?.name ?? ""}
               onChange={(e) => {
-                setProfileData(e.target.value);
+                setProfileData({ ...profileData, name: e.target.value });
               }}
             />
           </div>
@@ -29,7 +29,10 @@ function Profile({ details }) {
             <input
               value={profileData?.mobile_number ?? ""}
               onChange={(e) => {
-                setProfileData(e.target.value);
+                setProfileData({
+                  ...profileData,
+                  mobile_number: e.target.value,
+                });
               }}
             />
           </div>
@@ -41,9 +44,10 @@ function Profile({ details }) {
           <input
             value={profileData?.email ?? ""}
             onChange={(e) => {
-              setProfileData(e.target.value);
+              setProfileData({ ...profileData, email: e.target.value });
             }}
           />
+          <button className="verify-email" onClick={()=> verifyEmail({email:profileData?.email})}>Verify Now</button>
         </div>
       </div>
     </div>

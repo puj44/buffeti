@@ -15,6 +15,10 @@ export const verifyOtpApi = ({payload}) =>{
 
     return post("/auth/verify",payload);
 }
+export const verifyverifyEmailApiOtpApi = ({payload}) =>{
+
+    return post("/profile/verify-email",payload);
+}
 
 export const getTokenStatusApi = ({payload}) =>{
 

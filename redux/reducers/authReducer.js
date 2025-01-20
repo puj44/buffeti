@@ -23,6 +23,9 @@ export const authSlice = createSlice({
         verifyOtp:(state) =>{
             state.isLoading = true;
         },
+        verifyEmail:(state) =>{
+            state.isLoading = true;
+        },
         setMobileOtpResponse:(state,action)=>{
             state.isLoading = false;
             
