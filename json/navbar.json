@@ -1,43 +1,18 @@
 [
-    {
-        "url":"",
-        "title":"Home"
-    },
-    {
-        "title":"Meals",
-        "isDropdown":true,
-        "dropdownData":[
-            {
-                "title":"Catering",
-                "slug":"catering",
-                "url":"/packages/catering"
-            },
-            {
-                "title":"Snack Boxes",
-                "slug":"snack-boxes",
-                "url":"/snack-boxes/create-snackbox"
-            },
-            {
-                "title":"Mini Meals",
-                "slug":"mini-meals",
-                "url":"/packages/mini-meals"
-            }
-        ]
-    },
-    {
-        "url":"packages/catering",
-        "title":"Catering",
-        "isMobile":true
-    },
-    {
-        "title":"Snack Boxes",
-        "url":"snack-boxes",
-        "isMobile":true
-    },
-    {
-        "url":"packages/mini-meals",
-        "title":"Mini Meals",
-        "isMobile":true
-    }
-  
+  {
+    "url": "",
+    "title": "Home"
+  },
+  {
+    "url": "packages/catering",
+    "title": "Catering"
+  },
+  {
+    "title": "Snack Boxes",
+    "url": "snack-boxes/create-snackbox"
+  },
+  {
+    "url": "packages/mini-meals",
+    "title": "Mini Meals"
+  }
 ]
