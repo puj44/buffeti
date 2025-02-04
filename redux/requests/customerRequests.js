@@ -8,3 +8,10 @@ export const updateProfileApi = ({payload}) =>{
 
     return put("/profile/update-profile", payload);
 }
+
+export const sendEmailOtpApi = () =>{
+    return post("/profile/send-otp-email");
+}
+export const verifyOtpApi = ({payload}) =>{
+    return post("/profile/verify-email",payload);
+}
