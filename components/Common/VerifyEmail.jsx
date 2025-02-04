@@ -1,11 +1,31 @@
+import {
+  getProfile,
+  resetOtpResponse,
+  verifyEmailOtp,
+} from "@/redux/reducers/customerReducer";
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import OTPInput from "react-otp-input";
+import { useDispatch, useSelector } from "react-redux";
 
 const VerifyEmail = ({ handleClosePopup, email }) => {
   const [otp, setOtp] = useState("");
+  const dispatch = useDispatch();
   const [isResent, setIsResent] = useState(false);
-  const verifyOtp = () => {};
+  const { verifyOtpResponse } = useSelector((state) => state.customer);
+  const verifyOtp = () => {
+    dispatch(verifyEmailOtp({ otp: otp }));
+  };
+
+  useEffect(() => {
+    if (verifyOtpResponse.success || verifyOtpResponse.success === false) {
+      if (verifyOtpResponse.success) {
+        handleClosePopup();
+        dispatch(getProfile());
+      }
+      dispatch(resetOtpResponse());
+    }
+  }, [verifyOtpResponse]);
   return (
     <div className="fixed z-50 left-0 top-0  overflow-hidden w-dvw h-dvh bg-[rgb(0,0,0,0.3)] ">
       <div className="relative w-full h-full flex justify-center align-middle ">
