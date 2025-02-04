@@ -7,7 +7,9 @@ export const customerSlice = createSlice({
     name:"customer",
     initialState:{
         profile:{},
-        profileResponse:{}
+        profileResponse:{},
+        emailOtpResponse:{},
+        verifyOtpResponse:{},
     },
     reducers:{
         getProfile:(state) =>{
@@ -19,6 +21,24 @@ export const customerSlice = createSlice({
         updateProfileAction:(state,action) =>{
 
         },
+        sendEmailOtp:(state,action) =>{
+
+        },
+        sendEmailOtpResponse:(state,{payload}) =>{
+           
+
+            state.emailOtpResponse = {
+                success:payload?.status === 200 || payload?.statusCode === 200 ?true:false
+            };
+        },
+        verifyEmailOtp:(state,action) =>{
+
+        },
+        verifyEmailOtpResponse:(state,{payload}) =>{
+            state.verifyOtpResponse = {
+                success:payload?.status === 200 || payload?.statusCode === 200 ?true:false,
+            };
+        },
         updateProfileResponse:(state,{payload}) =>{
             const message = payload?.status === 200 || payload?.statusCode === 200 ? "Profile updated successfully!" : "Something went wrong!"
             state.profileResponse = {
@@ -28,10 +48,14 @@ export const customerSlice = createSlice({
         },
         resetProfile:(state) =>{
             state.profileResponse = {};
+        },
+        resetOtpResponse:(state) =>{
+            state.emailOtpResponse = {};
+            state.verifyOtpResponse = {};
         }
     },
 });
 
-export const {getProfile,setProfile,resetProfile,updateProfileAction,updateProfileResponse} = customerSlice.actions;
+export const {getProfile,setProfile,resetOtpResponse,resetProfile,updateProfileAction,updateProfileResponse, verifyEmailOtp, sendEmailOtp, verifyEmailOtpResponse, sendEmailOtpResponse} = customerSlice.actions;
 
 export default customerSlice.reducer;

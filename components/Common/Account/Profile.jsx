@@ -4,7 +4,9 @@ import VerifyEmail from "../VerifyEmail";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getProfile,
+  resetOtpResponse,
   resetProfile,
+  sendEmailOtp,
   updateProfileAction,
 } from "@/redux/reducers/customerReducer";
 import { setToaster } from "@/redux/reducers/uiReducer";
@@ -14,11 +16,18 @@ function Profile({ details }) {
   const [profileData, setProfileData] = useState({ ...details });
   const [emailPopup, setEmailPopup] = useState(false);
   const dispatch = useDispatch();
-  const { profileResponse } = useSelector((state) => state.customer);
+  const { profileResponse, emailOtpResponse } = useSelector(
+    (state) => state.customer
+  );
   const [isLoading, setLoading] = useState(false);
   const handleClosePopup = () => {
     setEmailPopup(false);
   };
+
+  useEffect(() => {
+    setProfileData({ ...(details ?? {}) });
+  }, [details]);
+
   useEffect(() => {
     if (JSON.stringify(profileData) !== JSON.stringify(details)) {
       setEdited(true);
@@ -33,6 +42,7 @@ function Profile({ details }) {
   useEffect(() => {
     if (profileResponse.success === true || profileResponse.success === false) {
       setLoading(false);
+      setEdited(false);
       dispatch(
         setToaster({
           type: profileResponse.success ? "success" : "error",
@@ -43,6 +53,13 @@ function Profile({ details }) {
       dispatch(getProfile());
     }
   }, [profileResponse]);
+
+  useEffect(() => {
+    if (emailOtpResponse.success || emailOtpResponse.success === false) {
+      emailOtpResponse.success && setEmailPopup(true);
+      dispatch(resetOtpResponse());
+    }
+  }, [emailOtpResponse]);
 
   return (
     <div className="grid grid-flow-row gap-3">
@@ -97,7 +114,7 @@ function Profile({ details }) {
           ) : (
             <button
               onClick={() => {
-                setEmailPopup(true);
+                dispatch(sendEmailOtp());
               }}
               className="text-color-secondary text-nowrap bg-white"
               disabled={isEdited ?? false}
