@@ -1,4 +1,5 @@
 import Address from "@/components/Common/Account/Address";
+import Profile from "@/components/Common/Account/Profile";
 import AddressModel from "@/components/Common/AddressModel";
 import ConfirmationPopup from "@/components/Common/ConfirmationPopup";
 import {
@@ -11,6 +12,7 @@ import { getOrders } from "@/redux/reducers/orderReducer";
 import { setToaster } from "@/redux/reducers/uiReducer";
 import dynamic from "next/dynamic";
 import Image from "next/image";
+import { useRouter } from "next/router";
 const AccountHeader = dynamic(
   () => import("@/components/Common/Account/AccountHeader"),
   { ssr: false }
@@ -26,13 +28,16 @@ const PaymentModel = dynamic(
 import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 // const AccountHeader
-const settings = [
-  // "Profile",
-  "Orders",
-  "Saved Addresses",
-];
+const settings = ["Profile", "Orders", "Saved Addresses"];
 function Account() {
-  const [setting, setSetting] = useState("Orders");
+  const router = useRouter();
+  const [setting, setSetting] = useState(
+    router.query?.active === "addresses"
+      ? "Saved Addresses"
+      : router.query?.active === "profile"
+      ? "Profile"
+      : "Orders"
+  );
   const [isLoading, setLoading] = useState(false);
 
   const { profile } = useSelector((state) => state.customer);
@@ -45,7 +50,6 @@ function Account() {
   const [showPayment, setShowPayment] = useState(false);
   const [deleteAddressShow, setDeleteAddress] = useState(false);
   const dispatch = useDispatch();
-
   const handleShowPayment = (number) => {
     setShowPayment(number);
   };
@@ -77,7 +81,17 @@ function Account() {
       }
     }
   }, [setting, isAuthenticated]);
-
+  useEffect(() => {
+    const selectedSetting =
+      router.query?.active === "addresses"
+        ? "Saved Addresses"
+        : router.query?.active === "profile"
+        ? "Profile"
+        : "Orders";
+    if (selectedSetting !== setting) {
+      setSetting(selectedSetting);
+    }
+  }, [router.query?.active]);
   useEffect(() => {
     setLoading(false);
   }, [profile, orders, addresses]);
@@ -120,10 +134,11 @@ function Account() {
   const renderSetting = useCallback(() => {
     switch (setting) {
       case "Profile":
-        <div className="flex flex-col gap-4 px-4 py-2 w-full">
-          <div className=""></div>
-        </div>;
-        break;
+        return (
+          <div className="flex flex-col gap-4 sm:px-4 py-2 w-full">
+            <Profile details={profile} />
+          </div>
+        );
       case "Orders":
         return (
           <div className="flex flex-col gap-8 py-4 w-full">
@@ -177,6 +192,7 @@ function Account() {
         break;
     }
   }, [setting, profile, orders, addresses]);
+
   return (
     <div className="grid grid-flow-row gap-2 sm:gap-6 page-spacing py-4 w-full justify-normal">
       <p className="sm:px-8 font-semibold account-heading">{"Settings"}</p>

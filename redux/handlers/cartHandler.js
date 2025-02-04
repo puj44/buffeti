@@ -1,6 +1,7 @@
 import { put, call } from "redux-saga/effects";
 import { addToCartApi, applyCouponApi, deleteCartApi, deleteCartItemApi, extraServicesApi, getCartApi, getCartDetailsApi, removeCouponApi, updateCartApi, updateCartItemApi } from "../requests/cartRequests";
 import { setAddToCart, setApplyCoupon, setCart, setCartDetails, setDeleteCart, setDeleteCartItem, setExtraServices, setRemoveCoupon, setUpdateCart, setUpdateCartItem } from "../reducers/cartReducer";
+import { setToaster } from "../reducers/uiReducer";
 
 
 export function* handleGetCartDetails(action){
@@ -45,6 +46,13 @@ export function* handleGetExtraServices(action){
 export function* handleCartItemUpdate(action){
     try{
         const response = yield call(updateCartItemApi,action);
+        const data = response?.response?.data || response?.data
+        if(data?.statusCode !==200){
+            yield put(setToaster({
+                type:"error",
+                message:"Something went wrong, try again!"
+            }))
+        }
         yield put(setUpdateCartItem(response?.response?.data || response?.data));
         yield put(setCart(response?.response?.data || response?.data));
         yield put(setCartDetails(response?.response?.data || response?.data));
@@ -56,6 +64,13 @@ export function* handleCartItemUpdate(action){
 export function* handleCartUpdate(action){
     try{
         const response = yield call(updateCartApi,action);
+        const data = response?.response?.data || response?.data
+        if(data?.statusCode !==200){
+            yield put(setToaster({
+                type:"error",
+                message:"Something went wrong, try again!"
+            }))
+        }
         yield put(setUpdateCart(response?.response?.data || response?.data));
         yield put(setCart(response?.response?.data || response?.data));
         

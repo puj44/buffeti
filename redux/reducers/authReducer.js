@@ -25,26 +25,29 @@ export const authSlice = createSlice({
         },
         setMobileOtpResponse:(state,action)=>{
             state.isLoading = false;
+            
             if(action?.payload?.statusCode === 200 || action?.payload?.statusCode === 400){
                 state.otpSecondsLeft = action?.payload?.data?.secondsLeft ?? 30
             }
             state.otpResponse = action?.payload?.statusCode ? true :false;
-            state.errorMessage = action?.payload?.statusCode !== 200 ?  (action?.payload?.message ?? "") :""
+            state.errorMessage = action?.payload?.statusCode !== 200 ?  (action?.payload?.message ?? "Something went wrong!") :""
         },
         getTokenStatus:(state) => {
             
         },
         isAuthenticated:(state,action) =>{
-            
+            const isValid = action?.payload?.statusCode === 200;
             state.isLoading = false;
-            state.isAuthenticated = action?.payload?.statusCode === 200 ?? false;
-            state.user = {
-                name:action?.payload?.data?.user?.name,
-                mobile_number:action?.payload?.data?.user?.mobile_number,
-                email:action?.payload?.data?.user?.email ?? null,
+            state.isAuthenticated =isValid ?? false;
+            if(isValid){        
+                state.user = {
+                    name:action?.payload?.data?.user?.name,
+                    mobile_number:action?.payload?.data?.user?.mobile_number,
+                    email:action?.payload?.data?.user?.email ?? null,
+                }
             }
             state.otpResponse = action?.payload?.statusCode ? true :false;
-            state.errorMessage = action?.payload?.statusCode !== 200 ?  (action?.payload?.message ?? "") :""
+            state.errorMessage = !isValid ?  (action?.payload?.message ?? "Something went wrong, try again!") :""
         },
         setTokenStatus:(state,action) =>{
             if(action?.payload?.statusCode !== 200 && (action?.payload?.statusCode === 403 || action?.payload?.statusCode === 401)){

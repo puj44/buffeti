@@ -28,8 +28,9 @@ const SuggestivePackage = dynamic(
 
 export default function Home(props) {
   const { noOfPeople, packages, filters } = props;
-  const [isCartAdded, setIsCartAdded] = useState(false);
-  const { cartDetails } = useSelector((state) => state.cart);
+  // const [isCartAdded, setIsCartAdded] = useState(false);
+  // const { cartDetails } = useSelector((state) => state.cart);
+  
   // useEffect(()=>{
   //   if(Object.keys(cartDetails ?? {}).length > 0){
   //     setIsCartAdded(true);

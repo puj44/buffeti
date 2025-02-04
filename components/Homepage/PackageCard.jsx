@@ -82,7 +82,7 @@ function PackageCard({ data, numberOfPeople, menuOption, handleShowModel }) {
       </div>
       <div className="px-4 gap-1 flex flex-col">
         <h4 className="font-medium package-title">
-          {menuOption ? data?.item_name : data?.package_name}
+          {menuOption === "mini-meals" ? data?.item_name : data?.package_name}
         </h4>
         <h5 className="text-color-primary-gray ">
           {menuOption === "mini-meals"

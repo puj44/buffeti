@@ -26,9 +26,13 @@ export function* handleSignup(action){
 export function* handleVerifyOtp(action){
     try{
         const response = yield call(verifyOtpApi,action);
-        yield put(isAuthenticated(response?.response?.data || response?.data));
-        const res = yield call(getCartDetailsApi,action);
-        yield put(setCartDetails(res?.response?.data || res?.data));
+        const data = response?.response?.data || response?.data;
+        
+        yield put(isAuthenticated(data));
+        if(data?.statusCode === 200){
+            const res = yield call(getCartDetailsApi,action);
+            yield put(setCartDetails(res?.response?.data || res?.data));
+        }
     }catch(err){
         
     }

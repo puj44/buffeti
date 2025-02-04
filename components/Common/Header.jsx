@@ -354,7 +354,7 @@ function Header({ handleModelClick }) {
               >
                 <Dropdown.Item as="div" className={`flex flex-col gap-3 `}>
                   <div className="flex flex-col self-baseline gap-2.5 px-4">
-                    <p className="font-semibold small-title">
+                    <p className="font-bold small-title">
                       {auth?.user?.name ?? ""}
                     </p>
                     {auth?.user?.email && (
@@ -362,20 +362,50 @@ function Header({ handleModelClick }) {
                     )}
                   </div>
                   <Dropdown.Divider className="w-full" />
-                  <div className="flex flex-col self-baseline gap-3 px-4 py-2">
+                  <div className="flex flex-col self-baseline gap-3 px-4 py-0">
                     <Link
                       className="flex flex-row align-middle gap-2"
-                      href={"/account"}
+                      href={"/account?active=profile"}
                     >
                       <div className="my-auto">
                         <Image
                           src={"/icons/profile.webp"}
-                          width={16}
-                          height={16}
+                          width={14}
+                          height={14}
                           alt="Profile"
                         />
                       </div>
                       <p className="small-title font-medium">{"Profile"}</p>
+                    </Link>
+                    <Link
+                      className="flex flex-row align-middle gap-2"
+                      href={"/account?active=orders"}
+                    >
+                      <div className="my-auto">
+                        <Image
+                          src={"/icons/order_details.webp"}
+                          width={14}
+                          height={14}
+                          alt="Orders"
+                        />
+                      </div>
+                      <p className="small-title font-medium">{"Orders"}</p>
+                    </Link>
+                    <Link
+                      className="flex flex-row align-middle gap-2"
+                      href={"/account?active=addresses"}
+                    >
+                      <div className="my-auto">
+                        <Image
+                          src={"/icons/address_icon.webp"}
+                          width={15}
+                          height={15}
+                          alt="Profile"
+                        />
+                      </div>
+                      <p className="small-title font-medium">
+                        {"Saved Addresses"}
+                      </p>
                     </Link>
                   </div>
                   <Dropdown.Divider className="w-full" />

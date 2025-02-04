@@ -6,7 +6,7 @@ import { handleGetFilters, handleGetPackage, handleGetPackagesData } from "../ha
 import { handleGetCategories, handleGetItemsData, handleSearchItems } from "../handlers/itemsHandler";
 import { handleAddAddress, handleDeleteAddress, handleDetectLocation, handleEditAddress, handleGetAddresses } from "../handlers/addressHandler";
 import { handleAddToCart, handleApplyCoupon, handleCartDelete, handleCartItemDelete, handleCartItemUpdate, handleCartUpdate, handleGetCartData, handleGetCartDetails, handleGetExtraServices, handleRemoveCoupon } from "../handlers/cartHandler";
-import { handleGetCustomerDetails } from "../handlers/customerHandler";
+import { handleGetCustomerDetails, handleUpdateProfile } from "../handlers/customerHandler";
 import { handleGetOrderDetails, handleGetOrders, handleOrderPayment, handlePlaceOrder } from "../handlers/orderHandler";
 
 export function* watcherSaga() {
@@ -48,6 +48,7 @@ export function* watcherSaga() {
             yield takeLatest('cart/removeCoupon',handleRemoveCoupon),
             //CUSTOMER
             yield takeLatest('customer/getProfile', handleGetCustomerDetails),
+            yield takeLatest('customer/updateProfileAction', handleUpdateProfile),
 
             //ORDERS
             yield takeLatest('order/placeOrder',handlePlaceOrder),

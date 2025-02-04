@@ -27,7 +27,9 @@ export const cartSlice = createSlice({
 
         },
         setCart:(state,{payload}) =>{
-            state.cart = payload?.data?.cart ?? {};
+            if(payload?.statusCode === 200){
+                state.cart = payload?.data?.cart ?? {};
+            }
         },
         addToCart:(state) =>{
 
