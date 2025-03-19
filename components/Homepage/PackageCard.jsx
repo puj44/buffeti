@@ -67,9 +67,13 @@ function PackageCard({ data, numberOfPeople, menuOption, handleShowModel }) {
       className="package-card relative max-w-[372px] flex flex-col gap-4 h-full"
       key={"package-" + data.slug}
     >
-      <div className="px-4  mx-auto">
+      <div className="px-4  mx-auto  ">
         <Image
-          src={`${process.env.NEXT_PUBLIC_IMAGES_URL}/catering_services/mini_thali.webp`}
+          src={`${process.env.NEXT_PUBLIC_IMAGES_URL}${
+            data?.img_url && data?.img_url?.includes(".webp")
+              ? data?.img_url?.replace("/images", "")
+              : "/catering_services/mini_thali.webp"
+          }`}
           width={340}
           height={166}
           style={{
@@ -78,6 +82,8 @@ function PackageCard({ data, numberOfPeople, menuOption, handleShowModel }) {
           }}
           alt={data?.slug}
           priority
+          className="rounded-md min-h-[166px] bg-[#ececec]"
+          unoptimized
         />
       </div>
       <div className="px-4 gap-1 flex flex-col">

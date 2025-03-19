@@ -28,11 +28,17 @@ function ItemCard({
       >
         <div className="flex flex-row gap-4 items-start justify-start w-fit md:w-full">
           {/* IMAGE */}
-          <div>
+          <div className="rounded-md overflow-hidden max-w-[94px]">
             <Image
-              src={`${process.env.NEXT_PUBLIC_IMAGES_URL}/packages/dummy_pack.webp`}
+              src={`${process.env.NEXT_PUBLIC_IMAGES_URL}${
+                item?.img_url && item?.img_url?.includes(".webp")
+                  ? item?.img_url?.replace("/images", "")
+                  : "/packages/dummy_pack.webp"
+              }`}
               width={102}
               height={106}
+              className="bg-[#ececec]"
+              unoptimized
               alt={item?.item_name}
             />
           </div>

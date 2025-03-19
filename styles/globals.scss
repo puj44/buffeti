@@ -438,6 +438,13 @@ input{
   }
 }
 
+.hide_scroll_bar{
+  -ms-overflow-style: none;  
+  scrollbar-width: none;
+  &::-webkit-scrollbar{
+    display: none;
+  }
+}
 
 @-webkit-keyframes fadein {
   from {bottom: 0; opacity: 0;} 
@@ -479,7 +486,7 @@ input{
     position: absolute;
     // top:0px;
     left:0;
-    height:-webkit-fill-available;
+    height:100%;
     width:2px;
     border-radius:50px;
     background-color: $primary;
