@@ -14,7 +14,7 @@ function ItemsAdded({
 }) {
   const [isOpen, setOpen] = useState({});
   return (
-    <div className="lg:max-w-[320px] xl:max-w-[350px] order-1 lg:order-2  w-full md:overflow-y-scroll overflow-x-hidden md:max-h-[820px]  bg-[#FAFAFA] z-10 p-2 sm:p-4 md:sticky md:top-0 mt-4 md:mt-0">
+    <div className="hide_scroll_bar lg:max-w-[320px] xl:max-w-[350px] order-1 lg:order-2  w-full md:overflow-y-scroll overflow-x-hidden md:max-h-[820px]  bg-[#FAFAFA] z-10 p-2 sm:p-4 md:sticky md:top-0 mt-4 md:mt-0">
       <div className="flex flex-col gap-4 w-full ">
         {itemsSelected && Object.keys(itemsSelected).length > 0 ? (
           <div className="flex flex-col w-full sm:min-w-[291px] bg-[#F3F3F3]">
@@ -61,11 +61,17 @@ function ItemsAdded({
                             isOpen[cat] ? "grid" : "hidden"
                           } grid-flow-col p-2 bg-[#FFFAEB] rounded-lg gap-4 items-start justify-start`}
                         >
-                          <div className="w-[100px] h-[100px]">
+                          <div className="w-[100px] h-[100px] rounded-md overflow-hidden">
                             <Image
-                              src={`${process.env.NEXT_PUBLIC_IMAGES_URL}/packages/dummy_pack.webp`}
+                              src={`${process.env.NEXT_PUBLIC_IMAGES_URL}${
+                                item?.img_url &&
+                                item?.img_url?.includes(".webp")
+                                  ? item?.img_url?.replace("/images", "")
+                                  : "/packages/dummy_pack.webp"
+                              }`}
                               width={102}
                               height={106}
+                              className="bg-[#ececec]  "
                               // style={{width:"100%",height:"100%"}}
                               alt={item?.item_name}
                             />
