@@ -38,7 +38,6 @@ function ItemCard({
               width={102}
               height={106}
               className="bg-[#ececec]"
-              unoptimized
               alt={item?.item_name}
             />
           </div>
